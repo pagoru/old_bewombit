@@ -11,9 +11,9 @@ import org.bukkit.scoreboard.Team;
 public class bewomBit extends JavaPlugin {
 	
 	private static Scoreboard board;
-	private static Team teamAdmin;
-	private static Team teamMod;
-	private static Team teamVip;
+	static Team teamAdmin;
+	static Team teamMod;
+	static Team teamVip;
 	
 	public void onEnable(){
 		getLogger().info("Plugin habilitado.");

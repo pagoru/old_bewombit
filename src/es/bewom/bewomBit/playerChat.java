@@ -13,7 +13,6 @@ public class playerChat implements Listener {
 	
 	@SuppressWarnings("unused")
 	private static Scoreboard board;
-	private static Boolean colorChange = true;
 
 	@EventHandler
 	public void onPlayerChat(PlayerChatEvent eventChat) {
@@ -33,6 +32,10 @@ public class playerChat implements Listener {
 		} else {
 			eventChat.setFormat(">> "+ playerName + " < " + ChatColor.GRAY + message);
 			
+		}
+		
+		if (eventChat.getMessage().contains("&1")){
+			eventChat.setMessage(ChatColor.DARK_BLUE + message);
 		}
 		
 		
