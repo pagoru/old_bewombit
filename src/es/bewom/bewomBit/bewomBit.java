@@ -57,7 +57,7 @@ public class bewomBit extends JavaPlugin {
 			teamMod.setDisplayName(bewomMod);
 		}
 		
-		if ( teamVip == null) {
+		if (teamVip == null) {
 			teamVip = board.registerNewTeam(bewomVip);
 			teamVip.setPrefix(ChatColor.DARK_AQUA + "");
 			teamVip.setDisplayName(bewomVip);

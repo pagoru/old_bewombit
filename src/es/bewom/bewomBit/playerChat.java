@@ -34,13 +34,8 @@ public class playerChat implements Listener {
 			
 		}
 		
-		if (eventChat.getMessage().contains("&1")){
-			eventChat.setMessage(ChatColor.DARK_BLUE + message);
-		}
-		
 		
 	}
-
 	
 
 }
