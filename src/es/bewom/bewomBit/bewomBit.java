@@ -14,7 +14,7 @@ public class bewomBit extends JavaPlugin {
 	static Team teamAdmin;
 	static Team teamMod;
 	static Team teamVip;
-	
+	//lasdjñlafs
 	public void onEnable(){
 		getLogger().info("Plugin habilitado.");
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
