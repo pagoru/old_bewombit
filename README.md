@@ -7,18 +7,18 @@ bewomBit
 TODO:
 
 - Sistema de permisos básico.
-  VIPS.
-  Perfiles MySQL.
+  > VIPS.
+  > Perfiles MySQL.
 - Sistema de baneos y kickeos.
 - Economia.
-  Dinero por minutos.
-  Tiendas.
+  > Dinero por minutos.
+  > Tiendas.
 - Comandos básicos chat.
 - Chat.
-  Limitación spam.
+  > Limitación spam.
 - Protección caballos.
 - Protección cofres.
- (cuidado hoppers)
+ > (cuidado hoppers)
 - LogBlock.
- (mucho trabajo)
+ > (mucho trabajo)
 - Sistema detección x-ray.
