@@ -9,7 +9,7 @@ import org.bukkit.scoreboard.Team;
 
 
 public class bewomBit extends JavaPlugin {
-	//ksfdhsdfu
+	
 	private static Scoreboard board;
 	static Team teamAdmin;
 	static Team teamMod;
