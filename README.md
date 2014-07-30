@@ -22,3 +22,5 @@ TODO:
 - LogBlock.
  > (mucho trabajo)
 - Sistema detección x-ray.
+- Broadcast twitter (?)
+  (Cuando se publiquen tweets que tambien salgan en los servers en forma de broadcast?)
