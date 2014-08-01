@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class connectPlayer implements Listener {
-	//Paco
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException {
@@ -20,8 +19,6 @@ public class connectPlayer implements Listener {
 		bewomBit.teamAdmin.removePlayer(craftPlayer);
 		bewomBit.teamMod.removePlayer(craftPlayer);
 		bewomBit.teamVip.removePlayer(craftPlayer);
-		
-		//hjegfgwieu
 		
 		if (craftPlayer.hasPermission("bewom.admin")) {
 			Bukkit.getLogger().info("[bewomBit] "+ playerName +" >> admin.");
