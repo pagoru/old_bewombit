@@ -21,6 +21,8 @@ public class connectPlayer implements Listener {
 		bewomBit.teamMod.removePlayer(craftPlayer);
 		bewomBit.teamVip.removePlayer(craftPlayer);
 		
+		//hjegfgwieu
+		
 		if (craftPlayer.hasPermission("bewom.admin")) {
 			Bukkit.getLogger().info("[bewomBit] "+ playerName +" >> admin.");
 			bewomBit.teamAdmin.addPlayer(craftPlayer);
