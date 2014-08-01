@@ -13,6 +13,7 @@ TODO:
 - Economia.
   > Dinero por minutos.
   > Tiendas.
+  > Préstamos
 - Comandos básicos chat.
 - Chat.
   > Limitación spam.
