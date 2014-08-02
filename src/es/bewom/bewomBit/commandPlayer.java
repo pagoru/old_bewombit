@@ -76,12 +76,12 @@ public class commandPlayer implements CommandExecutor {
 					//Detectar si ya tiene el modo vuelo.
 					if (!craftPlayer.getAllowFlight()){
 						craftPlayer.setAllowFlight(true);
-						craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo activado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
 						return true;
 					}
 					else{
 						craftPlayer.setAllowFlight(false);
-						craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo activado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
 						return true;
 					}
 					//Fly para el target.
@@ -89,26 +89,26 @@ public class commandPlayer implements CommandExecutor {
 				else {
 					if (args.length == 1){
 						//Detectar si ya tiene el modo vuelo.
-						if (sender.getServer().getPlayer(args [0])!=null){
+						if (sender.getServer().getPlayer(args [0]) != null){
 							craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 							if (!craftPlayerArgs.getAllowFlight()){
-								craftPlayer.setAllowFlight(true);
-								craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo vuelo activado!");
+								craftPlayerArgs.setAllowFlight(true);
+								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
 								return true;
 							}
 							else{
 								craftPlayerArgs.setAllowFlight(false);
-								craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo vuelo desactivado!");
+								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
 								return true;
 							}
 						}
-						sender.sendMessage(ChatColor.RED + "El jugador no esta conectado!");
+						sender.sendMessage(ChatColor.RED + "¡El jugador no esta conectado!");
 						return true;
 					}
 					else {
-						sender.sendMessage(ChatColor.RED + "Estás utilizando mal este comando!");
+						sender.sendMessage(ChatColor.RED + "¡Estas utilizando mal este comando!");
 						return true;
 					}
 				}
