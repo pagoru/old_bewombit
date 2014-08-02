@@ -2,6 +2,7 @@ package es.bewom.bewomBit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,6 +14,7 @@ public class commandPlayer implements CommandExecutor {
 		
 		Player craftPlayer = (Player) sender; //craftPlayer Player
 		String playerName = sender.getName(); //limpio String
+		
 		
 		// ---> say <--- //
 		
@@ -26,6 +28,18 @@ public class commandPlayer implements CommandExecutor {
 	            }
 				Bukkit.getServer().broadcastMessage(broadcast + ChatColor.GREEN + texto);
 				return true;
+			}
+		}
+		
+		// ---> tphere <--- //
+		
+		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+			if (label.equalsIgnoreCase("tphere")){
+				if (args.length == 1){
+					Location locationPlayer = craftPlayer.getLocation();
+					
+					
+				}
 			}
 		}
 			

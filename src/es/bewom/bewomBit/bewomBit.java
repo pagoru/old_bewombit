@@ -27,11 +27,13 @@ public class bewomBit extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
 		
+		
 		// ---> Comandos <--- //
 		
 		getCommand("say").setExecutor(new commandPlayer());
 		
-		//Scoreboard teams inicial
+		
+		// ---> Scoreboard teams inicial <--- //
 		
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		board = manager.getMainScoreboard();

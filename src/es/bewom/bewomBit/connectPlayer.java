@@ -16,6 +16,9 @@ public class connectPlayer implements Listener {
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		String playerName = eventConnect.getPlayer().getName(); //limpio String 
 		
+		
+		// ---> Scoreboards nicks <--- //
+		
 		bewomBit.teamAdmin.removePlayer(craftPlayer);
 		bewomBit.teamMod.removePlayer(craftPlayer);
 		bewomBit.teamVip.removePlayer(craftPlayer);
