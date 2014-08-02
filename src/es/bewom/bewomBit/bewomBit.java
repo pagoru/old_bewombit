@@ -1,14 +1,19 @@
 package es.bewom.bewomBit;
 
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 
-public class bewomBit extends JavaPlugin {
+public class bewomBit extends JavaPlugin implements Listener {
+	
+	Logger log = Logger.getLogger("Minecraft");
 	
 	private static Scoreboard board;
 	static Team teamAdmin;
@@ -16,9 +21,15 @@ public class bewomBit extends JavaPlugin {
 	static Team teamVip;
 	
 	public void onEnable(){
-		getLogger().info("Plugin habilitado.");
+		
+		log.info(ChatColor.AQUA + "Bit habilitado");
+		
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
+		
+		// ---> Comandos <--- //
+		
+		getCommand("say").setExecutor(new commandPlayer());
 		
 		//Scoreboard teams inicial
 		
@@ -69,9 +80,10 @@ public class bewomBit extends JavaPlugin {
 			teamVip.setDisplayName(bewomVip);
 		}
 	}
-	
+
 	public void onDisable(){
-		getLogger().info("Plugin deshabilitado.");
+		
+		log.info(ChatColor.AQUA + "Bit deshabilitado");
 		
 	}
 	

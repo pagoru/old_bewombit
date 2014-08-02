@@ -2,3 +2,9 @@ main: es.bewom.bewomBit.bewomBit
 name: bewomBit
 version: 1.0.0
 author: www.bewom.es
+
+commands:
+   say:
+      description: This is a demo command.
+      usage: /say
+      permission: bewom.basic
