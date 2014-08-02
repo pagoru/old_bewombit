@@ -86,6 +86,7 @@ public class commandPlayer implements CommandExecutor {
 						if (args.length == 1){
 							//Detectar si ya tiene el modo vuelo.
 							if (sender.getServer().getPlayer(args [0])!=null){
+								craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 								if (!craftPlayerArgs.getAllowFlight()){
 									craftPlayer.setAllowFlight(true);
 									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
