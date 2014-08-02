@@ -76,12 +76,12 @@ public class commandPlayer implements CommandExecutor {
 					//Detectar si ya tiene el modo vuelo.
 					if (!craftPlayer.getAllowFlight()){
 						craftPlayer.setAllowFlight(true);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo de vuelo activado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
 						return true;
 					}
 					else{
 						craftPlayer.setAllowFlight(false);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo de vuelo desactivado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
 						return true;
 					}
 					//Fly para el target.
@@ -94,21 +94,21 @@ public class commandPlayer implements CommandExecutor {
 							if (!craftPlayerArgs.getAllowFlight()){
 								craftPlayerArgs.setAllowFlight(true);
 								if (craftPlayer.getName() != craftPlayerArgs.getName()){
-									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo de vuelo activado para "+craftPlayerArgs.getName()+"!");
+									craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo activado para "+craftPlayerArgs.getName()+"!");
 								}
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo de vuelo activado!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
 								return true;
 							}
 							else{
 								craftPlayerArgs.setAllowFlight(false);
 								if (craftPlayer.getName() != craftPlayerArgs.getName()){
-									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo de vuelo desactivado para "+craftPlayerArgs.getName()+"!");
+									craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado para "+craftPlayerArgs.getName()+"!");
 								}
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo de vuelo desactivado!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
 								return true;
 							}
 						}
-						sender.sendMessage(ChatColor.RED + "¡Jugador no conectado!");
+						sender.sendMessage(ChatColor.RED + "Jugador no conectado!");
 						return true;
 					}
 					else {
