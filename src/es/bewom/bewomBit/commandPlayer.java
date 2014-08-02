@@ -58,10 +58,7 @@ public class commandPlayer implements CommandExecutor {
 					craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
 					return true;
 				}
-			} else {
-				craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
-				return true;
-			}
+			} 
 		}
 		
 		
