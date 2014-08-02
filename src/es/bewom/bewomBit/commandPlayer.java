@@ -39,70 +39,71 @@ public class commandPlayer implements CommandExecutor {
 
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 			if (label.equalsIgnoreCase("tphere")){
-				
+
 				if (args.length == 1){
 					Location locationPlayer = craftPlayer.getLocation();
 					Boolean isOnlinePlayer = Bukkit.getServer().getPlayer(args[0]).isOnline();
 
 					if (isOnlinePlayer){
-					if (craftPlayer.getServer().getPlayer(args[0]) != null){
-						
-						Location locationPlayer = craftPlayer.getLocation();
-						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-						craftPlayerArgs.teleport(locationPlayer);
-						String playerArgsName = craftPlayerArgs.getName();
-						
-						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + playerArgsName + " se ha tepeado a ti.");
-						
-						return true;
-						
-					} else {
-						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
-						return true;
-					}
-				} else {
-					craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
-					return true;
-				}
-			}
-		}
+						if (craftPlayer.getServer().getPlayer(args[0]) != null){
 
-		// ---> fly <--- //
+							Location locationPlayer = craftPlayer.getLocation();
+							craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+							craftPlayerArgs.teleport(locationPlayer);
+							String playerArgsName = craftPlayerArgs.getName();
 
-		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-			if (label.equalsIgnoreCase("fly")){
-				//Fly para el sender.
-				if (args.length == 0){
-					//Detectar si ya tiene el modo vuelo.
-					if (!craftPlayer.getAllowFlight()){
-						craftPlayer.setAllowFlight(true);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
-					}
-					else{
-						craftPlayer.setAllowFlight(false);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
-					}
-					//Fly para el target.
-					if (args.length == 1){
-						//Detectar si ya tiene el modo vuelo.
-						if (sender.getServer().getPlayer(args [0])!=null){
-							if (!craftPlayerArgs.getAllowFlight()){
-								craftPlayer.setAllowFlight(true);
-								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
-							}
-							else{
-								craftPlayerArgs.setAllowFlight(false);
-								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
-							}
+							craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + playerArgsName + " se ha tepeado a ti.");
+
+							return true;
+
+						} else {
+							craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
+							return true;
 						}
-						sender.sendMessage(ChatColor.RED + "¡El jugador no está conectado!");
+					} else {
+						craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
+						return true;
 					}
 				}
 			}
-			return true;
+
+			// ---> fly <--- //
+
+			if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+				if (label.equalsIgnoreCase("fly")){
+					//Fly para el sender.
+					if (args.length == 0){
+						//Detectar si ya tiene el modo vuelo.
+						if (!craftPlayer.getAllowFlight()){
+							craftPlayer.setAllowFlight(true);
+							craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+						}
+						else{
+							craftPlayer.setAllowFlight(false);
+							craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+						}
+						//Fly para el target.
+						if (args.length == 1){
+							//Detectar si ya tiene el modo vuelo.
+							if (sender.getServer().getPlayer(args [0])!=null){
+								if (!craftPlayerArgs.getAllowFlight()){
+									craftPlayer.setAllowFlight(true);
+									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
+									craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+								}
+								else{
+									craftPlayerArgs.setAllowFlight(false);
+									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
+									craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
+								}
+							}
+							sender.sendMessage(ChatColor.RED + "¡El jugador no está conectado!");
+						}
+					}
+				}
+				return true;
+			}
+			return false;
 		}
-		return false;
 	}
 }

@@ -8,14 +8,14 @@ commands:
       description: This is a demo command.
       usage: /say
       permission: bewom.basic
-<<<<<<< HEAD
+
    fly:
       description: Allow a player to fly.
       usage: /fly
-      permission bewom.fly
-=======
+      permission: bewom.fly
+
    tphere:
       description: This is a demo command.
       usage: /tphere
       permission: bewom.basic
->>>>>>> branch 'master' of https://carlotronico@bitbucket.org/bewom/bewombit.git
+
