@@ -18,11 +18,16 @@ public class commandPlayer implements CommandExecutor {
 		Player craftPlayerArgs = Bukkit.getServer().getPlayer("Steve");
 
 
-		// ---> say <--- //
+		
 
-		String broadcast = ChatColor.DARK_GREEN + ": " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " broadcast < ";
+		String broadcast = ChatColor.DARK_GREEN + ": " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " broadcast < "; //broadcast
 
+		// ---> admin y mod permissions <--- //
+		
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+			
+			// ---> say <--- //
+			
 			if (label.equalsIgnoreCase("say")){
 				String texto = "";
 				for (int i = 0; i < args.length; i++) {
@@ -34,7 +39,7 @@ public class commandPlayer implements CommandExecutor {
 			}
 		
 
-		// ---> tphere <--- //
+			// ---> tphere <--- //
 
 		
 			if (label.equalsIgnoreCase("tphere")){
@@ -62,10 +67,10 @@ public class commandPlayer implements CommandExecutor {
 			}
 		
 
-		// ---> fly <--- //
+			// ---> fly <--- //
 
 		
-			if (label.equalsIgnoreCase("fly")){
+			if (label.equals("fly")){
 				//Fly para el sender.
 				if (args.length == 0){
 					//Detectar si ya tiene el modo vuelo.

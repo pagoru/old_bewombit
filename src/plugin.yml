@@ -15,4 +15,7 @@ commands:
    tphere:
       description: This is a demo command.
       permission: bewom.basic
-      
+   
+   hola:
+      description: This is a demo command.
+      permission: bewom.basic

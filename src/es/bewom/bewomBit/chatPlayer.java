@@ -1,5 +1,6 @@
 package es.bewom.bewomBit;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +11,7 @@ public class chatPlayer implements Listener {
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent eventChat) {
+			
 		String message = eventChat.getMessage();
 		Player craftPlayer = eventChat.getPlayer(); //craftPlayer Player
 		String playerName = eventChat.getPlayer().getName(); //limpio String 
