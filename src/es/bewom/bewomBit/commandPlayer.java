@@ -34,6 +34,32 @@ public class commandPlayer implements CommandExecutor {
 			}
 		}
 		
+		// ---> tp <--- //
+		
+				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+					if (label.equalsIgnoreCase("tp")){
+						
+						if (args.length == 1){
+							if (craftPlayer.getServer().getPlayer(args[0]) != null){
+								
+								Location locationPlayer = craftPlayerArgs.getLocation();
+								craftPlayer.teleport(locationPlayer);
+								
+								craftPlayer.sendMessage(ChatColor.GRAY + "Te has tepeado a " + playerName + ".");
+								
+								return true;
+								
+							} else {
+								craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
+								return true;
+							}
+						} else {
+							craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
+							return true;
+						}
+					}
+				}
+		
 		
 		// ---> tphere <--- //
 		

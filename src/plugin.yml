@@ -12,3 +12,7 @@ commands:
       description: This is a demo command.
       usage: /tphere
       permission: bewom.basic
+   tp:
+      description: This is a demo command.
+      usage: /tp
+      permission: bewom.basic
