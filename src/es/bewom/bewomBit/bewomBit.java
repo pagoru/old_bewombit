@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
@@ -11,7 +12,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 
-public class bewomBit extends JavaPlugin implements Listener {
+public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -33,6 +34,7 @@ public class bewomBit extends JavaPlugin implements Listener {
 		getCommand("say").setExecutor(new commandPlayer());
 		getCommand("fly").setExecutor(new commandPlayer());
 		getCommand("tphere").setExecutor(new commandPlayer());
+		getCommand("hola").setExecutor(new commandPlayer());
 		
 		
 		// ---> Scoreboard teams inicial <--- //
