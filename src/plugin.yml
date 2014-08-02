@@ -8,3 +8,7 @@ commands:
       description: This is a demo command.
       usage: /say
       permission: bewom.basic
+   tphere:
+      description: This is a demo command.
+      usage: /tphere
+      permission: bewom.basic

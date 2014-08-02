@@ -15,7 +15,7 @@ public class commandPlayer implements CommandExecutor {
 		
 		Player craftPlayer = (Player) sender; //craftPlayer Player
 		String playerName = sender.getName(); //limpio String
-		Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+		Player craftPlayerArgs = Bukkit.getServer().getPlayer("Steve");
 		
 		
 		// ---> say <--- //
@@ -39,18 +39,27 @@ public class commandPlayer implements CommandExecutor {
 		
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 			if (label.equalsIgnoreCase("tphere")){
+				
 				if (args.length == 1){
-					Location locationPlayer = craftPlayer.getLocation();
-					Boolean isOnlinePlayer = Bukkit.getServer().getPlayer(args[0]).isOnline();
-					
-					if (isOnlinePlayer){
+					if (craftPlayer.getServer().getPlayer(args[0]) != null){
+						
+						Location locationPlayer = craftPlayer.getLocation();
 						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-						Location LocationPlayerArgs = craftPlayerArgs.getLocation();
+						craftPlayerArgs.teleport(locationPlayer);
+						String playerArgsName = craftPlayerArgs.getName();
 						
+						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + playerArgsName + " se ha tepeado a ti.");
 						
+						return true;
 						
+					} else {
+						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
+						return true;
 					}
 					
+				} else {
+					craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
+					return true;
 				}
 			}
 		}
