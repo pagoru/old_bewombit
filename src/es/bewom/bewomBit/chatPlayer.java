@@ -9,7 +9,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 
 @SuppressWarnings("deprecation")
-public class playerChat implements Listener {
+public class chatPlayer implements Listener {
 	
 	@SuppressWarnings("unused")
 	private static Scoreboard board;

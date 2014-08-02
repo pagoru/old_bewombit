@@ -18,7 +18,7 @@ public class bewomBit extends JavaPlugin {
 	public void onEnable(){
 		getLogger().info("Plugin habilitado.");
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
-		getServer().getPluginManager().registerEvents(new playerChat(), this);
+		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
 		
 		//Scoreboard teams inicial
 		
