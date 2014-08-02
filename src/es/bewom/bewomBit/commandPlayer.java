@@ -87,19 +87,42 @@ public class commandPlayer implements CommandExecutor {
 					return true;
 				}
 			}
-		}
-		
-		// ---> fly <--- //
-		
-		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-			if (label.equalsIgnoreCase("fly")){
-				if (args.length == 0){
-					craftPlayer.setAllowFlight(true);
-					craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
-				}
-				if (args.length == 1){
-					craftPlayerArgs.setAllowFlight(true);
-					craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
+
+			// ---> fly <--- //
+
+			if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+				if (label.equalsIgnoreCase("fly")){
+					//Fly para el sender.
+					if (args.length == 0){
+						//Detectar si ya tiene el modo vuelo.
+						if (!craftPlayer.getAllowFlight()){
+							craftPlayer.setAllowFlight(true);
+							craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+						}
+						else{
+							craftPlayer.setAllowFlight(false);
+							craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+						}
+						//Fly para el target.
+						if (args.length == 1){
+							//Detectar si ya tiene el modo vuelo.
+							if (sender.getServer().getPlayer(args [0])!=null){
+								craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+								if (!craftPlayerArgs.getAllowFlight()){
+									craftPlayer.setAllowFlight(true);
+									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
+									craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+								}
+								else{
+									craftPlayerArgs.setAllowFlight(false);
+									craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
+									craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
+								}
+							}
+							sender.sendMessage(ChatColor.RED + "¡El jugador no está conectado!");
+						}
+					}
+					return true;
 				}
 			}
 		}

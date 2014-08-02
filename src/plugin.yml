@@ -8,6 +8,12 @@ commands:
       description: This is a demo command.
       usage: /say
       permission: bewom.basic
+
+   fly:
+      description: Allow a player to fly.
+      usage: /fly
+      permission: bewom.fly
+
    tphere:
       description: This is a demo command.
       usage: /tphere
