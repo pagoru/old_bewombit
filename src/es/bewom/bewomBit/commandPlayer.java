@@ -100,8 +100,8 @@ public class commandPlayer implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "¡El jugador no está conectado!");
 						}
 					}
+					return true;
 				}
-				return true;
 			}
 			return false;
 		}
