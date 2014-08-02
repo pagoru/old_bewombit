@@ -46,11 +46,22 @@ public class commandPlayer implements CommandExecutor {
 					if (isOnlinePlayer){
 						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 						Location LocationPlayerArgs = craftPlayerArgs.getLocation();
-						
-						
-						
 					}
-					
+				}
+			}
+		}
+		
+		// ---> fly <--- //
+		
+		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+			if (label.equalsIgnoreCase("fly")){
+				if (args.length == 0){
+					craftPlayer.setAllowFlight(true);
+					craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+				}
+				if (args.length == 1){
+					craftPlayerArgs.setAllowFlight(true);
+					craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
 				}
 			}
 		}
