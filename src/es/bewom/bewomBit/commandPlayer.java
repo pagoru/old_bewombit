@@ -21,11 +21,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSay.commandsay(sender, cmd, label, args)){
 				return true;
 			}
-
 			if(commandTpHere.commandtphere(sender, cmd, label, args)){
 				return true;
 			}
-
 			if(commandFly.commandfly(sender, cmd, label, args)){
 				return true;
 			}
@@ -35,7 +33,7 @@ public class commandPlayer implements CommandExecutor {
 			if(commandInv.commandinv(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandEnd.commandend(sender, cmd, label, args)){
+			if(commandEnderChest.commandenderchest(sender, cmd, label, args)){
 				return true;
 			}
 			if(commandKill.commandkill(sender, cmd, label, args)){
