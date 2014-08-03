@@ -7,12 +7,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class commandFly {
+
 	@SuppressWarnings("deprecation")
 	public static boolean commandFly (CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
-		
-		if (label.equals("fly")){
+
+		if (label.equalsIgnoreCase("fly")){
 			//Fly para el sender.
 			if (args.length == 0){
 				//Detectar si ya tiene el modo vuelo.

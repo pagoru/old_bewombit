@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class commandTphere {
+	
 	@SuppressWarnings("deprecation")
 	public static boolean commandTphere (CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
@@ -28,11 +29,11 @@ public class commandTphere {
 					return true;
 
 				} else {
-					craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
+					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 					return true;
 				}
 			} else {
-				craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
+				sender.sendMessage(ChatColor.RED + "La forma correcta es /tphere <player>");
 				return true;
 			}
 		}
