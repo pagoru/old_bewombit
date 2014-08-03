@@ -1,5 +1,6 @@
 package es.bewom.bewomBit;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,7 +11,7 @@ public class commandPlayer implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
 		Player craftPlayer = (Player) sender; //craftPlayer Player
-		
+
 		// ---> Comandos de administración <--- //
 
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
@@ -26,6 +27,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandFly.commandFly(sender, cmd, label, args)){
 				return true;
 			}
+		}
+		else {
+			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
 		}
 		return false;
 	}
