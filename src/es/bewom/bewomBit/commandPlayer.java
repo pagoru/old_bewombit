@@ -6,17 +6,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class commandPlayer implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
-		Player craftPlayer = (Player) sender; //craftPlayer Player
-
 		// ---> Comandos de administracion <--- //
 
-		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+		if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
 
 			if(commandSay.commandsay(sender, cmd, label, args)){
 				return true;
@@ -50,7 +47,7 @@ public class commandPlayer implements CommandExecutor {
 		
 		// ---> Comandos de vips <--- //
 		
-		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod") || craftPlayer.hasPermission("bewom.vip")) {
+		if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
 			
 			if(commandHat.commandhat(sender, cmd, label, args)){
 				return true;

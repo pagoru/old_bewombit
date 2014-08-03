@@ -14,7 +14,7 @@ public class commandEnd {
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
 		
-		if (label.equalsIgnoreCase("end")){
+		if (label.equalsIgnoreCase("end") || label.equalsIgnoreCase("endersee")){
 			
 			if (args.length == 1) {
 				
