@@ -5,17 +5,13 @@ author: www.bewom.es
 
 commands:
    say:
-      description: This is a demo command.
-      permission: bewom.basic
+      description: Allow a player to broadcast.
+      permission: bewom.say
 
    fly:
-      description: Allow a player to fly.
+      description: Allow player to fly.
       permission: bewom.fly
 
    tphere:
-      description: This is a demo command.
-      permission: bewom.basic
-   
-   hola:
-      description: This is a demo command.
-      permission: bewom.basic
+      description: Allow a player to tp another player to his location.
+      permission: bewom.tphere
