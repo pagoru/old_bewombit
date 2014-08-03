@@ -25,3 +25,5 @@ TODO:
 - Sistema detección x-ray.
 - Broadcast twitter (?)
   (Cuando se publiquen tweets que tambien salgan en los servers en forma de broadcast?)
+- Sistema de amigos
+ > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
