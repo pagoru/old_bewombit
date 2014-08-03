@@ -5,13 +5,21 @@ author: www.bewom.es
 
 commands:
    say:
-      description: Allow a player to broadcast.
-      permission: bewom.say
+      description: Permite al jugador hablar por el broadcast.
+      permission: bewom.admin
 
    fly:
-      description: Allow player to fly.
-      permission: bewom.fly
+      description: Permite al jugador volar.
+      permission: bewom.admin
 
    tphere:
-      description: Allow a player to tp another player to his location.
-      permission: bewom.tphere
+      description: Permite al jugador teletransportar a otro jugador donde se encuentra.
+      permission: bewom.admin
+      
+   clear:
+      description: Permite al jugador limpiar el inventario.
+      permission: bewom.admin
+      
+   hat:
+      description: Permite al jugador ponerse un sombrero.
+      permission: bewom.vip

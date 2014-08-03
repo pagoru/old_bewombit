@@ -14,7 +14,7 @@ public class commandPlayer implements CommandExecutor {
 
 		Player craftPlayer = (Player) sender; //craftPlayer Player
 
-		// ---> Comandos de administración <--- //
+		// ---> Comandos de administracion <--- //
 
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 
@@ -29,10 +29,28 @@ public class commandPlayer implements CommandExecutor {
 			if(commandFly.commandFly(sender, cmd, label, args)){
 				return true;
 			}
-
-		}
-		else {
+			if(commandClear.commandClear(sender, cmd, label, args)){
+				return true;
+			}
+			
+		} else {
+			
 			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
+		
+		}
+		
+		// ---> Comandos de vips <--- //
+		
+		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod") || craftPlayer.hasPermission("bewom.vip")) {
+			
+			if(commandHat.commandHat(sender, cmd, label, args)){
+				return true;
+			}
+			
+		} else {
+			
+			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
+		
 		}
 		return false;
 	}
