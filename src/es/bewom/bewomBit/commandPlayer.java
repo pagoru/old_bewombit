@@ -1,5 +1,7 @@
 package es.bewom.bewomBit;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -52,16 +54,17 @@ public class commandPlayer implements CommandExecutor {
 						craftPlayerArgs.teleport(locationPlayer);
 						String playerArgsName = craftPlayerArgs.getName();
 
-						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + playerArgsName + " se ha tepeado a ti.");
+						craftPlayer.sendMessage(ChatColor.GRAY + playerArgsName + " se ha teletrasportado hasta ti!");
+						craftPlayerArgs.sendMessage(ChatColor.GRAY + "Te has teletransportado hasta " + playerName + "!");
 
 						return true;
 
 					} else {
-						craftPlayer.sendMessage(ChatColor.GRAY + "El jugador no esta conectado.");
+						craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 						return true;
 					}
 				} else {
-					craftPlayer.sendMessage(ChatColor.GRAY + "Usa el comando correctamente.");
+					craftPlayer.sendMessage(ChatColor.RED + "Usa el comando correctamente.");
 					return true;
 				}
 			}
@@ -76,12 +79,12 @@ public class commandPlayer implements CommandExecutor {
 					//Detectar si ya tiene el modo vuelo.
 					if (!craftPlayer.getAllowFlight()){
 						craftPlayer.setAllowFlight(true);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo activado!");
 						return true;
 					}
 					else{
 						craftPlayer.setAllowFlight(false);
-						craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo desactivado!");
 						return true;
 					}
 					//Fly para el target.
@@ -93,26 +96,35 @@ public class commandPlayer implements CommandExecutor {
 							craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 							if (!craftPlayerArgs.getAllowFlight()){
 								craftPlayerArgs.setAllowFlight(true);
-								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo activado!");
+								craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo activado para "+craftPlayerArgs.getName()+"!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo vuelo activado!");
 								return true;
 							}
 							else{
 								craftPlayerArgs.setAllowFlight(false);
-								craftPlayer.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "¡Modo vuelo desactivado!");
+								craftPlayer.sendMessage(ChatColor.GRAY + "Modo vuelo desactivado para "+craftPlayerArgs.getName()+"!");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo vuelo desactivado!");
 								return true;
 							}
 						}
-						sender.sendMessage(ChatColor.RED + "¡El jugador no esta conectado!");
+						sender.sendMessage(ChatColor.RED + "El jugador no esta conectado!");
 						return true;
 					}
 					else {
-						sender.sendMessage(ChatColor.RED + "¡Estas utilizando mal este comando!");
+						sender.sendMessage(ChatColor.RED + "Estas utilizando mal este comando!");
 						return true;
 					}
 				}
 			}
+			
+		}
+		
+		// ---> VIP permissions <--- //
+		
+		if(craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod") || craftPlayer.hasPermission("bewom.vip")){
+			
+			// ---> tpa <--- //
+
 		}
 		return false;
 	}
