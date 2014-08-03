@@ -1,4 +1,4 @@
-package es.bewom.bewomBit;
+package es.bewom.bewomBit.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -51,7 +51,7 @@ public class commandFly {
 							return true;
 						}
 					}
-					sender.sendMessage(ChatColor.RED + "Jugador no conectado!");
+					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 					return true;
 				}
 				else {

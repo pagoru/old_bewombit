@@ -1,5 +1,7 @@
 package es.bewom.bewomBit;
 
+import es.bewom.bewomBit.commands.*;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
