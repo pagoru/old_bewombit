@@ -20,7 +20,7 @@ public class commandPlayer implements CommandExecutor {
 				return true;
 			}
 
-			if(commandTphere.commandTphere(sender, cmd, label, args)){
+			if(commandTpHere.commandTpHere(sender, cmd, label, args)){
 				return true;
 			}
 
