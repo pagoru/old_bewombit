@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 public class commandSay {
 	
-	public static boolean commandSay (CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandsay(CommandSender sender, Command cmd, String label, String[] args){
 		String broadcast = ChatColor.DARK_GREEN + ": " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " broadcast < ";
 		if (label.equalsIgnoreCase("say")){
 			String texto = "";

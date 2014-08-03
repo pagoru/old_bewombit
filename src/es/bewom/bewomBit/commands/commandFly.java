@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class commandFly {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandFly (CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandfly (CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
 

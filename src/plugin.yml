@@ -23,3 +23,23 @@ commands:
    hat:
       description: Permite al jugador ponerse un sombrero.
       permission: bewom.vip
+   
+   inv:
+      description: Permite al jugador abrir el inventario de otra persona
+      permission: bewom.admin
+      
+   end:
+      description: Permite al jugador abrir el enderchest de otra persona
+      permission: bewom.admin
+   
+   enderchest:
+      description: Permite al jugador abrir el enderchest
+      permission: bewom.vip
+   
+   kill:
+      description: Permite al jugador matar a otro jugador
+      permission: bewom.admin
+   
+   suicide:
+      description: Permite al jugador suicidarse
+      permission: bewom.vip

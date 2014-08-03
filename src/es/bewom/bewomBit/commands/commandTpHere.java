@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class commandTpHere {
 	
 	@SuppressWarnings("deprecation")
-	public static boolean commandTpHere (CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandtphere(CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
 

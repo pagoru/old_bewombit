@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public class commandClear {
 	
 	@SuppressWarnings("deprecation")
-	public static boolean commandClear(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
 		

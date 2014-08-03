@@ -18,18 +18,27 @@ public class commandPlayer implements CommandExecutor {
 
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 
-			if(commandSay.commandSay(sender, cmd, label, args)){
+			if(commandSay.commandsay(sender, cmd, label, args)){
 				return true;
 			}
 
-			if(commandTpHere.commandTpHere(sender, cmd, label, args)){
+			if(commandTpHere.commandtphere(sender, cmd, label, args)){
 				return true;
 			}
 
-			if(commandFly.commandFly(sender, cmd, label, args)){
+			if(commandFly.commandfly(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandClear.commandClear(sender, cmd, label, args)){
+			if(commandClear.commandclear(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandInv.commandinv(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandEnd.commandend(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandKill.commandkill(sender, cmd, label, args)){
 				return true;
 			}
 			
@@ -43,7 +52,13 @@ public class commandPlayer implements CommandExecutor {
 		
 		if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod") || craftPlayer.hasPermission("bewom.vip")) {
 			
-			if(commandHat.commandHat(sender, cmd, label, args)){
+			if(commandHat.commandhat(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandEnderChest.commandenderchest(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandSuicide.commandsuicide(sender, cmd, label, args)){
 				return true;
 			}
 			

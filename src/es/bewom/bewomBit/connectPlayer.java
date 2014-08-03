@@ -1,7 +1,10 @@
 package es.bewom.bewomBit;
 
 import java.sql.SQLException;
+  
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +18,8 @@ public class connectPlayer implements Listener {
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		String playerName = eventConnect.getPlayer().getName(); //limpio String 
 		
+		eventConnect.setJoinMessage(ChatColor.GRAY + playerName + ChatColor.GRAY + " ha entrado en el servidor.");
+		
 		
 		// ---> Scoreboards nicks <--- //
 		
@@ -26,13 +31,19 @@ public class connectPlayer implements Listener {
 			Bukkit.getLogger().info("[bewomBit] "+ playerName +" >> admin.");
 			bewomBit.teamAdmin.addPlayer(craftPlayer);
 			
+			
 		} else if (craftPlayer.hasPermission("bewom.mod")) {
 			Bukkit.getLogger().info("[bewomBit] "+ playerName +" >> mod.");
 			bewomBit.teamMod.addPlayer(craftPlayer);
+		
 			
 		} else if (craftPlayer.hasPermission("bewom.vip")) {
 			Bukkit.getLogger().info("[bewomBit] "+ playerName +" >> vip.");
 			bewomBit.teamVip.addPlayer(craftPlayer);
+			
+			
+		} else {
+			
 		}
 	}
 

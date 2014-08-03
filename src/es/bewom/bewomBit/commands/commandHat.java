@@ -8,10 +8,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class commandHat {
 
-	@SuppressWarnings("deprecation")
-	public static boolean commandHat(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandhat(CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
 		
 		if (label.equalsIgnoreCase("hat")){
 			
