@@ -14,9 +14,9 @@ public class commandFly {
 		Player craftPlayerArgs;
 
 		if (label.equalsIgnoreCase("fly")){
-			//Fly para el sender.
+
 			if (args.length == 0){
-				//Detectar si ya tiene el modo vuelo.
+
 				if (!craftPlayer.getAllowFlight()){
 					craftPlayer.setAllowFlight(true);
 					craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
@@ -27,11 +27,11 @@ public class commandFly {
 					craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
 					return true;
 				}
-				//Fly para el target.
+
 			}
 			else {
 				if (args.length == 1){
-					//Detectar si ya tiene el modo vuelo.
+
 					if (sender.getServer().getPlayer(args [0]) != null){
 						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 						if (!craftPlayerArgs.getAllowFlight()){
@@ -51,7 +51,7 @@ public class commandFly {
 							return true;
 						}
 					}
-					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
+					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado!");
 					return true;
 				}
 				else {

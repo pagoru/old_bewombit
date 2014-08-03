@@ -31,6 +31,10 @@ commands:
    end:
       description: Permite al jugador abrir el enderchest de otra persona
       permission: bewom.admin
+
+   ender:
+      description: Permite al jugador abrir el enderchest de otra persona
+      permission: bewom.admin
    
    enderchest:
       description: Permite al jugador abrir el enderchest
