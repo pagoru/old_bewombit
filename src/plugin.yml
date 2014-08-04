@@ -51,6 +51,9 @@ commands:
    heal:
       description: Permite al jugador curarse
       permission: bewom.admin
+   congelar:
+      description: Algo
+      permission: bewom.congelashasdf
       permission: bewom.vip
       
    seen:

@@ -25,8 +25,9 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		
 		log.info(ChatColor.AQUA + "Bit habilitado");
 		
-		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
+		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
+		getServer().getPluginManager().registerEvents(new movePlayer(), this);
 		
 		
 		// ---> Comandos <--- //
@@ -46,6 +47,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("seen").setExecutor(new commandPlayer());
 		getCommand("kick").setExecutor(new commandPlayer());
 		getCommand("cd").setExecutor(new commandPlayer());
+		getCommand("congelar").setExecutor(new commandPlayer());
 				
 		// ---> Scoreboard teams inicial <--- //
 		
@@ -99,8 +101,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 
 	public void onDisable(){
 		
-		log.info(ChatColor.AQUA + "Bit deshabilitado");
-		
+		log.info(ChatColor.AQUA + "Bit deshabilitado");	
 	}
-	
 }
