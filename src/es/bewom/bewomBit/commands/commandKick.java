@@ -11,7 +11,6 @@ public class commandKick {
 	@SuppressWarnings("deprecation")
 	public static boolean commandkick(CommandSender sender, Command cmd, String label, String[] args){
 
-
 		if (label.equalsIgnoreCase("kick")){
 			Player craftPlayerArgs;
 			String broadcast = ChatColor.DARK_BLUE + ": " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_BLUE + " < ";
@@ -51,12 +50,11 @@ public class commandKick {
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 					return true;
 				}
-			} 
-
-		} else {
-			sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
-			return true;
-		}
+			} else {
+				sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
+				return true;
+			}
+		} 
 		return false;
 	}
 }
