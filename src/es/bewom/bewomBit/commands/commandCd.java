@@ -5,7 +5,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 
+import es.bewom.bewomBit.bewomBit;
 import es.bewom.bewomBit.chatPlayer;
 
 public class commandCd {
@@ -15,19 +19,34 @@ public class commandCd {
 		
 		if (label.equalsIgnoreCase("cd")){
 			
-			if (args.length == 1){
-					
+			if (args.length == 0){
+				Player craftPlayer = (Player) sender;
+				
+				chatPlayer.playerArgsNameTeam.removePlayer(craftPlayer);
+				
+				sender.sendMessage(ChatColor.GRAY + "Has salido de el chat privado.");
+				
+			} else if (args.length == 1){
+				
 				if (sender.getServer().getPlayer(args[0]) != null){
 					
 					Player craftPlayer = (Player) sender;
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-					String playerArgsName = craftPlayerArgs.getName();
+					chatPlayer.playerArgsCraft = Bukkit.getServer().getPlayer(args[0]);
+					String playerArgsName = chatPlayer.playerArgsCraft.getName();
 					
-					sender.sendMessage("asasdas");
+					sender.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + playerArgsName + ", usa /cd para salir.");
 					
-					chatPlayer.chatPlayerPrivate = true;
-					chatPlayer.chatPlayerPrivateName = playerArgsName;
-					chatPlayer.chatPlayerPrivateNameCraft = craftPlayerArgs;
+					chatPlayer.playerArgsNameTeam = chatPlayer.board.getTeam(playerArgsName);
+					
+					
+					if (chatPlayer.playerArgsNameTeam == null) {
+						chatPlayer.playerArgsNameTeam = chatPlayer.board.registerNewTeam(playerArgsName);
+						chatPlayer.playerArgsNameTeam.addPlayer(craftPlayer);
+					} else {
+						chatPlayer.playerArgsNameTeam.addPlayer(craftPlayer);
+						
+					}
+					
 					
 					return true;
 				} else {
