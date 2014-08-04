@@ -9,6 +9,7 @@ TODO:
 - Sistema de permisos básico.
   > VIPS.
   > Perfiles MySQL.
+  > El freeze!
 - Sistema de baneos y kickeos.
 - Economia.
   > Dinero por minutos.
