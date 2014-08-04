@@ -20,13 +20,23 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	static Team teamAdmin;
 	static Team teamMod;
 	static Team teamVip;
+	private static boolean congelar = false;
+	
+	public static boolean isCongelar() {
+		return congelar;
+	}
+
+	public static void setCongelar(boolean congelar) {
+		bewomBit.congelar = congelar;
+	}
 	
 	public void onEnable(){
 		
 		log.info(ChatColor.AQUA + "Bit habilitado");
 		
-		getServer().getPluginManager().registerEvents(new connectPlayer(), this); //class connectPlayer.java
+		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
+		getServer().getPluginManager().registerEvents(new movePlayer(), this);
 		
 		
 		// ---> Comandos <--- //
@@ -45,6 +55,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("heal").setExecutor(new commandPlayer());
 		getCommand("seen").setExecutor(new commandPlayer());
 		getCommand("kick").setExecutor(new commandPlayer());
+		getCommand("congelar").setExecutor(new commandPlayer());
 				
 		// ---> Scoreboard teams inicial <--- //
 		
@@ -98,8 +109,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 
 	public void onDisable(){
 		
-		log.info(ChatColor.AQUA + "Bit deshabilitado");
-		
+		log.info(ChatColor.AQUA + "Bit deshabilitado");	
 	}
-	
 }

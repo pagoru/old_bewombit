@@ -51,12 +51,6 @@ commands:
    heal:
       description: Permite al jugador curarse
       permission: bewom.admin
-      permission: bewom.vip
-      
-   seen:
-      description: Permite al jugador ver la ultima conexion de otro jugador
-      permission: bewom.vip
-      
-   kick:
-      description: Permite al jugador kickear a otro jugador
-      permission: bewom.admin
+   congelar:
+      description: Algo
+      permission: bewom.congelashasdf
