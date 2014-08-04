@@ -17,7 +17,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	Logger log = Logger.getLogger("Minecraft");
 	
 	private static Scoreboard board;
-	static Team teamAdmin;
+	public static Team teamAdmin;
 	static Team teamMod;
 	static Team teamVip;
 	
@@ -28,7 +28,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
 		getServer().getPluginManager().registerEvents(new movePlayer(), this);
-		
+		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
 		
 		// ---> Comandos <--- //
 		
@@ -46,7 +46,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("heal").setExecutor(new commandPlayer());
 		getCommand("seen").setExecutor(new commandPlayer());
 		getCommand("kick").setExecutor(new commandPlayer());
-		getCommand("cd").setExecutor(new commandPlayer());
+		getCommand("mp").setExecutor(new commandPlayer());
 		getCommand("congelar").setExecutor(new commandPlayer());
 				
 		// ---> Scoreboard teams inicial <--- //

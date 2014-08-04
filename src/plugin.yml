@@ -64,6 +64,6 @@ commands:
       description: Permite al jugador kickear a otro jugador
       permission: bewom.admin
    
-   cd:
+   mp:
       description: Permite entrar en chats
       permission: bewom.admin

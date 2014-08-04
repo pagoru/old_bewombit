@@ -12,7 +12,7 @@ public class commandKick {
 	public static boolean commandkick(CommandSender sender, Command cmd, String label, String[] args){
 		Player craftPlayerArgs;
 		
-		String broadcast = ChatColor.DARK_BLUE + ": " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_BLUE + " < ";
+		String broadcast = ChatColor.DARK_BLUE + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_BLUE + "/" + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_BLUE + " < ";
 		
 		
 		if (label.equalsIgnoreCase("kick")){
@@ -26,6 +26,7 @@ public class commandKick {
 					
 					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado.");
 					
+					return true;
 				} else {
 					
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
@@ -46,6 +47,8 @@ public class commandKick {
 					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado por " + texto);
 					
 					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado por " + texto);
+					return true;
+					
 				} else {
 					
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
