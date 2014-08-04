@@ -12,10 +12,11 @@ public class commandClear {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
 		
 		if (label.equalsIgnoreCase("clear")){
+			Player craftPlayer = (Player) sender;
+			Player craftPlayerArgs;
+			
 			if (args.length == 0){
 				craftPlayer.getInventory().clear();
 				craftPlayer.getInventory().setHelmet(new ItemStack(Material.AIR));

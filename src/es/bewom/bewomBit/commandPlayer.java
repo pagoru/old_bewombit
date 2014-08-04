@@ -39,6 +39,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandHeal.commandheal(sender,cmd,label,args)){
 				return true;
 			}
+			if(commandKick.commandkick(sender, cmd, label, args)){
+				return true;
+			}
 			
 		} else {
 			
@@ -57,6 +60,9 @@ public class commandPlayer implements CommandExecutor {
 				return true;
 			}
 			if(commandSuicide.commandsuicide(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandSeen.commandseen(sender, cmd, label, args)){
 				return true;
 			}
 			
