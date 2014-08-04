@@ -10,10 +10,9 @@ public class commandFly {
 
 	@SuppressWarnings("deprecation")
 	public static boolean commandfly (CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
-
 		if (label.equalsIgnoreCase("fly")){
+			Player craftPlayer = (Player) sender;
+			Player craftPlayerArgs;
 
 			if (args.length == 0){
 

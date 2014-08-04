@@ -11,10 +11,10 @@ public class commandEnderChest {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean commandenderchest(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
 		
 		if (label.equalsIgnoreCase("enderchest") || label.equalsIgnoreCase("ender") || label.equalsIgnoreCase("end")){
+			Player craftPlayer = (Player) sender;
+			Player craftPlayerArgs;
 			
 			if (args.length == 0){
 				

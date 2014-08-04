@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 public class commandHat {
 
 	public static boolean commandhat(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
 		
 		if (label.equalsIgnoreCase("hat")){
+			Player craftPlayer = (Player) sender;
 			
 			ItemStack craftPlayerItem = craftPlayer.getItemInHand();
 			ItemStack craftPlayerHat = craftPlayer.getInventory().getHelmet();

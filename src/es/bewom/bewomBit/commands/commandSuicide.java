@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 public class commandSuicide {
 	
 	public static boolean commandsuicide(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
 		
 		if (label.equalsIgnoreCase("suicide")){
+			Player craftPlayer = (Player) sender;
 					
 			craftPlayer.setHealth(0);
 			

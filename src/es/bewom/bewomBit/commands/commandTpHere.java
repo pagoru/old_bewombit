@@ -11,10 +11,9 @@ public class commandTpHere {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean commandtphere(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
-
 		if (label.equalsIgnoreCase("tphere")){
+			Player craftPlayer = (Player) sender;
+			Player craftPlayerArgs;
 
 			if (args.length == 1){
 				if (craftPlayer.getServer().getPlayer(args[0]) != null){

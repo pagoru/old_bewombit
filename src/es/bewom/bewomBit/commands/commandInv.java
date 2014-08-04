@@ -11,10 +11,10 @@ public class commandInv {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean commandinv(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayer = (Player) sender;
-		Player craftPlayerArgs;
 		
 		if (label.equalsIgnoreCase("inv")){
+			Player craftPlayer = (Player) sender;
+			Player craftPlayerArgs;
 			
 			if (args.length == 1) {
 				
@@ -26,7 +26,7 @@ public class commandInv {
 					String playerArgsName = craftPlayerArgs.getName();
 					
 					craftPlayer.sendMessage(ChatColor.GRAY + "Abierto el inventario del jugador " + playerArgsName + ".");
-
+					
 					return true;
 					
 				} else {
