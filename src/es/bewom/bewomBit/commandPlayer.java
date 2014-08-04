@@ -42,6 +42,12 @@ public class commandPlayer implements CommandExecutor {
 			if(commandKick.commandkick(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandKick.commandkick(sender, cmd, label, args)){
+				return true;
+			}
+			if(commandCd.commandcd(sender, cmd, label, args)){
+				return true;
+			}
 			
 		} else {
 			

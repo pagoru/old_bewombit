@@ -8,27 +8,58 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class chatPlayer implements Listener {
 	
+	public static boolean chatPlayerPrivate;
+	public static String chatPlayerPrivateName;
+	public static Player chatPlayerPrivateNameCraft;
+
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent eventChat) {
 			
 		String message = eventChat.getMessage();
 		Player craftPlayer = eventChat.getPlayer(); //craftPlayer Player
 		String playerName = eventChat.getPlayer().getName(); //limpio String 
-
-		if (craftPlayer.hasPermission("bewom.admin")) {
-			eventChat.setFormat(ChatColor.DARK_RED + "/ " + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
+		
+		String admin =  "/ " + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD;
+		String mod = "/ " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD;
+		String vip = "/ " + ChatColor.DARK_AQUA + playerName + " < ";
+		String steve = "/ " + playerName + " < ";
+		
+		if (chatPlayerPrivate == true){
 			
-		} else if (craftPlayer.hasPermission("bewom.mod")) {
-			eventChat.setFormat(ChatColor.DARK_GREEN + "/ " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
-			
-		} else if (craftPlayer.hasPermission("bewom.vip")) {
-			eventChat.setFormat(ChatColor.DARK_AQUA + "/ " + ChatColor.DARK_AQUA + playerName + " < " + message);
+			if (craftPlayer.hasPermission("bewom.admin")) {
+				eventChat.setFormat("");
+				eventChat.getPlayer().sendMessage("/" + chatPlayerPrivateName + admin + message);
+				chatPlayerPrivateNameCraft.sendMessage("/" + chatPlayerPrivateName + admin + message);
+				
+			} else if (craftPlayer.hasPermission("bewom.mod")) {
+				eventChat.setFormat("/" + chatPlayerPrivateName + mod + message);
+				
+			} else if (craftPlayer.hasPermission("bewom.vip")) {
+				eventChat.setFormat("/" + chatPlayerPrivateName + vip + message);
+				
+			} else {
+				eventChat.setFormat("/" + chatPlayerPrivateName + steve + message);
+				
+			}
 			
 		} else {
-			eventChat.setFormat(": " + playerName + " < " + ChatColor.GRAY + message);
+			
+			if (craftPlayer.hasPermission("bewom.admin")) {
+				eventChat.setFormat(admin + message);
+				
+			} else if (craftPlayer.hasPermission("bewom.mod")) {
+				eventChat.setFormat(mod + message);
+				
+			} else if (craftPlayer.hasPermission("bewom.vip")) {
+				eventChat.setFormat(vip + message);
+				
+			} else {
+				eventChat.setFormat(steve + message);
+				
+			}
 			
 		}
-		
+			
 		
 	}
 	
