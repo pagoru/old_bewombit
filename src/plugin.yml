@@ -54,3 +54,16 @@ commands:
    congelar:
       description: Algo
       permission: bewom.congelashasdf
+      permission: bewom.vip
+      
+   seen:
+      description: Permite al jugador ver la ultima conexion de otro jugador
+      permission: bewom.vip
+      
+   kick:
+      description: Permite al jugador kickear a otro jugador
+      permission: bewom.admin
+   
+   cd:
+      description: Permite entrar en chats
+      permission: bewom.admin
