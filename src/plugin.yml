@@ -47,3 +47,7 @@ commands:
    suicide:
       description: Permite al jugador suicidarse
       permission: bewom.vip
+
+   heal:
+      description: Permite al jugador curarse
+      permission: bewom.admin

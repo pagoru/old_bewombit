@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class commandKill {
 	
 	@SuppressWarnings("deprecation")
-	public static boolean commandkill(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandkill(CommandSender sender, Command cmd, String label, String [] args){
 		Player craftPlayer = (Player) sender;
 		Player craftPlayerArgs;
 		
