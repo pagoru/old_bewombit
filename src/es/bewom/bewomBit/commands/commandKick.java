@@ -22,7 +22,7 @@ public class commandKick {
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					String playerArgsName = craftPlayerArgs.getName();
 					
-					craftPlayerArgs.kickPlayer("");
+					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado.");
 					
 					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado.");
 					
@@ -43,7 +43,7 @@ public class commandKick {
 						texto += args[i] + " ";
 					}
 					
-					craftPlayerArgs.kickPlayer("");
+					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado por " + texto);
 					
 					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado por " + texto);
 				} else {
@@ -51,12 +51,12 @@ public class commandKick {
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 					return true;
 				}
-			} 
+			} else {
+				sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
+				return true;
+			}
 			
-		} else {
-			sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
-			return true;
-		}
+		} 
 		return false;
 	}
 }

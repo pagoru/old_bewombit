@@ -16,13 +16,13 @@ public class chatPlayer implements Listener {
 		String playerName = eventChat.getPlayer().getName(); //limpio String 
 
 		if (craftPlayer.hasPermission("bewom.admin")) {
-			eventChat.setFormat(ChatColor.DARK_RED + ": " + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
+			eventChat.setFormat(ChatColor.DARK_RED + "/ " + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
 			
 		} else if (craftPlayer.hasPermission("bewom.mod")) {
-			eventChat.setFormat(ChatColor.DARK_GREEN + ": " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
+			eventChat.setFormat(ChatColor.DARK_GREEN + "/ " + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName + ChatColor.RESET + " < " + ChatColor.WHITE  + ChatColor.BOLD + message);
 			
 		} else if (craftPlayer.hasPermission("bewom.vip")) {
-			eventChat.setFormat(ChatColor.DARK_AQUA + ": " + ChatColor.DARK_AQUA + playerName + " < " + message);
+			eventChat.setFormat(ChatColor.DARK_AQUA + "/ " + ChatColor.DARK_AQUA + playerName + " < " + message);
 			
 		} else {
 			eventChat.setFormat(": " + playerName + " < " + ChatColor.GRAY + message);
