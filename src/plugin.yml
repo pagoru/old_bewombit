@@ -47,6 +47,11 @@ commands:
    suicide:
       description: Permite al jugador suicidarse
       permission: bewom.vip
+
+   heal:
+      description: Permite al jugador curarse
+      permission: bewom.admin
+      permission: bewom.vip
       
    seen:
       description: Permite al jugador ver la ultima conexion de otro jugador

@@ -36,6 +36,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandKill.commandkill(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandHeal.commandheal(sender,cmd,label,args)){
+				return true;
+			}
 			if(commandKick.commandkick(sender, cmd, label, args)){
 				return true;
 			}
