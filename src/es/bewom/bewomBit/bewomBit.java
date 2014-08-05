@@ -11,7 +11,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
-
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
@@ -21,13 +20,22 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	static Team teamMod;
 	static Team teamVip;
 	
+	private static boolean congelar = false;
+	
+	public static boolean isCongelar() {
+		return congelar;
+	}
+
+	public static void setCongelar(boolean congelar) {
+		bewomBit.congelar = congelar;
+	}
+
 	public void onEnable(){
 		
 		log.info(ChatColor.AQUA + "Bit habilitado");
-		
+		getServer().getPluginManager().registerEvents(new movePlayer (this), this);
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
-		getServer().getPluginManager().registerEvents(new movePlayer(), this);
 		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
 		
 		// ---> Comandos <--- //
