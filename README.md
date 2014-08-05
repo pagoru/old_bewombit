@@ -29,6 +29,6 @@ TODO:
 - Sistema de amigos
  > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
 
-- RANDOM
-1. huevos en spawner
-2. spawner romper
+**- RANDOM**
+- huevos en spawner
+- spawner romper
