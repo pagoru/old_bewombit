@@ -30,5 +30,5 @@ TODO:
  > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
 
 - RANDOM
-> huevos en spawner
-> spawner romper
+1. - huevos en spawner
+1. - spawner romper
