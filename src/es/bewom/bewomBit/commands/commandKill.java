@@ -20,10 +20,11 @@ public class commandKill {
 				if (sender.getServer().getPlayer(args [0]) != null){
 					
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					int nivel = craftPlayerArgs.getLevel();
 					craftPlayerArgs.setHealth(0);
 					String playerArgsName = craftPlayerArgs.getName();
 					
-					craftPlayer.sendMessage(ChatColor.GRAY + "Has matado al jugador " + playerArgsName + ".");
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + " y le has hecho perder " + nivel + " niveles.");
 
 					return true;
 					
