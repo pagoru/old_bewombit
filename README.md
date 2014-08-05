@@ -28,3 +28,6 @@ TODO:
   (Cuando se publiquen tweets que tambien salgan en los servers en forma de broadcast?)
 - Sistema de amigos
  > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
+-** RANDOM**
+> huevos en spawner
+> spawner romper

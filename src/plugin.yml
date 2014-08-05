@@ -15,19 +15,19 @@ commands:
    tphere:
       description: Permite al jugador teletransportar a otro jugador donde se encuentra.
       permission: bewom.admin
-      
+
    clear:
       description: Permite al jugador limpiar el inventario.
       permission: bewom.admin
-      
+
    hat:
       description: Permite al jugador ponerse un sombrero.
       permission: bewom.vip
-   
+
    inv:
       description: Permite al jugador abrir el inventario de otra persona
       permission: bewom.admin
-      
+
    end:
       description: Permite al jugador abrir el enderchest de otra persona
       permission: bewom.admin
@@ -35,15 +35,15 @@ commands:
    ender:
       description: Permite al jugador abrir el enderchest de otra persona
       permission: bewom.admin
-   
+
    enderchest:
       description: Permite al jugador abrir el enderchest
       permission: bewom.vip
-   
+
    kill:
       description: Permite al jugador matar a otro jugador
       permission: bewom.admin
-   
+
    suicide:
       description: Permite al jugador suicidarse
       permission: bewom.vip
@@ -51,19 +51,20 @@ commands:
    heal:
       description: Permite al jugador curarse
       permission: bewom.admin
+
    congelar:
       description: Algo
       permission: bewom.congelashasdf
       permission: bewom.vip
-      
+
    seen:
       description: Permite al jugador ver la ultima conexion de otro jugador
       permission: bewom.vip
-      
+
    kick:
       description: Permite al jugador kickear a otro jugador
       permission: bewom.admin
-   
+
    mp:
       description: Permite entrar en chats
       permission: bewom.admin
