@@ -42,3 +42,4 @@ TODO:
  > Huevos en spawner
  > Poder romper spawner en supervivencia.
  
+- Sistema de torneos e inscripciones para pixelmon

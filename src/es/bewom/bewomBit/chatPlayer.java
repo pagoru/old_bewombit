@@ -11,7 +11,6 @@ public class chatPlayer implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent eventChat) {
 			
-		
 		String message = eventChat.getMessage();
 		Player craftPlayer = eventChat.getPlayer(); //craftPlayer Player
 		String playerName = eventChat.getPlayer().getName(); //limpio String 
@@ -25,26 +24,7 @@ public class chatPlayer implements Listener {
 		String vipDefaultText = " < ";
 		
 		
-		if (craftPlayer.hasPermission("bewom.admin")) {
-			
-			if (connectPlayer.board.getPlayerTeam(craftPlayer) == connectPlayer.playerArgsNameTeamAdmin) {
-
-				connectPlayer.playerArgsNameTeamAdmin.addPlayer(craftPlayer);
-				connectPlayer.playerArgsNameTeamAdmin.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
-				
-				String DisplayName3 = connectPlayer.playerArgsNameTeamAdmin.getDisplayName().substring(0, connectPlayer.playerArgsNameTeamAdmin.getDisplayName().length() - 3);
-				
-				String adminPrivateMe = admin + ChatColor.GRAY + "/mp/" + DisplayName3 + adminModText + message;
-				
-				String adminPrivate = admin + ChatColor.GRAY + "/mp" + adminModText + message;
-				
-				craftPlayer.sendMessage(adminPrivateMe);
-				connectPlayer.playerArgsCraft.sendMessage(adminPrivate);
-				
-				eventChat.setCancelled(true);
-				
-			}
-			
+		if (craftPlayer.hasPermission("bewom.admin")) {			
 			eventChat.setFormat(admin + adminModText + message);
 			
 		} else if (craftPlayer.hasPermission("bewom.mod")) {

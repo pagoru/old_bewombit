@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
 
 public class connectPlayer implements Listener {
 	
@@ -18,7 +16,6 @@ public class connectPlayer implements Listener {
 	public static String chatPlayerName;
 	public static Scoreboard board;
 	public static Player playerArgsCraft;
-	public static Team playerArgsNameTeamAdmin;
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException {
@@ -26,17 +23,7 @@ public class connectPlayer implements Listener {
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		String playerName = eventConnect.getPlayer().getName(); //limpio String 
 		
-		eventConnect.setJoinMessage(ChatColor.GRAY + playerName + ChatColor.GRAY + " ha entrado en el servidor.");
-		
-		// ---> chats
-		
-		chatPlayerName = playerName + "_chat";
-		
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		board = manager.getMainScoreboard();
-		
-		playerArgsNameTeamAdmin = board.getTeam(playerName + "_ad");
-		
+		eventConnect.setJoinMessage(ChatColor.GRAY + playerName + ChatColor.GRAY + " ha entrado en el servidor.");		
 		
 		// ---> Scoreboards nicks <--- //
 		
