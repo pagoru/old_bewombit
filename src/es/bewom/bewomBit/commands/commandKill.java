@@ -27,13 +27,13 @@ public class commandKill {
 					switch (nivel){
 
 					case 0:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", no tenía niveles.");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", no tenÃ­a niveles.");
 						break;
 					case 1:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenía " + nivel + " nivel.");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenia " + nivel + " nivel.");
 						break;
 					default:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenía " + nivel + " niveles.");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenia " + nivel + " niveles.");
 						break;
 					}
 
