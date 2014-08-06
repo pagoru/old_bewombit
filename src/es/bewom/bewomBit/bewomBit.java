@@ -2,23 +2,13 @@ package es.bewom.bewomBit;
 
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
-
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
-	
-	private static Scoreboard board;
-	public static Team teamAdmin;
-	static Team teamMod;
-	static Team teamVip;
 	
 	private static boolean congelar = false;
 	
@@ -61,53 +51,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("congelar").setExecutor(new commandPlayer());
 				
 		// ---> Scoreboard teams inicial <--- //
-		
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		board = manager.getMainScoreboard();
-		
-		String bewomAdmin = "bewom_Admin";
-		String bewomMod = "bewom_Mod";
-		String bewomVip = "bewom_Vip";
-		
-		teamAdmin = board.getTeam(bewomAdmin);
-		teamMod = board.getTeam(bewomMod);
-		teamVip = board.getTeam(bewomVip);
-		
-		if (teamAdmin == null) {
-			teamAdmin = board.registerNewTeam(bewomAdmin);
-			teamAdmin.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
-			teamAdmin.setDisplayName(bewomAdmin);
-		} else {
-			teamAdmin.unregister();
-			
-			teamAdmin = board.registerNewTeam(bewomAdmin);
-			teamAdmin.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
-			teamAdmin.setDisplayName(bewomAdmin);
-		}
-		
-		if (teamMod == null) {
-			teamMod = board.registerNewTeam(bewomMod);
-			teamMod.setPrefix(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "");
-			teamMod.setDisplayName(bewomMod);
-		} else {
-			teamMod.unregister();
-			
-			teamMod = board.registerNewTeam(bewomMod);
-			teamMod.setPrefix(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "");
-			teamMod.setDisplayName(bewomMod);
-		}
-		
-		if (teamVip == null) {
-			teamVip = board.registerNewTeam(bewomVip);
-			teamVip.setPrefix(ChatColor.DARK_AQUA + "");
-			teamVip.setDisplayName(bewomVip);
-		} else {
-			teamVip.unregister();
-			
-			teamVip = board.registerNewTeam(bewomVip);
-			teamVip.setPrefix(ChatColor.DARK_AQUA + "");
-			teamVip.setDisplayName(bewomVip);
-		}
 		
 		
 	}

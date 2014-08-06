@@ -53,6 +53,8 @@ public class chatPlayer implements Listener {
 					
 					// Información que cargar/guardar para el jugador
 					
+					// ---> Chat <--- //
+					
 					getPlayerChat = playerData.getString("Chat");
 					
 					if(getPlayerChat.equals("global")){
@@ -85,7 +87,7 @@ public class chatPlayer implements Listener {
 							
 						}
 						
-					}
+					}					
 					
 					playerData.save(f);
 					

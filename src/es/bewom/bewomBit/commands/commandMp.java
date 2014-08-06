@@ -110,14 +110,14 @@ public class commandMp {
 									
 									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
 									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + playerName + " < " + texto);
+									Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + args[0] + " < " + texto);
 									Bukkit.getServer().getPlayer(args[0]).sendMessage(admin + mpText + " < " + texto);
 									
 								} else {
 									
 									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
 									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(steve + mpText + "/" + playerName + " < " + texto);
+									Bukkit.getServer().getPlayer(playerName).sendMessage(steve + mpText + "/" + args[0] + " < " + texto);
 									Bukkit.getServer().getPlayer(args[0]).sendMessage(steve + mpText + " < " + texto);
 									
 								}
