@@ -27,6 +27,9 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
 		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
+		getServer().getPluginManager().registerEvents(new placeBlockPlayer(), this);
+		getServer().getPluginManager().registerEvents(new interactPlayer(), this);
+		
 		
 		
 		getFile();

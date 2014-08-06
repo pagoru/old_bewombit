@@ -32,38 +32,6 @@ public class connectPlayer implements Listener  {
 		
 		eventConnect.setJoinMessage(ChatColor.GRAY + playerName + ChatColor.GRAY + " ha entrado en el servidor.");		
 		
-		// ---> Scoreboards nicks OLD <--- //
-		
-//		bewomBit.teamAdmin.removePlayer(craftPlayer);
-//		bewomBit.teamMod.removePlayer(craftPlayer);
-//		bewomBit.teamVip.removePlayer(craftPlayer);
-//		
-//		if (craftPlayer.hasPermission("bewom.admin")) {
-//			Bukkit.getLogger().info("player " + playerName +" is administrator");
-//			bewomBit.teamAdmin.addPlayer(craftPlayer);
-//			
-//			
-//		} else if (craftPlayer.hasPermission("bewom.mod")) {
-//			Bukkit.getLogger().info("player " + playerName +" is moderator.");
-//			bewomBit.teamMod.addPlayer(craftPlayer);
-//		
-//			
-//		} else if (craftPlayer.hasPermission("bewom.vip")) {
-//			Bukkit.getLogger().info("player "+ playerName +" is vip.");
-//			bewomBit.teamVip.addPlayer(craftPlayer);
-//			
-//			
-//		} else {
-//			
-//		}
-		
-		if (craftPlayer.hasPermission("bewom.admin")) {
-			
-			
-			
-		}
-		
-		
 		// ---> Perfiles Individuales <--- //	
 		
 		// Creacion de la carpeta individual 
