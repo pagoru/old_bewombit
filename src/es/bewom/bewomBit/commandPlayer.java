@@ -45,9 +45,6 @@ public class commandPlayer implements CommandExecutor {
 			if(commandKick.commandkick(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandMp.commandmp(sender, cmd, label, args)){
-				return true;
-			}
 			if(commandCongelar.commandcongelar(sender, cmd, label, args)){
 				return true;
 			}
@@ -81,6 +78,13 @@ public class commandPlayer implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
 		
 		}
+		
+		// ---> Comandos cualquiera <--- //
+		
+		if(commandMp.commandmp(sender, cmd, label, args)){
+			return true;
+		}
+		
 		return false;
 	}
 }

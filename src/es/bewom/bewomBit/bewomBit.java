@@ -38,6 +38,9 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
 		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
 		
+		
+		getFile();
+		
 		// ---> Comandos <--- //
 		
 		getCommand("say").setExecutor(new commandPlayer());
@@ -105,10 +108,20 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 			teamVip.setPrefix(ChatColor.DARK_AQUA + "");
 			teamVip.setDisplayName(bewomVip);
 		}
+		
+		
 	}
 
 	public void onDisable(){
 		
 		log.info(ChatColor.AQUA + "Bit deshabilitado");	
 	}
+	
+//  Util quiza mas adelante	
+	
+	public bewomBit(){
+		this.getConfig().options().copyDefaults(true);
+		this.saveConfig();
+	}
+
 }

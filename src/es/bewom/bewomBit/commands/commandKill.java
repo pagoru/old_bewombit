@@ -23,11 +23,11 @@ public class commandKill {
 					int nivel = craftPlayerArgs.getLevel();
 					craftPlayerArgs.setHealth(0);
 					String playerArgsName = craftPlayerArgs.getName();
-
+					
 					switch (nivel){
 
 					case 0:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", no tenía niveles.");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", no tenia niveles.");
 						break;
 					case 1:
 						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenia " + nivel + " nivel.");
