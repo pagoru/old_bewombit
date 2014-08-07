@@ -14,25 +14,22 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 
-public class placeBlockPlayer implements Listener {
+public class brokeBlockPlayer implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
 	@EventHandler
-	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
+	public void OnBreak(BlockBreakEvent eventPlace) throws SQLException, IOException {
 		
-		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
-		String playerName = eventPlace.getPlayer().getName();
+		Block brokeBlock = eventPlace.getBlock();
 		
-		Block placeBlock = eventPlace.getBlock();
+		int locationBlockX = brokeBlock.getLocation().getBlockX();
+		int locationBlockY = brokeBlock.getLocation().getBlockY();
+		int locationBlockZ = brokeBlock.getLocation().getBlockZ();
 		
-		int locationBlockX = placeBlock.getLocation().getBlockX();
-		int locationBlockY = placeBlock.getLocation().getBlockY();
-		int locationBlockZ = placeBlock.getLocation().getBlockZ();
-		
-		if(placeBlock.getType() == Material.CHEST){
+		if(brokeBlock.getType() == Material.CHEST){
 			
 			File cofredata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Cofres.yml");
 			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
@@ -45,12 +42,7 @@ public class placeBlockPlayer implements Listener {
 						
 						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 						
-						cofreData.set("Chests."+ hash + ".playerName", playerName);
-						cofreData.set("Chests."+ hash + ".playerUUID", playerUUID);
-						cofreData.set("Chests."+ hash + ".X", locationBlockX);
-						cofreData.set("Chests."+ hash + ".Y", locationBlockY);
-						cofreData.set("Chests."+ hash + ".Z", locationBlockZ);
-						cofreData.set("Chests."+ hash + ".estado", "privado");
+						cofreData.set("Chests."+ hash, null);
 						
 						cofreData.save(cofredata);
 						

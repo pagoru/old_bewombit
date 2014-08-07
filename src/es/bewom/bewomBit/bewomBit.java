@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.bewom.bewomBit.events.brokeBlockPlayer;
 import es.bewom.bewomBit.events.chatPlayer;
 import es.bewom.bewomBit.events.connectPlayer;
 import es.bewom.bewomBit.events.deathPlayer;
@@ -38,6 +39,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new placeBlockPlayer(), this);
 		getServer().getPluginManager().registerEvents(new interactPlayer(), this);
 		getServer().getPluginManager().registerEvents(new deathPlayer(), this);
+		getServer().getPluginManager().registerEvents(new brokeBlockPlayer(), this);
 		
 		
 		

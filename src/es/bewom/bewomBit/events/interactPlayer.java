@@ -70,11 +70,9 @@ public class interactPlayer implements Listener {
 						
 						gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
 						
-						craftPlayer.sendMessage(gethash + "/" + hash + "   " + getlocationBlockPlayerName + " - " + playerName);
-						
 						if (gethash == hash){
 							
-							if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockPlayerName.equals("Steve")){
+							if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockEstado.equals("publico")){
 								
 							} else if (getlocationBlockPlayerName.equals(null)) {
 								
