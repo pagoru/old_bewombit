@@ -117,6 +117,14 @@ public class connectPlayer implements Listener  {
 						
 						}
 					}
+					
+					String lastMessage = playerData.getString("LastMessage");
+					
+					if(lastMessage == null){
+						
+						playerData.set("LastMessage", "Bienvenido");
+						
+					}
 
 					playerData.save(f);
 					
