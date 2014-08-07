@@ -70,7 +70,7 @@ commands:
       permission: bewom.admin
 
    me:
-      description: Permite entrar en chats
+      description: Permite entrar en chatsew
       permission: bewom.admin
       
    msg:

@@ -76,17 +76,11 @@ public class interactPlayer implements Listener {
 							
 							if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockPlayerName.equals("Steve")){
 								
-								craftPlayer.sendMessage(gethash + "/" + hash + "   " + getlocationBlockPlayerName + " - " + playerName);
-								
 							} else if (getlocationBlockPlayerName.equals(null)) {
-								
-								craftPlayer.sendMessage(gethash + "/" + hash + "   " + getlocationBlockPlayerName + " - " + playerName);
 								
 							} else {
 								
 								eventInteract.setCancelled(true);
-								
-								craftPlayer.sendMessage(gethash + "/" + hash + "   " + getlocationBlockPlayerName + " - " + playerName);
 								
 							}
 							
@@ -94,7 +88,6 @@ public class interactPlayer implements Listener {
 							
 							if (getlocationBlockPlayerName == null) {
 								
-
 								cofreData.set("Chests."+ hash + ".playerName", "Steve");
 								cofreData.set("Chests."+ hash + ".playerUUID", null);
 								cofreData.set("Chests."+ hash + ".X", locationBlockX);
@@ -102,7 +95,6 @@ public class interactPlayer implements Listener {
 								cofreData.set("Chests."+ hash + ".Z", locationBlockZ);
 								cofreData.set("Chests."+ hash + ".estado", "publico");
 								
-								craftPlayer.sendMessage(gethash + "/" + hash + "   " + getlocationBlockPlayerName + " - " + playerName);
 								
 							} else {
 								
@@ -110,10 +102,7 @@ public class interactPlayer implements Listener {
 								
 							}
 							
-							
 						}
-						
-						
 						
 						
 						cofreData.save(cofredata);
