@@ -105,9 +105,9 @@ public class chatPlayer implements Listener {
 	}
 	private String corregir (String message) {
 		if (message.length() >= 5){
-			message = message.substring(0, 0).toUpperCase() + message.substring(1);
-			char m = message.charAt(message.length());
-			if (!(m == '.' || m == '?' || m == '!' || m == ',' || m == ':' || m == ';')){
+			message = message.substring(0, 1).toUpperCase() + message.substring(1);
+			char m = message.charAt(message.length()-1);
+			if (!(m == '.' || m == ','|| m == '?' || m == '¿'  || m == '!' || m == '¡' || m == ':' || m == ';')){
 				message = message + '.';
 			}
 		}
