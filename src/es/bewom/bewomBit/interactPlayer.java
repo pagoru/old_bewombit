@@ -18,11 +18,14 @@ public class interactPlayer implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
+	@SuppressWarnings("static-access")
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent eventInteract){
 		
 		String playerUUID = eventInteract.getPlayer().getUniqueId().toString();
-		if (eventInteract.getClickedBlock().getType().equals(Material.CHEST)){
+			
+
+		if ((eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK || eventInteract.getAction() == eventInteract.getAction().LEFT_CLICK_BLOCK) && eventInteract.getClickedBlock().getType() == Material.CHEST){
 			
 			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 			File f = new File(userdata, File.separator + playerUUID + ".yml");
@@ -36,18 +39,25 @@ public class interactPlayer implements Listener {
 			int getlocationBlockY = 0;
 			int getlocationBlockZ = 0;
 			
+			
 			locationBlockX = eventInteract.getClickedBlock().getLocation().getBlockX();
 			locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
 			locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
+			
+			int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+			
+			int gethash = 0;
 			
 			try {
 				try {
 					try {
 						playerData.load(f);
-			
-						getlocationBlockX = playerData.getInt("Chest.X", locationBlockX);
-						getlocationBlockY = playerData.getInt("Chest.Y", locationBlockY);
-						getlocationBlockZ = playerData.getInt("Chest.Z", locationBlockZ);
+						
+						getlocationBlockX = playerData.getInt("Chests." + hash + ".X");
+						getlocationBlockY = playerData.getInt("Chests." + hash + ".Y");
+						getlocationBlockZ = playerData.getInt("Chests." + hash + ".Z");
+						
+						gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
 						
 						playerData.save(f);
 						
@@ -63,19 +73,14 @@ public class interactPlayer implements Listener {
 					e.printStackTrace();
 			}
 			
-			if (locationBlockX == getlocationBlockX && locationBlockY == getlocationBlockY && locationBlockZ == getlocationBlockZ){
-				log.info("TU CHEST");
+			if (gethash == hash){
 				
-				
-				
-			} else {
-				
-				log.info("NO TU CHEST");
-				
+			} else {				
 				eventInteract.setCancelled(true);
 			}
 		}
-        
+		
+	
         
     }
 

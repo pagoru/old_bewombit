@@ -29,6 +29,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
 		getServer().getPluginManager().registerEvents(new placeBlockPlayer(), this);
 		getServer().getPluginManager().registerEvents(new interactPlayer(), this);
+		getServer().getPluginManager().registerEvents(new deathPlayer(), this);
 		
 		
 		

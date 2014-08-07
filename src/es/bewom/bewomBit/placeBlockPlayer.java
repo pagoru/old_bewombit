@@ -26,6 +26,7 @@ public class placeBlockPlayer implements Listener {
 		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
 		
 		Block placeBlock = eventPlace.getBlock();
+		
 		int locationBlockX = placeBlock.getLocation().getBlockX();
 		int locationBlockY = placeBlock.getLocation().getBlockY();
 		int locationBlockZ = placeBlock.getLocation().getBlockZ();
@@ -43,10 +44,12 @@ public class placeBlockPlayer implements Listener {
 				try {
 					try {
 						playerData.load(f);
-			
-						playerData.set("Chest.X", locationBlockX);
-						playerData.set("Chest.Y", locationBlockY);
-						playerData.set("Chest.Z", locationBlockZ);
+						
+						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+						
+						playerData.set("Chests."+ hash + ".X", locationBlockX);
+						playerData.set("Chests."+ hash + ".Y", locationBlockY);
+						playerData.set("Chests."+ hash + ".Z", locationBlockZ);
 						
 						playerData.save(f);
 						
@@ -62,7 +65,7 @@ public class placeBlockPlayer implements Listener {
 					e.printStackTrace();
 			}
 		}
-		
+
 		
 	}
 
