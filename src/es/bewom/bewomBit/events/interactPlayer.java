@@ -19,7 +19,7 @@ public class interactPlayer implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "unused" })
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent eventInteract){
 		

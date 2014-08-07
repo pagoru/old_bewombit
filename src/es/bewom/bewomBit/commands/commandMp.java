@@ -23,7 +23,7 @@ public class commandMp {
 	@SuppressWarnings({ "deprecation"})
 	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args){
 		
-		if (label.equalsIgnoreCase("mp")){
+		if (label.equalsIgnoreCase("mp") || label.equalsIgnoreCase("msg") || label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("me")){
 		
 			Player craftPlayer = (Player) sender;
 			String playerName = sender.getName();

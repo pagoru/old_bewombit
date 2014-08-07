@@ -69,6 +69,18 @@ commands:
       description: Permite entrar en chats
       permission: bewom.admin
 
+   me:
+      description: Permite entrar en chats
+      permission: bewom.admin
+      
+   msg:
+      description: Permite entrar en chats
+      permission: bewom.admin
+
+   tell:
+      description: Permite entrar en chats
+      permission: bewom.admin
+  
    cofre:
       description: Permite al jugador editar un cofre
       permission: bewom.admin

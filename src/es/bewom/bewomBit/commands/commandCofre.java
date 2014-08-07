@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class commandCofre {
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unused" })
 	public static boolean commandcofre(CommandSender sender, Command cmd, String label, String[] args){
 		
 		if (label.equalsIgnoreCase("cofre")){
