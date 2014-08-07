@@ -87,7 +87,15 @@ public class chatPlayer implements Listener {
 
 						}
 
-					}					
+					}
+					
+					String lastMessage = playerData.getString("LastMessage");
+					
+					if(lastMessage.equals(message)){
+						eventChat.setCancelled(true);
+					}
+					
+					playerData.set("LastMessage", message);
 
 					playerData.save(f);
 
