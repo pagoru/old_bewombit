@@ -53,6 +53,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("kick").setExecutor(new commandPlayer());
 		getCommand("mp").setExecutor(new commandPlayer());
 		getCommand("congelar").setExecutor(new commandPlayer());
+		getCommand("cofre").setExecutor(new commandPlayer());
 				
 		// ---> Scoreboard teams inicial <--- //
 		

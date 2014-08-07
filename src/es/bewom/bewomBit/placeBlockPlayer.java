@@ -24,6 +24,7 @@ public class placeBlockPlayer implements Listener {
 	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
 		
 		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
+		String playerName = eventPlace.getPlayer().getName();
 		
 		Block placeBlock = eventPlace.getBlock();
 		
@@ -35,23 +36,25 @@ public class placeBlockPlayer implements Listener {
 			
 			log.info("CHEST");
 			
-			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
-			File f = new File(userdata, File.separator + playerUUID + ".yml");
-			FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+			File cofredata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Cofres.yml");
+			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
 			
 			
 			try {
 				try {
 					try {
-						playerData.load(f);
+						cofreData.load(cofredata);
 						
 						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 						
-						playerData.set("Chests."+ hash + ".X", locationBlockX);
-						playerData.set("Chests."+ hash + ".Y", locationBlockY);
-						playerData.set("Chests."+ hash + ".Z", locationBlockZ);
+						cofreData.set("Chests."+ hash + ".playerName", playerName);
+						cofreData.set("Chests."+ hash + ".playerUUID", playerUUID);
+						cofreData.set("Chests."+ hash + ".X", locationBlockX);
+						cofreData.set("Chests."+ hash + ".Y", locationBlockY);
+						cofreData.set("Chests."+ hash + ".Z", locationBlockZ);
+						cofreData.set("Chests."+ hash + ".estado", "privado");
 						
-						playerData.save(f);
+						cofreData.save(cofredata);
 						
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();

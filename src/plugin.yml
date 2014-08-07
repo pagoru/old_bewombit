@@ -68,3 +68,7 @@ commands:
    mp:
       description: Permite entrar en chats
       permission: bewom.admin
+
+   cofre:
+      description: Permite al jugador editar un cofre
+      permission: bewom.admin

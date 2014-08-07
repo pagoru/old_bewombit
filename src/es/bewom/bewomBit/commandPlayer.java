@@ -72,6 +72,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSeen.commandseen(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandCofre.commandcofre(sender, cmd, label, args)){
+				return true;
+			}
 			
 		} else {
 			
