@@ -1,4 +1,4 @@
-package es.bewom.bewomBit;
+package es.bewom.bewomBit.events;
 
 import java.io.File;
 import java.io.FileNotFoundException;

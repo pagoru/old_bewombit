@@ -6,6 +6,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import es.bewom.bewomBit.events.chatPlayer;
+import es.bewom.bewomBit.events.connectPlayer;
+import es.bewom.bewomBit.events.deathPlayer;
+import es.bewom.bewomBit.events.interactPlayer;
+import es.bewom.bewomBit.events.movePlayer;
+import es.bewom.bewomBit.events.placeBlockPlayer;
+import es.bewom.bewomBit.events.serverMOTD;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
