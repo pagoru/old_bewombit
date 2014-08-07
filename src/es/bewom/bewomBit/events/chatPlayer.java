@@ -16,98 +16,101 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class chatPlayer implements Listener {
-	
+
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent eventChat) {
-			
+
 		String message = eventChat.getMessage();
 		Player craftPlayer = eventChat.getPlayer(); //craftPlayer Player
 		String playerName = eventChat.getPlayer().getName(); //limpio String 
 		String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
-		
+
 		String admin = ChatColor.DARK_RED + "/" + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName;
 		String mod = ChatColor.DARK_GREEN + "/" + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName;
 		String vip =  ChatColor.DARK_AQUA + "/" + playerName;
 		String steve = "/" + playerName;
-		
+
 		String adminModText = ChatColor.RESET + " < " + ChatColor.WHITE  + "" + ChatColor.BOLD;
 		String vipDefaultText = ChatColor.WHITE + " < ";
-		
+
 		String mpText = ChatColor.GRAY + "/mp";
-		
+
 		//mp
-		
+
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-		
-		
+
+
 		try {
 			try {
 				try {
 					playerData.load(f);
-					
+
 					// Información que cargar/guardar para el jugador
-					
+
 					// ---> Chat <--- //
-					
+
 					getPlayerChat = playerData.getString("Chat");
-					
+
 					if(getPlayerChat.equals("global")){
-						
+
 						if (craftPlayer.hasPermission("bewom.admin")) {			
 							eventChat.setFormat(admin + adminModText + message);
-							
+
 						} else if (craftPlayer.hasPermission("bewom.mod")) {
 							eventChat.setFormat(mod + adminModText + message);
-							
+
 						} else if (craftPlayer.hasPermission("bewom.vip")) {
-							eventChat.setFormat(vip + vipDefaultText + message);
-							
+							eventChat.setFormat(vip + vipDefaultText + corregir(message));
+
 						} else {
-							eventChat.setFormat(steve + vipDefaultText + message);
-							
+							eventChat.setFormat(steve + vipDefaultText + corregir(message));
+
 						}
-						
+
 					} else {
-						
+
 						if (craftPlayer.hasPermission("bewom.admin")) {	
-							
+
 							Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + getPlayerChat + " < " + message);
-							
+
 							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(admin + mpText + " < " + message);
-							
+
 							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + message);
-							
+
 							eventChat.setCancelled(true);
-							
+
 						}
-						
+
 					}					
-					
+
 					playerData.save(f);
-					
+
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
-		}
-		
-		
-		
-			
-		
-	}
-	
 
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} catch (InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+	private String corregir (String message) {
+		if (message.length() >= 5){
+			message = message.substring(0, 0).toUpperCase() + message.substring(1);
+			char m = message.charAt(message.length());
+			if (!(m == '.' || m == '?' || m == '!' || m == ',' || m == ':' || m == ';')){
+				message = message + '.';
+			}
+		}
+		return message;
+	}
 }
