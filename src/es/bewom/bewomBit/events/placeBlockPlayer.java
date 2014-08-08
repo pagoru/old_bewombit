@@ -125,7 +125,19 @@ public class placeBlockPlayer implements Listener {
 				e.printStackTrace();
 		}
 		
-		//---> Protección Hopper contra cofre
+		//---> Protección Hopper contra cofre y cofre trampa
+		
+		if(placeBlock.getType().equals(Material.HOPPER)){
+			
+			locationBlock = placeBlock.getLocation().add(0, 1, 0);
+			
+			if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST){
+				
+				eventPlace.setCancelled(true);
+				
+			}
+			
+		}
 		
 		try {
 			try {
