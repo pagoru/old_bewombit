@@ -48,35 +48,45 @@ public class brokeBlockPlayer implements Listener {
 		int locationBlockY = brokeBlock.getLocation().getBlockY();
 		int locationBlockZ = brokeBlock.getLocation().getBlockZ();
 		
-		if(brokeBlock.getType() == Material.CHEST){
 			
-			File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-			File cofredata = new File(cofredata1, File.separator + "cofres.yml");
-			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
+		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		
+		String material = null;
 			
-			
+		try {
 			try {
 				try {
-					try {
-						cofreData.load(cofredata);
+					
+					if(brokeBlock.getType() == Material.CHEST || brokeBlock.getType() == Material.HOPPER){
+						
+						if(brokeBlock.getType() == Material.CHEST){
+							material = "Chest";
+						} else if (brokeBlock.getType() == Material.HOPPER){
+							material = "Hopper";
+						}
+					
+						proteccionData.load(protecciondata);
 						
 						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 						
-						cofreData.set("Chests."+ hash, null);
+						proteccionData.set(material + "." + hash, null);
 						
-						cofreData.save(cofredata);
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+						proteccionData.save(protecciondata);
+					
 					}
 					
-				} catch (IOException e) {
-						e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
 				
-			} catch (InvalidConfigurationException e) {
+			} catch (IOException e) {
 					e.printStackTrace();
 			}
+			
+		} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
 		}
 		
 		//congelar

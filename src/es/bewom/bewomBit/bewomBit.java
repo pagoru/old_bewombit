@@ -70,13 +70,13 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File data = new File(data1, File.separator + "config.yml");
-		File dataChest = new File(data1, File.separator + "cofres.yml");
+		File dataProteccion = new File(data1, File.separator + "proteccion.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
 		try {
 			data1.mkdir();
 			data.createNewFile();
-			dataChest.createNewFile();
+			dataProteccion.createNewFile();
 		} catch (IOException e) {
 		  
 			e.printStackTrace();

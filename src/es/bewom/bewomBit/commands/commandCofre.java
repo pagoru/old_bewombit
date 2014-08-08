@@ -35,14 +35,14 @@ public class commandCofre {
 					
 					int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 					
-					File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-					File cofredata = new File(cofredata1, File.separator + "cofres.yml");
-					FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
+					File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+					File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+					FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 					
 					try {
 						try {
 							try {
-								cofreData.load(cofredata);
+								proteccionData.load(protecciondata);
 								
 								int getlocationBlockHash = 0;
 								String getlocationBlockPlayerName = null;
@@ -54,13 +54,13 @@ public class commandCofre {
 								
 								int gethash = 0;
 								
-								getlocationBlockHash = cofreData.getInt("Chests." + hash);
-								getlocationBlockPlayerName = cofreData.getString("Chests." + hash + ".playerName");
-								getlocationBlockPlayerUUID = cofreData.getString("Chests." + hash + ".playerUUID");
-								getlocationBlockX = cofreData.getInt("Chests." + hash + ".X");
-								getlocationBlockY = cofreData.getInt("Chests." + hash + ".Y");
-								getlocationBlockZ = cofreData.getInt("Chests." + hash + ".Z");
-								getlocationBlockEstado = cofreData.getString("Chests."+ hash + ".estado");
+								getlocationBlockHash = proteccionData.getInt("Chests." + hash);
+								getlocationBlockPlayerName = proteccionData.getString("Chests." + hash + ".playerName");
+								getlocationBlockPlayerUUID = proteccionData.getString("Chests." + hash + ".playerUUID");
+								getlocationBlockX = proteccionData.getInt("Chests." + hash + ".X");
+								getlocationBlockY = proteccionData.getInt("Chests." + hash + ".Y");
+								getlocationBlockZ = proteccionData.getInt("Chests." + hash + ".Z");
+								getlocationBlockEstado = proteccionData.getString("Chests."+ hash + ".estado");
 								
 								gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
 								
@@ -70,11 +70,11 @@ public class commandCofre {
 										
 										if (args[0].equals("privado")){
 											
-											cofreData.set("Chests."+ hash + ".estado", "privado");
+											proteccionData.set("Chests."+ hash + ".estado", "privado");
 											
 										} else  if (args[0].equals("publico")) {
 											
-											cofreData.set("Chests."+ hash + ".estado", "publico");
+											proteccionData.set("Chests."+ hash + ".estado", "publico");
 											
 										}
 										
@@ -87,7 +87,7 @@ public class commandCofre {
 								}
 								
 								
-								cofreData.save(cofredata);
+								proteccionData.save(protecciondata);
 					
 							} catch (FileNotFoundException e) {
 								e.printStackTrace();

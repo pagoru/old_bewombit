@@ -42,47 +42,57 @@ public class interactPlayer implements Listener {
 			
 
 		if (eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK || eventInteract.getAction() == eventInteract.getAction().LEFT_CLICK_BLOCK){
-			
-			if(eventInteract.getClickedBlock().getType() == Material.CHEST){
 	
-				File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-				File cofredata = new File(cofredata1, File.separator + "cofres.yml");
-				FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
-				
-				int locationBlockX = 0;
-				int locationBlockY = 0;
-				int locationBlockZ = 0;
-				
-				int getlocationBlockHash = 0;
-				
-				String getlocationBlockPlayerName = null;
-				String getlocationBlockPlayerUUID = null;
-				int getlocationBlockX = 0;
-				int getlocationBlockY = 0;
-				int getlocationBlockZ = 0;
-				String getlocationBlockEstado = null;
-				
-				
-				locationBlockX = eventInteract.getClickedBlock().getLocation().getBlockX();
-				locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
-				locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
-				
-				int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
-				
-				int gethash = 0;
-				
+			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+			FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+			
+			int locationBlockX = 0;
+			int locationBlockY = 0;
+			int locationBlockZ = 0;
+			
+			int getlocationBlockHash = 0;
+			
+			String getlocationBlockPlayerName = null;
+			String getlocationBlockPlayerUUID = null;
+			int getlocationBlockX = 0;
+			int getlocationBlockY = 0;
+			int getlocationBlockZ = 0;
+			String getlocationBlockEstado = null;
+			
+			
+			locationBlockX = eventInteract.getClickedBlock().getLocation().getBlockX();
+			locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
+			locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
+			
+			int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+			
+			int gethash = 0;
+			
+			String material = null;
+			
+			try {
 				try {
 					try {
-						try {
-							cofreData.load(cofredata);
+						proteccionData.load(protecciondata);
+						
+						//proteccion
+						if(eventInteract.getClickedBlock().getType() == Material.CHEST || eventInteract.getClickedBlock().getType() == Material.HOPPER){
 							
-							getlocationBlockHash = cofreData.getInt("Chests." + hash);
-							getlocationBlockPlayerName = cofreData.getString("Chests." + hash + ".playerName");
-							getlocationBlockPlayerUUID = cofreData.getString("Chests." + hash + ".playerUUID");
-							getlocationBlockX = cofreData.getInt("Chests." + hash + ".X");
-							getlocationBlockY = cofreData.getInt("Chests." + hash + ".Y");
-							getlocationBlockZ = cofreData.getInt("Chests." + hash + ".Z");
-							getlocationBlockEstado = cofreData.getString("Chests."+ hash + ".estado");
+							if(eventInteract.getClickedBlock().getType() == Material.CHEST){
+								material = "Chest";
+							} else if (eventInteract.getClickedBlock().getType() == Material.HOPPER){
+								material = "Hopper";
+							}
+							
+							
+							getlocationBlockHash = proteccionData.getInt(material + "." + hash);
+							getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+							getlocationBlockPlayerUUID = proteccionData.getString(material + "." + hash + ".playerUUID");
+							getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
+							getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
+							getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
+							getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 							
 							gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
 							
@@ -102,12 +112,12 @@ public class interactPlayer implements Listener {
 								
 								if (getlocationBlockPlayerName == null) {
 									
-									cofreData.set("Chests."+ hash + ".playerName", "Steve");
-									cofreData.set("Chests."+ hash + ".playerUUID", null);
-									cofreData.set("Chests."+ hash + ".X", locationBlockX);
-									cofreData.set("Chests."+ hash + ".Y", locationBlockY);
-									cofreData.set("Chests."+ hash + ".Z", locationBlockZ);
-									cofreData.set("Chests."+ hash + ".estado", "publico");
+									proteccionData.set(material + "." + hash + ".playerName", "Steve");
+									proteccionData.set(material + "." + hash + ".playerUUID", null);
+									proteccionData.set(material + "." + hash + ".X", locationBlockX);
+									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+									proteccionData.set(material + "." + hash + ".estado", "publico");
 									
 									
 								} else {
@@ -117,26 +127,24 @@ public class interactPlayer implements Listener {
 								}
 								
 							}
-							
-							
-							cofreData.save(cofredata);
-							
-							
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
 						}
 						
-					} catch (IOException e) {
-							e.printStackTrace();
+						proteccionData.save(protecciondata);
+						
+						
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
 					}
 					
-				} catch (InvalidConfigurationException e) {
+				} catch (IOException e) {
 						e.printStackTrace();
 				}
+				
+			} catch (InvalidConfigurationException e) {
+					e.printStackTrace();
 			}
-			
-			
 		}
+			
 		
 		if (eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK){
 			

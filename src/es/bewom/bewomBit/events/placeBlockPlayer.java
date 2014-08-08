@@ -23,6 +23,7 @@ public class placeBlockPlayer implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
 		
@@ -49,57 +50,55 @@ public class placeBlockPlayer implements Listener {
 		int locationBlockZ = placeBlock.getLocation().getBlockZ();
 		Location locationBlock = placeBlock.getLocation();
 		
-		//---> COFRE
+		//---> Proteccion
 		
-		if(placeBlock.getType() == Material.CHEST){
-			
-			File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-			File cofredata = new File(cofredata1, File.separator + "cofres.yml");
-			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
-			
-			
+		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		
+		String material = null;
+		
+		try {
 			try {
 				try {
-					try {
-						cofreData.load(cofredata);
+					proteccionData.load(protecciondata);
+					
+					// Protección 
+					if(placeBlock.getType() == Material.CHEST || placeBlock.getType() == Material.HOPPER){
 						
+						if(placeBlock.getType() == Material.CHEST){
+							material = "Chest";
+						} else if (placeBlock.getType() == Material.HOPPER){
+							material = "Hopper";
+						}
+			
 						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
-						
-						cofreData.set("Chests."+ hash + ".playerName", playerName);
-						cofreData.set("Chests."+ hash + ".playerUUID", playerUUID);
-						cofreData.set("Chests."+ hash + ".X", locationBlockX);
-						cofreData.set("Chests."+ hash + ".Y", locationBlockY);
-						cofreData.set("Chests."+ hash + ".Z", locationBlockZ);
-						cofreData.set("Chests."+ hash + ".estado", "privado");
-						
-						cofreData.save(cofredata);
-						
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+							
+						proteccionData.set(material + "." + hash + ".playerName", playerName);
+						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+						proteccionData.set(material + "." + hash + ".X", locationBlockX);
+						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+						proteccionData.set(material + "." + hash + ".estado", "privado");
+
 					}
 					
-				} catch (IOException e) {
-						e.printStackTrace();
+					
+					proteccionData.save(protecciondata);
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
 				
-			} catch (InvalidConfigurationException e) {
+			} catch (IOException e) {
 					e.printStackTrace();
 			}
+			
+		} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
 		}
 		
 		//---> Protección Hopper contra cofre
-		
-		if(placeBlock.getType() == Material.HOPPER){
-			
-			locationBlock = placeBlock.getLocation().add(0, 1, 0);
-			
-			if (locationBlock.getBlock().getType() == Material.CHEST){
-				
-				eventPlace.setCancelled(true);
-				
-			}
-		}
 		
 		try {
 			try {
