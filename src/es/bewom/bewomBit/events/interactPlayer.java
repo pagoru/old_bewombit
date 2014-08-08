@@ -135,6 +135,11 @@ public class interactPlayer implements Listener {
 				}
 			}
 			
+			
+		}
+		
+		if (eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK){
+			
 			if(craftPlayer.getItemInHand().getType().equals(Material.HOPPER_MINECART) || craftPlayer.getItemInHand().getType().equals(Material.DISPENSER)){
 				
 				eventInteract.setCancelled(true);
