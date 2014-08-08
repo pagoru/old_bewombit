@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,6 +30,18 @@ public class interactPlayer implements Listener {
 			
 
 		if ((eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK || eventInteract.getAction() == eventInteract.getAction().LEFT_CLICK_BLOCK) && eventInteract.getClickedBlock().getType() == Material.CHEST){
+			
+			boolean playerIsCongelado = false;
+			
+			boolean isCongelado = false;
+			
+			File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File data = new File(data1, File.separator + "config.yml");
+			FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+			
+			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+			File f = new File(userdata, File.separator + playerUUID + ".yml");
+			FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 			
 			File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 			File cofredata = new File(cofredata1, File.separator + "cofres.yml");
@@ -106,6 +119,19 @@ public class interactPlayer implements Listener {
 						
 						cofreData.save(cofredata);
 						
+						playerData.load(f);
+						
+						playerIsCongelado = playerData.getBoolean("Congelado");
+						
+						playerData.save(f);
+						
+						
+						Data.load(data);
+						
+						isCongelado = Data.getBoolean("Congelado");
+						
+						Data.save(data);
+						
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
@@ -118,7 +144,13 @@ public class interactPlayer implements Listener {
 					e.printStackTrace();
 			}
 			
-			
+			if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
+				if (playerIsCongelado || isCongelado){
+		
+					eventInteract.setCancelled(true);
+					craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+				}
+			}
 		}
 		
 	

@@ -40,6 +40,14 @@ public class chatPlayer implements Listener {
 		String mpText = ChatColor.GRAY + "/mp";
 
 		//mp
+		
+		boolean playerIsCongelado = false;
+		
+		boolean isCongelado = false;
+		
+		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data = new File(data1, File.separator + "config.yml");
+		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
@@ -96,8 +104,17 @@ public class chatPlayer implements Listener {
 					}
 					
 					playerData.set("LastMessage", message);
-
+					
+					playerIsCongelado = playerData.getBoolean("Congelado");
+					
 					playerData.save(f);
+					
+					
+					Data.load(data);
+					
+					isCongelado = Data.getBoolean("Congelado");
+					
+					Data.save(data);
 
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -110,6 +127,15 @@ public class chatPlayer implements Listener {
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
+		
+		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
+			if (playerIsCongelado || isCongelado){
+	
+				eventChat.setCancelled(true);
+				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+			}
+		}
+		
 	}
 	private String corregir (String message) {
 		if (message.length() >= 5){
