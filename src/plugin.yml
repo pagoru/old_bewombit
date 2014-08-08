@@ -84,3 +84,7 @@ commands:
    cofre:
       description: Permite al jugador editar un cofre
       permission: bewom.admin
+      
+   gm:
+      description: Permite al jugador cambiar de gamemode
+      permission: bewom.admin

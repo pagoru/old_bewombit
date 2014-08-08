@@ -1,9 +1,16 @@
 package es.bewom.bewomBit;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,16 +25,6 @@ import es.bewom.bewomBit.events.serverMOTD;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
-	
-	private static boolean congelar = false;
-	
-	public static boolean isCongelar() {
-		return congelar;
-	}
-
-	public static void setCongelar(boolean congelar) {
-		bewomBit.congelar = congelar;
-	}
 
 	public void onEnable(){
 		
@@ -67,10 +64,45 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tell").setExecutor(new commandPlayer());
 		getCommand("congelar").setExecutor(new commandPlayer());
 		getCommand("cofre").setExecutor(new commandPlayer());
+		getCommand("gm").setExecutor(new commandPlayer());
 				
-		// ---> Scoreboard teams inicial <--- //
+		// ---> config inicial <--- //
 		
+		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data = new File(data1, File.separator + "config.yml");
+		File dataChest = new File(data1, File.separator + "cofres.yml");
+		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
+		try {
+			data1.mkdir();
+			data.createNewFile();
+			dataChest.createNewFile();
+		} catch (IOException e) {
+		  
+			e.printStackTrace();
+		}
+		
+		try {
+			try {
+				try {
+					
+					Data.load(data);
+					
+					Data.set("Congelado", false);
+					
+					Data.save(data);
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+			} catch (IOException e) {
+					e.printStackTrace();
+			}
+			
+		} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
+		}
 	}
 
 	public void onDisable(){

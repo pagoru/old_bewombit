@@ -58,6 +58,11 @@ public class connectPlayer implements Listener  {
 					playerData.set("PlayerName", playerName);
 					playerData.set("Chat", "global");
 					
+					if(playerData.getBoolean("Congelado") != true) {
+						playerData.set("Congelado", false);
+					}
+					
+					
 					
 					// ---> Scoreboards individuales <--- //
 					

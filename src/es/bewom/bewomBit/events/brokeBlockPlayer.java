@@ -31,7 +31,8 @@ public class brokeBlockPlayer implements Listener {
 		
 		if(brokeBlock.getType() == Material.CHEST){
 			
-			File cofredata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Cofres.yml");
+			File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File cofredata = new File(cofredata1, File.separator + "cofres.yml");
 			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
 			
 			

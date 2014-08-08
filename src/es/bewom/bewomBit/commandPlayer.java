@@ -48,6 +48,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandCongelar.commandcongelar(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandGm.commandgm(sender, cmd, label, args)){
+				return true;
+			}
 			
 			
 		} else {

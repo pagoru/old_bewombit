@@ -30,7 +30,8 @@ public class interactPlayer implements Listener {
 
 		if ((eventInteract.getAction() == eventInteract.getAction().RIGHT_CLICK_BLOCK || eventInteract.getAction() == eventInteract.getAction().LEFT_CLICK_BLOCK) && eventInteract.getClickedBlock().getType() == Material.CHEST){
 			
-			File cofredata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Cofres.yml");
+			File cofredata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File cofredata = new File(cofredata1, File.separator + "cofres.yml");
 			FileConfiguration cofreData = YamlConfiguration.loadConfiguration(cofredata);
 			
 			int locationBlockX = 0;
