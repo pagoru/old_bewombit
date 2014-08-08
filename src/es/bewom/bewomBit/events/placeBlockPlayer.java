@@ -64,6 +64,7 @@ public class placeBlockPlayer implements Listener {
 					proteccionData.load(protecciondata);
 					
 					// Protección 
+					
 					if(placeBlock.getType() == Material.CHEST || placeBlock.getType() == Material.HOPPER || placeBlock.getType() == Material.TRAPPED_CHEST || placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
 						
 						if(placeBlock.getType() == Material.CHEST){
@@ -110,6 +111,52 @@ public class placeBlockPlayer implements Listener {
 						
 					}
 					
+					if(placeBlock.getType().equals(Material.CHEST) || placeBlock.getType().equals(Material.TRAPPED_CHEST)){
+						
+						int getlocationBlockHash = 0;
+						
+						int hashlocationBlockXmas1 = locationBlockX + 1;
+						int hashlocationBlockZmas1 = locationBlockZ + 1;
+						int hashlocationBlockXmenos1 = locationBlockX - 1;
+						int hashlocationBlockZmenos1 = locationBlockZ - 1;
+						
+						int hashpos1 = hashlocationBlockXmas1 * 3 + locationBlockY * 2 + locationBlockZ *5;
+						int hashpos2 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmas1 *5;
+						int hashpos3 = hashlocationBlockXmenos1  * 3 + locationBlockY * 2 + locationBlockZ *5;
+						int hashpos4 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmenos1 *5;
+						
+						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+						
+						String getlocationBlockPlayerNamepos1 = proteccionData.getString(material + "." + hashpos1 + ".playerName");
+						String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
+						String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
+						String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
+						
+						if(getlocationBlockPlayerNamepos1 != null){
+							
+							craftPlayer.sendMessage("asd");
+							
+							if (!getlocationBlockPlayerNamepos1.equals(playerName)){
+								eventPlace.setCancelled(true);
+							} 
+						} 
+						if(getlocationBlockPlayerNamepos2  != null){
+							if (!getlocationBlockPlayerNamepos2.equals(playerName)){
+								eventPlace.setCancelled(true);
+							} 
+						} 
+						if(getlocationBlockPlayerNamepos3 != null){
+							if (!getlocationBlockPlayerNamepos3.equals(playerName)){
+								eventPlace.setCancelled(true);
+							}
+						} 
+						if(getlocationBlockPlayerNamepos4 != null){
+							if (!getlocationBlockPlayerNamepos4.equals(playerName)){
+								eventPlace.setCancelled(true);
+							} 
+						}
+						
+					}
 					
 					proteccionData.save(protecciondata);
 					
