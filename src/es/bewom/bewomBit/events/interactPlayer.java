@@ -77,13 +77,27 @@ public class interactPlayer implements Listener {
 						proteccionData.load(protecciondata);
 						
 						//proteccion
-						if(eventInteract.getClickedBlock().getType() == Material.CHEST || eventInteract.getClickedBlock().getType() == Material.HOPPER){
+						if(eventInteract.getClickedBlock().getType() == Material.CHEST || eventInteract.getClickedBlock().getType() == Material.HOPPER || eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST || eventInteract.getClickedBlock().getType() == Material.FURNACE || eventInteract.getClickedBlock().getType() == Material.ANVIL || eventInteract.getClickedBlock().getType() == Material.DROPPER || eventInteract.getClickedBlock().getType() == Material.JUKEBOX || eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE || eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
 							
 							if(eventInteract.getClickedBlock().getType() == Material.CHEST){
 								material = "Chest";
 							} else if (eventInteract.getClickedBlock().getType() == Material.HOPPER){
 								material = "Hopper";
-							}
+							} else if (eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST){
+								material = "TrappedChest";
+							} else if (eventInteract.getClickedBlock().getType() == Material.FURNACE){
+								material = "Furnace";
+							} else if (eventInteract.getClickedBlock().getType() == Material.ANVIL){
+								material = "Anvil";
+							} else if (eventInteract.getClickedBlock().getType() == Material.DROPPER){
+								material = "Dropper";
+							} else if (eventInteract.getClickedBlock().getType() == Material.JUKEBOX){
+								material = "Jukebox";
+							} else if (eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE){
+								material = "EnchantmentTable";
+							} else if (eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
+								material = "EnderChest";
+							} 
 							
 							
 							getlocationBlockHash = proteccionData.getInt(material + "." + hash);

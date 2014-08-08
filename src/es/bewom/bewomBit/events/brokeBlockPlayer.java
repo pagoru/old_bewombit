@@ -59,13 +59,27 @@ public class brokeBlockPlayer implements Listener {
 			try {
 				try {
 					
-					if(brokeBlock.getType() == Material.CHEST || brokeBlock.getType() == Material.HOPPER){
+					if(brokeBlock.getType() == Material.CHEST || brokeBlock.getType() == Material.HOPPER || brokeBlock.getType() == Material.TRAPPED_CHEST || brokeBlock.getType() == Material.FURNACE || brokeBlock.getType() == Material.ANVIL || brokeBlock.getType() == Material.DROPPER || brokeBlock.getType() == Material.JUKEBOX || brokeBlock.getType() == Material.ENCHANTMENT_TABLE || brokeBlock.getType() == Material.ENDER_CHEST){
 						
 						if(brokeBlock.getType() == Material.CHEST){
 							material = "Chest";
 						} else if (brokeBlock.getType() == Material.HOPPER){
 							material = "Hopper";
-						}
+						} else if (brokeBlock.getType() == Material.TRAPPED_CHEST){
+							material = "TrappedChest";
+						} else if (brokeBlock.getType() == Material.FURNACE){
+							material = "Furnace";
+						} else if (brokeBlock.getType() == Material.ANVIL){
+							material = "Anvil";
+						} else if (brokeBlock.getType() == Material.DROPPER){
+							material = "Dropper";
+						} else if (brokeBlock.getType() == Material.JUKEBOX){
+							material = "Jukebox";
+						} else if (brokeBlock.getType() == Material.ENCHANTMENT_TABLE){
+							material = "EnchantmentTable";
+						} else if (brokeBlock.getType() == Material.ENDER_CHEST){
+							material = "EnderChest";
+						} 
 					
 						proteccionData.load(protecciondata);
 						

@@ -64,12 +64,18 @@ public class placeBlockPlayer implements Listener {
 					proteccionData.load(protecciondata);
 					
 					// Protección 
-					if(placeBlock.getType() == Material.CHEST || placeBlock.getType() == Material.HOPPER){
+					if(placeBlock.getType() == Material.CHEST || placeBlock.getType() == Material.HOPPER || placeBlock.getType() == Material.TRAPPED_CHEST || placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
 						
 						if(placeBlock.getType() == Material.CHEST){
 							material = "Chest";
 						} else if (placeBlock.getType() == Material.HOPPER){
 							material = "Hopper";
+						} else if (placeBlock.getType() == Material.TRAPPED_CHEST){
+							material = "TrappedChest";
+						} else if (placeBlock.getType() == Material.FURNACE){
+							material = "Furnace";
+						} else if (placeBlock.getType() == Material.ANVIL){
+							material = "Anvil";
 						}
 			
 						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
@@ -81,6 +87,27 @@ public class placeBlockPlayer implements Listener {
 						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 						proteccionData.set(material + "." + hash + ".estado", "privado");
 
+					} else if(placeBlock.getType() == Material.DROPPER || placeBlock.getType() == Material.JUKEBOX || placeBlock.getType() == Material.ENCHANTMENT_TABLE || placeBlock.getType() == Material.ENDER_CHEST) {
+						
+						if(placeBlock.getType() == Material.DROPPER){
+							material = "Dropper";
+						} else if (placeBlock.getType() == Material.JUKEBOX){
+							material = "Jukebox";
+						} else if (placeBlock.getType() == Material.ENCHANTMENT_TABLE){
+							material = "EnchantmentTable";
+						} else if (placeBlock.getType() == Material.ENDER_CHEST){
+							material = "EnderChest";
+						} 
+			
+						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+							
+						proteccionData.set(material + "." + hash + ".playerName", playerName);
+						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+						proteccionData.set(material + "." + hash + ".X", locationBlockX);
+						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+						proteccionData.set(material + "." + hash + ".estado", "publico");
+						
 					}
 					
 					
