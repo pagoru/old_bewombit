@@ -79,6 +79,8 @@ public class brokeBlockPlayer implements Listener {
 			}
 		}
 		
+		//congelar
+		
 		try {
 			try {
 				try {

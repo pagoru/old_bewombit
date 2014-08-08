@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -46,6 +47,9 @@ public class placeBlockPlayer implements Listener {
 		int locationBlockX = placeBlock.getLocation().getBlockX();
 		int locationBlockY = placeBlock.getLocation().getBlockY();
 		int locationBlockZ = placeBlock.getLocation().getBlockZ();
+		Location locationBlock = placeBlock.getLocation();
+		
+		//---> COFRE
 		
 		if(placeBlock.getType() == Material.CHEST){
 			
@@ -81,6 +85,19 @@ public class placeBlockPlayer implements Listener {
 				
 			} catch (InvalidConfigurationException e) {
 					e.printStackTrace();
+			}
+		}
+		
+		//---> Protección Hopper contra cofre
+		
+		if(placeBlock.getType() == Material.HOPPER){
+			
+			locationBlock = placeBlock.getLocation().add(0, 1, 0);
+			
+			if (locationBlock.getBlock().getType() == Material.CHEST){
+				
+				eventPlace.setCancelled(true);
+				
 			}
 		}
 		
