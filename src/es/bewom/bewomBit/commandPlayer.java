@@ -42,9 +42,6 @@ public class commandPlayer implements CommandExecutor {
 			if(commandKick.commandkick(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandKick.commandkick(sender, cmd, label, args)){
-				return true;
-			}
 			if(commandCongelar.commandcongelar(sender, cmd, label, args)){
 				return true;
 			}
@@ -75,7 +72,7 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSeen.commandseen(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandCofre.commandcofre(sender, cmd, label, args)){
+			if(commandP.commandp(sender, cmd, label, args)){
 				return true;
 			}
 			

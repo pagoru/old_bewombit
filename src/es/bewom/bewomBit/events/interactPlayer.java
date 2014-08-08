@@ -70,6 +70,7 @@ public class interactPlayer implements Listener {
 			int gethash = 0;
 			
 			String material = null;
+			String nombreMaterial = null;
 			
 			try {
 				try {
@@ -81,22 +82,31 @@ public class interactPlayer implements Listener {
 							
 							if(eventInteract.getClickedBlock().getType() == Material.CHEST){
 								material = "Chest";
+								nombreMaterial = "Este cofre";
 							} else if (eventInteract.getClickedBlock().getType() == Material.HOPPER){
 								material = "Hopper";
+								nombreMaterial = "Este hopper";
 							} else if (eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST){
 								material = "TrappedChest";
+								nombreMaterial = "Este cofre trampa";
 							} else if (eventInteract.getClickedBlock().getType() == Material.FURNACE){
 								material = "Furnace";
+								nombreMaterial = "Este horno";
 							} else if (eventInteract.getClickedBlock().getType() == Material.ANVIL){
 								material = "Anvil";
+								nombreMaterial = "Este yunque";
 							} else if (eventInteract.getClickedBlock().getType() == Material.DROPPER){
 								material = "Dropper";
+								nombreMaterial = "Este dropper";
 							} else if (eventInteract.getClickedBlock().getType() == Material.JUKEBOX){
 								material = "Jukebox";
+								nombreMaterial = "Esta jukebox";
 							} else if (eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE){
 								material = "EnchantmentTable";
+								nombreMaterial = "Este mesa de encantamientos";
 							} else if (eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
 								material = "EnderChest";
+								nombreMaterial = "Este enderchest";
 							} 
 							
 							
@@ -118,6 +128,7 @@ public class interactPlayer implements Listener {
 									
 								} else {
 									
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 									eventInteract.setCancelled(true);
 									
 								}
@@ -136,6 +147,7 @@ public class interactPlayer implements Listener {
 									
 								} else {
 									
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 									eventInteract.setCancelled(true);
 									
 								}
