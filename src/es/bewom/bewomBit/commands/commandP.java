@@ -19,13 +19,13 @@ public class commandP {
 	@SuppressWarnings({ "deprecation", "unused" })
 	public static boolean commandp(CommandSender sender, Command cmd, String label, String[] args){
 		
+		Player craftPlayer = (Player) sender;
+		String playerName = craftPlayer.getName();
+		
+		String material = null;
+		String nombreMaterial = null;
+		
 		if (label.equalsIgnoreCase("p")){
-			
-			Player craftPlayer = (Player) sender;
-			String playerName = craftPlayer.getName();
-			
-			String material = null;
-			String nombreMaterial = null;
 			
 			if (craftPlayer.getTargetBlock(null, 5).getType() == Material.CHEST || craftPlayer.getTargetBlock(null, 5).getType() == Material.HOPPER || craftPlayer.getTargetBlock(null, 5).getType() == Material.DROPPER || craftPlayer.getTargetBlock(null, 5).getType() == Material.HOPPER || craftPlayer.getTargetBlock(null, 5).getType() == Material.TRAPPED_CHEST || craftPlayer.getTargetBlock(null, 5).getType() == Material.JUKEBOX || craftPlayer.getTargetBlock(null, 5).getType() == Material.FURNACE || craftPlayer.getTargetBlock(null, 5).getType() == Material.ANVIL || craftPlayer.getTargetBlock(null, 5).getType() == Material.ENCHANTMENT_TABLE || craftPlayer.getTargetBlock(null, 5).getType() == Material.ENDER_CHEST){
 				
@@ -58,25 +58,27 @@ public class commandP {
 					nombreMaterial = "Este enderchest";
 				} 
 				
+					
+				int locationBlockX = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockX();
+				int locationBlockY = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockY();
+				int locationBlockZ = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockZ();
 				
-				if (args.length == 0) {
-					
-				} else if (args.length == 1){
-					
-					int locationBlockX = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockX();
-					int locationBlockY = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockY();
-					int locationBlockZ = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockZ();
-					
-					int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
-					
-					File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-					File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
-					FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
-					
+				int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+				
+				File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+				File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+				FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+				
+				try {
 					try {
 						try {
-							try {
-								proteccionData.load(protecciondata);
+							proteccionData.load(protecciondata);
+							
+							if (args.length == 0) {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
+								
+							} else if (args.length == 1){
 								
 								int getlocationBlockHash = 0;
 								String getlocationBlockPlayerName = null;
@@ -119,30 +121,65 @@ public class commandP {
 									}
 									
 								}
+							} else if (args.length == 3){
 								
+								if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
+									
+									if (args[0].equals("cambiar")){
+										
+										if (args[1].equals("propietario")){
+											
+											proteccionData.set(material + "." + hash + ".playerName", args[2]);
+											proteccionData.set(material + "." + hash + ".playerUUID", null);
+											
+										} else if (args[1].equals("estado")){
+											
+											if (args[2].equals("privado")){
+												
+												proteccionData.set(material + "." + hash + ".estado", "privado");
+												
+											} else if (args[2].equals("publico")){
+												
+												proteccionData.set(material + "." + hash + ".estado", "publico");
+												
+											}
+											
+										}
+										
+									}
+									
+								}
 								
-								proteccionData.save(protecciondata);
-					
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
+								
 							}
+								
 							
-						} catch (IOException e) {
-								e.printStackTrace();
+							proteccionData.save(protecciondata);
+				
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
 						}
 						
-					} catch (InvalidConfigurationException e) {
+					} catch (IOException e) {
 							e.printStackTrace();
 					}
 					
-					
+				} catch (InvalidConfigurationException e) {
+						e.printStackTrace();
 				}
-					
-				return true;
+				
+				
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "Este bloque no se puede proteger.");
 			}
+				
+			return true;
+		} 
 			
-			
-		}
 		return false;
 		
 		
