@@ -16,8 +16,10 @@ public class brokeBlockPlayer implements Listener {
 
 	@EventHandler
 	public void OnBreak(BlockBreakEvent eventPlace) throws SQLException, IOException {
+		
 		eventsP.brokeBlockPlayerEventsP (eventPlace);
 		eventsCongelar.brokeBlockPlayerEventsCongelar(eventPlace);
+		
 	}
 
 }

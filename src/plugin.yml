@@ -92,3 +92,7 @@ commands:
    v:
       description: Permite al jugador ocultarse
       permission: bewom.admin
+   
+   tpa:
+      description: Permite al jugador pedir una peticion de tp
+      permission: bewom.admin
