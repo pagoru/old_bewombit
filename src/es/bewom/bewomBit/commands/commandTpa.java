@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -49,6 +50,10 @@ public class commandTpa implements Listener {
 							
 							playerData.set("Tpa", playerName);
 							
+							craftPlayerArgs.sendMessage(ChatColor.GRAY + "El usuario " + playerName + " quiere teletransportarse donde estas.");
+							craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si aceptas, escribe en el chat " + ChatColor.RED + "/tpa aceptar .");
+							craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si no quieres, escribe en el chat " + ChatColor.RED + "/tpa denegar .");
+							
 							playerData.save(f);
 				
 						} catch (FileNotFoundException e) {
@@ -62,6 +67,110 @@ public class commandTpa implements Listener {
 				} catch (InvalidConfigurationException e) {
 						e.printStackTrace();
 				}
+			} else if (args[0].equals("aceptar")){
+				
+				Location locationPlayer = craftPlayer.getLocation();
+				
+				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+				File f = new File(userdata, File.separator + playerUUID + ".yml");
+				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+				
+				try {
+					try {
+						try {
+							playerData.load(f);
+							
+							String playerNameTpa = playerData.getString("Tpa");
+							
+							if(playerNameTpa != null){
+								if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
+									
+									Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
+									
+									craftPlayer.teleport(playerCraftTpa);
+									
+									craftPlayer.sendMessage(ChatColor.GRAY + "Te has teletransportado con exito a " + playerNameTpa + ".");
+									
+									playerData.set("Tpa", null);
+									
+								} else {
+
+									craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
+									
+									playerData.set("Tpa", null);
+
+								}
+								
+							}  else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "No puedes aceptar un tpa de 'nadie'.");
+								
+							}
+							playerData.save(f);
+				
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						
+					} catch (IOException e) {
+							e.printStackTrace();
+					}
+					
+				} catch (InvalidConfigurationException e) {
+						e.printStackTrace();
+				}
+				
+			} else if (args[0].equals("denegar")){
+				
+				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+				File f = new File(userdata, File.separator + playerUUID + ".yml");
+				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+				
+				try {
+					try {
+						try {
+							playerData.load(f);
+							
+							String playerNameTpa = playerData.getString("Tpa");
+							
+							if(playerNameTpa != null){
+								if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
+									
+									craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpa.");
+									
+									playerData.set("Tpa", null);
+									
+								} else {
+
+									craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
+									
+									playerData.set("Tpa", null);
+
+								}
+								
+							}  else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpa de 'nadie'.");
+								
+							}
+							playerData.save(f);
+				
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						
+					} catch (IOException e) {
+							e.printStackTrace();
+					}
+					
+				} catch (InvalidConfigurationException e) {
+						e.printStackTrace();
+				}
+				
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "No se entiende el comando.");
+				
 			}
 		
 		}
