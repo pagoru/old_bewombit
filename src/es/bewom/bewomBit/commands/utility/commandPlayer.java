@@ -1,4 +1,4 @@
-package es.bewom.bewomBit;
+package es.bewom.bewomBit.commands.utility;
 
 import es.bewom.bewomBit.commands.*;
 

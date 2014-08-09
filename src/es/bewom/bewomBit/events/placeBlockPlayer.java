@@ -50,6 +50,18 @@ public class placeBlockPlayer implements Listener {
 		int locationBlockZ = placeBlock.getLocation().getBlockZ();
 		Location locationBlock = placeBlock.getLocation();
 		
+		int hashlocationBlockXmas1 = locationBlockX + 1;
+		int hashlocationBlockZmas1 = locationBlockZ + 1;
+		int hashlocationBlockXmenos1 = locationBlockX - 1;
+		int hashlocationBlockZmenos1 = locationBlockZ - 1;
+		
+		int hashpos1 = hashlocationBlockXmas1 * 3 + locationBlockY * 2 + locationBlockZ *5;
+		int hashpos2 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmas1 *5;
+		int hashpos3 = hashlocationBlockXmenos1  * 3 + locationBlockY * 2 + locationBlockZ *5;
+		int hashpos4 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmenos1 *5;
+		
+		int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+		
 		//---> Proteccion
 		
 		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
@@ -78,8 +90,6 @@ public class placeBlockPlayer implements Listener {
 						} else if (placeBlock.getType() == Material.ANVIL){
 							material = "Anvil";
 						}
-			
-						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 							
 						proteccionData.set(material + "." + hash + ".playerName", playerName);
 						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
@@ -99,15 +109,38 @@ public class placeBlockPlayer implements Listener {
 						} else if (placeBlock.getType() == Material.ENDER_CHEST){
 							material = "EnderChest";
 						} 
-			
-						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
 							
 						proteccionData.set(material + "." + hash + ".playerName", playerName);
 						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 						proteccionData.set(material + "." + hash + ".X", locationBlockX);
 						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+						proteccionData.set(material + "." + hash + ".doble", false);
 						proteccionData.set(material + "." + hash + ".estado", "publico");
+						
+//						placeBlock.getLocation().equals(obj)
+//						
+//						if(hashpos1 != 0){
+//							
+//							if (!getlocationBlockPlayerNamepos1.equals(playerName)){
+//								eventPlace.setCancelled(true);
+//							} 
+//						} 
+//						if(hashpos1 != 0){
+//							if (!getlocationBlockPlayerNamepos2.equals(playerName)){
+//								eventPlace.setCancelled(true);
+//							} 
+//						} 
+//						if(hashpos1 != 0{
+//							if (!getlocationBlockPlayerNamepos3.equals(playerName)){
+//								eventPlace.setCancelled(true);
+//							}
+//						} 
+//						if(hashpos1 != 0){
+//							if (!getlocationBlockPlayerNamepos4.equals(playerName)){
+//								eventPlace.setCancelled(true);
+//							} 
+//						}
 						
 					}
 					
@@ -115,26 +148,12 @@ public class placeBlockPlayer implements Listener {
 						
 						int getlocationBlockHash = 0;
 						
-						int hashlocationBlockXmas1 = locationBlockX + 1;
-						int hashlocationBlockZmas1 = locationBlockZ + 1;
-						int hashlocationBlockXmenos1 = locationBlockX - 1;
-						int hashlocationBlockZmenos1 = locationBlockZ - 1;
-						
-						int hashpos1 = hashlocationBlockXmas1 * 3 + locationBlockY * 2 + locationBlockZ *5;
-						int hashpos2 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmas1 *5;
-						int hashpos3 = hashlocationBlockXmenos1  * 3 + locationBlockY * 2 + locationBlockZ *5;
-						int hashpos4 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmenos1 *5;
-						
-						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
-						
 						String getlocationBlockPlayerNamepos1 = proteccionData.getString(material + "." + hashpos1 + ".playerName");
 						String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
 						String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
 						String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
 						
 						if(getlocationBlockPlayerNamepos1 != null){
-							
-							craftPlayer.sendMessage("asd");
 							
 							if (!getlocationBlockPlayerNamepos1.equals(playerName)){
 								eventPlace.setCancelled(true);

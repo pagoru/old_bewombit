@@ -14,6 +14,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.bewom.bewomBit.commands.utility.autoCompleteTab;
+import es.bewom.bewomBit.commands.utility.commandPlayer;
 import es.bewom.bewomBit.events.brokeBlockPlayer;
 import es.bewom.bewomBit.events.chatPlayer;
 import es.bewom.bewomBit.events.connectPlayer;
@@ -65,6 +67,10 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("congelar").setExecutor(new commandPlayer());
 		getCommand("p").setExecutor(new commandPlayer());
 		getCommand("gm").setExecutor(new commandPlayer());
+		
+		// ---> Comandos auto-completar <--- //
+		
+		getCommand("p").setTabCompleter(new autoCompleteTab());
 				
 		// ---> config inicial <--- //
 		
