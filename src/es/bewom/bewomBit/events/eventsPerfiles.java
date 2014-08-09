@@ -16,7 +16,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 public class eventsPerfiles {
-	
+
 	private static Scoreboard board;
 	
 	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect){

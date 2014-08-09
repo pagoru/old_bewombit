@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 public class eventsCongelar {
 	
@@ -164,17 +165,65 @@ public class eventsCongelar {
 					Data.load(data);
 					isCongelado = Data.getBoolean("Congelado");
 					Data.save(data);
-				
-			} catch (FileNotFoundException e) {
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-		} catch (IOException e) {
+		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
-
-	} catch (InvalidConfigurationException e) {
-		e.printStackTrace();
 	}
+	
+	@SuppressWarnings("unused")
+	public static void movePlayerEventsCongelar (PlayerMoveEvent eventMove){
+		Player craftPlayer = eventMove.getPlayer(); //craftPlayer Player
+		String playerName = eventMove.getPlayer().getName(); //limpio String 
+		String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
+
+		boolean playerIsCongelado = false;
+
+		boolean isCongelado = false;
+
+		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data = new File(data1, File.separator + "config.yml");
+		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+
+		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+		File f = new File(userdata, File.separator + playerUUID + ".yml");
+		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+		try {
+			try {
+				try {
+					playerData.load(f);
+
+					playerIsCongelado = playerData.getBoolean("Congelado");
+
+					playerData.save(f);
+
+
+					Data.load(data);
+
+					isCongelado = Data.getBoolean("Congelado");
+
+					Data.save(data);
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+		} catch (InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 }
