@@ -60,8 +60,6 @@ public class eventsPerfiles {
 						
 					}
 					
-					
-					
 					// ---> Scoreboards individuales <--- //
 					
 					ScoreboardManager manager = Bukkit.getScoreboardManager();
