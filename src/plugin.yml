@@ -88,3 +88,7 @@ commands:
    gm:
       description: Permite al jugador cambiar de gamemode
       permission: bewom.admin
+      
+   v:
+      description: Permite al jugador ocultarse
+      permission: bewom.admin

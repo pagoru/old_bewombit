@@ -43,3 +43,5 @@ TODO:
  > Poder romper spawner en supervivencia.
  
 - Sistema de torneos e inscripciones para pixelmon
+
+- Sistema de logs por usuario + mp
