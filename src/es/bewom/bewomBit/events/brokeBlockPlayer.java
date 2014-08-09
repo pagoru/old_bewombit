@@ -91,23 +91,6 @@ public class brokeBlockPlayer implements Listener {
 					
 					}
 					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
-		}
-		
-		//congelar
-		
-		try {
-			try {
-				try {
 					
 					playerData.load(f);
 					

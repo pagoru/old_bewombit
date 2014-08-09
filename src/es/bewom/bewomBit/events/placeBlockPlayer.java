@@ -224,7 +224,7 @@ public class placeBlockPlayer implements Listener {
 						
 						locationBlock = placeBlock.getLocation().add(0, 1, 0);
 						
-						if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST){
+						if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST || locationBlock.getBlock().getType() == Material.DROPPER || locationBlock.getBlock().getType() == Material.FURNACE){
 							
 							eventPlace.setCancelled(true);
 							
