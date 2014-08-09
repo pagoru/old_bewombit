@@ -1,7 +1,7 @@
 
 ^_^
 
-TODO:
+>>> TODO:
 
 - Sistema de permisos basico.
   > VIPS.
@@ -16,17 +16,10 @@ TODO:
   > Prestamos
   
 - Comandos basicos chat.
-  > Comando /pc (pixelmon)
-  
-
-- Chat.
-  > Limitacion spam.
+  > Comando /pc (pixelmon) <creo que no se puede>
   
 - Proteccion caballos.
 
-- Proteccion cofres.
- > (cuidado hoppers)
- 
 - LogBlock.
  > (mucho trabajo)
  
@@ -38,10 +31,20 @@ TODO:
 - Sistema de amigos
  > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
  
- - RANDOM
+- RANDOM
  > Huevos en spawner
  > Poder romper spawner en supervivencia.
  
 - Sistema de torneos e inscripciones para pixelmon
 
 - Sistema de logs por usuario + mp
+
+
+>>> ACABADO:
+
+- Chat.
+  > Limitacion spam.
+  
+- Proteccion cofres.
+ > (cuidado hoppers)
+ 
