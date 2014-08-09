@@ -85,6 +85,17 @@ public class brokeBlockPlayer implements Listener {
 						
 						String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 						
+						Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+						
+						if(getdobleChest.equals(true)) {
+							
+							String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+							
+							proteccionData.set(material + "." + getdobleChestHash + ".doble", false);
+							proteccionData.set(material + "." + getdobleChestHash + ".dobleHash", null);
+							
+						}
+						
 						proteccionData.set(material + "." + hash, null);
 						
 						proteccionData.save(protecciondata);

@@ -24,6 +24,7 @@ public class commandP {
 		
 		String material = null;
 		String nombreMaterial = null;
+		String nombreMaterialSimple = null;
 		
 		if (label.equalsIgnoreCase("p")){
 			
@@ -32,30 +33,39 @@ public class commandP {
 				if(craftPlayer.getTargetBlock(null, 5).getType() == Material.CHEST){
 					material = "Chest";
 					nombreMaterial = "Este cofre";
+					nombreMaterialSimple = "este cofre";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.HOPPER){
 					material = "Hopper";
 					nombreMaterial = "Este hopper";
+					nombreMaterialSimple = "este hopper";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.TRAPPED_CHEST){
 					material = "TrappedChest";
 					nombreMaterial = "Este cofre trampa";
+					nombreMaterialSimple = "este cofre trampa";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.FURNACE){
 					material = "Furnace";
 					nombreMaterial = "Este horno";
+					nombreMaterialSimple = "este horno";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.ANVIL){
 					material = "Anvil";
 					nombreMaterial = "Este yunque";
+					nombreMaterialSimple = "este yunque";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.DROPPER){
 					material = "Dropper";
 					nombreMaterial = "Este dropper";
+					nombreMaterialSimple = "este dropper";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.JUKEBOX){
 					material = "Jukebox";
 					nombreMaterial = "Esta jukebox";
+					nombreMaterialSimple = "esta jukebox";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.ENCHANTMENT_TABLE){
 					material = "EnchantmentTable";
 					nombreMaterial = "Esta mesa de encantamientos";
+					nombreMaterialSimple = "esta mesa de encantamientos";
 				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.ENDER_CHEST){
 					material = "EnderChest";
 					nombreMaterial = "Este enderchest";
+					nombreMaterialSimple = "este enderchest";
 				} 
 				
 					
@@ -103,10 +113,39 @@ public class commandP {
 										if (args[0].equals("privado")){
 											
 											proteccionData.set(material + "." + hash + ".estado", "privado");
+											craftPlayer.sendMessage(ChatColor.GRAY + nombreMaterial + " ahora esta privatizado.");
+											
+											if (material.equals("Chest") || material.equals("TrappedChest")){
+												
+												Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+												
+												if(getdobleChest) {
+													
+													String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+													
+													proteccionData.set(material + "." + getdobleChestHash + ".estado", "privado");
+													
+												}
+											}
+											
 											
 										} else  if (args[0].equals("publico")) {
 											
 											proteccionData.set(material + "." + hash + ".estado", "publico");
+											craftPlayer.sendMessage(ChatColor.GRAY + nombreMaterial + " ahora esta publico.");
+											
+											if (material.equals("Chest") || material.equals("TrappedChest")){
+												
+												Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+												
+												if(getdobleChest) {
+													
+													String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+													
+													proteccionData.set(material + "." + getdobleChestHash + ".estado", "publico");
+													
+												}
+											}
 											
 										}
 										
@@ -126,16 +165,58 @@ public class commandP {
 										if (args[1].equals("propietario")){
 											
 											proteccionData.set(material + "." + hash + ".playerName", args[2]);
+											craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + args[2] + ".");
+											
+											if (material.equals("Chest") || material.equals("TrappedChest")){
+												
+												Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+												
+												if(getdobleChest) {
+													
+													String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+													
+													proteccionData.set(material + "." + getdobleChestHash + ".playerName", args[2]);
+													
+												}
+											}
 											
 										} else if (args[1].equals("estado")){
 											
 											if (args[2].equals("privado")){
 												
 												proteccionData.set(material + "." + hash + ".estado", "privado");
+												craftPlayer.sendMessage(ChatColor.GRAY + nombreMaterial + " ahora esta privatizado.");
+												
+												if (material.equals("Chest") || material.equals("TrappedChest")){
+													
+													Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+													
+													if(getdobleChest) {
+														
+														String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+														
+														proteccionData.set(material + "." + getdobleChestHash + ".estado", "privado");
+														
+													}
+												}
 												
 											} else if (args[2].equals("publico")){
 												
 												proteccionData.set(material + "." + hash + ".estado", "publico");
+												craftPlayer.sendMessage(ChatColor.GRAY + nombreMaterial + " ahora esta publico.");
+												
+												if (material.equals("Chest") || material.equals("TrappedChest")){
+													
+													Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+													
+													if(getdobleChest) {
+														
+														String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+														
+														proteccionData.set(material + "." + getdobleChestHash + ".estado", "publico");
+														
+													}
+												}
 												
 											}
 											

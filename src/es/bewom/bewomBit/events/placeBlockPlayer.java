@@ -132,7 +132,7 @@ public class placeBlockPlayer implements Listener {
 							proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 							proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 							proteccionData.set(material + "." + hash + ".estado", "privado");
-							proteccionData.set(material + "." + hash + ".doble", "false");
+							proteccionData.set(material + "." + hash + ".doble", false);
 							
 						} else {
 							
@@ -140,12 +140,18 @@ public class placeBlockPlayer implements Listener {
 								
 								if (getlocationBlockPlayerNamepos1.equals(playerName)){
 									
+									String estadohaspos1 = proteccionData.getString(material + "." + hashpos1 + ".estado");
+									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-									proteccionData.set(material + "." + hash + ".estado", "privado");
-									proteccionData.set(material + "." + hash + ".doble", "false");
+									proteccionData.set(material + "." + hash + ".estado", estadohaspos1);
+									proteccionData.set(material + "." + hash + ".doble", true);
+									proteccionData.set(material + "." + hash + ".dobleHash", hashpos1);
+									
+									proteccionData.set(material + "." + hashpos1 + ".doble", true);
+									proteccionData.set(material + "." + hashpos1 + ".dobleHash", hash);
 									
 								} else {
 									
@@ -159,12 +165,18 @@ public class placeBlockPlayer implements Listener {
 								
 								if (getlocationBlockPlayerNamepos2.equals(playerName)){
 									
+									String estadohaspos2 = proteccionData.getString(material + "." + hashpos2 + ".estado");
+									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-									proteccionData.set(material + "." + hash + ".estado", "privado");
-									proteccionData.set(material + "." + hash + ".doble", "false");
+									proteccionData.set(material + "." + hash + ".estado", estadohaspos2);
+									proteccionData.set(material + "." + hash + ".doble", true);
+									proteccionData.set(material + "." + hash + ".dobleHash", hashpos2);
+									
+									proteccionData.set(material + "." + hashpos2 + ".doble", true);
+									proteccionData.set(material + "." + hashpos2 + ".dobleHash", hash);
 									
 								} else {
 									
@@ -178,12 +190,18 @@ public class placeBlockPlayer implements Listener {
 								
 								if (getlocationBlockPlayerNamepos3.equals(playerName)){
 									
+									String estadohaspos3 = proteccionData.getString(material + "." + hashpos3 + ".estado");
+									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-									proteccionData.set(material + "." + hash + ".estado", "privado");
-									proteccionData.set(material + "." + hash + ".doble", "false");
+									proteccionData.set(material + "." + hash + ".estado", estadohaspos3);
+									proteccionData.set(material + "." + hash + ".doble", true);
+									proteccionData.set(material + "." + hash + ".dobleHash", hashpos3);
+									
+									proteccionData.set(material + "." + hashpos3 + ".doble", true);
+									proteccionData.set(material + "." + hashpos3 + ".dobleHash", hash);
 									
 								} else {
 									
@@ -197,12 +215,18 @@ public class placeBlockPlayer implements Listener {
 								
 								if (getlocationBlockPlayerNamepos4.equals(playerName)){
 									
+									String estadohaspos4 = proteccionData.getString(material + "." + hashpos4 + ".estado");
+									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-									proteccionData.set(material + "." + hash + ".estado", "privado");
-									proteccionData.set(material + "." + hash + ".doble", "false");
+									proteccionData.set(material + "." + hash + ".estado", estadohaspos4);
+									proteccionData.set(material + "." + hash + ".doble", true);
+									proteccionData.set(material + "." + hash + ".dobleHash", hashpos4);
+									
+									proteccionData.set(material + "." + hashpos4 + ".doble", true);
+									proteccionData.set(material + "." + hashpos4 + ".dobleHash", hash);
 									
 								} else {
 									

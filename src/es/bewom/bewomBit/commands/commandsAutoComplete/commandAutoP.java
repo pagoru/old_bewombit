@@ -18,7 +18,7 @@ public class commandAutoP {
 			if (args.length == 1){
 				List<String> pList = new ArrayList<String>();  
 		         
-				pList.add("private");
+				pList.add("privado");
 				pList.add("publico");
 				
 				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
