@@ -40,10 +40,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new deathPlayer(), this);
 		getServer().getPluginManager().registerEvents(new brokeBlockPlayer(), this);
 		
-		
-		
-		getFile();
-		
 		// ---> Comandos <--- //
 		
 		getCommand("say").setExecutor(new commandPlayer());
@@ -71,6 +67,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		// ---> Comandos auto-completar <--- //
 		
 		getCommand("p").setTabCompleter(new autoCompleteTab());
+		getCommand("gm").setTabCompleter(new autoCompleteTab());
 				
 		// ---> config inicial <--- //
 		

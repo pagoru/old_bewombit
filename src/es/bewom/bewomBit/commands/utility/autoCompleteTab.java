@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
+import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoGm;
 import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoP;
 
 public class autoCompleteTab implements TabCompleter {
@@ -16,6 +17,12 @@ public class autoCompleteTab implements TabCompleter {
 		if(commandAutoP.commandautop(sender, cmd, alias, args) != null){
 			
 			return commandAutoP.commandautop(sender, cmd, alias, args);
+			
+		} 
+		
+		if(commandAutoGm.commandautogm(sender, cmd, alias, args) != null){
+			
+			return commandAutoGm.commandautogm(sender, cmd, alias, args);
 			
 		} 
 		
