@@ -6,6 +6,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import es.bewom.bewomBit.bewomBit;
 import es.bewom.bewomBit.events.eventsCongelar;
+import es.bewom.bewomBit.events.eventsSaltarImpulso;
 
 public class movePlayer implements Listener{
 
@@ -17,6 +18,9 @@ public class movePlayer implements Listener{
 
 	@EventHandler
 	public void onPlayerMove (PlayerMoveEvent eventMove){
+		
 		eventsCongelar.movePlayerEventsCongelar (eventMove);
+		eventsSaltarImpulso.movePlayerEventsSaltarImpulso(eventMove);
+		
 	}
 }
