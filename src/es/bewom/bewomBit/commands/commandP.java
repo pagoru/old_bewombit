@@ -63,7 +63,7 @@ public class commandP {
 				int locationBlockY = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockY();
 				int locationBlockZ = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockZ();
 				
-				int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+				String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 				
 				File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 				File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
@@ -88,8 +88,6 @@ public class commandP {
 								int getlocationBlockZ = 0;
 								String getlocationBlockEstado = null;
 								
-								int gethash = 0;
-								
 								getlocationBlockHash = proteccionData.getInt(material + "." + hash);
 								getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
 								getlocationBlockPlayerUUID = proteccionData.getString(material + "." + hash + ".playerUUID");
@@ -98,9 +96,9 @@ public class commandP {
 								getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
 								getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 								
-								gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
+								String gethash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 								
-								if (gethash == hash){
+								if (gethash.equals(hash)){
 									
 									if (getlocationBlockPlayerName.equals(playerName)){
 										

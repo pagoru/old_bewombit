@@ -83,7 +83,7 @@ public class brokeBlockPlayer implements Listener {
 					
 						proteccionData.load(protecciondata);
 						
-						int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+						String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 						
 						proteccionData.set(material + "." + hash, null);
 						

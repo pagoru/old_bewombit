@@ -22,8 +22,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class placeBlockPlayer implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
-	
-	@SuppressWarnings("unused")
+
 	@EventHandler
 	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
 		
@@ -50,17 +49,17 @@ public class placeBlockPlayer implements Listener {
 		int locationBlockZ = placeBlock.getLocation().getBlockZ();
 		Location locationBlock = placeBlock.getLocation();
 		
-		int hashlocationBlockXmas1 = locationBlockX + 1;
-		int hashlocationBlockZmas1 = locationBlockZ + 1;
-		int hashlocationBlockXmenos1 = locationBlockX - 1;
-		int hashlocationBlockZmenos1 = locationBlockZ - 1;
+		int locationBlockXmas1 = locationBlockX + 1;
+		int locationBlockZmas1 = locationBlockZ + 1;
+		int locationBlockXmenos1 = locationBlockX - 1;
+		int locationBlockZmenos1 = locationBlockZ - 1;
 		
-		int hashpos1 = hashlocationBlockXmas1 * 3 + locationBlockY * 2 + locationBlockZ *5;
-		int hashpos2 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmas1 *5;
-		int hashpos3 = hashlocationBlockXmenos1  * 3 + locationBlockY * 2 + locationBlockZ *5;
-		int hashpos4 = locationBlockX * 3 + locationBlockY * 2 + hashlocationBlockZmenos1 *5;
+		String hashpos1 = Integer.toString(locationBlockXmas1) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+		String hashpos2 = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZmas1);
+		String hashpos3 = Integer.toString(locationBlockXmenos1) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+		String hashpos4 = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZmenos1);
 		
-		int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
+		String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 		
 		//---> Proteccion
 		
@@ -77,20 +76,16 @@ public class placeBlockPlayer implements Listener {
 					
 					// Protección 
 					
-					if(placeBlock.getType() == Material.CHEST || placeBlock.getType() == Material.HOPPER || placeBlock.getType() == Material.TRAPPED_CHEST || placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
+					if(placeBlock.getType() == Material.HOPPER || placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
 						
-						if(placeBlock.getType() == Material.CHEST){
-							material = "Chest";
-						} else if (placeBlock.getType() == Material.HOPPER){
+						if (placeBlock.getType() == Material.HOPPER){
 							material = "Hopper";
-						} else if (placeBlock.getType() == Material.TRAPPED_CHEST){
-							material = "TrappedChest";
 						} else if (placeBlock.getType() == Material.FURNACE){
 							material = "Furnace";
 						} else if (placeBlock.getType() == Material.ANVIL){
 							material = "Anvil";
 						}
-							
+						
 						proteccionData.set(material + "." + hash + ".playerName", playerName);
 						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 						proteccionData.set(material + "." + hash + ".X", locationBlockX);
@@ -109,70 +104,116 @@ public class placeBlockPlayer implements Listener {
 						} else if (placeBlock.getType() == Material.ENDER_CHEST){
 							material = "EnderChest";
 						} 
-							
+						
 						proteccionData.set(material + "." + hash + ".playerName", playerName);
 						proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 						proteccionData.set(material + "." + hash + ".X", locationBlockX);
 						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".doble", false);
-						proteccionData.set(material + "." + hash + ".estado", "publico");
-						
-//						placeBlock.getLocation().equals(obj)
-//						
-//						if(hashpos1 != 0){
-//							
-//							if (!getlocationBlockPlayerNamepos1.equals(playerName)){
-//								eventPlace.setCancelled(true);
-//							} 
-//						} 
-//						if(hashpos1 != 0){
-//							if (!getlocationBlockPlayerNamepos2.equals(playerName)){
-//								eventPlace.setCancelled(true);
-//							} 
-//						} 
-//						if(hashpos1 != 0{
-//							if (!getlocationBlockPlayerNamepos3.equals(playerName)){
-//								eventPlace.setCancelled(true);
-//							}
-//						} 
-//						if(hashpos1 != 0){
-//							if (!getlocationBlockPlayerNamepos4.equals(playerName)){
-//								eventPlace.setCancelled(true);
-//							} 
-//						}
+						proteccionData.set(material + "." + hash + ".estado", "privado");
 						
 					}
 					
 					if(placeBlock.getType().equals(Material.CHEST) || placeBlock.getType().equals(Material.TRAPPED_CHEST)){
 						
-						int getlocationBlockHash = 0;
+						if(placeBlock.getType() == Material.CHEST){
+							material = "Chest";
+						} else if (placeBlock.getType() == Material.TRAPPED_CHEST){
+							material = "TrappedChest";
+						}
 						
 						String getlocationBlockPlayerNamepos1 = proteccionData.getString(material + "." + hashpos1 + ".playerName");
 						String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
 						String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
 						String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
 						
-						if(getlocationBlockPlayerNamepos1 != null){
+						if (getlocationBlockPlayerNamepos1 == null && getlocationBlockPlayerNamepos2 == null && getlocationBlockPlayerNamepos3 == null && getlocationBlockPlayerNamepos4 == null){
 							
-							if (!getlocationBlockPlayerNamepos1.equals(playerName)){
-								eventPlace.setCancelled(true);
+							proteccionData.set(material + "." + hash + ".playerName", playerName);
+							proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+							proteccionData.set(material + "." + hash + ".X", locationBlockX);
+							proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+							proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+							proteccionData.set(material + "." + hash + ".estado", "privado");
+							
+						} else {
+							
+							if (getlocationBlockPlayerNamepos1 != null){
+								
+								if (getlocationBlockPlayerNamepos1.equals(playerName)){
+									
+									proteccionData.set(material + "." + hash + ".playerName", playerName);
+									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+									proteccionData.set(material + "." + hash + ".X", locationBlockX);
+									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+									proteccionData.set(material + "." + hash + ".estado", "privado");
+									
+								} else {
+									
+									eventPlace.setCancelled(true);
+									
+								}
+									
 							} 
-						} 
-						if(getlocationBlockPlayerNamepos2  != null){
-							if (!getlocationBlockPlayerNamepos2.equals(playerName)){
-								eventPlace.setCancelled(true);
+							
+							if (getlocationBlockPlayerNamepos2 != null){
+								
+								if (getlocationBlockPlayerNamepos2.equals(playerName)){
+									
+									proteccionData.set(material + "." + hash + ".playerName", playerName);
+									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+									proteccionData.set(material + "." + hash + ".X", locationBlockX);
+									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+									proteccionData.set(material + "." + hash + ".estado", "privado");
+									
+								} else {
+									
+									eventPlace.setCancelled(true);
+									
+								}
+									
 							} 
-						} 
-						if(getlocationBlockPlayerNamepos3 != null){
-							if (!getlocationBlockPlayerNamepos3.equals(playerName)){
-								eventPlace.setCancelled(true);
-							}
-						} 
-						if(getlocationBlockPlayerNamepos4 != null){
-							if (!getlocationBlockPlayerNamepos4.equals(playerName)){
-								eventPlace.setCancelled(true);
+							
+							if (getlocationBlockPlayerNamepos3 != null){
+								
+								if (getlocationBlockPlayerNamepos3.equals(playerName)){
+									
+									proteccionData.set(material + "." + hash + ".playerName", playerName);
+									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+									proteccionData.set(material + "." + hash + ".X", locationBlockX);
+									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+									proteccionData.set(material + "." + hash + ".estado", "privado");
+									
+								} else {
+									
+									eventPlace.setCancelled(true);
+									
+								}
+									
 							} 
+							
+							if (getlocationBlockPlayerNamepos4 != null){
+								
+								if (getlocationBlockPlayerNamepos4.equals(playerName)){
+									
+									proteccionData.set(material + "." + hash + ".playerName", playerName);
+									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
+									proteccionData.set(material + "." + hash + ".X", locationBlockX);
+									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+									proteccionData.set(material + "." + hash + ".estado", "privado");
+									
+								} else {
+									
+									eventPlace.setCancelled(true);
+									
+								}
+									
+							} 
+							
 						}
 						
 					}

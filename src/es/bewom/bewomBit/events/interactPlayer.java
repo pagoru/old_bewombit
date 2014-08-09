@@ -65,9 +65,7 @@ public class interactPlayer implements Listener {
 			locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
 			locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
 			
-			int hash = locationBlockX * 3 + locationBlockY * 2 + locationBlockZ *5;
-			
-			int gethash = 0;
+			String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 			
 			String material = null;
 			String nombreMaterial = null;
@@ -118,9 +116,9 @@ public class interactPlayer implements Listener {
 							getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
 							getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 							
-							gethash = getlocationBlockX * 3 + getlocationBlockY * 2 + getlocationBlockZ *5;
+							String gethash = Integer.toString(getlocationBlockX) + Integer.toString(getlocationBlockY) + Integer.toString(getlocationBlockZ);
 							
-							if (gethash == hash){
+							if (gethash.equals(hash)){
 								
 								if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockEstado.equals("publico")){
 									
