@@ -5,20 +5,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Skull;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class eventsP {
-	
-	public static void connectPlayerEventsP (PlayerJoinEvent eventConnect){
-		
-	}
 
 	@SuppressWarnings("unused")
 	public static void brokeBlockPlayerEventsP (BlockBreakEvent eventPlace){
@@ -26,7 +26,7 @@ public class eventsP {
 		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
 		String playerName = eventPlace.getPlayer().getName();
 		Player craftPlayer = (Player) eventPlace.getPlayer();
-		
+
 		Block brokeBlock = eventPlace.getBlock();
 
 		int locationBlockX = brokeBlock.getLocation().getBlockX();
@@ -83,17 +83,38 @@ public class eventsP {
 						proteccionData.set(material + "." + hash, null);
 						proteccionData.save(protecciondata);
 					}
-					
+
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-	
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	
+
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void deathPlayerEventsP (PlayerDeathEvent eventDeath){
+
+		Player playerCraft = eventDeath.getEntity();
+		String playerName = playerCraft.getName();
+
+		int X = playerCraft.getLocation().getBlockX();
+		int Y = playerCraft.getLocation().getBlockY();
+		int Z = playerCraft.getLocation().getBlockZ();
+
+		Bukkit.getWorld("world").getBlockAt(X, Y, Z).setType(Material.CHEST);
+		Location loc = new Location(Bukkit.getWorld("world"), X, Y + 1, Z);
+		loc.getBlock().setType(Material.SKULL);
+		BlockState state = loc.getBlock().getState();
+
+		Skull s = (Skull) state;
+		s.setSkullType(SkullType.PLAYER);
+		s.setOwner(playerName);
+		loc.getBlock().getChunk().load();
+		s.update(true);
 	}
 }
