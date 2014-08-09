@@ -72,9 +72,6 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSeen.commandseen(sender, cmd, label, args)){
 				return true;
 			}
-			if(commandP.commandp(sender, cmd, label, args)){
-				return true;
-			}
 			
 		} else {
 			
@@ -85,6 +82,9 @@ public class commandPlayer implements CommandExecutor {
 		// ---> Comandos cualquiera <--- //
 		
 		if(commandMp.commandmp(sender, cmd, label, args)){
+			return true;
+		}
+		if(commandP.commandp(sender, cmd, label, args)){
 			return true;
 		}
 		
