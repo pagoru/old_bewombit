@@ -75,6 +75,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSeen.commandseen(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandTpa.commandtpa(sender, cmd, label, args)){
+				return true;
+			}
 			
 		} else {
 			

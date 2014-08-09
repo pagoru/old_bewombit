@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.events;
+package es.bewom.bewomBit.events.utilitiy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -108,7 +108,7 @@ public class placeBlockPlayer implements Listener {
 						proteccionData.set(material + "." + hash + ".X", locationBlockX);
 						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".estado", "privado");
+						proteccionData.set(material + "." + hash + ".estado", "publico");
 						
 					}
 					

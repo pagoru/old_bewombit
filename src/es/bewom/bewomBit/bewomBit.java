@@ -16,14 +16,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import es.bewom.bewomBit.commands.utility.autoCompleteTab;
 import es.bewom.bewomBit.commands.utility.commandPlayer;
-import es.bewom.bewomBit.events.brokeBlockPlayer;
-import es.bewom.bewomBit.events.chatPlayer;
-import es.bewom.bewomBit.events.connectPlayer;
-import es.bewom.bewomBit.events.deathPlayer;
-import es.bewom.bewomBit.events.interactPlayer;
-import es.bewom.bewomBit.events.movePlayer;
-import es.bewom.bewomBit.events.placeBlockPlayer;
-import es.bewom.bewomBit.events.serverMOTD;
+import es.bewom.bewomBit.events.utilitiy.brokeBlockPlayer;
+import es.bewom.bewomBit.events.utilitiy.chatPlayer;
+import es.bewom.bewomBit.events.utilitiy.connectPlayer;
+import es.bewom.bewomBit.events.utilitiy.deathPlayer;
+import es.bewom.bewomBit.events.utilitiy.interactPlayer;
+import es.bewom.bewomBit.events.utilitiy.movePlayer;
+import es.bewom.bewomBit.events.utilitiy.placeBlockPlayer;
+import es.bewom.bewomBit.events.utilitiy.serverMOTD;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
@@ -64,6 +64,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("p").setExecutor(new commandPlayer());
 		getCommand("gm").setExecutor(new commandPlayer());
 		getCommand("v").setExecutor(new commandPlayer());
+		getCommand("tpa").setExecutor(new commandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		

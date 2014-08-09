@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.events;
+package es.bewom.bewomBit.events.utilitiy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,6 +57,7 @@ public class connectPlayer implements Listener  {
 					
 					playerData.set("PlayerName", playerName);
 					playerData.set("Chat", "global");
+					playerData.set("Tpa", null);
 					
 					if(playerData.getBoolean("Congelado") != true) {
 						playerData.set("Congelado", false);

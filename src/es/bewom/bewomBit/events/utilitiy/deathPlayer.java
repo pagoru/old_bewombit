@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.events;
+package es.bewom.bewomBit.events.utilitiy;
 
 import java.util.logging.Logger;
 

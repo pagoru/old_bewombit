@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.events;
+package es.bewom.bewomBit.events.utilitiy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
