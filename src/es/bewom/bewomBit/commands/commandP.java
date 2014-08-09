@@ -82,7 +82,6 @@ public class commandP {
 								
 								int getlocationBlockHash = 0;
 								String getlocationBlockPlayerName = null;
-								String getlocationBlockPlayerUUID = null;
 								int getlocationBlockX = 0;
 								int getlocationBlockY = 0;
 								int getlocationBlockZ = 0;
@@ -90,7 +89,6 @@ public class commandP {
 								
 								getlocationBlockHash = proteccionData.getInt(material + "." + hash);
 								getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
-								getlocationBlockPlayerUUID = proteccionData.getString(material + "." + hash + ".playerUUID");
 								getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
 								getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
 								getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
@@ -128,7 +126,6 @@ public class commandP {
 										if (args[1].equals("propietario")){
 											
 											proteccionData.set(material + "." + hash + ".playerName", args[2]);
-											proteccionData.set(material + "." + hash + ".playerUUID", null);
 											
 										} else if (args[1].equals("estado")){
 											

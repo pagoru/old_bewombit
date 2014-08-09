@@ -76,11 +76,9 @@ public class placeBlockPlayer implements Listener {
 					
 					// Protección 
 					
-					if(placeBlock.getType() == Material.HOPPER || placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
+					if(placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
 						
-						if (placeBlock.getType() == Material.HOPPER){
-							material = "Hopper";
-						} else if (placeBlock.getType() == Material.FURNACE){
+						if (placeBlock.getType() == Material.FURNACE){
 							material = "Furnace";
 						} else if (placeBlock.getType() == Material.ANVIL){
 							material = "Anvil";
@@ -130,11 +128,11 @@ public class placeBlockPlayer implements Listener {
 						if (getlocationBlockPlayerNamepos1 == null && getlocationBlockPlayerNamepos2 == null && getlocationBlockPlayerNamepos3 == null && getlocationBlockPlayerNamepos4 == null){
 							
 							proteccionData.set(material + "." + hash + ".playerName", playerName);
-							proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 							proteccionData.set(material + "." + hash + ".X", locationBlockX);
 							proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 							proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 							proteccionData.set(material + "." + hash + ".estado", "privado");
+							proteccionData.set(material + "." + hash + ".doble", "false");
 							
 						} else {
 							
@@ -143,11 +141,11 @@ public class placeBlockPlayer implements Listener {
 								if (getlocationBlockPlayerNamepos1.equals(playerName)){
 									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
-									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 									proteccionData.set(material + "." + hash + ".estado", "privado");
+									proteccionData.set(material + "." + hash + ".doble", "false");
 									
 								} else {
 									
@@ -162,11 +160,11 @@ public class placeBlockPlayer implements Listener {
 								if (getlocationBlockPlayerNamepos2.equals(playerName)){
 									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
-									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 									proteccionData.set(material + "." + hash + ".estado", "privado");
+									proteccionData.set(material + "." + hash + ".doble", "false");
 									
 								} else {
 									
@@ -181,11 +179,11 @@ public class placeBlockPlayer implements Listener {
 								if (getlocationBlockPlayerNamepos3.equals(playerName)){
 									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
-									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 									proteccionData.set(material + "." + hash + ".estado", "privado");
+									proteccionData.set(material + "." + hash + ".doble", "false");
 									
 								} else {
 									
@@ -200,11 +198,11 @@ public class placeBlockPlayer implements Listener {
 								if (getlocationBlockPlayerNamepos4.equals(playerName)){
 									
 									proteccionData.set(material + "." + hash + ".playerName", playerName);
-									proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 									proteccionData.set(material + "." + hash + ".estado", "privado");
+									proteccionData.set(material + "." + hash + ".doble", "false");
 									
 								} else {
 									
@@ -218,38 +216,33 @@ public class placeBlockPlayer implements Listener {
 						
 					}
 					
+					//---> Protección Hopper contra cofre y cofre trampa
+					
+					if(placeBlock.getType().equals(Material.HOPPER)){
+						
+						material = "Hopper";
+						
+						locationBlock = placeBlock.getLocation().add(0, 1, 0);
+						
+						if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST){
+							
+							eventPlace.setCancelled(true);
+							
+						} else {
+							
+							proteccionData.set(material + "." + hash + ".playerName", playerName);
+							proteccionData.set(material + "." + hash + ".X", locationBlockX);
+							proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+							proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+							proteccionData.set(material + "." + hash + ".estado", "privado");
+							
+						}
+						
+					}
+					
 					proteccionData.save(protecciondata);
 					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
-		}
-		
-		//---> Protección Hopper contra cofre y cofre trampa
-		
-		if(placeBlock.getType().equals(Material.HOPPER)){
-			
-			locationBlock = placeBlock.getLocation().add(0, 1, 0);
-			
-			if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST){
-				
-				eventPlace.setCancelled(true);
-				
-			}
-			
-		}
-		
-		try {
-			try {
-				try {
-					
+										
 					playerData.load(f);
 					
 					playerIsCongelado = playerData.getBoolean("Congelado");

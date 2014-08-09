@@ -110,7 +110,6 @@ public class interactPlayer implements Listener {
 							
 							getlocationBlockHash = proteccionData.getInt(material + "." + hash);
 							getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
-							getlocationBlockPlayerUUID = proteccionData.getString(material + "." + hash + ".playerUUID");
 							getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
 							getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
 							getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
@@ -136,7 +135,6 @@ public class interactPlayer implements Listener {
 								if (getlocationBlockPlayerName == null) {
 									
 									proteccionData.set(material + "." + hash + ".playerName", "Steve");
-									proteccionData.set(material + "." + hash + ".playerUUID", null);
 									proteccionData.set(material + "." + hash + ".X", locationBlockX);
 									proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 									proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
