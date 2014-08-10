@@ -15,13 +15,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-public class commandTpa implements Listener {
+public class commandTpaHere implements Listener {
 
 	@SuppressWarnings({ "deprecation", "unused" })
-	public static boolean commandtpa(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandtpahere(CommandSender sender, Command cmd, String label, String[] args){
 		
-		if (label.equalsIgnoreCase("tpa")){
-			
+		if (label.equalsIgnoreCase("tpahere")){
+
 			Player craftPlayer = (Player) sender;
 			String playerName = craftPlayer.getName();
 			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
@@ -48,11 +48,11 @@ public class commandTpa implements Listener {
 							try {
 								playerData.load(f);
 								
-								playerData.set("Tpa", playerName);
+								playerData.set("TpaHere", playerName);
 								
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "El usuario " + playerName + " quiere que vengas donde esta el.");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si aceptas, escribe en el chat " + ChatColor.RED + "/tpa aceptar" + ChatColor.GRAY + ".");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si no quieres, escribe en el chat " + ChatColor.RED + "/tpa denegar" + ChatColor.GRAY + ".");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "El usuario " + playerName + " quiere ir donde estas tu.");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si aceptas, escribe en el chat " + ChatColor.RED + "/tpahere aceptar" + ChatColor.GRAY + ".");
+								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si no quieres, escribe en el chat " + ChatColor.RED + "/tpahere denegar" + ChatColor.GRAY + ".");
 								
 								playerData.save(f);
 					
@@ -81,30 +81,30 @@ public class commandTpa implements Listener {
 							try {
 								playerData.load(f);
 								
-								String playerNameTpa = playerData.getString("Tpa");
+								String playerNameTpa = playerData.getString("TpaHere");
 								
 								if(playerNameTpa != null){
 									if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
 										
 										Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
 										
-										craftPlayer.teleport(playerCraftTpa);
+										playerCraftTpa.teleport(craftPlayer);
 										
-										craftPlayer.sendMessage(ChatColor.GRAY + "Te has teletransportado con exito a " + playerNameTpa + ".");
+										craftPlayer.sendMessage(ChatColor.GRAY + "Se ha teletransportado con exito a " + playerNameTpa + ".");
 										
-										playerData.set("Tpa", null);
+										playerData.set("TpaHere", null);
 										
 									} else {
 	
 										craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 										
-										playerData.set("Tpa", null);
+										playerData.set("TpaHere", null);
 	
 									}
 									
 								}  else {
 									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes aceptar un tpa de 'nadie'.");
+									craftPlayer.sendMessage(ChatColor.RED + "No puedes aceptar un tpahere de 'nadie'.");
 									
 								}
 								playerData.save(f);
@@ -132,26 +132,26 @@ public class commandTpa implements Listener {
 							try {
 								playerData.load(f);
 								
-								String playerNameTpa = playerData.getString("Tpa");
+								String playerNameTpa = playerData.getString("TpaHere");
 								
 								if(playerNameTpa != null){
 									if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
 										
-										craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpa.");
+										craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpahere.");
 										
-										playerData.set("Tpa", null);
+										playerData.set("TpaHere", null);
 										
 									} else {
 	
 										craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
 										
-										playerData.set("Tpa", null);
+										playerData.set("TpaHere", null);
 	
 									}
 									
 								}  else {
 									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpa de 'nadie'.");
+									craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpahere de 'nadie'.");
 									
 								}
 								playerData.save(f);
@@ -176,7 +176,8 @@ public class commandTpa implements Listener {
 			
 			}
 			
-			return true;		
+			return true;
+			
 		}
 		
 		return false;

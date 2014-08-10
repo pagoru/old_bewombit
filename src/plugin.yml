@@ -96,3 +96,7 @@ commands:
    tpa:
       description: Permite al jugador pedir una peticion de tp
       permission: bewom.admin
+      
+   tpahere:
+      description: Permite al jugador pedir una peticion de tp donde el se encuentra
+      permission: bewom.admin
