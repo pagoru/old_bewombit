@@ -3,6 +3,8 @@ package es.bewom.bewomBit.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -156,6 +158,62 @@ public class commandP {
 									}
 									
 								}
+							} else if (args.length == 2){
+								
+								if (args[0].equals("añadir")){
+									
+									if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+										
+										List<String> pList = new ArrayList<String>(); 
+										List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+										
+										pList.addAll(pLista);
+										pList.add(args[1]);
+										
+										proteccionData.set(material + "." + hash + ".miembros", pList);
+										
+										if (material.equals("Chest") || material.equals("TrappedChest")){
+											
+											Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+											
+											if(getdobleChest) {
+												String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+												
+												proteccionData.set(material + "." + getdobleChestHash + ".miembros", pList);
+												
+											}
+										}
+										
+									}
+									
+								} else if (args[0].equals("eliminar")) {
+									
+									if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+										
+										List<String> pList = new ArrayList<String>(); 
+										List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+										
+										pList.addAll(pLista);
+										pList.remove(args[1]);
+										
+										proteccionData.set(material + "." + hash + ".miembros", pList);
+										
+										if (material.equals("Chest") || material.equals("TrappedChest")){
+											
+											Boolean getdobleChest = proteccionData.getBoolean(material + "." + hash + ".doble");
+											
+											if(getdobleChest) {
+												String getdobleChestHash = proteccionData.getString(material + "." + hash + ".dobleHash");
+												
+												proteccionData.set(material + "." + getdobleChestHash + ".miembros", pList);
+												
+											}
+										}	
+										
+									}
+									
+								}
+								
 							} else if (args.length == 3){
 								
 								if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
@@ -220,7 +278,7 @@ public class commandP {
 												
 											}
 											
-										}
+										} 
 										
 									}
 									
