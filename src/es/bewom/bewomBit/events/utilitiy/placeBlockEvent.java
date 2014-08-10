@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import es.bewom.bewomBit.events.eventsCongelar;
 import es.bewom.bewomBit.events.eventsP;
 
 public class placeBlockEvent implements Listener {
@@ -18,7 +17,6 @@ public class placeBlockEvent implements Listener {
 	@EventHandler
 	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
 		
-		eventsCongelar.blockPlacePlayerEventsCongelar(eventPlace);
 		eventsP.blockPlacePlayerEventsP(eventPlace);
 		
 	}

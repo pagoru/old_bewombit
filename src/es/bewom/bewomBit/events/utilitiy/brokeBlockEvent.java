@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-import es.bewom.bewomBit.events.eventsCongelar;
 import es.bewom.bewomBit.events.eventsP;
 
 public class brokeBlockEvent implements Listener {
@@ -18,7 +17,6 @@ public class brokeBlockEvent implements Listener {
 	public void OnBreak(BlockBreakEvent eventPlace) throws SQLException, IOException {
 		
 		eventsP.brokeBlockPlayerEventsP (eventPlace);
-		eventsCongelar.brokeBlockPlayerEventsCongelar(eventPlace);
 		
 	}
 

@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import es.bewom.bewomBit.events.eventsCongelar;
 import es.bewom.bewomBit.events.eventsP;
 
 public class interactEvent implements Listener {
@@ -16,6 +17,7 @@ public class interactEvent implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent eventInteract){
 	
 		eventsP.playerInteractEventsP(eventInteract);
+		eventsCongelar.onPlayerInteract(eventInteract);
 	
 	}
 
