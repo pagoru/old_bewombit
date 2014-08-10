@@ -60,6 +60,7 @@ public class commandKick {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
 
 			}
+			return true;
 		} 
 		return false;
 	}

@@ -32,11 +32,13 @@ public class commandSeen {
 					craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + args[0] + " esta desconectado desde el " + dateFormat.format(date));
 					
 				}
-				return true;
+				
 			} else {
+				
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /seen [player]");
-				return true;
+				
 			}
+			return true;
 		}
 		return false;
 	}

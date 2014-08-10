@@ -38,6 +38,7 @@ public class commandInv {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /inv <player>");
 				
 			}
+			return true;
 			
 		}
 		

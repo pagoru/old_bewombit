@@ -42,6 +42,7 @@ public class commandHeal {
 				craftPlayer.sendMessage(ChatColor.GRAY + craftPlayerArgs.getName() + " ha sido curado.");
 				craftPlayerArgs.sendMessage(ChatColor.GRAY + "Has sido curado.");
 			}
+			return true;
 		}
 		return false;
 	}

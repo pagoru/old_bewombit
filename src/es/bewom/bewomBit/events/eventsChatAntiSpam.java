@@ -74,11 +74,41 @@ public class eventsChatAntiSpam {
 
 						if (craftPlayer.hasPermission("bewom.admin")) {	
 
-							Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + getPlayerChat + " < " + message);
+							Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + getPlayerChat + " < " + corregir(message));
 
-							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(admin + mpText + " < " + message);
+							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(admin + mpText + " < " + corregir(message));
 
-							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + message);
+							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
+
+							eventChat.setCancelled(true);
+
+						} else if (craftPlayer.hasPermission("bewom.mod")) {	
+
+							Bukkit.getServer().getPlayer(playerName).sendMessage(mod + mpText + "/" + getPlayerChat + " < " + corregir(message));
+
+							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(mod + mpText + " < " + corregir(message));
+
+							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
+
+							eventChat.setCancelled(true);
+
+						} else if (craftPlayer.hasPermission("bewom.vip")) {	
+
+							Bukkit.getServer().getPlayer(playerName).sendMessage(vip + mpText + "/" + getPlayerChat + " < " + corregir(message));
+
+							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(vip + mpText + " < " + corregir(message));
+
+							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
+
+							eventChat.setCancelled(true);
+
+						} else {	
+
+							Bukkit.getServer().getPlayer(playerName).sendMessage(steve + mpText + "/" + getPlayerChat + " < " + corregir(message));
+
+							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(steve + mpText + " < " + corregir(message));
+
+							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
 
 							eventChat.setCancelled(true);
 

@@ -26,8 +26,6 @@ static Logger log = Logger.getLogger("Minecraft");
 				
 				craftPlayer.sendMessage(ChatColor.RED+ "El comando esta incompleto, usa /v [mostrar/ocultar].");
 				
-				return true;
-				
 			} else if(args.length == 2) {
 				
 				if (args[0].equals("ocultar")){
@@ -57,8 +55,8 @@ static Logger log = Logger.getLogger("Minecraft");
 					
 					
 				}
-				return true;
 			} 
+			return true;
 			
 		}
 		return false;

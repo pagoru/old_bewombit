@@ -44,7 +44,7 @@ public class commandEnderChest {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /enderchest [player], /ender [player] o /end [player]");
 				
 			}
-			
+			return true;
 		}
 		
 		return false;

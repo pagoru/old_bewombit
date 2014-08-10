@@ -67,7 +67,7 @@ public class commandTpaHere implements Listener {
 					} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 					}
-					return true;
+					
 				} else if (args[0].equals("aceptar")){
 					
 					Location locationPlayer = craftPlayer.getLocation();
@@ -120,7 +120,7 @@ public class commandTpaHere implements Listener {
 					} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 					}
-					return true;
+					
 				} else if (args[0].equals("denegar")){
 					
 					File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
@@ -167,11 +167,11 @@ public class commandTpaHere implements Listener {
 					} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 					}
-					return true;
+					
 				} else {
 					
 					craftPlayer.sendMessage(ChatColor.RED + "No se entiende el comando.");
-					return true;
+					
 				}
 			
 			}

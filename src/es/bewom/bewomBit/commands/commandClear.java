@@ -52,7 +52,7 @@ public class commandClear {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /clear [player]");
 				
 			}
-			
+			return true;
 		}
 		
 		return false;

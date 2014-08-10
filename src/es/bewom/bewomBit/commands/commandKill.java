@@ -49,6 +49,7 @@ public class commandKill {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /kill <player>");
 				
 			}
+			return true;
 
 		}
 		return false;

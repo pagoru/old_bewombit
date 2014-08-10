@@ -2,7 +2,6 @@ package es.bewom.bewomBit.commands.utility;
 
 import es.bewom.bewomBit.commands.*;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,10 +52,6 @@ public class commandPlayer implements CommandExecutor {
 			}
 			
 			
-		} else {
-			
-			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
-		
 		}
 		
 		// ---> Comandos de vips <--- //
@@ -82,11 +77,7 @@ public class commandPlayer implements CommandExecutor {
 				return true;
 			}
 			
-		} else {
-			
-			sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando!");
-		
-		}
+		} 
 		
 		// ---> Comandos cualquiera <--- //
 		

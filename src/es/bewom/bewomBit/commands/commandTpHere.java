@@ -25,16 +25,15 @@ public class commandTpHere {
 
 					craftPlayer.sendMessage(ChatColor.GRAY + "El jugador " + playerArgsName + " se ha tepeado a ti.");
 
-					return true;
-
 				} else {
 					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					return true;
+					
 				}
 			} else {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /tphere <player>");
-				return true;
+				
 			}
+			return true;
 		}
 		return false;
 	}

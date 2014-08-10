@@ -54,7 +54,6 @@ commands:
 
    congelar:
       description: Algo
-      permission: bewom.congelashasdf
       permission: bewom.vip
 
    seen:
@@ -67,23 +66,23 @@ commands:
 
    mp:
       description: Permite entrar en chats
-      permission: bewom.admin
+      permission: bewom.vip
 
    me:
       description: Permite entrar en chatsew
-      permission: bewom.admin
+      permission: bewom.vip
       
    msg:
       description: Permite entrar en chats
-      permission: bewom.admin
+      permission: bewom.vip
 
    tell:
       description: Permite entrar en chats
-      permission: bewom.admin
+      permission: bewom.vip
   
    p:
       description: Permite al jugador editar un cofre
-      permission: bewom.admin
+      permission: bewom.vip
       
    gm:
       description: Permite al jugador cambiar de gamemode
@@ -95,8 +94,8 @@ commands:
    
    tpa:
       description: Permite al jugador pedir una peticion de tp
-      permission: bewom.admin
+      permission: bewom.vip
       
    tpahere:
       description: Permite al jugador pedir una peticion de tp donde el se encuentra
-      permission: bewom.admin
+      permission: bewom.vip

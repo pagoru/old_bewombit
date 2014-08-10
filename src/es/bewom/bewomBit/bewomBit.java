@@ -18,7 +18,7 @@ import es.bewom.bewomBit.commands.utility.autoCompleteTab;
 import es.bewom.bewomBit.commands.utility.commandPlayer;
 import es.bewom.bewomBit.events.utilitiy.brokeBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.chatEvent;
-import es.bewom.bewomBit.events.utilitiy.connectEvent;
+import es.bewom.bewomBit.events.utilitiy.joinEvent;
 import es.bewom.bewomBit.events.utilitiy.deathEvent;
 import es.bewom.bewomBit.events.utilitiy.interactEvent;
 import es.bewom.bewomBit.events.utilitiy.moveEvent;
@@ -28,11 +28,15 @@ import es.bewom.bewomBit.events.utilitiy.serverMotdEvent;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
+	
+	public static bewomBit main;
 
 	public void onEnable(){
 		
-		getServer().getPluginManager().registerEvents(new moveEvent (this), this);
-		getServer().getPluginManager().registerEvents(new connectEvent(), this);
+		main = this;
+		
+		getServer().getPluginManager().registerEvents(new moveEvent(this), this);
+		getServer().getPluginManager().registerEvents(new joinEvent(), this);
 		getServer().getPluginManager().registerEvents(new chatEvent(), this);
 		getServer().getPluginManager().registerEvents(new serverMotdEvent(), this);
 		getServer().getPluginManager().registerEvents(new placeBlockEvent(), this);
@@ -76,6 +80,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tpa").setTabCompleter(new autoCompleteTab());
 		getCommand("tpahere").setTabCompleter(new autoCompleteTab());
 				
+		
 		// ---> config inicial <--- //
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");

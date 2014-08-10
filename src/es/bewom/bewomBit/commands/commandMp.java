@@ -30,6 +30,8 @@ public class commandMp {
 			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
 			
 			String admin = ChatColor.DARK_RED + "/" + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName;
+			String mod = ChatColor.DARK_GREEN + "/" + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName;
+			String vip = ChatColor.DARK_AQUA + "/" + playerName;
 			String steve = "/" + playerName;
 			
 			String mpText = ChatColor.GRAY + "/mp";
@@ -108,6 +110,20 @@ public class commandMp {
 									Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + args[0] + " < " + texto);
 									Bukkit.getServer().getPlayer(args[0]).sendMessage(admin + mpText + " < " + texto);
 									
+								} else if (craftPlayer.hasPermission("bewom.mod")) {
+									
+									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
+									
+									Bukkit.getServer().getPlayer(playerName).sendMessage(mod + mpText + "/" + args[0] + " < " + texto);
+									Bukkit.getServer().getPlayer(args[0]).sendMessage(mod + mpText + " < " + texto);
+									
+								} else if (craftPlayer.hasPermission("bewom.vip")) {
+									
+									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
+									
+									Bukkit.getServer().getPlayer(playerName).sendMessage(vip + mpText + "/" + args[0] + " < " + texto);
+									Bukkit.getServer().getPlayer(args[0]).sendMessage(vip + mpText + " < " + texto);
+									
 								} else {
 									
 									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
@@ -136,10 +152,7 @@ public class commandMp {
 			} catch (InvalidConfigurationException e) {
 					e.printStackTrace();
 			}
-			
-			
-		
-
+			return true;
 		}
 		
 		return false;

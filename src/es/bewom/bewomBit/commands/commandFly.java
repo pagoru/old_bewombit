@@ -60,6 +60,7 @@ public class commandFly {
 
 				}
 			}
+			return true;
 		}
 		return false;
 	}
