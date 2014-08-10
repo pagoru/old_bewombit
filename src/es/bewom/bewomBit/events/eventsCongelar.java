@@ -225,5 +225,14 @@ public class eventsCongelar {
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
+		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
+			if (playerIsCongelado || isCongelado){
+				
+			}
+			craftPlayer.teleport(craftPlayer);
+			craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+
+		}
+
 	}
 }
