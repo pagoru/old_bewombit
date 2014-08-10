@@ -19,10 +19,13 @@ public class eventsPermissions {
 		return instance;
 		}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {
 		
 		Player player = eventConnect.getPlayer();
+		
+		player.setBanned(true);
 		
 		PermissionAttachment attachment = player.addAttachment(bewomBit.main);
 		
