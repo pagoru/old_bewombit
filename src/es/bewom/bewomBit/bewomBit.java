@@ -23,7 +23,9 @@ import es.bewom.bewomBit.events.utilitiy.deathEvent;
 import es.bewom.bewomBit.events.utilitiy.interactEvent;
 import es.bewom.bewomBit.events.utilitiy.moveEvent;
 import es.bewom.bewomBit.events.utilitiy.placeBlockEvent;
+import es.bewom.bewomBit.events.utilitiy.preLoginEvent;
 import es.bewom.bewomBit.events.utilitiy.preprocessCommandEvent;
+import es.bewom.bewomBit.events.utilitiy.quitEvent;
 import es.bewom.bewomBit.events.utilitiy.serverMotdEvent;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
@@ -44,6 +46,8 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new deathEvent(), this);
 		getServer().getPluginManager().registerEvents(new brokeBlockEvent(), this);
 		getServer().getPluginManager().registerEvents(new preprocessCommandEvent(), this);
+		getServer().getPluginManager().registerEvents(new quitEvent(), this);
+		getServer().getPluginManager().registerEvents(new preLoginEvent(), this);
 		
 		// ---> Comandos <--- //
 		

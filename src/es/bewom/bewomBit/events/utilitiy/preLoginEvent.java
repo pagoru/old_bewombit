@@ -7,11 +7,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
+import es.bewom.bewomBit.events.eventsPermissions;
+
 public class preLoginEvent implements Listener  {
 	
 	@EventHandler
 	public void onPreLogin(AsyncPlayerPreLoginEvent eventPreLogin) throws SQLException, IOException {
 		
+		eventsPermissions.onPreLogin(eventPreLogin);
 		
 	}
 	
