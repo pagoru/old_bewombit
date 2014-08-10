@@ -14,9 +14,66 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class eventsCongelar {
+	
+	public static void onPreprocessCommandEvent(PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException {
+		
+		String playerUUID = eventPreprocessCommand.getPlayer().getUniqueId().toString();
+		Player craftPlayer = (Player) eventPreprocessCommand.getPlayer();
+		
+		boolean playerIsCongelado = false;
+		
+		boolean isCongelado = false;
+		
+		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data = new File(data1, File.separator + "config.yml");
+		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+
+		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+		File f = new File(userdata, File.separator + playerUUID + ".yml");
+		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+		
+		try {
+			try {
+				try {				
+										
+					playerData.load(f);
+					
+					playerIsCongelado = playerData.getBoolean("Congelado");
+					
+					playerData.save(f);
+					
+					
+					Data.load(data);
+					
+					isCongelado = Data.getBoolean("Congelado");
+					
+					Data.save(data);
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+			} catch (IOException e) {
+					e.printStackTrace();
+			}
+			
+		} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
+		}
+		
+		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
+			if (playerIsCongelado || isCongelado){
+	
+				eventPreprocessCommand.setCancelled(true);
+				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+			}
+		}
+				
+	}
 	
 	public static void blockPlacePlayerEventsCongelar(BlockPlaceEvent eventPlace) throws SQLException, IOException {
 		
@@ -129,10 +186,10 @@ public class eventsCongelar {
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
 				
+				eventChat.setCancelled(true);
+				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+				
 			}
-			
-			eventChat.setCancelled(true);
-			craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 
 		}
 	}
@@ -150,14 +207,6 @@ public class eventsCongelar {
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-
-		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
-			if (playerIsCongelado || isCongelado){
-
-				eventPlace.setCancelled(true);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
-			}
-		}
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File data = new File(data1, File.separator + "config.yml");
@@ -186,6 +235,14 @@ public class eventsCongelar {
 
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
+		}
+		
+		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
+			if (playerIsCongelado || isCongelado){
+
+				eventPlace.setCancelled(true);
+				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+			}
 		}
 	}
 	
@@ -239,9 +296,11 @@ public class eventsCongelar {
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
 				
+				craftPlayer.teleport(craftPlayer);
+				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+				
 			}
-			craftPlayer.teleport(craftPlayer);
-			craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+			
 
 		}
 

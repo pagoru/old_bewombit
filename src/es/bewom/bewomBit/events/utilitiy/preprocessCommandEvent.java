@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
+import es.bewom.bewomBit.events.eventsCongelar;
+
 public class preprocessCommandEvent implements Listener  {
 	
-	@EventHandler
-	public void onPreprocessCommandEvent(PlayerCommandPreprocessEvent eventConnect) throws SQLException, IOException {
+	@EventHandler (priority = EventPriority.HIGHEST)
+	public void onPreprocessCommandEvent(PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException {
+		
+		eventsCongelar.onPreprocessCommandEvent(eventPreprocessCommand);
 		
 	}
 }
