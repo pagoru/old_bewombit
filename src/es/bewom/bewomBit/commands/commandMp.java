@@ -30,12 +30,7 @@ public class commandMp {
 			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
 			
 			String admin = ChatColor.DARK_RED + "/" + ChatColor.DARK_RED + "" + ChatColor.BOLD + playerName;
-//			String mod = ChatColor.DARK_GREEN + "/" + ChatColor.DARK_GREEN + "" + ChatColor.BOLD + playerName;
-//			String vip =  ChatColor.DARK_AQUA + "/" + playerName;
 			String steve = "/" + playerName;
-			
-//			String adminModText = ChatColor.RESET + " < " + ChatColor.WHITE  + "" + ChatColor.BOLD;
-//			String vipDefaultText = ChatColor.WHITE + " < ";
 			
 			String mpText = ChatColor.GRAY + "/mp";
 			

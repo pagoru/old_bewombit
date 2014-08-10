@@ -27,16 +27,16 @@ public class commandInv {
 					
 					craftPlayer.sendMessage(ChatColor.GRAY + "Abierto el inventario del jugador " + playerArgsName + ".");
 					
-					return true;
-					
 				} else {
+					
 					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					return true;
+
 				}
 				
 			} else {
+				
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /inv <player>");
-				return true;
+				
 			}
 			
 		}

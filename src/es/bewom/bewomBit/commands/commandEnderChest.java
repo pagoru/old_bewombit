@@ -21,7 +21,7 @@ public class commandEnderChest {
 				Inventory craftPlayerInventory = craftPlayer.getEnderChest();
 				craftPlayer.openInventory(craftPlayerInventory);
 				craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest.");
-				return true;
+
 			}
 			
 			if (args.length == 1) {
@@ -34,17 +34,15 @@ public class commandEnderChest {
 					String playerArgsName = craftPlayerArgs.getName();
 					
 					craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest de " + playerArgsName + ".");
-
-					return true;
 					
 				} else {
 					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					return true;
+
 				}
 				
 			} else {
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /enderchest [player], /ender [player] o /end [player]");
-				return true;
+				
 			}
 			
 		}

@@ -64,8 +64,6 @@ public class commandGm {
 					} 
 				
 				}
-
-			return true;
 			
 			} 
 		}

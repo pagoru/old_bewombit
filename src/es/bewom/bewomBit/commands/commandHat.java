@@ -20,7 +20,7 @@ public class commandHat {
 			craftPlayer.getInventory().setHelmet(craftPlayerItem);
 			
 			craftPlayer.sendMessage(ChatColor.GRAY + "Bonito sombrero!");
-			return true;
+			
 		}
 		
 		return false;

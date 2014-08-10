@@ -12,6 +12,7 @@ public class commandKill {
 	public static boolean commandkill(CommandSender sender, Command cmd, String label, String [] args){
 
 		if (label.equalsIgnoreCase("kill")){
+			
 			Player craftPlayer = (Player) sender;
 			Player craftPlayerArgs;
 
@@ -37,18 +38,17 @@ public class commandKill {
 						break;
 					}
 
-					return true;
-
 				} else {
+					
 					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					return true;
+					
 				}
 
 			} else {
+				
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /kill <player>");
-				return true;
+				
 			}
-
 
 		}
 		return false;

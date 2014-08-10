@@ -26,8 +26,6 @@ public class commandClear {
 				
 				craftPlayer.sendMessage(ChatColor.GRAY + "Se ha eliminado tu inventario!");
 				
-				return true;
-				
 			} else if (args.length == 1){
 				
 				if (sender.getServer().getPlayer(args [0]) != null){
@@ -43,22 +41,20 @@ public class commandClear {
 					
 					craftPlayer.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
 					
-					return true;
-					
 				} else {
 					
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					return true;
-					
+
 				}
 				
 			} else {
 				
 				sender.sendMessage(ChatColor.RED + "La forma correcta es /clear [player]");
-				return true;
 				
 			}
+			
 		}
+		
 		return false;
 	
 		

@@ -17,14 +17,16 @@ public class commandFly {
 			if (args.length == 0){
 
 				if (!craftPlayer.getAllowFlight()){
+					
 					craftPlayer.setAllowFlight(true);
 					craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
-					return true;
+
 				}
 				else{
+					
 					craftPlayer.setAllowFlight(false);
 					craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
-					return true;
+
 				}
 
 			}
@@ -39,7 +41,7 @@ public class commandFly {
 								craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo activado para "+craftPlayerArgs.getName()+"!");
 							}
 							craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
-							return true;
+
 						}
 						else{
 							craftPlayerArgs.setAllowFlight(false);
@@ -47,15 +49,15 @@ public class commandFly {
 								craftPlayer.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado para "+craftPlayerArgs.getName()+"!");
 							}
 							craftPlayerArgs.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
-							return true;
+
 						}
 					}
 					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado!");
-					return true;
+
 				}
 				else {
 					sender.sendMessage(ChatColor.RED + "La forma correcta es /fly [player]");
-					return true;
+
 				}
 			}
 		}
