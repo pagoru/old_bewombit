@@ -301,13 +301,13 @@ public class eventsP {
 	}
 
 	@SuppressWarnings("unused")
-	public static void brokeBlockPlayerEventsP(BlockBreakEvent eventPlace){
+	public static void brokeBlockPlayerEventsP(BlockBreakEvent eventBroke){
 
-		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
-		String playerName = eventPlace.getPlayer().getName();
-		Player craftPlayer = (Player) eventPlace.getPlayer();
+		String playerUUID = eventBroke.getPlayer().getUniqueId().toString();
+		String playerName = eventBroke.getPlayer().getName();
+		Player craftPlayer = (Player) eventBroke.getPlayer();
 		
-		Block brokeBlock = eventPlace.getBlock();
+		Block brokeBlock = eventBroke.getBlock();
 
 		int locationBlockX = brokeBlock.getLocation().getBlockX();
 		int locationBlockY = brokeBlock.getLocation().getBlockY();

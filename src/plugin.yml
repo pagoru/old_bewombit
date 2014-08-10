@@ -99,3 +99,7 @@ commands:
    tpahere:
       description: Permite al jugador pedir una peticion de tp donde el se encuentra
       permission: bewom.vip
+      
+   spawner:
+      description: Permite al jugador cambiar un spawner
+      permission: bewom.admin

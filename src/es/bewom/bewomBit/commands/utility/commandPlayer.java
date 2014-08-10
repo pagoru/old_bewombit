@@ -50,6 +50,9 @@ public class commandPlayer implements CommandExecutor {
 			if(commandV.commandv(sender, cmd, label, args)){
 				return true;
 			}
+			if(commandSpawner.commandspawner(sender, cmd, label, args)){
+				return true;
+			}
 			
 			
 		}

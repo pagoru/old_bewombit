@@ -13,6 +13,7 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import es.bewom.bewomBit.bewomBit;
 
+@SuppressWarnings("unused")
 public class eventsPermissions {
 	
 	private static final eventsPermissions instance = new eventsPermissions();
@@ -20,7 +21,7 @@ public class eventsPermissions {
 	public static final eventsPermissions getPlugin() {
 		
 		return instance;
-		}
+	}
 	
 	@EventHandler
 	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {

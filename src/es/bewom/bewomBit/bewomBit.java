@@ -23,9 +23,7 @@ import es.bewom.bewomBit.events.utilitiy.deathEvent;
 import es.bewom.bewomBit.events.utilitiy.interactEvent;
 import es.bewom.bewomBit.events.utilitiy.moveEvent;
 import es.bewom.bewomBit.events.utilitiy.placeBlockEvent;
-import es.bewom.bewomBit.events.utilitiy.preLoginEvent;
 import es.bewom.bewomBit.events.utilitiy.preprocessCommandEvent;
-import es.bewom.bewomBit.events.utilitiy.quitEvent;
 import es.bewom.bewomBit.events.utilitiy.serverMotdEvent;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
@@ -46,8 +44,8 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new deathEvent(), this);
 		getServer().getPluginManager().registerEvents(new brokeBlockEvent(), this);
 		getServer().getPluginManager().registerEvents(new preprocessCommandEvent(), this);
-		getServer().getPluginManager().registerEvents(new quitEvent(), this);
-		getServer().getPluginManager().registerEvents(new preLoginEvent(), this);
+		getServer().getPluginManager().registerEvents(new preprocessCommandEvent(), this);
+		getServer().getPluginManager().registerEvents(new preprocessCommandEvent(), this);
 		
 		// ---> Comandos <--- //
 		
@@ -75,6 +73,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("v").setExecutor(new commandPlayer());
 		getCommand("tpa").setExecutor(new commandPlayer());
 		getCommand("tpahere").setExecutor(new commandPlayer());
+		getCommand("spawner").setExecutor(new commandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -83,6 +82,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("v").setTabCompleter(new autoCompleteTab());
 		getCommand("tpa").setTabCompleter(new autoCompleteTab());
 		getCommand("tpahere").setTabCompleter(new autoCompleteTab());
+		getCommand("spawner").setTabCompleter(new autoCompleteTab());
 				
 		
 		// ---> config inicial <--- //
