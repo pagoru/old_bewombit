@@ -8,11 +8,11 @@ import es.bewom.bewomBit.bewomBit;
 import es.bewom.bewomBit.events.eventsCongelar;
 import es.bewom.bewomBit.events.eventsSaltarImpulso;
 
-public class movePlayer implements Listener{
+public class moveEvent implements Listener{
 
 	public static bewomBit plugin;
 
-	public movePlayer (bewomBit instance){
+	public moveEvent (bewomBit instance){
 		plugin = instance;
 	}
 

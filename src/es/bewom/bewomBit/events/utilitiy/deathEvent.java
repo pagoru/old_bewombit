@@ -8,7 +8,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import es.bewom.bewomBit.events.eventsP;
 
-public class deathPlayer implements Listener {
+public class deathEvent implements Listener {
 
 	static Logger log = Logger.getLogger("Minecraft");
 

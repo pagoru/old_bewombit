@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import es.bewom.bewomBit.events.eventsChatAntiSpam;
 import es.bewom.bewomBit.events.eventsCongelar;
 
-public class chatPlayer implements Listener {
+public class chatEvent implements Listener {
 
 	static Logger log = Logger.getLogger("Minecraft");
 

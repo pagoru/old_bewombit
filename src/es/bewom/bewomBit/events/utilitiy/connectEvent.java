@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import es.bewom.bewomBit.events.eventsPerfiles;
 import es.bewom.bewomBit.events.eventsWelcomePlayer;
 
-public class connectPlayer implements Listener  {
+public class connectEvent implements Listener  {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {

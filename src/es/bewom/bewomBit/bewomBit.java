@@ -16,28 +16,30 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import es.bewom.bewomBit.commands.utility.autoCompleteTab;
 import es.bewom.bewomBit.commands.utility.commandPlayer;
-import es.bewom.bewomBit.events.utilitiy.brokeBlockPlayer;
-import es.bewom.bewomBit.events.utilitiy.chatPlayer;
-import es.bewom.bewomBit.events.utilitiy.connectPlayer;
-import es.bewom.bewomBit.events.utilitiy.deathPlayer;
-import es.bewom.bewomBit.events.utilitiy.interactPlayer;
-import es.bewom.bewomBit.events.utilitiy.movePlayer;
-import es.bewom.bewomBit.events.utilitiy.placeBlockPlayer;
-import es.bewom.bewomBit.events.utilitiy.serverMOTD;
+import es.bewom.bewomBit.events.utilitiy.brokeBlockEvent;
+import es.bewom.bewomBit.events.utilitiy.chatEvent;
+import es.bewom.bewomBit.events.utilitiy.connectEvent;
+import es.bewom.bewomBit.events.utilitiy.deathEvent;
+import es.bewom.bewomBit.events.utilitiy.interactEvent;
+import es.bewom.bewomBit.events.utilitiy.moveEvent;
+import es.bewom.bewomBit.events.utilitiy.placeBlockEvent;
+import es.bewom.bewomBit.events.utilitiy.preprocessCommandEvent;
+import es.bewom.bewomBit.events.utilitiy.serverMotdEvent;
 public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
 
 	public void onEnable(){
 		
-		getServer().getPluginManager().registerEvents(new movePlayer (this), this);
-		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
-		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
-		getServer().getPluginManager().registerEvents(new serverMOTD(), this);
-		getServer().getPluginManager().registerEvents(new placeBlockPlayer(), this);
-		getServer().getPluginManager().registerEvents(new interactPlayer(), this);
-		getServer().getPluginManager().registerEvents(new deathPlayer(), this);
-		getServer().getPluginManager().registerEvents(new brokeBlockPlayer(), this);
+		getServer().getPluginManager().registerEvents(new moveEvent (this), this);
+		getServer().getPluginManager().registerEvents(new connectEvent(), this);
+		getServer().getPluginManager().registerEvents(new chatEvent(), this);
+		getServer().getPluginManager().registerEvents(new serverMotdEvent(), this);
+		getServer().getPluginManager().registerEvents(new placeBlockEvent(), this);
+		getServer().getPluginManager().registerEvents(new interactEvent(), this);
+		getServer().getPluginManager().registerEvents(new deathEvent(), this);
+		getServer().getPluginManager().registerEvents(new brokeBlockEvent(), this);
+		getServer().getPluginManager().registerEvents(new preprocessCommandEvent(), this);
 		
 		// ---> Comandos <--- //
 		

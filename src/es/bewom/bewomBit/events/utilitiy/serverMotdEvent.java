@@ -6,7 +6,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 
 import es.bewom.bewomBit.events.eventsServerMOTD;
 
-public class serverMOTD implements Listener {
+public class serverMotdEvent implements Listener {
 
 	@EventHandler
 	public void LagMOTD(ServerListPingEvent pingEvent){

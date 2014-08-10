@@ -3,23 +3,22 @@ package es.bewom.bewomBit.events.utilitiy;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 
 import es.bewom.bewomBit.events.eventsCongelar;
 import es.bewom.bewomBit.events.eventsP;
 
-public class placeBlockPlayer implements Listener {
-	
+public class brokeBlockEvent implements Listener {
+
 	static Logger log = Logger.getLogger("Minecraft");
 
 	@EventHandler
-	public void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException {
+	public void OnBreak(BlockBreakEvent eventPlace) throws SQLException, IOException {
 		
-		eventsCongelar.blockPlacePlayerEventsCongelar(eventPlace);
-		eventsP.blockPlacePlayerEventsP(eventPlace);
+		eventsP.brokeBlockPlayerEventsP (eventPlace);
+		eventsCongelar.brokeBlockPlayerEventsCongelar(eventPlace);
 		
 	}
 

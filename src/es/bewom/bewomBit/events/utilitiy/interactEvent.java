@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import es.bewom.bewomBit.events.eventsP;
 
-public class interactPlayer implements Listener {
+public class interactEvent implements Listener {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
