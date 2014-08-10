@@ -30,7 +30,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 
 	public void onEnable(){
 		
-		log.info(ChatColor.AQUA + "Bit habilitado");
 		getServer().getPluginManager().registerEvents(new movePlayer (this), this);
 		getServer().getPluginManager().registerEvents(new connectPlayer(), this);
 		getServer().getPluginManager().registerEvents(new chatPlayer(), this);
