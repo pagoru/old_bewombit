@@ -8,6 +8,8 @@ import org.bukkit.command.TabCompleter;
 
 import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoGm;
 import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoP;
+import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoTpa;
+import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoTpaHere;
 import es.bewom.bewomBit.commands.commandsAutoComplete.commandAutoV;
 
 public class autoCompleteTab implements TabCompleter {
@@ -30,6 +32,18 @@ public class autoCompleteTab implements TabCompleter {
 		if(commandAutoV.commandautov(sender, cmd, alias, args) != null){
 			
 			return commandAutoV.commandautov(sender, cmd, alias, args);
+			
+		}
+		
+		if(commandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){
+			
+			return commandAutoTpa.commandautotpa(sender, cmd, alias, args);
+			
+		} 
+
+		if(commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){
+			
+			return commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);
 			
 		} 
 		

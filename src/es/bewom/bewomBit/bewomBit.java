@@ -72,6 +72,8 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("p").setTabCompleter(new autoCompleteTab());
 		getCommand("gm").setTabCompleter(new autoCompleteTab());
 		getCommand("v").setTabCompleter(new autoCompleteTab());
+		getCommand("tpa").setTabCompleter(new autoCompleteTab());
+		getCommand("tpahere").setTabCompleter(new autoCompleteTab());
 				
 		// ---> config inicial <--- //
 		
