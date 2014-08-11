@@ -27,8 +27,7 @@ public class EventsSpawner {
 			Location block = eventBroke.getBlock().getLocation();
 			CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
 			
-			String spawnerName = spawner.getCreatureTypeName().toString();
-			
+			String spawnerName = spawner.getCreatureTypeName().toString();			
 			
 			ItemStack spawnerItem = new ItemStack(spawnerState);
 			
@@ -36,11 +35,8 @@ public class EventsSpawner {
 			meta.setDisplayName(ChatColor.AQUA + spawnerName);
 			spawnerItem.setItemMeta(meta);
 			
-			eventBroke.getPlayer().getWorld().dropItem(eventBroke.getBlock().getLocation(), spawnerItem);
-			
-		}
-	
-		
+			eventBroke.getPlayer().getWorld().dropItem(eventBroke.getBlock().getLocation(), spawnerItem);			
+		}		
 	}
 		
 	public static void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException, InterruptedException {
@@ -54,48 +50,32 @@ public class EventsSpawner {
 					
 			Location block = eventPlace.getBlock().getLocation();
 			
-			if (meta.getDisplayName().equals(ChatColor.AQUA + "Blaze")){
-				
-				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
-	            spawner1.setCreatureTypeByName("Blaze");
-	            spawner1.setDelay(0);
-	            spawner1.update();
-			
-			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Zombie")){
-				
-				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
-	            spawner1.setCreatureTypeByName("Zombie");
-	            spawner1.setDelay(0);
-	            spawner1.update();
-			
-			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Skeleton")){
-				
-				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
-	            spawner1.setCreatureTypeByName("Skeleton");
-	            spawner1.setDelay(0);
-	            spawner1.update();
-			
-			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Spider")){
-				
-				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
-	            spawner1.setCreatureTypeByName("Spider");
-	            spawner1.setDelay(0);
-	            spawner1.update();
-			
-			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "CaveSpider")){
-				
-				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
-	            spawner1.setCreatureTypeByName("CaveSpider");
-	            spawner1.setDelay(0);
-	            spawner1.update();
-			
-			} else {
-				
-				eventPlace.setCancelled(true);
-				
+			if (meta.getDisplayName().equals(ChatColor.AQUA + "Blaze")){				
+	            clasificarSpawner (block, "Blaze");			
 			}
-			
-		}
+			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Zombie")){				
+	            clasificarSpawner (block, "Zombie");			
+			}
+			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Skeleton")){				
+	            clasificarSpawner (block, "Skeleton");			
+			}
+			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Spider")){				
+	            clasificarSpawner (block, "Spider");			
+			}
+			else if (meta.getDisplayName().equals(ChatColor.AQUA + "CaveSpider")){				
+	            clasificarSpawner (block, "CaveSpider");			
+			}
+			else {				
+				eventPlace.setCancelled(true);				
+			}			
+		}		
+	}
+	
+	public static void clasificarSpawner (Location block, String mob){
 		
+		CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
+        spawner.setCreatureTypeByName("mob");
+        spawner.setDelay(0);
+        spawner.update();
 	}
 }

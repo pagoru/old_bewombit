@@ -7,59 +7,49 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.commands.utility.CommandUtilities;
+
 public class CommandSpawner {
 
-	@SuppressWarnings({ "unused", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	public static boolean commandspawner (CommandSender sender, Command cmd, String commandLabel, String [] args){
-	
-		if (commandLabel.equalsIgnoreCase("spawner")){
-			
-			Player craftPlayer = (Player) sender;
-			String playerName = sender.getName();
-			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
-			
-			if (craftPlayer.getTargetBlock(null, 5).getType().equals(Material.MOB_SPAWNER)){
-				
-				Location block = craftPlayer.getTargetBlock(null, 50).getLocation();
-				
-				if(args.length == 0){
-					
-				} else if (args.length == 1){
-					
-					CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
-					
-					if(args[0].equals("MagmaCube")){
 
-		                spawner.setCreatureTypeByName("LavaSlime");
-						
-					} else {
-						
-						spawner.setCreatureTypeByName(args[0]);
-						
-					}
-	                
-					spawner.setDelay(0);
-	                spawner.update();
-	                
-				} else if (args.length == 2){
-					
-					String args1 = args[1].toString();
-					
-					int args2 = Integer.parseInt(args1);
-					
-					CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
-	                spawner.setCreatureTypeByName(args[0]);
-	                spawner.setDelay(args2);
-	                spawner.update();
-					
-				}
+		if (commandLabel.equalsIgnoreCase("spawner")){
+
+			Player craftPlayer = (Player) sender;
+
+			if (craftPlayer.getTargetBlock(null, 5).getType().equals(Material.MOB_SPAWNER)){
+
+				Location block = craftPlayer.getTargetBlock(null, 50).getLocation();
+
+				if (args.length == 1){		
 				
-			}
-			
+					modificarSpawner (block, args[0], 0);
+				}
+				else if (args.length == 2){	
+					
+					modificarSpawner (block, args[0], Integer.parseInt(args[1].toString()));
+				}
+				else {
+					CommandUtilities.formaCorrecta(sender, "/spawner <mob> [delay]");
+				}
+			}			
 			return true;
 		}
-		return false;
-	
+		return false;	
 	}
 
+	public static void modificarSpawner (Location block, String arg, int delay){
+
+		CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
+
+		if(arg.equals("MagmaCube")){
+			spawner.setCreatureTypeByName("LavaSlime");
+		}
+		else {
+			spawner.setCreatureTypeByName(arg);
+		}
+		spawner.setDelay(delay);
+		spawner.update();
+	}
 }
