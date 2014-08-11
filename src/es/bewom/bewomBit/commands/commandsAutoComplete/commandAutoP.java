@@ -3,7 +3,7 @@ package es.bewom.bewomBit.commands.commandsAutoComplete;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -100,12 +100,8 @@ public class commandAutoP {
 						getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 						
 						if (args.length == 1){
-							List<String> pList = new ArrayList<String>();  
-					         
-							pList.add("privado");
-							pList.add("publico");
-							pList.add("añadir");
-							pList.add("eliminar");
+							
+							List<String> pList = Arrays.asList("privado","publico","añadir","eliminar");  
 							
 							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 								pList.add("cambiar");
@@ -121,10 +117,8 @@ public class commandAutoP {
 						} else if(args.length == 2 && args[0].equals("cambiar")){
 							
 							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-								List<String> pList = new ArrayList<String>();  
-						        
-								pList.add("propietario");
-								pList.add("estado");
+								
+								List<String> pList =  Arrays.asList("propietario","estado");  
 								
 								return pList;
 							}
@@ -132,10 +126,8 @@ public class commandAutoP {
 						} else if(args.length == 3 && args[0].equals("cambiar") && args[1].equals("estado")){
 						
 							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-								List<String> pList = new ArrayList<String>();  
-						         
-								pList.add("privado");
-								pList.add("publico");
+								
+								List<String> pList = Arrays.asList("privado","publico");
 								
 								return pList;
 							}
