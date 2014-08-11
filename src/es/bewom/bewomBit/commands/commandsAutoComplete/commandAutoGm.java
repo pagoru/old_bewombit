@@ -20,10 +20,8 @@ public class commandAutoGm {
 				pList.add("2");
 				
 				return pList;
-			} 
-		
+			}
 		}
 		return null;
 	}
-	
 }

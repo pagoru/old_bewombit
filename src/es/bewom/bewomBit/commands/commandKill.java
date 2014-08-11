@@ -6,54 +6,48 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandKill {
 
 	@SuppressWarnings("deprecation")
 	public static boolean commandkill(CommandSender sender, Command cmd, String label, String [] args){
 
 		if (label.equalsIgnoreCase("kill")){
-			
-			Player craftPlayer = (Player) sender;
-			Player craftPlayerArgs;
 
 			if (args.length == 1) {
 
-				if (sender.getServer().getPlayer(args [0]) != null){
+				if (commandUtilities.comprobarJugador(sender, args [0])){
 
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					int nivel = craftPlayerArgs.getLevel();
 					craftPlayerArgs.setHealth(0);
-					String playerArgsName = craftPlayerArgs.getName();
-					
-					switch (nivel){
-
-					case 0:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", no tenia niveles.");
-						break;
-					case 1:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenia " + nivel + " nivel.");
-						break;
-					default:
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgsName + ", tenia " + nivel + " niveles.");
-						break;
-					}
-
-				} else {
-					
-					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-					
+					mostrarExperiencia (sender, craftPlayerArgs, nivel);
+				}
+				else {
+					commandUtilities.jugadorDesconectado(sender);
 				}
 
 			} else {
-				
-				sender.sendMessage(ChatColor.RED + "La forma correcta es /kill <player>");
-				
+				commandUtilities.formaCorrecta(sender, "/kill <player>");
 			}
 			return true;
-
 		}
 		return false;
 	}
+	
+	public static void mostrarExperiencia (CommandSender sender, Player playerArgs, int nivel){
+		switch (nivel){
 
-
+		case 0:
+			sender.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgs.getName() + ", no tenia niveles.");
+			break;
+		case 1:
+			sender.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgs.getName() + ", tenia " + nivel + " nivel.");
+			break;
+		default:
+			sender.sendMessage(ChatColor.GRAY + "Has matado a " + playerArgs.getName() + ", tenia " + nivel + " niveles.");
+			break;
+		}
+	}
 }

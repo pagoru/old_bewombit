@@ -10,6 +10,8 @@ public class serverMotdEvent implements Listener {
 
 	@EventHandler
 	public void LagMOTD(ServerListPingEvent pingEvent){
+		
 		eventsServerMOTD.serverMOTDEvents (pingEvent);
+		
 	}
 }

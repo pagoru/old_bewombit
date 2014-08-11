@@ -15,12 +15,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandMp {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
-	
-	@SuppressWarnings({ "deprecation"})
+
 	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args){
 		
 		if (label.equalsIgnoreCase("mp") || label.equalsIgnoreCase("msg") || label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("me")){
@@ -50,53 +51,50 @@ public class commandMp {
 						
 						getPlayerChat = playerData.getString("Chat");
 						
-						
 						if (args.length == 0){
-							
+
 							if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
 							
 								if(getPlayerChat.equals("global")){
 									
 									craftPlayer.sendMessage(ChatColor.RED + "No puedes salir del chat general, usa /mp [nick] y/o (mensaje).");
-									
-								} else {
+								}
+								else {
 									
 									playerData.set("Chat", "global");
-									
 									craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del chat privado de " + getPlayerChat + ".");
-									
 								}
 							
-							} else {
+							}
+							else {
 								
 								craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-								
 							}
 							
-						} else if (args.length == 1) {
+						}
+						else if (args.length == 1) {
 							
 							if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
 							
-								if (sender.getServer().getPlayer(args[0]) != null){
+								if (commandUtilities.comprobarJugador(sender, args [0])){
 									
 									craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + args[0] + ".");
-									
 									playerData.set("Chat", args[0]);
 									
-								} else {
-									craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
+								}
+								else {
+									commandUtilities.jugadorDesconectado(sender);
 									return true;
 								}
-							
-							} else {
+							}
+							else {
 								
 								craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-								
 							}
+						}
+						else {
 							
-						} else {
-							
-							if (sender.getServer().getPlayer(args[0]) != null){
+							if (commandUtilities.comprobarJugador(sender, args [0])){
 								
 								String texto = "";
 								for (int i = 1; i < args.length; i++) {
@@ -105,38 +103,25 @@ public class commandMp {
 								
 								if (craftPlayer.hasPermission("bewom.admin")) {	
 									
-									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
-									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + args[0] + " < " + texto);
-									Bukkit.getServer().getPlayer(args[0]).sendMessage(admin + mpText + " < " + texto);
-									
-								} else if (craftPlayer.hasPermission("bewom.mod")) {
-									
-									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
-									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(mod + mpText + "/" + args[0] + " < " + texto);
-									Bukkit.getServer().getPlayer(args[0]).sendMessage(mod + mpText + " < " + texto);
-									
-								} else if (craftPlayer.hasPermission("bewom.vip")) {
-									
-									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
-									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(vip + mpText + "/" + args[0] + " < " + texto);
-									Bukkit.getServer().getPlayer(args[0]).sendMessage(vip + mpText + " < " + texto);
-									
-								} else {
-									
-									log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
-									
-									Bukkit.getServer().getPlayer(playerName).sendMessage(steve + mpText + "/" + args[0] + " < " + texto);
-									Bukkit.getServer().getPlayer(args[0]).sendMessage(steve + mpText + " < " + texto);
+									formatearChatMp (craftPlayer, playerName, admin, mpText, args, texto);
 									
 								}
-								
+								else if (craftPlayer.hasPermission("bewom.mod")) {
+									
+									formatearChatMp (craftPlayer, playerName, mod, mpText, args, texto);
+									
+								}
+								else if (craftPlayer.hasPermission("bewom.vip")) {
+									
+									formatearChatMp (craftPlayer, playerName, vip, mpText, args, texto);
+									
+								}
+								else {
+				
+									formatearChatMp (craftPlayer, playerName, steve, mpText, args, texto);
+								}
 							}
-							
 						}
-						
 						
 						playerData.save(f);
 						return true;
@@ -154,7 +139,15 @@ public class commandMp {
 			}
 			return true;
 		}
-		
 		return false;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void formatearChatMp (Player player, String playerName, String permiso, String mpText, String [] args, String texto){
+	
+		log.info("/mp/" + playerName + "/to/" + args[0] + " < " +  texto);
+		
+		Bukkit.getServer().getPlayer(playerName).sendMessage(permiso + mpText + "/" + args[0] + " < " + texto);
+		Bukkit.getServer().getPlayer(args[0]).sendMessage(permiso + mpText + " < " + texto);
 	}
 }

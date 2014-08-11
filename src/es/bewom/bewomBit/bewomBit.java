@@ -80,7 +80,6 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tpa").setTabCompleter(new autoCompleteTab());
 		getCommand("tpahere").setTabCompleter(new autoCompleteTab());
 				
-		
 		// ---> config inicial <--- //
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");

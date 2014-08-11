@@ -6,59 +6,52 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandKick {
-	
+
 	@SuppressWarnings("deprecation")
 	public static boolean commandkick(CommandSender sender, Command cmd, String label, String[] args){
-		Player craftPlayerArgs;
-		
-		String broadcast = ChatColor.DARK_BLUE + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_BLUE + "/" + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_BLUE + " < ";
-		
-		
+
 		if (label.equalsIgnoreCase("kick")){
-			
+
+			Player craftPlayerArgs;
+			String broadcast = ChatColor.DARK_BLUE + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_BLUE + "/" + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_BLUE + " < ";
+
 			if (args.length == 1) {
-				
-				if (sender.getServer().getPlayer(args[0]) != null){
-					
+
+				if (commandUtilities.comprobarJugador(sender, args [0])){
+
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-					String playerArgsName = craftPlayerArgs.getName();
-					
-					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado.");
-					
-					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado.");
-					
-				} else {
-					
-					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
+
+					craftPlayerArgs.kickPlayer (ChatColor.BLUE + "Has sido kickeado.");
+					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado.");
 
 				}
-				
-			} else if (args.length > 1){
-				
-				if (sender.getServer().getPlayer(args[0]) != null){
-				
+				else {	
+					commandUtilities.jugadorDesconectado(sender);
+				}
+			}
+
+			else if (args.length > 1){
+
+				if (commandUtilities.comprobarJugador(sender, args [0])){
+
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-					String playerArgsName = craftPlayerArgs.getName();
-					
 					String texto = "";
+
 					for (int i = 1; i < args.length; i++) {
 						texto += args[i] + " ";
 					}
-					
 					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado por " + texto);
-					
-					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + playerArgsName + " ha sido kickeado por " + texto);
-					
-				} else {
-					
-					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-
+					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.BLUE + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado por " + texto);
 				}
-			} else {
-				
-				sender.sendMessage(ChatColor.RED + "La forma correcta es /kick <player> [motivo]");
-
+				else{
+					commandUtilities.jugadorDesconectado(sender);
+				}
+			}
+			else {
+				commandUtilities.formaCorrecta(sender, "/kick <player> [motivo]");
 			}
 			return true;
 		} 

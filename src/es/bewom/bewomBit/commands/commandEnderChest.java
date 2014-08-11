@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandEnderChest {
 	
 	@SuppressWarnings("deprecation")
@@ -20,8 +22,8 @@ public class commandEnderChest {
 				
 				Inventory craftPlayerInventory = craftPlayer.getEnderChest();
 				craftPlayer.openInventory(craftPlayerInventory);
+				
 				craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest.");
-
 			}
 			
 			if (args.length == 1) {
@@ -29,26 +31,20 @@ public class commandEnderChest {
 				if (sender.getServer().getPlayer(args [0]) != null){
 					
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					
 					Inventory craftPlayerArgsInventory = craftPlayerArgs.getEnderChest();
 					craftPlayer.openInventory(craftPlayerArgsInventory);
-					String playerArgsName = craftPlayerArgs.getName();
 					
-					craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest de " + playerArgsName + ".");
-					
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest de " + craftPlayerArgs.getName() + ".");
 				} else {
-					craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-
+					commandUtilities.jugadorDesconectado(sender);
 				}
 				
 			} else {
-				sender.sendMessage(ChatColor.RED + "La forma correcta es /enderchest [player], /ender [player] o /end [player]");
-				
+				commandUtilities.formaCorrecta(sender, "/enderchest [player], /ender [player] o /end [player]");
 			}
 			return true;
 		}
-		
 		return false;
-	
 	}
-
 }
