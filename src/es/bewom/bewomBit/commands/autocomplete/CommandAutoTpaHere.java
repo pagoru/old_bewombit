@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.commands.commandsAutoComplete;
+package es.bewom.bewomBit.commands.autocomplete;
 
 import java.util.Arrays;
 import java.util.List;

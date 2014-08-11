@@ -6,12 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoGm;
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoP;
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoSpawner;
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoTpa;
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoTpaHere;
-import es.bewom.bewomBit.commands.commandsAutoComplete.CommandAutoV;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpaHere;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoV;
 
 public class AutoCompleteTab implements TabCompleter {
 
