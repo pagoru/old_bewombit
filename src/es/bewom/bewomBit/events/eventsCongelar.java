@@ -132,7 +132,6 @@ public class eventsCongelar {
 				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
-
 		}
 	}
 	
@@ -242,9 +241,6 @@ public class eventsCongelar {
 				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
-			
-
 		}
-
 	}
 }

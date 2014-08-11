@@ -44,7 +44,7 @@ public class commandFly {
 			player.setAllowFlight(true);
 			player.sendMessage(ChatColor.GRAY + "Modo de vuelo activado!");
 		}
-		else{
+		else {
 			player.setAllowFlight(false);
 			player.sendMessage(ChatColor.GRAY + "Modo de vuelo desactivado!");
 		}

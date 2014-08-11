@@ -17,10 +17,7 @@ public class eventsSaltarImpulso {
 				
 				craftPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20, 0));
 				
-			}
-			
-		}
-		
-	}
-	
+			}			
+		}		
+	}	
 }

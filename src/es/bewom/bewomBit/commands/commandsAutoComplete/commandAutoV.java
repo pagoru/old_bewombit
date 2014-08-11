@@ -19,10 +19,8 @@ public class commandAutoV {
 				pList.add("ocultar");
 
 				return pList;
-			} 
-		
+			} 		
 		}
 		return null;
 	}
-	
 }

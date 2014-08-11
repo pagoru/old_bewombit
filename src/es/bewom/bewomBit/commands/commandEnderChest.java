@@ -26,7 +26,7 @@ public class commandEnderChest {
 				craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest.");
 			}
 			
-			if (args.length == 1) {
+			else if (args.length == 1) {
 				
 				if (sender.getServer().getPlayer(args [0]) != null){
 					
@@ -36,11 +36,13 @@ public class commandEnderChest {
 					craftPlayer.openInventory(craftPlayerArgsInventory);
 					
 					craftPlayer.sendMessage(ChatColor.GRAY + "Has abierto el enderchest de " + craftPlayerArgs.getName() + ".");
-				} else {
+				}
+				else {
 					commandUtilities.jugadorDesconectado(sender);
 				}
 				
-			} else {
+			}
+			else {
 				commandUtilities.formaCorrecta(sender, "/enderchest [player], /ender [player] o /end [player]");
 			}
 			return true;

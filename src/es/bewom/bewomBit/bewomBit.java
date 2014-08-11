@@ -130,5 +130,4 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		this.getConfig().options().copyDefaults(true);
 		this.saveConfig();
 	}
-
 }

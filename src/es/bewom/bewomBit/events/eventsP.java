@@ -63,7 +63,7 @@ public class eventsP {
 				try {
 					proteccionData.load(protecciondata);
 					
-					// Protección 
+					// Proteccion
 					
 					if(placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
 						
@@ -499,7 +499,8 @@ public class eventsP {
 																
 								if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockEstado.equals("publico") || pLista.toString().contains(playerName)){
 									
-								} else if (getlocationBlockPlayerName.equals(null)) {
+								}
+								else if (getlocationBlockPlayerName.equals(null)) {
 									
 								} else {
 									
@@ -508,7 +509,8 @@ public class eventsP {
 									
 								}
 								
-							} else {
+							}
+							else {
 								
 								if (getlocationBlockPlayerName == null) {
 									
@@ -519,7 +521,8 @@ public class eventsP {
 									proteccionData.set(material + "." + hash + ".estado", "publico");
 									
 									
-								} else {
+								}
+								else {
 									
 									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 									eventInteract.setCancelled(true);
@@ -593,7 +596,6 @@ public class eventsP {
 				eventInteract.setCancelled(true);
 				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 			}
-		}
-		        
+		}		        
     }
 }

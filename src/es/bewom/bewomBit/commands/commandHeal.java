@@ -21,7 +21,7 @@ public class commandHeal {
 				curarJugador (craftPlayer);
 			}
 
-			if (args.length == 1){
+			else if (args.length == 1){
 				if (sender.getServer().getPlayer(args [0]) != null){
 					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					curarJugador (craftPlayerArgs);

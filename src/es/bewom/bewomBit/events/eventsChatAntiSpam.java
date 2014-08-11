@@ -88,7 +88,6 @@ public class eventsChatAntiSpam {
 							formatearMensaje(playerName, steve, mpText, message, eventChat);
 							eventChat.setCancelled(true);
 						}
-
 					}
 					
 					String lastMessage = playerData.getString("LastMessage");
@@ -111,8 +110,7 @@ public class eventsChatAntiSpam {
 
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
-		}
-				
+		}				
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -122,7 +120,6 @@ public class eventsChatAntiSpam {
 		Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(permiso + mpText + " < " + corregir(message));
 		log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
 		eventChat.setCancelled(true);
-		
 	}
 	
 	private static String corregir (String message) {
@@ -134,6 +131,5 @@ public class eventsChatAntiSpam {
 			}
 		}
 		return message;
-	}
-	
+	}	
 }

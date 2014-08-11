@@ -48,16 +48,14 @@ public class eventsPerfiles {
 					playerData.set("Chat", "global");
 					playerData.set("Tpa", null);
 					
-					if(playerData.getBoolean("Congelado") != true) {
+					if (playerData.getBoolean("Congelado") != true) {
 						playerData.set("Congelado", false);
 					}
 					
 					String lastMessage = playerData.getString("LastMessage");
 					
-					if(lastMessage == null){
-						
-						playerData.set("LastMessage", "Bienvenido");
-						
+					if (lastMessage == null){						
+						playerData.set("LastMessage", "Bienvenido");						
 					}
 					
 					// ---> Scoreboards individuales <--- //
@@ -69,57 +67,14 @@ public class eventsPerfiles {
 					
 					if (teamUser == null) {
 						
-						if (craftPlayer.hasPermission("bewom.admin")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
-							
-						} else if (craftPlayer.hasPermission("bewom.mod")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "");
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
-							
-						} else if (craftPlayer.hasPermission("bewom.vip")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_AQUA + "" );
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
+						registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
 						
-						}
-						
-					} else {
+					}
+					else {
 						teamUser.unregister();
 						
-						if (craftPlayer.hasPermission("bewom.admin")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
-							
-						} else if (craftPlayer.hasPermission("bewom.mod")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "");
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
-							
-						} else if (craftPlayer.hasPermission("bewom.vip")) {
-							
-							teamUser = board.registerNewTeam(playerName);
-							teamUser.setPrefix(ChatColor.DARK_AQUA + "" );
-							teamUser.setDisplayName(playerName);
-							teamUser.addPlayer(craftPlayer);
-						
-						}
-					}
-					
-					
+						registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
+					}					
 	
 					playerData.save(f);
 					
@@ -137,4 +92,29 @@ public class eventsPerfiles {
 	
 	}
 	
+	public static void registrarScoreboardsPorPermisos (Player craftPlayer, Team teamUser, String playerName){
+		
+		if (craftPlayer.hasPermission("bewom.admin")) {
+			
+			teamUser = board.registerNewTeam(playerName);
+			teamUser.setPrefix(ChatColor.DARK_RED + "" + ChatColor.BOLD + "");
+			teamUser.setDisplayName(playerName);
+			teamUser.addPlayer(craftPlayer);
+			
+		} else if (craftPlayer.hasPermission("bewom.mod")) {
+			
+			teamUser = board.registerNewTeam(playerName);
+			teamUser.setPrefix(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "");
+			teamUser.setDisplayName(playerName);
+			teamUser.addPlayer(craftPlayer);
+			
+		} else if (craftPlayer.hasPermission("bewom.vip")) {
+			
+			teamUser = board.registerNewTeam(playerName);
+			teamUser.setPrefix(ChatColor.DARK_AQUA + "" );
+			teamUser.setDisplayName(playerName);
+			teamUser.addPlayer(craftPlayer);
+		
+		}
+	}	
 }

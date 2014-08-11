@@ -35,9 +35,7 @@ public class autoCompleteTab implements TabCompleter {
 		
 		if(commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
 			return commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
-		} 
-		
+		} 		
 		return null;
 	}
-
 }

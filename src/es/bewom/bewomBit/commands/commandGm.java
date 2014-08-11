@@ -23,7 +23,7 @@ public class commandGm {
 
 				cambiarModoDeJuego (craftPlayer, args);
 			}
-
+			
 			else if (args.length == 2) {
 				if (sender.getServer().getPlayer(args [1]) != null){
 

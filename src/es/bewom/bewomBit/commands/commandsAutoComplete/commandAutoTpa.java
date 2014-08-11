@@ -26,10 +26,8 @@ public static List<String> commandautotpa(CommandSender sender, Command cmd, Str
 				Player craftlist = (Player) object;
 				pList.add(craftlist.getName());
 			}
-
 			return pList;
-		} 
-		
+		} 		
 	}
 	return null;
 	}

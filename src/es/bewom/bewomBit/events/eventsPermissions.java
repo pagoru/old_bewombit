@@ -14,8 +14,7 @@ public class eventsPermissions {
 	
 	private static final eventsPermissions instance = new eventsPermissions();
 	
-	public static final eventsPermissions getPlugin() {
-		
+	public static final eventsPermissions getPlugin() {		
 		return instance;
 		}
 	
@@ -28,6 +27,5 @@ public class eventsPermissions {
 		
 		attachment.setPermission("bewom.vip", true);
 		
-	}
-	
+	}	
 }
