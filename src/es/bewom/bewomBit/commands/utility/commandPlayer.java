@@ -53,8 +53,6 @@ public class commandPlayer implements CommandExecutor {
 			if(commandSpawner.commandspawner(sender, cmd, label, args)){
 				return true;
 			}
-			
-			
 		}
 		
 		// ---> Comandos de vips <--- //
@@ -79,7 +77,6 @@ public class commandPlayer implements CommandExecutor {
 			if(commandTpaHere.commandtpahere(sender, cmd, label, args)){
 				return true;
 			}
-			
 		} 
 		
 		// ---> Comandos cualquiera <--- //
@@ -90,7 +87,6 @@ public class commandPlayer implements CommandExecutor {
 		if(commandP.commandp(sender, cmd, label, args)){
 			return true;
 		}
-		
 		return false;
 	}
 }

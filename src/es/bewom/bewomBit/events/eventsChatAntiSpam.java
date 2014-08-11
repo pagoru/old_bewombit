@@ -18,7 +18,6 @@ public class eventsChatAntiSpam {
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
 	
-	@SuppressWarnings("deprecation")
 	public static void onPlayerChatEventsAntiSpam(AsyncPlayerChatEvent eventChat) {
 
 		String message = eventChat.getMessage();
@@ -35,8 +34,6 @@ public class eventsChatAntiSpam {
 		String vipDefaultText = ChatColor.WHITE + " < ";
 
 		String mpText = ChatColor.GRAY + "/mp";
-
-		//mp
 		
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
@@ -59,61 +56,38 @@ public class eventsChatAntiSpam {
 						if (craftPlayer.hasPermission("bewom.admin")) {			
 							eventChat.setFormat(admin + adminModText + message);
 
-						} else if (craftPlayer.hasPermission("bewom.mod")) {
+						}
+						else if (craftPlayer.hasPermission("bewom.mod")) {
 							eventChat.setFormat(mod + adminModText + message);
 
-						} else if (craftPlayer.hasPermission("bewom.vip")) {
+						}
+						else if (craftPlayer.hasPermission("bewom.vip")) {
 							eventChat.setFormat(vip + vipDefaultText + corregir(message));
 
-						} else {
+						}
+						else {
 							eventChat.setFormat(steve + vipDefaultText + corregir(message));
-
 						}
 
-					} else {
+					}
+					else {
 
 						if (craftPlayer.hasPermission("bewom.admin")) {	
-
-							Bukkit.getServer().getPlayer(playerName).sendMessage(admin + mpText + "/" + getPlayerChat + " < " + corregir(message));
-
-							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(admin + mpText + " < " + corregir(message));
-
-							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
-
+							formatearMensaje(playerName, admin, mpText, message, eventChat);
 							eventChat.setCancelled(true);
-
-						} else if (craftPlayer.hasPermission("bewom.mod")) {	
-
-							Bukkit.getServer().getPlayer(playerName).sendMessage(mod + mpText + "/" + getPlayerChat + " < " + corregir(message));
-
-							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(mod + mpText + " < " + corregir(message));
-
-							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
-
-							eventChat.setCancelled(true);
-
-						} else if (craftPlayer.hasPermission("bewom.vip")) {	
-
-							Bukkit.getServer().getPlayer(playerName).sendMessage(vip + mpText + "/" + getPlayerChat + " < " + corregir(message));
-
-							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(vip + mpText + " < " + corregir(message));
-
-							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
-
-							eventChat.setCancelled(true);
-
-						} else {	
-
-							Bukkit.getServer().getPlayer(playerName).sendMessage(steve + mpText + "/" + getPlayerChat + " < " + corregir(message));
-
-							Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(steve + mpText + " < " + corregir(message));
-
-							log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
-
-							eventChat.setCancelled(true);
-
 						}
-
+						else if (craftPlayer.hasPermission("bewom.mod")) {	
+							formatearMensaje(playerName, mod, mpText, message, eventChat);
+							eventChat.setCancelled(true);
+						}
+						else if (craftPlayer.hasPermission("bewom.vip")) {	
+							formatearMensaje(playerName, vip, mpText, message, eventChat);
+							eventChat.setCancelled(true);
+						}
+						else {	
+							formatearMensaje(playerName, steve, mpText, message, eventChat);
+							eventChat.setCancelled(true);
+						}
 					}
 					
 					String lastMessage = playerData.getString("LastMessage");
@@ -136,9 +110,18 @@ public class eventsChatAntiSpam {
 
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
-		}
-				
+		}				
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static void formatearMensaje (String playerName, String permiso, String mpText, String message, AsyncPlayerChatEvent eventChat){
+		
+		Bukkit.getServer().getPlayer(playerName).sendMessage(permiso + mpText + "/" + getPlayerChat + " < " + corregir(message));
+		Bukkit.getServer().getPlayer(getPlayerChat).sendMessage(permiso + mpText + " < " + corregir(message));
+		log.info("/mp/" + playerName + "/to/" + getPlayerChat + " < " + corregir(message));
+		eventChat.setCancelled(true);
+	}
+	
 	private static String corregir (String message) {
 		if (message.length() >= 5){
 			message = message.substring(0, 1).toUpperCase() + message.substring(1);
@@ -148,6 +131,5 @@ public class eventsChatAntiSpam {
 			}
 		}
 		return message;
-	}
-	
+	}	
 }

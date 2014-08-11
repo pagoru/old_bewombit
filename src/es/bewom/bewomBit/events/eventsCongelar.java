@@ -18,13 +18,12 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class eventsCongelar {
 	
-	public static void onPreprocessCommandEvent(PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException {
+	public static void onPreprocessCommandEvent (PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException {
 		
 		String playerUUID = eventPreprocessCommand.getPlayer().getUniqueId().toString();
 		Player craftPlayer = (Player) eventPreprocessCommand.getPlayer();
 		
 		boolean playerIsCongelado = false;
-		
 		boolean isCongelado = false;
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
@@ -133,7 +132,6 @@ public class eventsCongelar {
 				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
-
 		}
 	}
 	
@@ -243,9 +241,6 @@ public class eventsCongelar {
 				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
-			
-
 		}
-
 	}
 }

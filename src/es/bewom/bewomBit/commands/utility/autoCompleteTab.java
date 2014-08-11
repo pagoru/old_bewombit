@@ -19,42 +19,28 @@ public class autoCompleteTab implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
 		
 		if(commandAutoP.commandautop(sender, cmd, alias, args) != null){
-			
 			return commandAutoP.commandautop(sender, cmd, alias, args);
-			
-		} 
+		} 	
 		
 		if(commandAutoGm.commandautogm(sender, cmd, alias, args) != null){
-			
 			return commandAutoGm.commandautogm(sender, cmd, alias, args);
-			
-		} 
+		} 	
 		
-		if(commandAutoV.commandautov(sender, cmd, alias, args) != null){
-			
-			return commandAutoV.commandautov(sender, cmd, alias, args);
-			
-		}
+		if(commandAutoV.commandautov(sender, cmd, alias, args) != null){			
+			return commandAutoV.commandautov(sender, cmd, alias, args);			
+		}	
 		
-		if(commandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){
-			
-			return commandAutoTpa.commandautotpa(sender, cmd, alias, args);
-			
-		} 
-
-		if(commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){
-			
-			return commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);
-			
+		if(commandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){			
+			return commandAutoTpa.commandautotpa(sender, cmd, alias, args);			
 		} 
 		
 		if(commandAutoSpawner.commandautospawner(sender, cmd, alias, args) != null){
-			
 			return commandAutoSpawner.commandautospawner(sender, cmd, alias, args);
-			
 		} 
 		
+		if(commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
+			return commandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
+		} 		
 		return null;
 	}
-
 }

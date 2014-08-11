@@ -12,5 +12,4 @@ public class eventsWelcomePlayer {
 		eventConnect.setJoinMessage(ChatColor.GRAY + playerName + ChatColor.GRAY + " ha entrado en el servidor.");	
 
 	}
-
 }

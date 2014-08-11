@@ -145,10 +145,8 @@ public class commandAutoP {
 				
 			} catch (InvalidConfigurationException e) {
 					e.printStackTrace();
-			}
-		
+			}		
 		}
 		return null;
-	}
-	
+	}	
 }

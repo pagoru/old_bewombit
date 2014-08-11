@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -16,9 +15,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandTpa implements Listener {
 
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings({ "deprecation"})
 	public static boolean commandtpa(CommandSender sender, Command cmd, String label, String[] args){
 		
 		if (label.equalsIgnoreCase("tpa")){
@@ -26,18 +27,14 @@ public class commandTpa implements Listener {
 			Player craftPlayer = (Player) sender;
 			String playerName = craftPlayer.getName();
 			UUID playerUUID = craftPlayer.getUniqueId();
-			String playerUUIDString = craftPlayer.getUniqueId().toString(); //UUID Player
 			
 			Player craftPlayerArgs = null;
 			String playerUUIDArgs = null; //UUID Player
-			
-			String tpa = null;
-			
+						
 			if (args.length == 1){
-				
-				if (Bukkit.getServer().getPlayer(args[0]) != null){
-					
-					Location locationPlayer = craftPlayer.getLocation();
+
+				if (commandUtilities.comprobarJugador(sender, args [0])){
+
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					playerUUIDArgs = craftPlayerArgs.getUniqueId().toString();
 					
@@ -61,19 +58,16 @@ public class commandTpa implements Listener {
 							} catch (FileNotFoundException e) {
 								e.printStackTrace();
 							}
-							
 						} catch (IOException e) {
-								e.printStackTrace();
+							e.printStackTrace();
 						}
-						
 					} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 					}
-					
-				} else if (args[0].equals("aceptar")){
-					
-					Location locationPlayer = craftPlayer.getLocation();
-					
+
+				}
+				else if (args[0].equals("aceptar")){
+
 					File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 					File f = new File(userdata, File.separator + playerUUID + ".yml");
 					FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
@@ -86,8 +80,8 @@ public class commandTpa implements Listener {
 								String playerNameTpa = playerData.getString("Tpa");
 								
 								if(playerNameTpa != null){
-									if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
-										
+									if (commandUtilities.comprobarJugador(sender, playerNameTpa)){
+
 										Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
 										
 										craftPlayer.teleport(playerCraftTpa);
@@ -97,9 +91,9 @@ public class commandTpa implements Listener {
 										playerData.set("Tpa", null);
 										
 									} else {
-	
-										craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-										
+
+										commandUtilities.jugadorDesconectado(sender);
+
 										playerData.set("Tpa", null);
 	
 									}
@@ -137,22 +131,21 @@ public class commandTpa implements Listener {
 								String playerNameTpa = playerData.getString("Tpa");
 								
 								if(playerNameTpa != null){
-									if (craftPlayer.getServer().getPlayer(playerNameTpa) != null){
-										
+
+									if (commandUtilities.comprobarJugador(sender, playerNameTpa)){
+
 										craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpa.");
 										
 										playerData.set("Tpa", null);
-										
-									} else {
-	
-										craftPlayer.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-										
+									}
+									else {
+										commandUtilities.jugadorDesconectado(sender);
 										playerData.set("Tpa", null);
 	
 									}
-									
-								}  else {
-									
+								}
+								else {
+
 									craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpa de 'nadie'.");
 									
 								}
@@ -163,19 +156,17 @@ public class commandTpa implements Listener {
 							}
 							
 						} catch (IOException e) {
-								e.printStackTrace();
+							e.printStackTrace();
 						}
 						
 					} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 					}
 
-				} else {
-					
-					craftPlayer.sendMessage(ChatColor.RED + "No se entiende el comando.");
-					
 				}
-			
+				else {
+					commandUtilities.formaCorrecta(sender, "/tpa <playerOnline/aceptar/denegar>");
+				}
 			}
 			
 			return true;		

@@ -6,21 +6,32 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class commandSuicide {
-	
+
 	public static boolean commandsuicide(CommandSender sender, Command cmd, String label, String[] args){
-		
+
 		if (label.equalsIgnoreCase("suicide")){
 			Player craftPlayer = (Player) sender;
-					
+			int nivel = craftPlayer.getLevel();
 			craftPlayer.setHealth(0);
-			
-			craftPlayer.sendMessage(ChatColor.GRAY + "Te has suicidado.");
-
+			mostrarExperiencia (sender, nivel);
 			return true;
-				
 		}
 		return false;
 	}
-		
 
+	public static void mostrarExperiencia (CommandSender sender, int nivel){
+		
+		switch (nivel){
+
+		case 0:
+			sender.sendMessage(ChatColor.GRAY + "Te has suicidado, no tenias niveles.");
+			break;
+		case 1:
+			sender.sendMessage(ChatColor.GRAY + "Te has suicidado, tenias " + nivel + " nivel.");
+			break;
+		default:
+			sender.sendMessage(ChatColor.GRAY + "Te has suicidado, tenias " + nivel + " niveles.");
+			break;
+		}
+	}
 }

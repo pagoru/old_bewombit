@@ -8,56 +8,46 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandClear {
-	
+
 	@SuppressWarnings("deprecation")
 	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args){
-		
+
 		if (label.equalsIgnoreCase("clear")){
 			Player craftPlayer = (Player) sender;
-			Player craftPlayerArgs;
-			
+
 			if (args.length == 0){
-				craftPlayer.getInventory().clear();
-				craftPlayer.getInventory().setHelmet(new ItemStack(Material.AIR));
-				craftPlayer.getInventory().setChestplate(new ItemStack(Material.AIR));
-				craftPlayer.getInventory().setLeggings(new ItemStack(Material.AIR));
-				craftPlayer.getInventory().setBoots(new ItemStack(Material.AIR));
-				
-				craftPlayer.sendMessage(ChatColor.GRAY + "Se ha eliminado tu inventario!");
-				
-			} else if (args.length == 1){
-				
+				eliminarInventario (craftPlayer);
+			}
+
+			else if (args.length == 1){
+
 				if (sender.getServer().getPlayer(args [0]) != null){
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-					
-					craftPlayerArgs.getInventory().clear();
-					craftPlayerArgs.getInventory().setHelmet(new ItemStack(Material.AIR));
-					craftPlayerArgs.getInventory().setChestplate(new ItemStack(Material.AIR));
-					craftPlayerArgs.getInventory().setLeggings(new ItemStack(Material.AIR));
-					craftPlayerArgs.getInventory().setBoots(new ItemStack(Material.AIR));
-
-					craftPlayerArgs.sendMessage(ChatColor.GRAY + "Se ha eliminado tu inventario!");
-					
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					eliminarInventario (craftPlayerArgs);
 					craftPlayer.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
-					
-				} else {
-					
-					sender.sendMessage(ChatColor.RED + "El jugador no esta conectado.");
-
 				}
-				
-			} else {
-				
-				sender.sendMessage(ChatColor.RED + "La forma correcta es /clear [player]");
-				
+				else {
+					commandUtilities.jugadorDesconectado(sender);
+				}
+			}
+			else {
+				commandUtilities.formaCorrecta(sender, "/clear [player]");
 			}
 			return true;
 		}
-		
 		return false;
-	
-		
 	}
 
+	public static void eliminarInventario (Player player){
+
+		player.getInventory().clear();
+		player.getInventory().setHelmet(new ItemStack(Material.AIR));
+		player.getInventory().setChestplate(new ItemStack(Material.AIR));
+		player.getInventory().setLeggings(new ItemStack(Material.AIR));
+		player.getInventory().setBoots(new ItemStack(Material.AIR));
+		player.sendMessage(ChatColor.GRAY + "Se ha eliminado tu inventario!");
+	}
 }

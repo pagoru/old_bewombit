@@ -17,10 +17,8 @@ public class commandAutoGm {
 				List<String> pList =  Arrays.asList("0","1","2");  
 				
 				return pList;
-			} 
-		
+			}
 		}
 		return null;
 	}
-	
 }

@@ -17,10 +17,8 @@ public class commandAutoV {
 				List<String> pList =  Arrays.asList("mostrar","ocultar");  
 
 				return pList;
-			} 
-		
+			} 		
 		}
 		return null;
 	}
-	
 }

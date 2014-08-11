@@ -22,11 +22,9 @@ public static List<String> commandautotpahere(CommandSender sender, Command cmd,
 					
 					Player craftlist = (Player) object;
 					pList.add(craftlist.getName());
-				}
-				
+				}				
 				return pList;
-			} 
-			
+			} 			
 		}
 		return null;
 	}

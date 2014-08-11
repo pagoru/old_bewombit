@@ -8,59 +8,47 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.commands.utility.commandUtilities;
+
 public class commandV {
-	
-static Logger log = Logger.getLogger("Minecraft");
-	
-	@SuppressWarnings({ "unused", "deprecation" })
+
+	static Logger log = Logger.getLogger("Minecraft");
+
+	@SuppressWarnings({ "deprecation" })
 	public static boolean commandv(CommandSender sender, Command cmd, String label, String[] args){
-		
+
 		if (label.equalsIgnoreCase("v")){
-			
+
 			Player craftPlayer = (Player) sender;
-			String playerName = sender.getName();
-			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
 			Player craftPlayerArgs;
-			
-			if (args.length == 0){
-				
-				craftPlayer.sendMessage(ChatColor.RED+ "El comando esta incompleto, usa /v [mostrar/ocultar].");
-				
-			} else if(args.length == 2) {
-				
-				if (args[0].equals("ocultar")){
-					
-					if (sender.getServer().getPlayer(args [1]) != null){
+
+			if(args.length == 2) {
+
+				if (commandUtilities.comprobarJugador(sender, args [0])){
+					craftPlayerArgs = Bukkit.getServer().getPlayer(args[1]);
+
+					if (args[0].equals("ocultar")){
 						
-						craftPlayerArgs = Bukkit.getServer().getPlayer(args[1]);
-						String playerArgsName = craftPlayerArgs.getName();
-						
-						craftPlayerArgs.hidePlayer(craftPlayer);	
+						craftPlayerArgs.hidePlayer(craftPlayer);
 						craftPlayer.sendMessage(ChatColor.GRAY + "Estas oculto para el jugador " + args[1] + ".");
-	
+						return true;
+
 					}
-										
-				} else if (args[0].equals("mostrar")){
+					else if (args[0].equals("mostrar")){
 					
-					if (sender.getServer().getPlayer(args [1]) != null){
-						
-						craftPlayerArgs = Bukkit.getServer().getPlayer(args[1]);
-						String playerArgsName = craftPlayerArgs.getName();
-						
 						craftPlayerArgs.showPlayer(craftPlayer);	
 						craftPlayer.sendMessage(ChatColor.GRAY + "Ya no estas oculto para el jugador " + args[1] + ".");
-		
-					
+						return true;
 					}
-					
-					
 				}
-			} 
-			return true;
-			
+
+				else {
+					commandUtilities.formaCorrecta(sender, "/v <mostrar/ocultar> <player>");
+				}
+				return true;
+			}
+			return false;
 		}
 		return false;
-		
 	}
-	
 }
