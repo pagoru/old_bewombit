@@ -55,8 +55,8 @@ public class commandCongelar {
 
 							if (sender.getServer().getPlayer(args[0]) != null){
 
-								UUID argUUID = sender.getServer().getPlayer(args[0]).getUniqueId();
-
+								UUID argUUID = sender.getServer().getOfflinePlayer(args[0]).getUniqueId();
+								
 								File argsdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 								File arg = new File(argsdata, File.separator + argUUID + ".yml");
 								FileConfiguration argData = YamlConfiguration.loadConfiguration(arg);
