@@ -21,16 +21,24 @@ public class eventsPermissions {
 
 	@EventHandler
 	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {
-
+		
 		Player player = eventConnect.getPlayer();
-
+		
 		PermissionAttachment attachment = player.addAttachment(bewomBit.main);
-
+		
 		attachment.setPermission("bewom.vip", true);
-	}	
-
+		
+	}
+	
 	@EventHandler
 	public static void onPreLogin(AsyncPlayerPreLoginEvent eventPreLogin) throws SQLException, IOException {
-
+		
+//		String hola = ChatColor.DARK_AQUA + "Has sido baneado" + "asdddbdddddddddddddd asdddbdddddddddddddd asdddbdddddddddddddd asdddbdddddddddddddd ";
+//		
+//		Result disable = AsyncPlayerPreLoginEvent.Result.KICK_OTHER;
+//		
+//		eventPreLogin.disallow(disable, hola);
+		
 	}
+	
 }

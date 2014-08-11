@@ -1,6 +1,6 @@
 package es.bewom.bewomBit.commands.commandsAutoComplete;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -16,10 +16,7 @@ public static List<String> commandautotpa(CommandSender sender, Command cmd, Str
 		
 		if (args.length == 1){
 			
-			List<String> pList = new ArrayList<String>(); 
-			
-			pList.add("aceptar");
-			pList.add("denegar");
+			List<String> pList = Arrays.asList("aceptar","denegar");
 			
 			for (Object object : Bukkit.getOnlinePlayers().toArray()) {
 				

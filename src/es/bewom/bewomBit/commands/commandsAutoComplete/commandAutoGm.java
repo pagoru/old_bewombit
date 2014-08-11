@@ -1,6 +1,6 @@
 package es.bewom.bewomBit.commands.commandsAutoComplete;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -13,11 +13,8 @@ public class commandAutoGm {
 		if(cmd.getName().equalsIgnoreCase("gm")){
 			
 			if (args.length == 1){
-				List<String> pList = new ArrayList<String>();  
-		        
-				pList.add("0");
-				pList.add("1");
-				pList.add("2");
+				
+				List<String> pList =  Arrays.asList("0","1","2");  
 				
 				return pList;
 			}
