@@ -1,29 +1,101 @@
 package es.bewom.bewomBit.events;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class eventsSpawner {
 	
-	@SuppressWarnings({ "unused"})
+	static Logger log = Logger.getLogger("Minecraft");
+	
 	public static void brokeBlockPlayerEventsP(BlockBreakEvent eventBroke){
-
-		String playerUUID = eventBroke.getPlayer().getUniqueId().toString();
-		String playerName = eventBroke.getPlayer().getName();
-		Player craftPlayer = (Player) eventBroke.getPlayer();
 		
 		if(eventBroke.getBlock().getType().equals(Material.MOB_SPAWNER)){
+						
+			Material spawnerState = Material.MOB_SPAWNER;
 			
-			Material spawner = eventBroke.getBlock().getType();
-			int spawnerData = eventBroke.getBlock().getType().getData().getModifiers();
+			Location block = eventBroke.getBlock().getLocation();
+			CreatureSpawner spawner = ((CreatureSpawner) block.getBlock().getState());
 			
-			ItemStack item = new ItemStack(spawner, spawnerData);
-			eventBroke.getPlayer().getWorld().dropItem(eventBroke.getBlock().getLocation(), item);
+			String spawnerName = spawner.getCreatureTypeName().toString();
+			
+			
+			ItemStack spawnerItem = new ItemStack(spawnerState);
+			
+			ItemMeta meta = (ItemMeta) spawnerItem.getItemMeta();
+			meta.setDisplayName(ChatColor.AQUA + spawnerName);
+			spawnerItem.setItemMeta(meta);
+			
+			eventBroke.getPlayer().getWorld().dropItem(eventBroke.getBlock().getLocation(), spawnerItem);
 			
 		}
 	
+		
+	}
+		
+	public static void OnPlace(BlockPlaceEvent eventPlace) throws SQLException, IOException, InterruptedException {
+		
+		Player craftPlayer = (Player) eventPlace.getPlayer();
+		
+		ItemStack itemInHand = craftPlayer.getItemInHand();
+		ItemMeta meta = (ItemMeta) itemInHand.getItemMeta();
+		
+		if(eventPlace.getBlock().getType().equals(Material.MOB_SPAWNER)){
+					
+			Location block = eventPlace.getBlock().getLocation();
+			
+			if (meta.getDisplayName().equals(ChatColor.AQUA + "Blaze")){
+				
+				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
+	            spawner1.setCreatureTypeByName("Blaze");
+	            spawner1.setDelay(0);
+	            spawner1.update();
+			
+			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Zombie")){
+				
+				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
+	            spawner1.setCreatureTypeByName("Zombie");
+	            spawner1.setDelay(0);
+	            spawner1.update();
+			
+			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Skeleton")){
+				
+				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
+	            spawner1.setCreatureTypeByName("Skeleton");
+	            spawner1.setDelay(0);
+	            spawner1.update();
+			
+			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "Spider")){
+				
+				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
+	            spawner1.setCreatureTypeByName("Spider");
+	            spawner1.setDelay(0);
+	            spawner1.update();
+			
+			} else if (meta.getDisplayName().equals(ChatColor.AQUA + "CaveSpider")){
+				
+				CreatureSpawner spawner1 = ((CreatureSpawner) block.getBlock().getState());
+	            spawner1.setCreatureTypeByName("CaveSpider");
+	            spawner1.setDelay(0);
+	            spawner1.update();
+			
+			} else {
+				
+				eventPlace.setCancelled(true);
+				
+			}
+			
+		}
 		
 	}
 }

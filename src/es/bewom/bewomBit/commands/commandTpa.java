@@ -3,6 +3,7 @@ package es.bewom.bewomBit.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,7 +25,8 @@ public class commandTpa implements Listener {
 			
 			Player craftPlayer = (Player) sender;
 			String playerName = craftPlayer.getName();
-			String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
+			UUID playerUUID = craftPlayer.getUniqueId();
+			String playerUUIDString = craftPlayer.getUniqueId().toString(); //UUID Player
 			
 			Player craftPlayerArgs = null;
 			String playerUUIDArgs = null; //UUID Player
@@ -33,7 +35,7 @@ public class commandTpa implements Listener {
 			
 			if (args.length == 1){
 				
-				if (craftPlayer.getServer().getPlayer(args[0]) != null){
+				if (Bukkit.getServer().getPlayer(args[0]) != null){
 					
 					Location locationPlayer = craftPlayer.getLocation();
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);

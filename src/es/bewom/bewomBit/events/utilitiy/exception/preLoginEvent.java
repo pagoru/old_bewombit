@@ -1,4 +1,4 @@
-package es.bewom.bewomBit.events.utilitiy;
+package es.bewom.bewomBit.events.utilitiy.exception;
 
 import java.io.IOException;
 import java.sql.SQLException;
