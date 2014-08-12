@@ -77,6 +77,15 @@ public class CommandPlayer implements CommandExecutor {
 			if(CommandTpaHere.commandtpahere(sender, cmd, label, args)){
 				return true;
 			}
+			if(CommandSetHome.commandsethome(sender, cmd, label, args)){
+				return true;
+			}
+			if(CommandHome.commandhome(sender, cmd, label, args)){
+				return true;
+			}
+			if(CommandDelHome.commanddelhome(sender, cmd, label, args)){
+				return true;
+			}
 		} 
 		
 		// ---> Comandos cualquiera <--- //

@@ -103,3 +103,15 @@ commands:
    spawner:
       description: Permite al jugador cambiar un spawner
       permission: bewom.admin
+      
+   sethome:
+      description: Permite al jugador guardar una localizacion
+      permission: bewom.vip
+      
+   home:
+      description: Permite al jugador teletransportarse a una localizacion
+      permission: bewom.vip
+      
+   delhome:
+      description: Permite al jugador teletransportarse a una localizacion
+      permission: bewom.vip

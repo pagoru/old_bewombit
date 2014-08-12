@@ -6,7 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoDelHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
@@ -40,7 +42,13 @@ public class AutoCompleteTab implements TabCompleter {
 		
 		if(CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
 			return CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
-		} 		
+		} 	
+		if(CommandAutoHome.commandautohome(sender, cmd, alias, args) != null){			
+			return CommandAutoHome.commandautohome(sender, cmd, alias, args);			
+		} 
+		if(CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args) != null){			
+			return CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args);			
+		} 
 		return null;
 	}
 }

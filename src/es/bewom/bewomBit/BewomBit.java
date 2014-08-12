@@ -74,6 +74,9 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tpa").setExecutor(new CommandPlayer());
 		getCommand("tpahere").setExecutor(new CommandPlayer());
 		getCommand("spawner").setExecutor(new CommandPlayer());
+		getCommand("sethome").setExecutor(new CommandPlayer());
+		getCommand("home").setExecutor(new CommandPlayer());
+		getCommand("delhome").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -83,6 +86,8 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tpa").setTabCompleter(new AutoCompleteTab());
 		getCommand("tpahere").setTabCompleter(new AutoCompleteTab());
 		getCommand("spawner").setTabCompleter(new AutoCompleteTab());
+		getCommand("home").setTabCompleter(new AutoCompleteTab());
+		getCommand("delhome").setTabCompleter(new AutoCompleteTab());
 				
 		// ---> config inicial <--- //
 		
