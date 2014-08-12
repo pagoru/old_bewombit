@@ -1,4 +1,4 @@
-main: es.bewom.bewomBit.bewomBit
+main: es.bewom.bewomBit.BewomBit
 name: bewomBit
 version: 1.0.0
 author: www.bewom.es
