@@ -16,9 +16,9 @@ public class CommandClear {
 	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args){
 
 		if (label.equalsIgnoreCase("clear")){
-			Player craftPlayer = (Player) sender;
 
 			if (args.length == 0){
+				Player craftPlayer = (Player) sender;
 				eliminarInventario (craftPlayer);
 			}
 
@@ -27,7 +27,7 @@ public class CommandClear {
 				if (sender.getServer().getPlayer(args [0]) != null){
 					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					eliminarInventario (craftPlayerArgs);
-					craftPlayer.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
+					sender.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
 				}
 				else {
 					CommandUtilities.jugadorDesconectado(sender);

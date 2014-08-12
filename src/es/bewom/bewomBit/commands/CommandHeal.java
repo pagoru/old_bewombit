@@ -26,8 +26,9 @@ public class CommandHeal {
 					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					curarJugador (craftPlayerArgs);
 					craftPlayer.sendMessage(ChatColor.GRAY + craftPlayerArgs.getName() + " ha sido curado.");
+				} else {
+					CommandUtilities.jugadorDesconectado(sender);
 				}
-				CommandUtilities.jugadorDesconectado(sender);
 			}
 			else{
 				CommandUtilities.formaCorrecta(sender, "/heal [player]");
