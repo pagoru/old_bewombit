@@ -26,11 +26,11 @@ import es.bewom.bewomBit.events.utilitiy.PlaceBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.PreprocessCommandEvent;
 import es.bewom.bewomBit.events.utilitiy.QuitEvent;
 import es.bewom.bewomBit.events.utilitiy.ServerMotdEvent;
-public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
+public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
 	
-	public static bewomBit main;
+	public static BewomBit main;
 
 	public void onEnable(){
 		
@@ -76,6 +76,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("spawner").setExecutor(new CommandPlayer());
 		getCommand("sethome").setExecutor(new CommandPlayer());
 		getCommand("home").setExecutor(new CommandPlayer());
+		getCommand("delhome").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -85,6 +86,8 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("tpa").setTabCompleter(new AutoCompleteTab());
 		getCommand("tpahere").setTabCompleter(new AutoCompleteTab());
 		getCommand("spawner").setTabCompleter(new AutoCompleteTab());
+		getCommand("home").setTabCompleter(new AutoCompleteTab());
+		getCommand("delhome").setTabCompleter(new AutoCompleteTab());
 				
 		// ---> config inicial <--- //
 		
@@ -132,7 +135,7 @@ public class bewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 //  Util quiza mas adelante	
 	
-	public bewomBit(){
+	public BewomBit(){
 		this.getConfig().options().copyDefaults(true);
 		this.saveConfig();
 	}

@@ -83,6 +83,9 @@ public class CommandPlayer implements CommandExecutor {
 			if(CommandHome.commandhome(sender, cmd, label, args)){
 				return true;
 			}
+			if(CommandDelHome.commanddelhome(sender, cmd, label, args)){
+				return true;
+			}
 		} 
 		
 		// ---> Comandos cualquiera <--- //

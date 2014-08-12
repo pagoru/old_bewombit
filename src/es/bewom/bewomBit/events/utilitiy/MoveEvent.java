@@ -4,15 +4,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import es.bewom.bewomBit.bewomBit;
+import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.events.EventsCongelar;
 import es.bewom.bewomBit.events.EventsSaltarImpulso;
 
 public class MoveEvent implements Listener{
 
-	public static bewomBit plugin;
+	public static BewomBit plugin;
 
-	public MoveEvent (bewomBit instance){
+	public MoveEvent (BewomBit instance){
 		plugin = instance;
 	}
 

@@ -3,23 +3,23 @@ package es.bewom.bewomBit.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
-public class CommandHome implements Listener {
+public class CommandDelHome {
 
-	public static boolean commandhome(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commanddelhome(CommandSender sender, Command cmd, String label, String[] args){
 		
-		if (label.equalsIgnoreCase("home")){
+		if (label.equalsIgnoreCase("delhome")){
 			
 			Player craftPlayer = (Player) sender;
 			UUID playerUUID = craftPlayer.getUniqueId();
@@ -34,24 +34,20 @@ public class CommandHome implements Listener {
 					try {
 						try {
 							playerData.load(f);
+														
+							List<String> pList = new ArrayList<String>();
+							List<String> pLista = playerData.getStringList("Homes.List");
 							
-							String world = playerData.getString("Homes." + args[0] + ".World");
-							double x = playerData.getDouble("Homes." + args[0] + ".X");
-							double y = playerData.getDouble("Homes." + args[0] + ".Y");
-							double z = playerData.getDouble("Homes." + args[0] + ".Z");
-							double Pitch = playerData.getDouble("Homes." + args[0] + ".Pitch");
-							double Yaw = playerData.getDouble("Homes." + args[0] + ".Yaw");
-							
-							float PitchFloat = (float) Pitch;
-							float YawFloat = (float) Yaw;
-							
-							if (world != null){
+							if (pLista.contains(args[0])){
 								
-								Location teleport = new Location(Bukkit.getWorld(world), x, y, z, YawFloat, PitchFloat);
-								craftPlayer.teleport(teleport);
-							
+								pLista.remove(args[0]);
+								pList.addAll(pLista);
+								
+								playerData.set("Homes." + args[0], null);
+								playerData.set("Homes.List", pList);
+								
 							}
-							
+														
 							playerData.save(f);
 				
 						} catch (FileNotFoundException e) {
@@ -69,4 +65,5 @@ public class CommandHome implements Listener {
 		}
 		return false;
 	}
+	
 }

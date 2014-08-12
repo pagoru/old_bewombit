@@ -3,6 +3,7 @@ package es.bewom.bewomBit.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -34,11 +35,22 @@ public class CommandSetHome implements Listener {
 						try {
 							playerData.load(f);
 							
-							playerData.set("Homes", args[0]);
+							List<String> pLista = playerData.getStringList("Homes.List");
+							
+							if (!pLista.contains(args[0])){
+								
+								pLista.add(args[0]);
+								
+							}
+							
+							playerData.set("Homes.List", pLista);
+							
 							playerData.set("Homes." + args[0] + ".World", craftPlayer.getWorld().getName());
-							playerData.set("Homes." + args[0] + ".X", craftPlayer.getLocation().getBlockX());
-							playerData.set("Homes." + args[0] + ".Y", craftPlayer.getLocation().getBlockY());
-							playerData.set("Homes." + args[0] + ".Z", craftPlayer.getLocation().getBlockZ());
+							playerData.set("Homes." + args[0] + ".X", craftPlayer.getLocation().getX());
+							playerData.set("Homes." + args[0] + ".Y", craftPlayer.getLocation().getY());
+							playerData.set("Homes." + args[0] + ".Z", craftPlayer.getLocation().getZ());
+							playerData.set("Homes." + args[0] + ".Pitch", craftPlayer.getLocation().getPitch());
+							playerData.set("Homes." + args[0] + ".Yaw", craftPlayer.getLocation().getYaw());
 							
 							playerData.save(f);
 				
