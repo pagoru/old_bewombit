@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
-import es.bewom.bewomBit.BewomBit;
+import es.bewom.bewomBit.bewomBit;
 
 public class EventsPermissions {
 
@@ -24,7 +24,7 @@ public class EventsPermissions {
 		
 		Player player = eventConnect.getPlayer();
 		
-		PermissionAttachment attachment = player.addAttachment(BewomBit.main);
+		PermissionAttachment attachment = player.addAttachment(bewomBit.main);
 		
 		attachment.setPermission("bewom.vip", true);
 		
