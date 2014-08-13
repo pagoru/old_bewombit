@@ -44,10 +44,12 @@ public class CommandSay {
 				if(getPlayerChat.equals("global")){
 					
 					playerData.set("Chat", "say");
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el modo broadcast.");
 					
 				} else if (getPlayerChat.equals("say")){
 					
 					playerData.set("Chat", "global");
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del modo broadcast.");
 					
 				}
 				
