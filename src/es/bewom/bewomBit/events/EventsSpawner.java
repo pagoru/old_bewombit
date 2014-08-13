@@ -49,25 +49,33 @@ public class EventsSpawner {
 		if(eventPlace.getBlock().getType().equals(Material.MOB_SPAWNER)){
 
 			Location block = eventPlace.getBlock().getLocation();
-
-			if (meta.getDisplayName().equals(ChatColor.AQUA + "Blaze")){				
-				clasificarSpawner (block, "Blaze");			
-			}
-			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Zombie")){				
-				clasificarSpawner (block, "Zombie");			
-			}
-			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Skeleton")){				
-				clasificarSpawner (block, "Skeleton");			
-			}
-			else if (meta.getDisplayName().equals(ChatColor.AQUA + "Spider")){				
-				clasificarSpawner (block, "Spider");			
-			}
-			else if (meta.getDisplayName().equals(ChatColor.AQUA + "CaveSpider")){				
-				clasificarSpawner (block, "CaveSpider");			
-			}
-			else {				
+			
+			if (meta.getDisplayName() != null) {
+				
+				if (meta.getDisplayName().equals(ChatColor.AQUA + "Blaze")){				
+					clasificarSpawner (block, "Blaze");			
+				}
+				else if (meta.getDisplayName().equals(ChatColor.AQUA + "Zombie")){				
+					clasificarSpawner (block, "Zombie");			
+				}
+				else if (meta.getDisplayName().equals(ChatColor.AQUA + "Skeleton")){				
+					clasificarSpawner (block, "Skeleton");			
+				}
+				else if (meta.getDisplayName().equals(ChatColor.AQUA + "Spider")){				
+					clasificarSpawner (block, "Spider");			
+				}
+				else if (meta.getDisplayName().equals(ChatColor.AQUA + "CaveSpider")){				
+					clasificarSpawner (block, "CaveSpider");			
+				}
+				else {				
+					eventPlace.setCancelled(true);				
+				}			
+				
+			} else {	
+				
 				eventPlace.setCancelled(true);				
-			}			
+			}
+			
 		}		
 	}
 

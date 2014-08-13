@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -67,7 +66,7 @@ public class EventsCongelar {
 			if (playerIsCongelado || isCongelado){
 	
 				eventPreprocessCommand.setCancelled(true);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+
 			}
 		}
 				
@@ -129,7 +128,6 @@ public class EventsCongelar {
 			if (playerIsCongelado || isCongelado){
 				
 				eventChat.setCancelled(true);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
 		}
@@ -182,7 +180,7 @@ public class EventsCongelar {
 			if (playerIsCongelado || isCongelado){
 
 				eventInteract.setCancelled(true);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
+				
 			}
 		}
 	}
@@ -238,7 +236,6 @@ public class EventsCongelar {
 			if (playerIsCongelado || isCongelado){
 				
 				craftPlayer.teleport(craftPlayer);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
 				
 			}
 		}

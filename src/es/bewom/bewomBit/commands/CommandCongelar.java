@@ -12,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
 
@@ -22,8 +21,6 @@ public class CommandCongelar {
 	public static boolean commandcongelar (CommandSender sender, Command cmd, String commandLabel, String [] args){
 
 		if (commandLabel.equalsIgnoreCase("congelar")){
-
-			Player craftPlayer = (Player) sender;
 
 			boolean isCongelado = false;
 			boolean argIsCongelado = false;
@@ -42,11 +39,11 @@ public class CommandCongelar {
 							
 							if(isCongelado){	
 								Data.set("Congelado", false);
-								craftPlayer.sendMessage(ChatColor.GRAY + "Usuarios descongelados.");
+								sender.sendMessage(ChatColor.GRAY + "Usuarios descongelados.");
 							}
 							else {
 								Data.set("Congelado", true);
-								craftPlayer.sendMessage(ChatColor.RED + "Usuarios congelados.");
+								sender.sendMessage(ChatColor.RED + "Usuarios congelados.");
 							}
 							Data.save(data);
 						}
@@ -67,15 +64,16 @@ public class CommandCongelar {
 								if(argIsCongelado){
 
 									argData.set("Congelado", false);
-									craftPlayer.sendMessage(ChatColor.GRAY + "Usuario " + args[0] + " descongelado.");
+									sender.sendMessage(ChatColor.GRAY + "Usuario " + args[0] + " descongelado.");
 
 								} else {
 									argData.set("Congelado", true);
-									craftPlayer.sendMessage(ChatColor.RED + "Usuario " + args[0] + " congelado.");
+									sender.sendMessage(ChatColor.RED + "Usuario " + args[0] + " congelado.");
 								}
 								argData.save(arg);
+							} else {
+								CommandUtilities.jugadorDesconectado(sender);
 							}
-							CommandUtilities.jugadorDesconectado(sender);
 						}
 						else {
 							CommandUtilities.formaCorrecta(sender, "/congelar [player]");

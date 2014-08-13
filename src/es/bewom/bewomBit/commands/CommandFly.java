@@ -26,8 +26,9 @@ public class CommandFly {
 					if (sender.getServer().getPlayer(args [0]) != null){
 						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 						cambiarModoDeVuelo (craftPlayer, craftPlayerArgs);
+					} else {
+						CommandUtilities.jugadorDesconectado(sender);
 					}
-					CommandUtilities.jugadorDesconectado(sender);
 
 				}
 				else {
