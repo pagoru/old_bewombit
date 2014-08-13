@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 public class CommandAutoP {
 
 	@SuppressWarnings({ "unused", "deprecation" })
-	public static List<String> commandautop(CommandSender sender, Command cmd, String alias, String[] args) {
+	public static List<String> commandautop(CommandSender sender, Command cmd, String alias, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException {
 		
 		if(cmd.getName().equalsIgnoreCase("p")){
 			
@@ -85,67 +85,52 @@ public class CommandAutoP {
 			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 			File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
 			FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+
+			proteccionData.load(protecciondata);
 			
-			try {
-				try {
-					try {
-						
-						proteccionData.load(protecciondata);
-						
-						getlocationBlockHash = proteccionData.getInt(material + "." + hash);
-						getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
-						getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
-						getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
-						getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
-						getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
-						
-						if (args.length == 1){
-							
-							List<String> pList = Arrays.asList("privado","publico","añadir","eliminar");  
-							
-							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-								pList.add("cambiar");
-							}
-							
-							return pList;
-						} else if(args.length == 2 && args[0].equals("eliminar")){
-							
-							List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
-							
-							return pLista;
-							
-						} else if(args.length == 2 && args[0].equals("cambiar")){
-							
-							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-								
-								List<String> pList =  Arrays.asList("propietario","estado");  
-								
-								return pList;
-							}
-							
-						} else if(args.length == 3 && args[0].equals("cambiar") && args[1].equals("estado")){
-						
-							if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-								
-								List<String> pList = Arrays.asList("privado","publico");
-								
-								return pList;
-							}
-						}
-						
-						proteccionData.save(protecciondata);
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-				} catch (IOException e) {
-						e.printStackTrace();
+			getlocationBlockHash = proteccionData.getInt(material + "." + hash);
+			getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+			getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
+			getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
+			getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
+			getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
+			
+			if (args.length == 1){
+				
+				List<String> pList = Arrays.asList("privado","publico","añadir","eliminar");  
+				
+				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+					pList.add("cambiar");
 				}
 				
-			} catch (InvalidConfigurationException e) {
-					e.printStackTrace();
-			}		
+				return pList;
+			} else if(args.length == 2 && args[0].equals("eliminar")){
+				
+				List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+				
+				return pLista;
+				
+			} else if(args.length == 2 && args[0].equals("cambiar")){
+				
+				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+					
+					List<String> pList =  Arrays.asList("propietario","estado");  
+					
+					return pList;
+				}
+				
+			} else if(args.length == 3 && args[0].equals("cambiar") && args[1].equals("estado")){
+			
+				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
+					
+					List<String> pList = Arrays.asList("privado","publico");
+					
+					return pList;
+				}
+			}
+			
+			proteccionData.save(protecciondata);
+
 		}
 		return null;
 	}	

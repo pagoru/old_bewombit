@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public class CommandAutoDelHome {
 	
 	@SuppressWarnings({ "unused"})
-	public static List<String> commandautodelhome(CommandSender sender, Command cmd, String alias, String[] args) {
+	public static List<String> commandautodelhome(CommandSender sender, Command cmd, String alias, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException {
 		
 		if(cmd.getName().equalsIgnoreCase("delhome")){
 			
@@ -28,32 +28,19 @@ public class CommandAutoDelHome {
 			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 			File f = new File(userdata, File.separator + playerUUID + ".yml");
 			FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+						
+			playerData.load(f);
 			
-			try {
-				try {
-					try {
-						
-						playerData.load(f);
-						
-						if (args.length == 1){
-							
-							List<String> pLista = playerData.getStringList("Homes.List");
-														
-							return pLista;
-							
-						}
-						
-						playerData.save(f);
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} catch (InvalidConfigurationException e) {
-					e.printStackTrace();
+			if (args.length == 1){
+				
+				List<String> pLista = playerData.getStringList("Homes.List");
+											
+				return pLista;
+				
 			}
+			
+			playerData.save(f);
+
 		}	
 		
 		return null;

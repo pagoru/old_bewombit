@@ -17,7 +17,7 @@ import org.bukkit.event.Listener;
 
 public class CommandHome implements Listener {
 
-	public static boolean commandhome(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandhome(CommandSender sender, Command cmd, String label, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		
 		if (label.equalsIgnoreCase("home")){
 			
@@ -29,40 +29,28 @@ public class CommandHome implements Listener {
 				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 				File f = new File(userdata, File.separator + playerUUID + ".yml");
 				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+				playerData.load(f);
 				
-				try {
-					try {
-						try {
-							playerData.load(f);
-							
-							String world = playerData.getString("Homes." + args[0] + ".World");
-							double x = playerData.getDouble("Homes." + args[0] + ".X");
-							double y = playerData.getDouble("Homes." + args[0] + ".Y");
-							double z = playerData.getDouble("Homes." + args[0] + ".Z");
-							double Pitch = playerData.getDouble("Homes." + args[0] + ".Pitch");
-							double Yaw = playerData.getDouble("Homes." + args[0] + ".Yaw");
-							
-							float PitchFloat = (float) Pitch;
-							float YawFloat = (float) Yaw;
-							
-							if (world != null){
-								
-								Location teleport = new Location(Bukkit.getWorld(world), x, y, z, YawFloat, PitchFloat);
-								craftPlayer.teleport(teleport);
-							
-							}
-							
-							playerData.save(f);
+				String world = playerData.getString("Homes." + args[0] + ".World");
+				double x = playerData.getDouble("Homes." + args[0] + ".X");
+				double y = playerData.getDouble("Homes." + args[0] + ".Y");
+				double z = playerData.getDouble("Homes." + args[0] + ".Z");
+				double Pitch = playerData.getDouble("Homes." + args[0] + ".Pitch");
+				double Yaw = playerData.getDouble("Homes." + args[0] + ".Yaw");
 				
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} catch (InvalidConfigurationException e) {
-						e.printStackTrace();
+				float PitchFloat = (float) Pitch;
+				float YawFloat = (float) Yaw;
+				
+				if (world != null){
+					
+					Location teleport = new Location(Bukkit.getWorld(world), x, y, z, YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
+				
 				}
+				
+				playerData.save(f);
+	
 			}
 			
 			return true;

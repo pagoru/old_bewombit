@@ -1,7 +1,6 @@
 package es.bewom.bewomBit.events;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,7 +16,7 @@ public class EventsSpawn {
 
 
 	@EventHandler
-	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {
+	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, InvalidConfigurationException {
 		
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		
@@ -25,38 +24,22 @@ public class EventsSpawn {
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 
-
-		try {
-			try {
-				try {
-					Data.load(data);
-					
-					String spawn = Data.getString("Spawn");
-					
-					if(spawn != null){
-						
-						if(spawn.equals("permanente")){
-							
-							craftPlayer.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
-							
-						}
-						
-					}
-					
-					Data.save(data);
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
+		Data.load(data);
+		
+		String spawn = Data.getString("Spawn");
+		
+		if(spawn != null){
+			
+			if(spawn.equals("permanente")){
+				
+				craftPlayer.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+				
 			}
-
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
+			
 		}
 		
+		Data.save(data);
+
 	}
 	
 }

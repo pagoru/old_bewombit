@@ -3,6 +3,7 @@ package es.bewom.bewomBit.events.utilitiy;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -15,7 +16,7 @@ import es.bewom.bewomBit.events.EventsWelcomePlayer;
 public class JoinEvent implements Listener  {
 	
 	@EventHandler
-	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException {
+	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, InvalidConfigurationException {
 		
 		EventsPermissions.onJoin(eventConnect);
 		EventsPerfiles.connectPlayerEventsPerfiles(eventConnect);	

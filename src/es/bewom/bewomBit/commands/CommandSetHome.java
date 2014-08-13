@@ -17,7 +17,7 @@ import org.bukkit.event.Listener;
 
 public class CommandSetHome implements Listener {
 
-	public static boolean commandsethome(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandsethome(CommandSender sender, Command cmd, String label, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		
 		if (label.equalsIgnoreCase("sethome")){
 			
@@ -29,10 +29,7 @@ public class CommandSetHome implements Listener {
 				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 				File f = new File(userdata, File.separator + playerUUID + ".yml");
 				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-				
-				try {
-					try {
-						try {
+
 							playerData.load(f);
 							
 							List<String> pLista = playerData.getStringList("Homes.List");
@@ -53,16 +50,7 @@ public class CommandSetHome implements Listener {
 							playerData.set("Homes." + args[0] + ".Yaw", craftPlayer.getLocation().getYaw());
 							
 							playerData.save(f);
-				
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} catch (InvalidConfigurationException e) {
-						e.printStackTrace();
-				}
+
 			}
 			
 			return true;

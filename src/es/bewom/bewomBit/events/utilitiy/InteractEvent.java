@@ -1,7 +1,10 @@
 package es.bewom.bewomBit.events.utilitiy;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Logger;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -14,7 +17,7 @@ public class InteractEvent implements Listener {
 	static Logger log = Logger.getLogger("Minecraft");
 	
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent eventInteract){
+	public void onPlayerInteract(PlayerInteractEvent eventInteract) throws FileNotFoundException, IOException, InvalidConfigurationException{
 	
 		EventsP.playerInteractEventsP(eventInteract);
 		EventsCongelar.onPlayerInteract(eventInteract);

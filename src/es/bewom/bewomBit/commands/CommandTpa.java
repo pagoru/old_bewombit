@@ -1,7 +1,6 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandTpa implements Listener {
 
 	@SuppressWarnings({ "deprecation"})
-	public static boolean commandtpa(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandtpa(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
 		
 		if (label.equalsIgnoreCase("tpa")){
 			
@@ -42,29 +41,16 @@ public class CommandTpa implements Listener {
 					File f = new File(userdata, File.separator + playerUUIDArgs + ".yml");
 					FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 					
-					try {
-						try {
-							try {
-								playerData.load(f);
-								
-								playerData.set("Tpa", playerName);
-								
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "El usuario " + playerName + " quiere que vengas donde esta el.");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si aceptas, escribe en el chat " + ChatColor.RED + "/tpa aceptar" + ChatColor.GRAY + ".");
-								craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si no quieres, escribe en el chat " + ChatColor.RED + "/tpa denegar" + ChatColor.GRAY + ".");
-								
-								playerData.save(f);
+					playerData.load(f);
 					
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} catch (InvalidConfigurationException e) {
-							e.printStackTrace();
-					}
-
+					playerData.set("Tpa", playerName);
+					
+					craftPlayerArgs.sendMessage(ChatColor.GRAY + "El usuario " + playerName + " quiere que vengas donde esta el.");
+					craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si aceptas, escribe en el chat " + ChatColor.RED + "/tpa aceptar" + ChatColor.GRAY + ".");
+					craftPlayerArgs.sendMessage(ChatColor.GRAY + "Si no quieres, escribe en el chat " + ChatColor.RED + "/tpa denegar" + ChatColor.GRAY + ".");
+					
+					playerData.save(f);
+					
 				}
 				else if (args[0].equals("aceptar")){
 
@@ -72,97 +58,67 @@ public class CommandTpa implements Listener {
 					File f = new File(userdata, File.separator + playerUUID + ".yml");
 					FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 					
-					try {
-						try {
-							try {
-								playerData.load(f);
-								
-								String playerNameTpa = playerData.getString("Tpa");
-								
-								if(playerNameTpa != null){
-									if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
-
-										Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
-										
-										craftPlayer.teleport(playerCraftTpa);
-										
-										craftPlayer.sendMessage(ChatColor.GRAY + "Te has teletransportado con exito a " + playerNameTpa + ".");
-										
-										playerData.set("Tpa", null);
-										
-									} else {
-
-										CommandUtilities.jugadorDesconectado(sender);
-
-										playerData.set("Tpa", null);
-	
-									}
-									
-								}  else {
-									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes aceptar un tpa de 'nadie'.");
-									
-								}
-								playerData.save(f);
+					playerData.load(f);
 					
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
+					String playerNameTpa = playerData.getString("Tpa");
+					
+					if(playerNameTpa != null){
+						if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
+
+							Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
 							
-						} catch (IOException e) {
-								e.printStackTrace();
+							craftPlayer.teleport(playerCraftTpa);
+							
+							craftPlayer.sendMessage(ChatColor.GRAY + "Te has teletransportado con exito a " + playerNameTpa + ".");
+							
+							playerData.set("Tpa", null);
+							
+						} else {
+
+							CommandUtilities.jugadorDesconectado(sender);
+
+							playerData.set("Tpa", null);
+
 						}
 						
-					} catch (InvalidConfigurationException e) {
-							e.printStackTrace();
+					}  else {
+						
+						craftPlayer.sendMessage(ChatColor.RED + "No puedes aceptar un tpa de 'nadie'.");
+						
 					}
-					
+					playerData.save(f);
+										
 				} else if (args[0].equals("denegar")){
 					
 					File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 					File f = new File(userdata, File.separator + playerUUID + ".yml");
 					FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+					playerData.load(f);
 					
-					try {
-						try {
-							try {
-								playerData.load(f);
-								
-								String playerNameTpa = playerData.getString("Tpa");
-								
-								if(playerNameTpa != null){
-
-									if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
-
-										craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpa.");
-										
-										playerData.set("Tpa", null);
-									}
-									else {
-										CommandUtilities.jugadorDesconectado(sender);
-										playerData.set("Tpa", null);
-	
-									}
-								}
-								else {
-
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpa de 'nadie'.");
-									
-								}
-								playerData.save(f);
+					String playerNameTpa = playerData.getString("Tpa");
 					
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
+					if(playerNameTpa != null){
+
+						if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
+
+							craftPlayer.sendMessage(ChatColor.RED + "Has denegado el tpa.");
 							
-						} catch (IOException e) {
-							e.printStackTrace();
+							playerData.set("Tpa", null);
 						}
-						
-					} catch (InvalidConfigurationException e) {
-							e.printStackTrace();
-					}
+						else {
+							CommandUtilities.jugadorDesconectado(sender);
+							playerData.set("Tpa", null);
 
+						}
+					}
+					else {
+
+						craftPlayer.sendMessage(ChatColor.RED + "No puedes denegar un tpa de 'nadie'.");
+						
+					}
+					playerData.save(f);
+					
 				}
 				else {
 					CommandUtilities.formaCorrecta(sender, "/tpa <playerOnline/aceptar/denegar>");

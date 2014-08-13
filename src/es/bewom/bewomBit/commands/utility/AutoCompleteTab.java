@@ -1,10 +1,13 @@
 package es.bewom.bewomBit.commands.utility;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.InvalidConfigurationException;
 
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoDelHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
@@ -20,35 +23,46 @@ public class AutoCompleteTab implements TabCompleter {
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
 		
-		if(CommandAutoP.commandautop(sender, cmd, alias, args) != null){
-			return CommandAutoP.commandautop(sender, cmd, alias, args);
+		try {
+			if(CommandAutoP.commandautop(sender, cmd, alias, args) != null){
+				return CommandAutoP.commandautop(sender, cmd, alias, args);
+			}
+			if(CommandAutoGm.commandautogm(sender, cmd, alias, args) != null){
+				return CommandAutoGm.commandautogm(sender, cmd, alias, args);
+			} 	
+			
+			if(CommandAutoV.commandautov(sender, cmd, alias, args) != null){			
+				return CommandAutoV.commandautov(sender, cmd, alias, args);			
+			}	
+			
+			if(CommandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){			
+				return CommandAutoTpa.commandautotpa(sender, cmd, alias, args);			
+			} 
+			
+			if(CommandAutoSpawner.commandautospawner(sender, cmd, alias, args) != null){
+				return CommandAutoSpawner.commandautospawner(sender, cmd, alias, args);
+			} 
+			
+			if(CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
+				return CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
+			} 	
+			if(CommandAutoHome.commandautohome(sender, cmd, alias, args) != null){			
+				return CommandAutoHome.commandautohome(sender, cmd, alias, args);			
+			} 
+			if(CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args) != null){			
+				return CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args);			
+			} 
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 	
-		
-		if(CommandAutoGm.commandautogm(sender, cmd, alias, args) != null){
-			return CommandAutoGm.commandautogm(sender, cmd, alias, args);
-		} 	
-		
-		if(CommandAutoV.commandautov(sender, cmd, alias, args) != null){			
-			return CommandAutoV.commandautov(sender, cmd, alias, args);			
-		}	
-		
-		if(CommandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){			
-			return CommandAutoTpa.commandautotpa(sender, cmd, alias, args);			
-		} 
-		
-		if(CommandAutoSpawner.commandautospawner(sender, cmd, alias, args) != null){
-			return CommandAutoSpawner.commandautospawner(sender, cmd, alias, args);
-		} 
-		
-		if(CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
-			return CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
-		} 	
-		if(CommandAutoHome.commandautohome(sender, cmd, alias, args) != null){			
-			return CommandAutoHome.commandautohome(sender, cmd, alias, args);			
-		} 
-		if(CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args) != null){			
-			return CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args);			
-		} 
 		return null;
 	}
 }

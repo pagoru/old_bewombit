@@ -2,7 +2,6 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -22,7 +21,7 @@ public class CommandMp {
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
 
-	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
 		
 		if (label.equalsIgnoreCase("mp") || label.equalsIgnoreCase("msg") || label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("me")){
 		
@@ -40,104 +39,89 @@ public class CommandMp {
 			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 			File f = new File(userdata, File.separator + playerUUID + ".yml");
 			FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-			  
-		  
-			try {
-				try {
-					try {
-						playerData.load(f);
-						
-						// Información que cargar/guardar para el jugador
-						
-						getPlayerChat = playerData.getString("Chat");
-						
-						if (args.length == 0){
 
-							if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
-							
-								if(getPlayerChat.equals("global")){
-									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes salir del chat general, usa /mp [nick] y/o (mensaje).");
-								}
-								else {
-									
-									playerData.set("Chat", "global");
-									craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del chat privado de " + getPlayerChat + ".");
-								}
-							
-							}
-							else {
-								
-								craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-							}
-							
-						}
-						else if (args.length == 1) {
-							
-							if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
-							
-								if (CommandUtilities.comprobarJugador(sender, args [0])){
-									
-									craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + args[0] + ".");
-									playerData.set("Chat", args[0]);
-									
-								}
-								else {
-									CommandUtilities.jugadorDesconectado(sender);
-									return true;
-								}
-							}
-							else {
-								
-								craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-							}
-						}
-						else {
-							
-							if (CommandUtilities.comprobarJugador(sender, args [0])){
-								
-								String texto = "";
-								for (int i = 1; i < args.length; i++) {
-									texto += args[i] + " ";
-								}
-								
-								if (craftPlayer.hasPermission("bewom.admin")) {	
-									
-									formatearChatMp (craftPlayer, playerName, admin, mpText, args, texto);
-									
-								}
-								else if (craftPlayer.hasPermission("bewom.mod")) {
-									
-									formatearChatMp (craftPlayer, playerName, mod, mpText, args, texto);
-									
-								}
-								else if (craftPlayer.hasPermission("bewom.vip")) {
-									
-									formatearChatMp (craftPlayer, playerName, vip, mpText, args, texto);
-									
-								}
-								else {
+			playerData.load(f);
+			
+			// Información que cargar/guardar para el jugador
+			
+			getPlayerChat = playerData.getString("Chat");
+			
+			if (args.length == 0){
+
+				if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
 				
-									formatearChatMp (craftPlayer, playerName, steve, mpText, args, texto);
-								}
-							}
-						}
+					if(getPlayerChat.equals("global")){
 						
-						playerData.save(f);
-						return true;
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+						craftPlayer.sendMessage(ChatColor.RED + "No puedes salir del chat general, usa /mp [nick] y/o (mensaje).");
 					}
+					else {
+						
+						playerData.set("Chat", "global");
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del chat privado de " + getPlayerChat + ".");
+					}
+				
+				}
+				else {
 					
-				} catch (IOException e) {
-						e.printStackTrace();
+					craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
 				}
 				
-			} catch (InvalidConfigurationException e) {
-					e.printStackTrace();
 			}
+			else if (args.length == 1) {
+				
+				if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
+				
+					if (CommandUtilities.comprobarJugador(sender, args [0])){
+						
+						craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + args[0] + ".");
+						playerData.set("Chat", args[0]);
+						
+					}
+					else {
+						CommandUtilities.jugadorDesconectado(sender);
+						return true;
+					}
+				}
+				else {
+					
+					craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
+				}
+			}
+			else {
+				
+				if (CommandUtilities.comprobarJugador(sender, args [0])){
+					
+					String texto = "";
+					for (int i = 1; i < args.length; i++) {
+						texto += args[i] + " ";
+					}
+					
+					if (craftPlayer.hasPermission("bewom.admin")) {	
+						
+						formatearChatMp (craftPlayer, playerName, admin, mpText, args, texto);
+						
+					}
+					else if (craftPlayer.hasPermission("bewom.mod")) {
+						
+						formatearChatMp (craftPlayer, playerName, mod, mpText, args, texto);
+						
+					}
+					else if (craftPlayer.hasPermission("bewom.vip")) {
+						
+						formatearChatMp (craftPlayer, playerName, vip, mpText, args, texto);
+						
+					}
+					else {
+	
+						formatearChatMp (craftPlayer, playerName, steve, mpText, args, texto);
+					}
+				}
+			}
+			
+			playerData.save(f);
 			return true;
+			
+
 		}
 		return false;
 	}

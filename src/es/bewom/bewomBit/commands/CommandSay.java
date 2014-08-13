@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 public class CommandSay {
 
-	public static boolean commandsay(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandsay(CommandSender sender, Command cmd, String label, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
 		if (label.equalsIgnoreCase("say")){
 			if (args.length >= 1){
@@ -37,38 +37,23 @@ public class CommandSay {
 				File f = new File(userdata, File.separator + playerUUID + ".yml");
 				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 
-
-				try {
-					try {
-						try {
-							playerData.load(f);
-							
-							String getPlayerChat = playerData.getString("Chat");
-							
-							if(getPlayerChat.equals("global")){
-								
-								playerData.set("Chat", "say");
-								
-							} else if (getPlayerChat.equals("say")){
-								
-								playerData.set("Chat", "global");
-								
-							}
-							
-							playerData.save(f);
-
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-				} catch (InvalidConfigurationException e) {
-					e.printStackTrace();
+				playerData.load(f);
+				
+				String getPlayerChat = playerData.getString("Chat");
+				
+				if(getPlayerChat.equals("global")){
+					
+					playerData.set("Chat", "say");
+					
+				} else if (getPlayerChat.equals("say")){
+					
+					playerData.set("Chat", "global");
+					
 				}
 				
+				playerData.save(f);
+
+	
 			}
 			return true;
 		}
