@@ -24,7 +24,6 @@ import es.bewom.bewomBit.events.utilitiy.InteractEvent;
 import es.bewom.bewomBit.events.utilitiy.MoveEvent;
 import es.bewom.bewomBit.events.utilitiy.PlaceBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.PreprocessCommandEvent;
-import es.bewom.bewomBit.events.utilitiy.QuitEvent;
 import es.bewom.bewomBit.events.utilitiy.ServerMotdEvent;
 public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
@@ -45,7 +44,6 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new DeathEvent(), this);
 		getServer().getPluginManager().registerEvents(new BrokeBlockEvent(), this);
 		getServer().getPluginManager().registerEvents(new PreprocessCommandEvent(), this);
-		getServer().getPluginManager().registerEvents(new QuitEvent(), this);
 		
 		// ---> Comandos <--- //
 		
@@ -77,6 +75,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("sethome").setExecutor(new CommandPlayer());
 		getCommand("home").setExecutor(new CommandPlayer());
 		getCommand("delhome").setExecutor(new CommandPlayer());
+		getCommand("spawn").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -88,6 +87,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("spawner").setTabCompleter(new AutoCompleteTab());
 		getCommand("home").setTabCompleter(new AutoCompleteTab());
 		getCommand("delhome").setTabCompleter(new AutoCompleteTab());
+		getCommand("spawn").setTabCompleter(new AutoCompleteTab());
 				
 		// ---> config inicial <--- //
 		

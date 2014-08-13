@@ -19,7 +19,7 @@ public class EventsPerfiles {
 
 	private static Scoreboard board;
 	
-	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect){
+	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		String playerName = eventConnect.getPlayer().getName(); //limpio String 
@@ -36,59 +36,44 @@ public class EventsPerfiles {
 		  
 			e.printStackTrace();
 		}
-	  
-		try {
-			try {
-				try {
-					playerData.load(f);
+
+		playerData.load(f);
 					
-					// Información que cargar/guardar para el jugador
-					
-					playerData.set("PlayerName", playerName);
-					playerData.set("Chat", "global");
-					playerData.set("Tpa", null);
-					
-					if (playerData.getBoolean("Congelado") != true) {
-						playerData.set("Congelado", false);
-					}
-					
-					String lastMessage = playerData.getString("LastMessage");
-					
-					if (lastMessage == null){						
-						playerData.set("LastMessage", "Bienvenido");						
-					}
-					
-					// ---> Scoreboards individuales <--- //
-					
-					ScoreboardManager manager = Bukkit.getScoreboardManager();
-					board = manager.getMainScoreboard();
-					
-					Team teamUser = board.getTeam(playerName);
-					
-					if (teamUser == null) {
-						
-						registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
-						
-					}
-					else {
-						teamUser.unregister();
-						
-						registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
-					}					
-	
-					playerData.save(f);
-					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
+		// Información que cargar/guardar para el jugador
+		
+		playerData.set("PlayerName", playerName);
+		playerData.set("Chat", "global");
+		playerData.set("Tpa", null);
+		
+		if (playerData.getBoolean("Congelado") != true) {
+			playerData.set("Congelado", false);
 		}
+		
+		String lastMessage = playerData.getString("LastMessage");
+		
+		if (lastMessage == null){						
+			playerData.set("LastMessage", "Bienvenido");						
+		}
+		
+		// ---> Scoreboards individuales <--- //
+		
+		ScoreboardManager manager = Bukkit.getScoreboardManager();
+		board = manager.getMainScoreboard();
+		
+		Team teamUser = board.getTeam(playerName);
+		
+		if (teamUser == null) {
+			
+			registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
+			
+		}
+		else {
+			teamUser.unregister();
+			
+			registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
+		}					
+
+		playerData.save(f);
 	
 	}
 	

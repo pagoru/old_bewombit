@@ -6,16 +6,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import es.bewom.bewomBit.events.EventsP;
+import es.bewom.bewomBit.events.EventsCofreMuerto;
 
 public class DeathEvent implements Listener {
 
 	static Logger log = Logger.getLogger("Minecraft");
 
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent eventDeath){
+	public void onPlayerDeath(PlayerDeathEvent eventDeath) throws InterruptedException{
 		
-		EventsP.deathPlayerEventsP (eventDeath);
+		EventsCofreMuerto.deathCofreMuerto(eventDeath);
 		
 	}    
 }

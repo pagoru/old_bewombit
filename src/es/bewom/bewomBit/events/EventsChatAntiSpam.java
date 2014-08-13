@@ -18,7 +18,7 @@ public class EventsChatAntiSpam {
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
 	
-	public static void onPlayerChatEventsAntiSpam(AsyncPlayerChatEvent eventChat) {
+	public static void onPlayerChatEventsAntiSpam(AsyncPlayerChatEvent eventChat) throws FileNotFoundException, IOException, InvalidConfigurationException {
 
 		String message = eventChat.getMessage();
 		Player craftPlayer = eventChat.getPlayer(); //craftPlayer Player
@@ -35,82 +35,75 @@ public class EventsChatAntiSpam {
 
 		String mpText = ChatColor.GRAY + "/mp";
 		
+		String broadcast = ChatColor.DARK_GREEN + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_GREEN + "/"+  ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " < ";
+		
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 
+		playerData.load(f);
 
-		try {
-			try {
-				try {
-					playerData.load(f);
+		// Información que cargar/guardar para el jugador
 
-					// Información que cargar/guardar para el jugador
+		// ---> Chat <--- //
 
-					// ---> Chat <--- //
+		getPlayerChat = playerData.getString("Chat");
 
-					getPlayerChat = playerData.getString("Chat");
+		if(getPlayerChat.equals("global")){
 
-					if(getPlayerChat.equals("global")){
+			if (craftPlayer.hasPermission("bewom.admin")) {			
+				eventChat.setFormat(admin + adminModText + message);
 
-						if (craftPlayer.hasPermission("bewom.admin")) {			
-							eventChat.setFormat(admin + adminModText + message);
+			}
+			else if (craftPlayer.hasPermission("bewom.mod")) {
+				eventChat.setFormat(mod + adminModText + message);
 
-						}
-						else if (craftPlayer.hasPermission("bewom.mod")) {
-							eventChat.setFormat(mod + adminModText + message);
+			}
+			else if (craftPlayer.hasPermission("bewom.vip")) {
+				eventChat.setFormat(vip + vipDefaultText + corregir(message));
 
-						}
-						else if (craftPlayer.hasPermission("bewom.vip")) {
-							eventChat.setFormat(vip + vipDefaultText + corregir(message));
-
-						}
-						else {
-							eventChat.setFormat(steve + vipDefaultText + corregir(message));
-						}
-
-					}
-					else {
-
-						if (craftPlayer.hasPermission("bewom.admin")) {	
-							formatearMensaje(playerName, admin, mpText, message, eventChat);
-							eventChat.setCancelled(true);
-						}
-						else if (craftPlayer.hasPermission("bewom.mod")) {	
-							formatearMensaje(playerName, mod, mpText, message, eventChat);
-							eventChat.setCancelled(true);
-						}
-						else if (craftPlayer.hasPermission("bewom.vip")) {	
-							formatearMensaje(playerName, vip, mpText, message, eventChat);
-							eventChat.setCancelled(true);
-						}
-						else {	
-							formatearMensaje(playerName, steve, mpText, message, eventChat);
-							eventChat.setCancelled(true);
-						}
-					}
-					
-					String lastMessage = playerData.getString("LastMessage");
-					
-					if(lastMessage.equals(message)){
-						eventChat.setCancelled(true);
-					}
-					
-					playerData.set("LastMessage", message);
-					
-					playerData.save(f);
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
+			}
+			else {
+				eventChat.setFormat(steve + vipDefaultText + corregir(message));
 			}
 
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}				
+		} else if (getPlayerChat.equals("say")){
+			
+			if (craftPlayer.hasPermission("bewom.admin")) {			
+				eventChat.setFormat(broadcast + ChatColor.GREEN + message);
+
+			}
+			
+		} else {
+
+			if (craftPlayer.hasPermission("bewom.admin")) {	
+				formatearMensaje(playerName, admin, mpText, message, eventChat);
+				eventChat.setCancelled(true);
+			}
+			else if (craftPlayer.hasPermission("bewom.mod")) {	
+				formatearMensaje(playerName, mod, mpText, message, eventChat);
+				eventChat.setCancelled(true);
+			}
+			else if (craftPlayer.hasPermission("bewom.vip")) {	
+				formatearMensaje(playerName, vip, mpText, message, eventChat);
+				eventChat.setCancelled(true);
+			}
+			else {	
+				formatearMensaje(playerName, steve, mpText, message, eventChat);
+				eventChat.setCancelled(true);
+			}
+		}
+		
+		String lastMessage = playerData.getString("LastMessage");
+		
+		if(lastMessage.equals(message)){
+			eventChat.setCancelled(true);
+		}
+		
+		playerData.set("LastMessage", message);
+		
+		playerData.save(f);
+	
 	}
 	
 	@SuppressWarnings("deprecation")

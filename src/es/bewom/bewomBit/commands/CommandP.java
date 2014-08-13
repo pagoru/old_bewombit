@@ -1,7 +1,6 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import org.bukkit.entity.Player;
 public class CommandP {
 
 	@SuppressWarnings({"unused", "deprecation" })
-	public static boolean commandp(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandp(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
 
 		Player craftPlayer = (Player) sender;
 		String playerName = craftPlayer.getName();
@@ -89,118 +88,106 @@ public class CommandP {
 				File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
 				FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 
-				try {
-					try {
-						try {
-							proteccionData.load(protecciondata);
+				proteccionData.load(protecciondata);
 
-							if (args.length == 0) {
+				if (args.length == 0) {
 
-								craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
+					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
 
+				}
+				else if (args.length == 1){
+
+					int getlocationBlockHash = 0;
+					String getlocationBlockPlayerName = null;
+					int getlocationBlockX = 0;
+					int getlocationBlockY = 0;
+					int getlocationBlockZ = 0;
+					String getlocationBlockEstado = null;
+
+					getlocationBlockHash = proteccionData.getInt(material + "." + hash);
+					getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+					getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
+					getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
+					getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
+					getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
+
+					String gethash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+
+					if (gethash.equals(hash)){
+
+						if (getlocationBlockPlayerName.equals(playerName)){
+
+							if (args[0].equals("privado")){
+
+								privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+								
 							}
-							else if (args.length == 1){
+							else if (args[0].equals("publico")) {
 
-								int getlocationBlockHash = 0;
-								String getlocationBlockPlayerName = null;
-								int getlocationBlockX = 0;
-								int getlocationBlockY = 0;
-								int getlocationBlockZ = 0;
-								String getlocationBlockEstado = null;
-
-								getlocationBlockHash = proteccionData.getInt(material + "." + hash);
-								getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
-								getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
-								getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
-								getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
-								getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
-
-								String gethash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
-
-								if (gethash.equals(hash)){
-
-									if (getlocationBlockPlayerName.equals(playerName)){
-
-										if (args[0].equals("privado")){
-
-											privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-											
-										}
-										else if (args[0].equals("publico")) {
-
-											estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-											
-										}
-									}
-									else {
-
-										craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-
-									}
-								}
+								estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+								
 							}
-							else if (args.length == 2){
-
-								if (args[0].equals("añadir")){
-
-									if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
-										
-										añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
-										
-									}
-								}
-								else if (args[0].equals("eliminar")) {
-
-									if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
-
-										eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
-										
-									}
-								}
-							}
-							else if (args.length == 3){
-
-								if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
-
-									if (args[0].equals("cambiar")){
-
-										if (args[1].equals("propietario")){
-
-											cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, args[2]);
-											proteccionData.set(material + "." + hash + ".playerName", args[2]);
-											craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + args[2] + ".");
-
-										}
-										else if (args[1].equals("estado")){
-
-											if (args[2].equals("privado")){
-
-												privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-											}
-											else if (args[2].equals("publico")){
-
-												estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);												
-											}											
-										}									
-									}
-								}	
-							}
-							else {
-
-								craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
-
-							}
-							proteccionData.save(protecciondata);
-
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
 						}
-					} catch (IOException e) {
-						e.printStackTrace();
+						else {
+
+							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+
+						}
 					}
-				} catch (InvalidConfigurationException e) {
-					e.printStackTrace();
-				}	
+				}
+				else if (args.length == 2){
+
+					if (args[0].equals("añadir")){
+
+						if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+							
+							añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
+							
+						}
+					}
+					else if (args[0].equals("eliminar")) {
+
+						if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+
+							eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
+							
+						}
+					}
+				}
+				else if (args.length == 3){
+
+					if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
+
+						if (args[0].equals("cambiar")){
+
+							if (args[1].equals("propietario")){
+
+								cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, args[2]);
+								proteccionData.set(material + "." + hash + ".playerName", args[2]);
+								craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + args[2] + ".");
+
+							}
+							else if (args[1].equals("estado")){
+
+								if (args[2].equals("privado")){
+
+									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+								}
+								else if (args[2].equals("publico")){
+
+									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);												
+								}											
+							}									
+						}
+					}	
+				}
+				else {
+
+					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
+
+				}
+				proteccionData.save(protecciondata);
+
 			}
 			else {
 

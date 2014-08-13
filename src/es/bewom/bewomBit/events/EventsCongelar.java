@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class EventsCongelar {
 	
-	public static void onPreprocessCommandEvent (PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException {
+	public static void onPreprocessCommandEvent (PlayerCommandPreprocessEvent eventPreprocessCommand) throws SQLException, IOException, InvalidConfigurationException {
 		
 		String playerUUID = eventPreprocessCommand.getPlayer().getUniqueId().toString();
 		Player craftPlayer = (Player) eventPreprocessCommand.getPlayer();
@@ -31,37 +31,21 @@ public class EventsCongelar {
 
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
-		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-		
-		try {
-			try {
-				try {				
+		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);	
 										
-					playerData.load(f);
-					
-					playerIsCongelado = playerData.getBoolean("Congelado");
-					
-					playerData.save(f);
-					
-					
-					Data.load(data);
-					
-					isCongelado = Data.getBoolean("Congelado");
-					
-					Data.save(data);
-					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
-		}
+		playerData.load(f);
 		
+		playerIsCongelado = playerData.getBoolean("Congelado");
+		
+		playerData.save(f);
+		
+		
+		Data.load(data);
+		
+		isCongelado = Data.getBoolean("Congelado");
+		
+		Data.save(data);
+							
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
 	
@@ -73,7 +57,7 @@ public class EventsCongelar {
 	}
 		
 	@SuppressWarnings("unused")
-	public static void onPlayerChatEventsCongelar(AsyncPlayerChatEvent eventChat) {
+	public static void onPlayerChatEventsCongelar(AsyncPlayerChatEvent eventChat) throws FileNotFoundException, IOException, InvalidConfigurationException {
 		
 		String message = eventChat.getMessage();
 		
@@ -92,37 +76,21 @@ public class EventsCongelar {
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+					
+		playerData.load(f);
+
+		playerData.set("LastMessage", message);
 		
-		try {
-			try {
-				try {
-					
-					playerData.load(f);
+		playerIsCongelado = playerData.getBoolean("Congelado");
 		
-					playerData.set("LastMessage", message);
-					
-					playerIsCongelado = playerData.getBoolean("Congelado");
-					
-					playerData.save(f);
-					
-					
-					Data.load(data);
-					
-					isCongelado = Data.getBoolean("Congelado");
-					
-					Data.save(data);
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
+		playerData.save(f);
+		
+		
+		Data.load(data);
+		
+		isCongelado = Data.getBoolean("Congelado");
+		
+		Data.save(data);
 		
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
@@ -134,7 +102,7 @@ public class EventsCongelar {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void onPlayerInteract(PlayerInteractEvent eventInteract){
+	public static void onPlayerInteract(PlayerInteractEvent eventInteract) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		
 		String playerUUID = eventInteract.getPlayer().getUniqueId().toString();
 		String playerName = eventInteract.getPlayer().getName();
@@ -150,31 +118,15 @@ public class EventsCongelar {
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
-		
-		try {
-			try {
-				try {
 
-					playerData.load(f);
-					playerIsCongelado = playerData.getBoolean("Congelado");
-					playerData.save(f);
+		playerData.load(f);
+		playerIsCongelado = playerData.getBoolean("Congelado");
+		playerData.save(f);
 
 
-					Data.load(data);
-					isCongelado = Data.getBoolean("Congelado");
-					Data.save(data);
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
+		Data.load(data);
+		isCongelado = Data.getBoolean("Congelado");
+		Data.save(data);
 		
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
@@ -186,7 +138,7 @@ public class EventsCongelar {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void movePlayerEventsCongelar (PlayerMoveEvent eventMove){
+	public static void movePlayerEventsCongelar (PlayerMoveEvent eventMove) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		Player craftPlayer = eventMove.getPlayer(); //craftPlayer Player
 		String playerName = eventMove.getPlayer().getName(); //limpio String 
 		String playerUUID = craftPlayer.getUniqueId().toString(); //UUID Player
@@ -203,34 +155,18 @@ public class EventsCongelar {
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 
-		try {
-			try {
-				try {
-					playerData.load(f);
+		playerData.load(f);
 
-					playerIsCongelado = playerData.getBoolean("Congelado");
+		playerIsCongelado = playerData.getBoolean("Congelado");
 
-					playerData.save(f);
+		playerData.save(f);
 
 
-					Data.load(data);
+		Data.load(data);
 
-					isCongelado = Data.getBoolean("Congelado");
+		isCongelado = Data.getBoolean("Congelado");
 
-					Data.save(data);
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
+		Data.save(data);
 
 		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
 			if (playerIsCongelado || isCongelado){
