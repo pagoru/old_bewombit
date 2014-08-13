@@ -18,15 +18,12 @@ import es.bewom.bewomBit.commands.utility.AutoCompleteTab;
 import es.bewom.bewomBit.commands.utility.CommandPlayer;
 import es.bewom.bewomBit.events.utilitiy.BrokeBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.ChatEvent;
-import es.bewom.bewomBit.events.utilitiy.ItemPickupEvent;
 import es.bewom.bewomBit.events.utilitiy.JoinEvent;
 import es.bewom.bewomBit.events.utilitiy.DeathEvent;
 import es.bewom.bewomBit.events.utilitiy.InteractEvent;
 import es.bewom.bewomBit.events.utilitiy.MoveEvent;
-import es.bewom.bewomBit.events.utilitiy.PistonEvent;
 import es.bewom.bewomBit.events.utilitiy.PlaceBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.PreprocessCommandEvent;
-import es.bewom.bewomBit.events.utilitiy.QuitEvent;
 import es.bewom.bewomBit.events.utilitiy.ServerMotdEvent;
 public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
@@ -47,9 +44,6 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new DeathEvent(), this);
 		getServer().getPluginManager().registerEvents(new BrokeBlockEvent(), this);
 		getServer().getPluginManager().registerEvents(new PreprocessCommandEvent(), this);
-		getServer().getPluginManager().registerEvents(new QuitEvent(), this);
-		getServer().getPluginManager().registerEvents(new PistonEvent(), this);
-		getServer().getPluginManager().registerEvents(new ItemPickupEvent(), this);
 		
 		// ---> Comandos <--- //
 		
