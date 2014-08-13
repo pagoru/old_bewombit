@@ -8,8 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 
-import es.bewom.bewomBit.events.EventsCofreMuerto;
-
 public class ItemPickupEvent implements Listener {
 
 	static Logger log = Logger.getLogger("Minecraft");
