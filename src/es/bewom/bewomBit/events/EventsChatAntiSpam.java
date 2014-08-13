@@ -35,6 +35,8 @@ public class EventsChatAntiSpam {
 
 		String mpText = ChatColor.GRAY + "/mp";
 		
+		String broadcast = ChatColor.DARK_GREEN + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_GREEN + "/"+  ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " < ";
+		
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
@@ -69,8 +71,14 @@ public class EventsChatAntiSpam {
 							eventChat.setFormat(steve + vipDefaultText + corregir(message));
 						}
 
-					}
-					else {
+					} else if (getPlayerChat.equals("say")){
+						
+						if (craftPlayer.hasPermission("bewom.admin")) {			
+							eventChat.setFormat(broadcast + ChatColor.GREEN + message);
+
+						}
+						
+					} else {
 
 						if (craftPlayer.hasPermission("bewom.admin")) {	
 							formatearMensaje(playerName, admin, mpText, message, eventChat);
