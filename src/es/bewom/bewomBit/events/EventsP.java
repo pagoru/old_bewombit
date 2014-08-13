@@ -11,17 +11,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Skull;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class EventsP {
@@ -385,28 +381,7 @@ public class EventsP {
 			e.printStackTrace();
 		}
 	}
-
-	public static void deathPlayerEventsP (PlayerDeathEvent eventDeath){
-
-		Player playerCraft = eventDeath.getEntity();
-		String playerName = playerCraft.getName();
-
-		int X = playerCraft.getLocation().getBlockX();
-		int Y = playerCraft.getLocation().getBlockY();
-		int Z = playerCraft.getLocation().getBlockZ();
-
-		Bukkit.getWorld("world").getBlockAt(X, Y, Z).setType(Material.CHEST);
-		Location loc = new Location(Bukkit.getWorld("world"), X, Y + 1, Z);
-		loc.getBlock().setType(Material.SKULL);
-		BlockState state = loc.getBlock().getState();
-
-		Skull s = (Skull) state;
-		s.setSkullType(SkullType.PLAYER);
-		s.setOwner(playerName);
-		loc.getBlock().getChunk().load();
-		s.update(true);
-	}
-
+	
 	@SuppressWarnings({ "unused", "static-access" })
 	public static void playerInteractEventsP(PlayerInteractEvent eventInteract){
 
