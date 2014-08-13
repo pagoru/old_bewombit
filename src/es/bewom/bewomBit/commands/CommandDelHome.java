@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -42,6 +43,12 @@ public class CommandDelHome {
 					
 					playerData.set("Homes." + args[0], null);
 					playerData.set("Homes.List", pList);
+					
+					craftPlayer.sendMessage(ChatColor.GRAY + "Ha sido eliminada " + args[0] + " de tu lista de homes.");
+					
+				} else {
+					
+					craftPlayer.sendMessage(ChatColor.RED + "No tienes un home con este nombre.");
 					
 				}
 											

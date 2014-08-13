@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,7 +47,13 @@ public class CommandHome implements Listener {
 					
 					Location teleport = new Location(Bukkit.getWorld(world), x, y, z, YawFloat, PitchFloat);
 					craftPlayer.teleport(teleport);
-				
+					
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has sido teletransportado a " + args[0] + ".");
+					
+				} else {
+					
+					craftPlayer.sendMessage(ChatColor.RED + "No tienes un home con este nombre.");
+					
 				}
 				
 				playerData.save(f);

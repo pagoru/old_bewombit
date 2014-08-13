@@ -13,6 +13,7 @@ import es.bewom.bewomBit.commands.autocomplete.CommandAutoDelHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawn;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpaHere;
@@ -51,6 +52,9 @@ public class AutoCompleteTab implements TabCompleter {
 			} 
 			if(CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args) != null){			
 				return CommandAutoDelHome.commandautodelhome(sender, cmd, alias, args);			
+			} 
+			if(CommandAutoSpawn.commandautospawn(sender, cmd, alias, args) != null){			
+				return CommandAutoSpawn.commandautospawn(sender, cmd, alias, args);			
 			} 
 		
 		} catch (FileNotFoundException e) {

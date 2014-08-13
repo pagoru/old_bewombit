@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -30,26 +31,32 @@ public class CommandSetHome implements Listener {
 				File f = new File(userdata, File.separator + playerUUID + ".yml");
 				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 
-							playerData.load(f);
-							
-							List<String> pLista = playerData.getStringList("Homes.List");
-							
-							if (!pLista.contains(args[0])){
-								
-								pLista.add(args[0]);
-								
-							}
-							
-							playerData.set("Homes.List", pLista);
-							
-							playerData.set("Homes." + args[0] + ".World", craftPlayer.getWorld().getName());
-							playerData.set("Homes." + args[0] + ".X", craftPlayer.getLocation().getX());
-							playerData.set("Homes." + args[0] + ".Y", craftPlayer.getLocation().getY());
-							playerData.set("Homes." + args[0] + ".Z", craftPlayer.getLocation().getZ());
-							playerData.set("Homes." + args[0] + ".Pitch", craftPlayer.getLocation().getPitch());
-							playerData.set("Homes." + args[0] + ".Yaw", craftPlayer.getLocation().getYaw());
-							
-							playerData.save(f);
+				playerData.load(f);
+				
+				List<String> pLista = playerData.getStringList("Homes.List");
+				
+				if (!pLista.contains(args[0])){
+					
+					pLista.add(args[0]);
+					
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has añadido " + args[0] + " a tu lista de homes.");
+					
+				} else {
+					
+					craftPlayer.sendMessage(ChatColor.GRAY + "Has sustituido la localización de " + args[0] + " de tu lista de homes.");
+					
+				}
+				
+				playerData.set("Homes.List", pLista);
+				
+				playerData.set("Homes." + args[0] + ".World", craftPlayer.getWorld().getName());
+				playerData.set("Homes." + args[0] + ".X", craftPlayer.getLocation().getX());
+				playerData.set("Homes." + args[0] + ".Y", craftPlayer.getLocation().getY());
+				playerData.set("Homes." + args[0] + ".Z", craftPlayer.getLocation().getZ());
+				playerData.set("Homes." + args[0] + ".Pitch", craftPlayer.getLocation().getPitch());
+				playerData.set("Homes." + args[0] + ".Yaw", craftPlayer.getLocation().getYaw());
+				
+				playerData.save(f);
 
 			}
 			
