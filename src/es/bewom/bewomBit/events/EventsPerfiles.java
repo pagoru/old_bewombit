@@ -44,6 +44,7 @@ public class EventsPerfiles {
 		playerData.set("PlayerName", playerName);
 		playerData.set("Chat", "global");
 		playerData.set("Tpa", null);
+		playerData.set("Dios", false);
 		
 		if (playerData.getBoolean("Congelado") != true) {
 			playerData.set("Congelado", false);

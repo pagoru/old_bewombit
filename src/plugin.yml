@@ -119,3 +119,8 @@ commands:
    spawn:
       description: Permite al jugador ir al spawn
       permission: bewom.default
+      
+   god:
+      description: Permite al jugador ser inmortal
+      permission: bewom.admin
+   

@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.events.EventsCongelar;
+import es.bewom.bewomBit.events.EventsInmortal;
 import es.bewom.bewomBit.events.EventsSaltarImpulso;
 
 public class MoveEvent implements Listener{
@@ -25,6 +26,7 @@ public class MoveEvent implements Listener{
 		
 		EventsCongelar.movePlayerEventsCongelar (eventMove);
 		EventsSaltarImpulso.movePlayerEventsSaltarImpulso(eventMove);
+		EventsInmortal.onPlayerMove(eventMove);
 		
 	}
 }

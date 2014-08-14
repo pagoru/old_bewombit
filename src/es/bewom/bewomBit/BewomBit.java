@@ -18,6 +18,7 @@ import es.bewom.bewomBit.commands.utility.AutoCompleteTab;
 import es.bewom.bewomBit.commands.utility.CommandPlayer;
 import es.bewom.bewomBit.events.utilitiy.BrokeBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.ChatEvent;
+import es.bewom.bewomBit.events.utilitiy.DamageEntityEvent;
 import es.bewom.bewomBit.events.utilitiy.JoinEvent;
 import es.bewom.bewomBit.events.utilitiy.DeathEvent;
 import es.bewom.bewomBit.events.utilitiy.InteractEvent;
@@ -44,6 +45,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new DeathEvent(), this);
 		getServer().getPluginManager().registerEvents(new BrokeBlockEvent(), this);
 		getServer().getPluginManager().registerEvents(new PreprocessCommandEvent(), this);
+		getServer().getPluginManager().registerEvents(new DamageEntityEvent(), this);
 		
 		// ---> Comandos <--- //
 		
@@ -76,6 +78,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("home").setExecutor(new CommandPlayer());
 		getCommand("delhome").setExecutor(new CommandPlayer());
 		getCommand("spawn").setExecutor(new CommandPlayer());
+		getCommand("god").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		

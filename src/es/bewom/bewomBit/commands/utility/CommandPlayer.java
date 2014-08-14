@@ -57,6 +57,9 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandSpawner.commandspawner(sender, cmd, label, args)){
 					return true;
 				}
+				if(CommandGod.commandgod(sender, cmd, label, args)){
+					return true;
+				}
 			}
 			
 			// ---> Comandos de vips <--- //
