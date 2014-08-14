@@ -123,4 +123,8 @@ commands:
    god:
       description: Permite al jugador ser inmortal
       permission: bewom.admin
+      
+   lag:
+      description: Permite al jugador saber el estado del servidor.
+      permission: bewom.admin
    

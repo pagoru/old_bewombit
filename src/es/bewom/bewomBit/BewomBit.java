@@ -26,6 +26,7 @@ import es.bewom.bewomBit.events.utilitiy.MoveEvent;
 import es.bewom.bewomBit.events.utilitiy.PlaceBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.PreprocessCommandEvent;
 import es.bewom.bewomBit.events.utilitiy.ServerMotdEvent;
+import es.bewom.bewomBit.utility.Lag;
 public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	Logger log = Logger.getLogger("Minecraft");
@@ -79,6 +80,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("delhome").setExecutor(new CommandPlayer());
 		getCommand("spawn").setExecutor(new CommandPlayer());
 		getCommand("god").setExecutor(new CommandPlayer());
+		getCommand("lag").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -91,6 +93,11 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("home").setTabCompleter(new AutoCompleteTab());
 		getCommand("delhome").setTabCompleter(new AutoCompleteTab());
 		getCommand("spawn").setTabCompleter(new AutoCompleteTab());
+		getCommand("lag").setTabCompleter(new AutoCompleteTab());
+		
+		// ---> Temporizadores
+		
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 				
 		// ---> config inicial <--- //
 		

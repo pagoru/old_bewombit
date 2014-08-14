@@ -12,6 +12,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoDelHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoHome;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoLag;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawn;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
@@ -55,6 +56,9 @@ public class AutoCompleteTab implements TabCompleter {
 			} 
 			if(CommandAutoSpawn.commandautospawn(sender, cmd, alias, args) != null){			
 				return CommandAutoSpawn.commandautospawn(sender, cmd, alias, args);			
+			} 
+			if(CommandAutoLag.commandautolag(sender, cmd, alias, args) != null){			
+				return CommandAutoLag.commandautolag(sender, cmd, alias, args);			
 			} 
 		
 		} catch (FileNotFoundException e) {

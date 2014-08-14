@@ -107,6 +107,9 @@ public class CommandPlayer implements CommandExecutor {
 			if(CommandSpawn.commandspawn(sender, cmd, label, args)){
 				return true;
 			}
+			if(CommandLag.commandlag(sender, cmd, label, args)){
+				return true;
+			}
 			
 			
 			
