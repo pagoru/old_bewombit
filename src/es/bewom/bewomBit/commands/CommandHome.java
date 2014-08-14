@@ -52,8 +52,7 @@ public class CommandHome implements Listener {
 					
 				} else {
 					
-					craftPlayer.sendMessage(ChatColor.RED + "No tienes un home con este nombre.");
-					
+					craftPlayer.sendMessage(ChatColor.RED + "No tienes un home con este nombre.");					
 				}
 				
 				playerData.save(f);
