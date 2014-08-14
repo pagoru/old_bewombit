@@ -202,7 +202,7 @@ public class EventsChatAntiSpam {
 			break;
 
 		case 'e':
-			message = ChatColor.WHITE + message;
+			message = ChatColor.YELLOW + message;
 			break;
 
 		case 'f':
