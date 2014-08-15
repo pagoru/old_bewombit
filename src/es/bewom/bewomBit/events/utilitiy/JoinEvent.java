@@ -16,7 +16,7 @@ import es.bewom.bewomBit.events.EventsWelcomePlayer;
 public class JoinEvent implements Listener  {
 	
 	@EventHandler
-	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, InvalidConfigurationException {
+	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, InvalidConfigurationException, ClassNotFoundException {
 		
 		EventsPermissions.onJoin(eventConnect);
 		EventsPerfiles.connectPlayerEventsPerfiles(eventConnect);	
