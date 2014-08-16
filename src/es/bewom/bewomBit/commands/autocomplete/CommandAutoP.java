@@ -97,10 +97,16 @@ public class CommandAutoP {
 			
 			if (args.length == 1){
 				
-				List<String> pList = Arrays.asList("privado","publico","añadir","eliminar");  
+				List<String> pList;
 				
 				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
-					pList.add("cambiar");
+					
+					pList = Arrays.asList("privado","publico","añadir","eliminar","cambiar");  
+				
+				} else {
+					
+					pList = Arrays.asList("privado","publico","añadir","eliminar");  
+					
 				}
 				
 				return pList;
