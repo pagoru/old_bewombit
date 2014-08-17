@@ -1,7 +1,9 @@
 package es.bewom.bewomBit.events;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Logger;
 
 import org.bukkit.entity.Player;
@@ -11,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
 import es.bewom.bewomBit.BewomBit;
+import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class EventsPermissions {
 	
@@ -31,31 +34,21 @@ public class EventsPermissions {
 		attachment.setPermission("bewom.vip", true);
 		
 		
-//	    final String DB_NAME = "jdbc:mysql://188.165.234.183:3306/zpermissions";
-//	    final String USER = "root";
-//	    final String PASS = "aef771bc0d3f5118ba5dcc1893bd0bd4";
-//	    Connection conn;
-//	    Statement s;
+		MySQL connection = new MySQL(BewomBit.main, "localhost", "3306", "bewomBit", "root", "");
+		connection.openConnection();
+		Statement statement = connection.getConnection().createStatement();
+		ResultSet aaa = statement.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + player.getName() + "';");
 		
-		// ---> MySQL <--- //
 		
-//		Class.forName("com.mysql.jdbc.Driver");
-//		
-//		Connection connection = DriverManager.getConnection("jdbc:mysql://bewom.es.mysql", "bewom_es", "n58PLKf7");
-//
-//		
-//		try
-//		{
-//		    if(connection != null)
-//		        connection.close();
-//		} catch (SQLException e) {
-//		    e.printStackTrace();
-//		}
-	    
+		if(aaa.next()){
+			
+			player.sendMessage(aaa.getString("group"));
 		
-//		"SELECT * FROM `memberships` WHERE member = '" + player.getName() + "';"
+		}
 		
-//		player.sendMessage(rs.toString());
+		statement.close();
+		connection.closeConnection();
+
 		
 	}
 	
