@@ -20,21 +20,21 @@ public class CommandFly {
 			if (args.length == 0){
 				cambiarModoDeVuelo (craftPlayer);
 			}
-			else {
-				if (args.length == 1){
+			else if (args.length == 1){
 
-					if (sender.getServer().getPlayer(args [0]) != null){
-						craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
-						cambiarModoDeVuelo (craftPlayer, craftPlayerArgs);
-					} else {
-						CommandUtilities.jugadorDesconectado(sender);
-					}
-
+				if (CommandUtilities.comprobarJugador (sender, (args[0]))){
+					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					cambiarModoDeVuelo (craftPlayer, craftPlayerArgs);
 				}
 				else {
-					CommandUtilities.formaCorrecta(sender, "/fly [player]");
+					CommandUtilities.jugadorDesconectado(sender);
 				}
+
 			}
+			else {
+				CommandUtilities.formaCorrecta(sender, "/fly [player]");
+			}
+
 			return true;
 		}
 		return false;

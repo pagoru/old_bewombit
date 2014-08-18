@@ -21,4 +21,37 @@ public class CommandUtilities {
 		}
 		return false;
 	}
+	
+	public static int getInt (String cadena) throws Exception {
+		int numero;
+		try {
+			numero = Integer.parseInt(cadena);
+		}
+		catch (NumberFormatException e){
+			throw new Exception();
+		}
+		return numero;
+	}
+	
+	public static float getFloat (String cadena) throws Exception {
+		float numero;
+		try {
+			numero = Float.parseFloat(cadena);
+		}
+		catch (NumberFormatException e){
+			throw new Exception();
+		}
+		return numero;
+	}
+	
+	public static double getDouble (String cadena) throws Exception {
+		double numero;
+		try {
+			numero = Double.parseDouble(cadena);
+		}
+		catch (NumberFormatException e){
+			throw new Exception();
+		}
+		return numero;
+	}
 }

@@ -16,6 +16,7 @@ import es.bewom.bewomBit.commands.autocomplete.CommandAutoLag;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawn;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpAll;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpaHere;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoV;
@@ -31,23 +32,19 @@ public class AutoCompleteTab implements TabCompleter {
 			}
 			if(CommandAutoGm.commandautogm(sender, cmd, alias, args) != null){
 				return CommandAutoGm.commandautogm(sender, cmd, alias, args);
-			} 	
-			
+			} 			
 			if(CommandAutoV.commandautov(sender, cmd, alias, args) != null){			
 				return CommandAutoV.commandautov(sender, cmd, alias, args);			
-			}	
-			
+			}			
 			if(CommandAutoTpa.commandautotpa(sender, cmd, alias, args) != null){			
 				return CommandAutoTpa.commandautotpa(sender, cmd, alias, args);			
-			} 
-			
+			} 			
 			if(CommandAutoSpawner.commandautospawner(sender, cmd, alias, args) != null){
 				return CommandAutoSpawner.commandautospawner(sender, cmd, alias, args);
-			} 
-			
+			} 			
 			if(CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args) != null){			
 				return CommandAutoTpaHere.commandautotpahere(sender, cmd, alias, args);			
-			} 	
+			} 			
 			if(CommandAutoHome.commandautohome(sender, cmd, alias, args) != null){			
 				return CommandAutoHome.commandautohome(sender, cmd, alias, args);			
 			} 
@@ -59,7 +56,11 @@ public class AutoCompleteTab implements TabCompleter {
 			} 
 			if(CommandAutoLag.commandautolag(sender, cmd, alias, args) != null){			
 				return CommandAutoLag.commandautolag(sender, cmd, alias, args);			
-			} 
+			}
+			if (CommandAutoTpAll.commandautotpall(sender, cmd, alias, args) != null){
+				return CommandAutoTpAll.commandautotpall(sender, cmd, alias, args);
+			}
+
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

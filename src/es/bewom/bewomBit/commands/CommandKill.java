@@ -11,7 +11,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandKill {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandkill(CommandSender sender, Command cmd, String label, String [] args){
+	public static boolean commandkill (CommandSender sender, Command cmd, String label, String [] args){
 
 		if (label.equalsIgnoreCase("kill")){
 
