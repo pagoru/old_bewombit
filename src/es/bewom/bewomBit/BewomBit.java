@@ -81,6 +81,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("spawn").setExecutor(new CommandPlayer());
 		getCommand("god").setExecutor(new CommandPlayer());
 		getCommand("lag").setExecutor(new CommandPlayer());
+		getCommand("tpall").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -94,6 +95,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("delhome").setTabCompleter(new AutoCompleteTab());
 		getCommand("spawn").setTabCompleter(new AutoCompleteTab());
 		getCommand("lag").setTabCompleter(new AutoCompleteTab());
+		getCommand("tpall").setTabCompleter(new AutoCompleteTab());
 		
 		// ---> Temporizadores
 		

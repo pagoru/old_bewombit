@@ -16,13 +16,11 @@ import org.bukkit.entity.Player;
 
 public class CommandAutoDelHome {
 	
-	@SuppressWarnings({ "unused"})
 	public static List<String> commandautodelhome(CommandSender sender, Command cmd, String alias, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException {
 		
 		if(cmd.getName().equalsIgnoreCase("delhome")){
 			
 			Player craftPlayer = (Player) sender;
-			String playerName = craftPlayer.getName();
 			UUID playerUUID = craftPlayer.getUniqueId();
 			
 			File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");

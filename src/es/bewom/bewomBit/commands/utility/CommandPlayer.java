@@ -60,6 +60,9 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandGod.commandgod(sender, cmd, label, args)){
 					return true;
 				}
+				if(CommandTpAll.commandtpall(sender, cmd, label, args)){
+					return true;
+				}
 			}
 			
 			// ---> Comandos de vips <--- //
@@ -102,8 +105,7 @@ public class CommandPlayer implements CommandExecutor {
 			}
 			if(CommandP.commandp(sender, cmd, label, args)){
 				return true;
-			}
-		
+			}		
 			if(CommandSpawn.commandspawn(sender, cmd, label, args)){
 				return true;
 			}

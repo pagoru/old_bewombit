@@ -53,8 +53,8 @@ commands:
       permission: bewom.admin
 
    congelar:
-      description: Algo
-      permission: bewom.vip
+      description: Permite al jugador congelar jugadores
+      permission: bewom.admin
 
    seen:
       description: Permite al jugador ver la ultima conexion de otro jugador
@@ -71,7 +71,7 @@ commands:
    me:
       description: Permite entrar en chatsew
       permission: bewom.vip
-      
+
    msg:
       description: Permite entrar en chats
       permission: bewom.vip
@@ -79,52 +79,56 @@ commands:
    tell:
       description: Permite entrar en chats
       permission: bewom.vip
-  
+
    p:
       description: Permite al jugador editar un cofre
       permission: bewom.vip
-      
+
    gm:
       description: Permite al jugador cambiar de gamemode
       permission: bewom.admin
-      
+
    v:
       description: Permite al jugador ocultarse
       permission: bewom.admin
-   
+
    tpa:
       description: Permite al jugador pedir una peticion de tp
       permission: bewom.vip
-      
+
    tpahere:
       description: Permite al jugador pedir una peticion de tp donde el se encuentra
       permission: bewom.vip
-      
+
    spawner:
       description: Permite al jugador cambiar un spawner
       permission: bewom.admin
-      
+
    sethome:
       description: Permite al jugador guardar una localizacion
       permission: bewom.vip
-      
+
    home:
       description: Permite al jugador teletransportarse a una localizacion
       permission: bewom.vip
-      
+
    delhome:
       description: Permite al jugador teletransportarse a una localizacion
       permission: bewom.vip
-      
+
    spawn:
       description: Permite al jugador ir al spawn
       permission: bewom.default
-      
+
    god:
       description: Permite al jugador ser inmortal
       permission: bewom.admin
-      
+
    lag:
       description: Permite al jugador saber el estado del servidor.
       permission: bewom.admin
-   
+
+   tpall:
+      description: Permite al jugador tepear telentransportar a todos los jugadores hacia el.
+      permission: bewom.admin
+
