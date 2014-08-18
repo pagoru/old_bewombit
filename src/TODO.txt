@@ -35,6 +35,8 @@
 
 - Sistema de logs por usuario + mp
 
+- Sistemna de regiones
+
 
 >>> ACABADO:
 

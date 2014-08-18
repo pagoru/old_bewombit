@@ -32,6 +32,7 @@ public class EventsChatAntiSpam {
 
 		String adminModText = ChatColor.RESET + " < " + ChatColor.WHITE  + "" + ChatColor.BOLD;
 		String vipDefaultText = ChatColor.WHITE + " < ";
+		String steveDefaultText = ChatColor.WHITE + " < " + ChatColor.GRAY;
 
 		String mpText = ChatColor.GRAY + "/mp";
 
@@ -64,7 +65,7 @@ public class EventsChatAntiSpam {
 
 			}
 			else {
-				eventChat.setFormat(steve + vipDefaultText + corregir(message));
+				eventChat.setFormat(steve + steveDefaultText + corregir(message));
 			}
 
 		} else if (getPlayerChat.equals("say")){
