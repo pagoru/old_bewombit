@@ -67,7 +67,7 @@ public class EventsPermissions {
 					
 				} else {
 					
-					int group = query.getInt("group");
+					int group = query.getInt("group"); 
 					
 					if(group == 0){
 						
