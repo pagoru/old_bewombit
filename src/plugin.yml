@@ -132,3 +132,7 @@ commands:
       description: Permite al jugador tepear telentransportar a todos los jugadores hacia el.
       permission: bewom.admin
 
+   speed:
+      description: Permite al jugador cambiar velocidades.
+      permission: bewom.admin
+

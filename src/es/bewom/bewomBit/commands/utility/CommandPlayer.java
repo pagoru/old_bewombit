@@ -63,6 +63,9 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandTpAll.commandtpall(sender, cmd, label, args)){
 					return true;
 				}
+				/*if(CommandSpeed.commandspeed(sender, cmd, label, args)){
+					return true;
+				}*/
 			}
 			
 			// ---> Comandos de vips <--- //
@@ -122,6 +125,9 @@ public class CommandPlayer implements CommandExecutor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
