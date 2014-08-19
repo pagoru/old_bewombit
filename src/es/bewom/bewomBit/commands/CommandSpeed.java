@@ -1,14 +1,14 @@
-/*package es.bewom.bewomBit.commands;
-
+package es.bewom.bewomBit.commands;
+/*
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-
+*/
 public class CommandSpeed {
-
+	/*
 	public static boolean commandspeed(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("speed")){
@@ -41,5 +41,5 @@ public class CommandSpeed {
 		return false;
 	}
 
-
-}*/
+*/
+}
