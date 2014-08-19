@@ -11,12 +11,15 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 
 import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.utility.MySQL.MySQL;
@@ -24,8 +27,19 @@ import es.bewom.bewomBit.utility.MySQL.MySQL;
 public class EventsPermissions {
 	
 	static Logger log = Logger.getLogger("Minecraft");
+	
+	private static int task1;
+	private static int task2;
+	
 	private static final EventsPermissions instance = new EventsPermissions();
-
+	
+	private static String SQLUrl = "localhost";
+	private static String SQLPort = "3306";
+	private static String SQLbd = "bewomBit";
+	private static String SQLUser = "root";
+	private static String SQLPass = "";
+	
+	
 	public static final EventsPermissions getPlugin() {		
 		return instance;
 	}
@@ -33,18 +47,18 @@ public class EventsPermissions {
 	@EventHandler
 	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, ClassNotFoundException, ParseException {
 		
-		Player craftPlayer = eventConnect.getPlayer();
+		final Player craftPlayer = eventConnect.getPlayer();
 		String playerUUID = craftPlayer.getUniqueId().toString();
 		String playerName = craftPlayer.getName();
 		String playerIP = craftPlayer.getAddress().getAddress().toString().substring(1);
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date firstDate = new Date();
 		
-		PermissionAttachment attachment = craftPlayer.addAttachment(BewomBit.main);
+		final PermissionAttachment attachment = craftPlayer.addAttachment(BewomBit.main);
 		
 		
-		MySQL connection = new MySQL(BewomBit.main, "localhost", "3306", "bewomBit", "root", "");
+		MySQL connection = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
 		connection.openConnection();
 		Statement statement = connection.getConnection().createStatement();
 		ResultSet query = statement.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
@@ -244,6 +258,79 @@ public class EventsPermissions {
 							}
 							
 						}
+						
+						//Scheduler
+												
+						task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
+				            
+							@SuppressWarnings("deprecation")
+							@Override
+				            public void run() {
+								try {
+									
+									log.info("Refrescando permisos de " + craftPlayer.getName());
+									
+									MySQL connection1 = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
+									
+									connection1.openConnection();
+									
+									Statement statement1 = connection1.getConnection().createStatement();
+									ResultSet query1 = statement1.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
+									
+									if(query1.next()){
+										
+										String groupExp1 = query1.getString("group_expiration");
+										Date firstDate1 = new Date();
+										Date group_expiration1;
+										
+										
+										if(groupExp1 != null) {
+											
+											group_expiration1 = dateFormat.parse(groupExp1);
+											
+											if(group_expiration1.compareTo(firstDate1) < 0){
+												
+												statement1.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `playerName` = '" + craftPlayer.getName() + "'");
+												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Se te ha terminado el VIP! :(");
+												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Pero puedes volver a donar! :)");
+												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "http://bewom.es/vip");
+												
+												attachment.unsetPermission("bewom.vip");
+												attachment.setPermission("bewom.default", true);
+												
+												// elimina scoreboard del jugador
+												
+												ScoreboardManager manager = Bukkit.getScoreboardManager();
+												EventsPerfiles.board = manager.getMainScoreboard();
+												
+												Team teamUser = EventsPerfiles.board.getTeam(craftPlayer.getName());
+												teamUser.unregister();
+												
+												Bukkit.getServer().getScheduler().cancelTask(task1);
+												
+											}
+										}
+									}
+									
+									statement1.close();
+									connection1.closeConnection();
+									
+									if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
+										
+										Bukkit.getServer().getScheduler().cancelTask(task1);
+										
+									}
+									
+								} catch (ClassNotFoundException e) {
+									e.printStackTrace();
+								} catch (SQLException e) {
+									e.printStackTrace();
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}	
+							}
+							
+						}, 0, 3000L);
 	
 						
 					} 
@@ -256,6 +343,70 @@ public class EventsPermissions {
 				if(group == 0){
 					
 					attachment.setPermission("bewom.default", true);
+					
+					//Scheduler
+					
+					task2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
+			            
+						@SuppressWarnings("deprecation")
+						@Override
+			            public void run() {
+							try {
+								
+								log.info("Refrescando permisos de " + craftPlayer.getName());
+								
+								MySQL connection2 = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
+								
+								connection2.openConnection();
+								
+								Statement statement2 = connection2.getConnection().createStatement();
+								ResultSet query2 = statement2.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
+								
+								if(query2.next()){
+									
+									String group2 = query2.getString("group");									
+									
+									if(group2.equals("3")) {
+										
+										craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Ya eres VIP! :)");
+										craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Disfruta de tus nuevas ventajas! :D");
+										
+										attachment.setPermission("bewom.vip", true);
+										
+										// crea scoreboard del jugador
+										
+										ScoreboardManager manager = Bukkit.getScoreboardManager();
+										EventsPerfiles.board = manager.getMainScoreboard();
+										
+										Team teamUser = EventsPerfiles.board.getTeam(craftPlayer.getName());
+										
+										teamUser = EventsPerfiles.board.registerNewTeam(craftPlayer.getName());
+										teamUser.setPrefix(ChatColor.DARK_AQUA + "" );
+										teamUser.setDisplayName(craftPlayer.getName());
+										teamUser.addPlayer(craftPlayer);
+										
+										Bukkit.getServer().getScheduler().cancelTask(task2);
+
+									}
+								}
+								
+								statement2.close();
+								connection2.closeConnection();
+								
+								if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
+									
+									Bukkit.getServer().getScheduler().cancelTask(task1);
+									
+								}
+								
+							} catch (ClassNotFoundException e) {
+								e.printStackTrace();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							} 
+						}
+						
+					}, 0, 3000L);
 					
 				} else if(group == 1){
 					
@@ -284,7 +435,7 @@ public class EventsPermissions {
 		
 		statement.close();
 		connection.closeConnection();
-
+		
 		
 	}
 	

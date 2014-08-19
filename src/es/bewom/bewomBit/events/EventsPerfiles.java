@@ -17,7 +17,7 @@ import org.bukkit.scoreboard.Team;
 
 public class EventsPerfiles {
 
-	private static Scoreboard board;
+	static Scoreboard board;
 	
 	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect) throws FileNotFoundException, IOException, InvalidConfigurationException{
 		

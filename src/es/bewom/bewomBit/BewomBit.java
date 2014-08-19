@@ -101,7 +101,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		// ---> Temporizadores
 		
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
-				
+						
 		// ---> config inicial <--- //
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");

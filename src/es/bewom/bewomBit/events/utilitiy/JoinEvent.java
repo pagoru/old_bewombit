@@ -20,9 +20,9 @@ public class JoinEvent implements Listener  {
 	public void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, InvalidConfigurationException, ClassNotFoundException, ParseException {
 		
 		EventsWelcomePlayer.connectPlayerEventsWelcomePlayer(eventConnect);
-		EventsPerfiles.connectPlayerEventsPerfiles(eventConnect);	
 		EventsPermissions.onJoin(eventConnect);
 		EventsSpawn.onJoin(eventConnect);
+		EventsPerfiles.connectPlayerEventsPerfiles(eventConnect);	
 		
 	}
 	
