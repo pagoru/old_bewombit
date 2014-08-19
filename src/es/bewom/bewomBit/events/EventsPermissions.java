@@ -62,7 +62,9 @@ public class EventsPermissions {
 			long hours = TimeUnit.MILLISECONDS.toHours(diff) % 24; 
 			long days = TimeUnit.MILLISECONDS.toDays(diff); 
 			
-			//˙ltima hora de connexion//
+			//√∫ltima hora de connexion//
+			
+			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido de nuevo " + playerName + "! " + ChatColor.DARK_RED  + "‚ù§");
 			
 			String segundos = "";
 			String minutos = "";
@@ -95,19 +97,19 @@ public class EventsPermissions {
 			
 			if(days == 0 && hours == 0 && minutes == 0){
 				
-				craftPlayer.sendMessage(ChatColor.GRAY + "Tu ˙ltima conexiÛn fue hace " + segundos + "." );	
+				craftPlayer.sendMessage(ChatColor.GRAY + "Tu √∫ltima conexi√≥n fue hace " + segundos + "." );	
 				
 			} else if(days == 0 && hours == 0){
 				
-				craftPlayer.sendMessage(ChatColor.GRAY + "Tu ˙ltima conexiÛn fue hace " + minutos + " y " + segundos + "." );	
+				craftPlayer.sendMessage(ChatColor.GRAY + "Tu √∫ltima conexi√≥n fue hace " + minutos + " y " + segundos + "." );	
 				
 			} else if(days == 0){
 				
-				craftPlayer.sendMessage(ChatColor.GRAY + "Tu ˙ltima conexiÛn fue hace " + horas + ", " + minutos + " y " + segundos + "." );
+				craftPlayer.sendMessage(ChatColor.GRAY + "Tu √∫ltima conexi√≥n fue hace " + horas + ", " + minutos + " y " + segundos + "." );
 				
 			} else {
 				
-				craftPlayer.sendMessage(ChatColor.GRAY + "Tu ˙ltima conexiÛn fue hace " + dias + ", " + horas + ", " + minutos + " y " + segundos + "." );
+				craftPlayer.sendMessage(ChatColor.GRAY + "Tu √∫ltima conexi√≥n fue hace " + dias + ", " + horas + ", " + minutos + " y " + segundos + "." );
 				
 			}
 			
@@ -272,6 +274,8 @@ public class EventsPermissions {
 			
 		} else {
 				
+			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido " + playerName + "! ¬øEres nuevo, no? " + ChatColor.DARK_RED  + "‚ù§");
+			
 			statement.executeUpdate("INSERT INTO permissions (`UUID`, `playerName`, `group`, `first_login`, `last_login`, `IP`) VALUES ('" + playerUUID + "', '" + playerName + "', '" + "0" + "', '" + dateFormat.format(firstDate).toString() + "', '" + dateFormat.format(firstDate).toString() + "', '" + playerIP + "');");
 			
 		}
