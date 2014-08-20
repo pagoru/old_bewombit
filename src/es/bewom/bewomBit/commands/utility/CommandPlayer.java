@@ -63,6 +63,9 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandTpAll.commandtpall(sender, cmd, label, args)){
 					return true;
 				}
+				if(CommandBan.commandban(sender, cmd, label, args)){
+					return true;
+				}
 				/*if(CommandSpeed.commandspeed(sender, cmd, label, args)){
 					return true;
 				}*/
