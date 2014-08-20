@@ -2,11 +2,6 @@
 ^_^
 
 >>> TODO:
-
-- Sistema de permisos basico.
-  > VIPS.
-  > Perfiles MySQL.
-  > El freeze!
   
 - Sistema de baneos y kickeos.
 
@@ -50,3 +45,7 @@
  > Huevos en spawner
  > Poder romper spawner en supervivencia.
  
+ - Sistema de permisos basico.
+  > VIPS.
+  > Perfiles MySQL.
+  > El freeze!

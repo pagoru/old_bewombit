@@ -33,13 +33,6 @@ public class EventsPermissions {
 	
 	private static final EventsPermissions instance = new EventsPermissions();
 	
-	private static String SQLUrl = "localhost";
-	private static String SQLPort = "3306";
-	private static String SQLbd = "bewomBit";
-	private static String SQLUser = "root";
-	private static String SQLPass = "";
-	
-	
 	public static final EventsPermissions getPlugin() {		
 		return instance;
 	}
@@ -58,7 +51,7 @@ public class EventsPermissions {
 		final PermissionAttachment attachment = craftPlayer.addAttachment(BewomBit.main);
 		
 		
-		MySQL connection = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
+		MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 		connection.openConnection();
 		Statement statement = connection.getConnection().createStatement();
 		ResultSet query = statement.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
@@ -270,7 +263,7 @@ public class EventsPermissions {
 									
 									log.info("Refrescando permisos de " + craftPlayer.getName());
 									
-									MySQL connection1 = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
+									MySQL connection1 = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 									
 									connection1.openConnection();
 									
@@ -355,7 +348,7 @@ public class EventsPermissions {
 								
 								log.info("Refrescando permisos de " + craftPlayer.getName());
 								
-								MySQL connection2 = new MySQL(BewomBit.main, SQLUrl, SQLPort, SQLbd, SQLUser, SQLPass);
+								MySQL connection2 = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 								
 								connection2.openConnection();
 								

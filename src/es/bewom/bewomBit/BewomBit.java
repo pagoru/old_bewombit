@@ -32,6 +32,12 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	Logger log = Logger.getLogger("Minecraft");
 	
 	public static BewomBit main;
+	
+	public static String SQLUrl = "localhost";
+	public static String SQLPort = "3306";
+	public static String SQLbd = "bewomBit";
+	public static String SQLUser = "root";
+	public static String SQLPass = "";
 
 	public void onEnable(){
 		
@@ -83,6 +89,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("lag").setExecutor(new CommandPlayer());
 		getCommand("tpall").setExecutor(new CommandPlayer());
 		//getCommand("speed").setExecutor(new CommandPlayer());
+		getCommand("ban").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		

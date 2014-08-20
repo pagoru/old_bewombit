@@ -126,7 +126,7 @@ commands:
 
    lag:
       description: Permite al jugador saber el estado del servidor.
-      permission: bewom.admin
+      permission: bewom.default
 
    tpall:
       description: Permite al jugador tepear telentransportar a todos los jugadores hacia el.
@@ -135,4 +135,8 @@ commands:
    speed:
       description: Permite al jugador cambiar velocidades.
       permission: bewom.admin
+      
+   ban:
+      description: Permite al jugador banear a otro jugador
+      permission: bewom.mod
 
