@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.InvalidConfigurationException;
 
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoBan;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoDelHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoHome;
@@ -59,6 +60,9 @@ public class AutoCompleteTab implements TabCompleter {
 			}
 			if (CommandAutoTpAll.commandautotpall(sender, cmd, alias, args) != null){
 				return CommandAutoTpAll.commandautotpall(sender, cmd, alias, args);
+			}
+			if (CommandAutoBan.commandautoban(sender, cmd, alias, args) != null){
+				return CommandAutoBan.commandautoban(sender, cmd, alias, args);
 			}
 
 		

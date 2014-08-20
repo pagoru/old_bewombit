@@ -53,7 +53,7 @@ public class CommandBan {
 					
 					if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
 						
-						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().toString();
+						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
 						
 					}
 					
@@ -82,7 +82,7 @@ public class CommandBan {
 					
 					if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
 						
-						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().toString();
+						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
 						
 					}
 					
@@ -126,7 +126,7 @@ public class CommandBan {
 					
 					if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
 						
-						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().toString();
+						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
 						
 					}		
 					
@@ -161,6 +161,67 @@ public class CommandBan {
 							+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
 							+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
 							+ "'incumplir las normas', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
+							+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
+
+					statement.close();
+					connection.closeConnection();
+					
+				} else if (args.length >= 5){
+									
+					String motivo = "";
+					for (int i = 4; i < args.length; i++) {
+						motivo += args[i] + " ";
+					}
+					
+					
+					long args2 = Long.parseLong(args[2]);
+					long segundosArgs2 = 0;
+					
+					String bannedPlayer = args[0];
+					UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+					
+					String bannedPlayerIP = null;
+					
+					long firsDateTime = firstDate.getTime();
+					
+					
+					if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+						
+						bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+						
+					}		
+					
+					if(args[3].contains("s")){
+						
+						segundosArgs2 = args2*1000;
+						
+					} else if(args[3].contains("m")){
+						
+						segundosArgs2 = args2*60*1000;
+						
+					} else if(args[3].contains("h")){
+						
+						segundosArgs2 = args2*60*60*1000;
+						
+					} else if(args[3].contains("d")){
+						
+						segundosArgs2 = args2*24*60*60*1000;
+						
+					}
+					
+					long dateTimeSec = firsDateTime + segundosArgs2;					
+					Date dateTime = new Date(dateTimeSec);
+					
+					MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+					connection.openConnection();
+					
+					Statement statement = connection.getConnection().createStatement();
+						
+					statement.executeUpdate("INSERT INTO ban_list "
+							+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
+							+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
+							+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
+							+ "'" + motivo + "', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
 							+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
 
 					statement.close();
