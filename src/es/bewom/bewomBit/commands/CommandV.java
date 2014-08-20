@@ -31,23 +31,32 @@ public class CommandV {
 						
 						craftPlayerArgs.hidePlayer(craftPlayer);
 						craftPlayer.sendMessage(ChatColor.GRAY + "Estas oculto para el jugador " + args[1] + ".");
-						return true;
 
-					}
-					else if (args[0].equals("mostrar")){
+					} else if (args[0].equals("mostrar")){
 					
 						craftPlayerArgs.showPlayer(craftPlayer);	
 						craftPlayer.sendMessage(ChatColor.GRAY + "Ya no estas oculto para el jugador " + args[1] + ".");
-						return true;
+						
 					}
+					
+				} else {
+					
+					CommandUtilities.formaCorrecta(sender, "/v <mostrar/ocultar> <player>");
+					
 				}
 
-				else {
-					CommandUtilities.formaCorrecta(sender, "/v <mostrar/ocultar> <player>");
-				}
-				return true;
+			} else if (args.length == 1){
+				
+				craftPlayer.sendMessage(ChatColor.GRAY + "Estas oculto para todos los jugadores en linea.");
+				
+//			    for (Player players : Bukkit.getOnlinePlayers()){
+//			    	
+//			    	players.hidePlayer(craftPlayer);
+//			    }
+				
 			}
-			return false;
+			
+			return true;
 		}
 		return false;
 	}
