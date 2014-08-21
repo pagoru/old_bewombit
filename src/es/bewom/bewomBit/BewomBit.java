@@ -36,8 +36,8 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	public static String SQLUrl = "localhost";
 	public static String SQLPort = "3306";
 	public static String SQLbd = "bewomBit";
-	public static String SQLUser = "root";
-	public static String SQLPass = "";
+	public static String SQLUser = "bewomBit";
+	public static String SQLPass = "9fff69cdd1a245760e2309d4b1147028";
 
 	public void onEnable(){
 		

@@ -112,7 +112,12 @@ public class CommandBan {
 					statement.close();
 					connection.closeConnection();
 					
-					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado.");
+					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
+					
+					Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+					if(bannedCraftPlayer != null){
+						bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma permanente por incumplir las normas.");
+					}
 					
 				} else if (args.length >= 3){
 				
@@ -129,7 +134,7 @@ public class CommandBan {
 					
 					String motivo = "";
 					for (int i = 2; i < args.length; i++) {
-						motivo += args[i] + " ";
+						motivo += args[i] + "";
 					}
 					
 					//consulta bans
@@ -184,6 +189,13 @@ public class CommandBan {
 					connection.closeConnection();
 					
 					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
+					
+					Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+					if(bannedCraftPlayer != null){
+						
+						bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma permanente.");
+						
+					}
 					
 				} 
 				
@@ -280,13 +292,18 @@ public class CommandBan {
 					statement.close();
 					connection.closeConnection();
 					
-					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado.");
+					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
+					
+					Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+					if(bannedCraftPlayer != null){
+						bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal por incumplir las normas.");
+					}
 					
 				} else if (args.length >= 5){
 									
 					String motivo = "";
 					for (int i = 4; i < args.length; i++) {
-						motivo += args[i] + " ";
+						motivo += args[i] + "";
 					}
 					
 					
@@ -353,6 +370,7 @@ public class CommandBan {
 						}
 						
 						statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+						craftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal.");
 					}
 					
 					statementC.close();
@@ -379,6 +397,11 @@ public class CommandBan {
 					connection.closeConnection();
 					
 					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
+					
+					Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+					if(bannedCraftPlayer != null){
+						bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma temporal.");
+					}
 					
 				} 
 				

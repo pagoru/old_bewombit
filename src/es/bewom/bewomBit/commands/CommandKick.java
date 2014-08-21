@@ -1,7 +1,6 @@
 package es.bewom.bewomBit.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,7 +23,7 @@ public class CommandKick {
 
 					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 
-					craftPlayerArgs.kickPlayer (ChatColor.BLUE + "Has sido kickeado.");
+					craftPlayerArgs.kickPlayer (DefaultMessages.kickBanPlayer + "Has sido kickeado.");
 					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado.");
 
 				}
@@ -41,10 +40,10 @@ public class CommandKick {
 					String texto = "";
 
 					for (int i = 1; i < args.length; i++) {
-						texto += args[i] + " ";
+						texto += args[i] + "";
 					}
-					craftPlayerArgs.kickPlayer(ChatColor.BLUE + "Has sido kickeado por " + texto);
-					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado por " + texto);
+					craftPlayerArgs.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido kickeado por " + texto + ".");
+					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado por " + texto + ".");
 				}
 				else{
 					CommandUtilities.jugadorDesconectado(sender);

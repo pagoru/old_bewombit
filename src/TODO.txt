@@ -30,7 +30,9 @@
 
 - Sistema de logs por usuario + mp
 
-- Sistemna de regiones
+- Sistemna de regiones WORLDGUARD
+
+- Integracion foro
 
 
 >>> ACABADO:
