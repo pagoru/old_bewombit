@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -34,6 +35,9 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	Logger log = Logger.getLogger("Minecraft");
 	
 	public static BewomBit main;
+	
+	@SuppressWarnings("unused")
+	private static int task1;
 	
 	public static String SQLUrl = "localhost";
 	public static String SQLPort = "3306";
@@ -115,6 +119,26 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
 						
+		// ---> Guardado de mundos
+		
+		task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
+	        
+			@Override
+	        public void run() {
+				
+				java.util.List<World> listWorlds = Bukkit.getServer().getWorlds();
+				
+				for (World w : listWorlds){
+					
+					w.save();
+					log.info(w.getName() + " guardado.");
+					
+				}
+
+			}
+			
+		}, 0, 18000);
+		
 		// ---> config inicial <--- //
 		
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");

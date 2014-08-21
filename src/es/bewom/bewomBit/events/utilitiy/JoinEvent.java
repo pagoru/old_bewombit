@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import es.bewom.bewomBit.events.EventsGuardar;
 import es.bewom.bewomBit.events.EventsPerfiles;
 import es.bewom.bewomBit.events.EventsPermissions;
 import es.bewom.bewomBit.events.EventsSpawn;
@@ -23,6 +24,7 @@ public class JoinEvent implements Listener  {
 		EventsPermissions.onJoin(eventConnect);
 		EventsSpawn.onJoin(eventConnect);
 		EventsPerfiles.connectPlayerEventsPerfiles(eventConnect);	
+		EventsGuardar.onJoin(eventConnect);
 		
 	}
 	

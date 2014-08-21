@@ -15,7 +15,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -388,7 +387,7 @@ public class EventsPermissions {
 								
 								if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
 									
-									Bukkit.getServer().getScheduler().cancelTask(task1);
+									Bukkit.getServer().getScheduler().cancelTask(task2);
 									
 								}
 								
@@ -430,19 +429,6 @@ public class EventsPermissions {
 		connection.closeConnection();
 		
 		
-	}
-	
-	@EventHandler
-	public static void onPreLogin(AsyncPlayerPreLoginEvent eventPreLogin) throws SQLException, IOException {
-		
-//		String hola = ChatColor.DARK_AQUA + "Has sido baneado" + "asdddbdddddddddddddd asdddbdddddddddddddd asdddbdddddddddddddd asdddbdddddddddddddd ";
-//		
-//		Result disable = AsyncPlayerPreLoginEvent.Result.KICK_OTHER;
-//		
-//		eventPreLogin.disallow(disable, hola);
-		
-	}
-	
-	
+	}	
 	
 }
