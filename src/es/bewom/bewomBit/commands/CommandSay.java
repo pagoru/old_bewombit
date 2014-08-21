@@ -24,9 +24,17 @@ public class CommandSay {
 				String broadcast = ChatColor.DARK_GREEN + "/"+ ChatColor.MAGIC + "b" + ChatColor.DARK_GREEN + "/"+  ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WOM" + ChatColor.DARK_GREEN + " < ";
 				String texto = "";
 				for (int i = 0; i < args.length; i++) {
-					texto += args[i] + " ";
+					if(args.length-1 > i){
+						texto += args[i] + " ";
+					} else {
+						texto += args[i] + "";
+					}
+					
 				}
-				Bukkit.getServer().broadcastMessage(broadcast + ChatColor.GREEN + texto);
+				
+				if(!texto.equals("")){
+					Bukkit.getServer().broadcastMessage(broadcast + ChatColor.GREEN + texto);
+				}
 			
 			} else {
 				

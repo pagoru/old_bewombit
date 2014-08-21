@@ -40,7 +40,11 @@ public class CommandKick {
 					String texto = "";
 
 					for (int i = 1; i < args.length; i++) {
-						texto += args[i] + "";
+						if(args.length-1 > i){
+							texto += args[i] + " ";
+						} else {
+							texto += args[i] + "";
+						}
 					}
 					craftPlayerArgs.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido kickeado por " + texto + ".");
 					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado por " + texto + ".");

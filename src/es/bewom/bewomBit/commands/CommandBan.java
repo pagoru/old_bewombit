@@ -134,7 +134,11 @@ public class CommandBan {
 					
 					String motivo = "";
 					for (int i = 2; i < args.length; i++) {
-						motivo += args[i] + "";
+						if(args.length-1 > i){
+							motivo += args[i] + " ";
+						} else {
+							motivo += args[i] + "";
+						}
 					}
 					
 					//consulta bans
@@ -303,7 +307,11 @@ public class CommandBan {
 									
 					String motivo = "";
 					for (int i = 4; i < args.length; i++) {
-						motivo += args[i] + "";
+						if(args.length-1 > i){
+							motivo += args[i] + " ";
+						} else {
+							motivo += args[i] + "";
+						}
 					}
 					
 					
