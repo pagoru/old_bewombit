@@ -33,6 +33,11 @@
 - Integracion foro
 
 
+> UUID
+si pones nick en minus, te da = UUID
+entonces llamas al nombre de esa UUID y te lo da corecto con sus mayus! ;D <3 <3 <3
+
+
 >>> ACABADO:
 
 - Sistema de baneos y kickeos.
