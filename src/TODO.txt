@@ -2,8 +2,6 @@
 ^_^
 
 >>> TODO:
-  
-- Sistema de baneos y kickeos.
 
 - Economia.
   > Dinero por minutos.
@@ -37,6 +35,8 @@
 
 >>> ACABADO:
 
+- Sistema de baneos y kickeos.
+
 - Chat.
   > Limitacion spam.
   
@@ -47,7 +47,7 @@
  > Huevos en spawner
  > Poder romper spawner en supervivencia.
  
- - Sistema de permisos basico.
+ - Sistema de permisos basico. << falta comando
   > VIPS.
   > Perfiles MySQL.
   > El freeze!
