@@ -139,4 +139,8 @@ commands:
    ban:
       description: Permite al jugador banear a otro jugador
       permission: bewom.mod
+      
+   unban:
+      description: Permite al jugador desbanear a otro jugador
+      permission: bewom.mod
 

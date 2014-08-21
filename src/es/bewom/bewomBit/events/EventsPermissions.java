@@ -323,7 +323,7 @@ public class EventsPermissions {
 								}	
 							}
 							
-						}, 0, 3000L);
+						}, 0, 6000);
 	
 						
 					} 
@@ -399,7 +399,7 @@ public class EventsPermissions {
 							} 
 						}
 						
-					}, 0, 3000L);
+					}, 0, 6000);
 					
 				} else if(group == 1){
 					
