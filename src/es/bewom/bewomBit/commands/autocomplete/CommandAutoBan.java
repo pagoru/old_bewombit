@@ -1,17 +1,14 @@
 package es.bewom.bewomBit.commands.autocomplete;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 
 public class CommandAutoBan {
 	
-	public static List<String> commandautoban(CommandSender sender, Command cmd, String alias, String[] args) throws FileNotFoundException, IOException, InvalidConfigurationException {
+	public static List<String> commandautoban(CommandSender sender, Command cmd, String alias, String[] args){
 		
 		if(cmd.getName().equalsIgnoreCase("ban")){
 			

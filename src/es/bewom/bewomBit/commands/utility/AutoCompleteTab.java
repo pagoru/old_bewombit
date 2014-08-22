@@ -15,6 +15,7 @@ import es.bewom.bewomBit.commands.autocomplete.CommandAutoGm;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoHome;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoLag;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoP;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoSave;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawn;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoSpawner;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpAll;
@@ -63,6 +64,9 @@ public class AutoCompleteTab implements TabCompleter {
 			}
 			if (CommandAutoBan.commandautoban(sender, cmd, alias, args) != null){
 				return CommandAutoBan.commandautoban(sender, cmd, alias, args);
+			}
+			if (CommandAutoSave.commandautosave(sender, cmd, alias, args) != null){
+				return CommandAutoSave.commandautosave(sender, cmd, alias, args);
 			}
 
 		

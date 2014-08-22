@@ -143,4 +143,8 @@ commands:
    unban:
       description: Permite al jugador desbanear a otro jugador
       permission: bewom.mod
+      
+   save:
+      description: Permite al jugador guardar el servidor
+      permission: bewom.mod
 
