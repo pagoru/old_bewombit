@@ -100,6 +100,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("ban").setExecutor(new CommandPlayer());
 		getCommand("unban").setExecutor(new CommandPlayer());
 		getCommand("save").setExecutor(new CommandPlayer());
+		getCommand("xray").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -146,12 +147,16 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File data = new File(data1, File.separator + "config.yml");
 		File dataProteccion = new File(data1, File.separator + "proteccion.yml");
+		File dataRxray = new File(data1, File.separator + "rxray.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
 		try {
+			
 			data1.mkdir();
 			data.createNewFile();
 			dataProteccion.createNewFile();
+			dataRxray.createNewFile();
+			
 		} catch (IOException e) {
 		  
 			e.printStackTrace();

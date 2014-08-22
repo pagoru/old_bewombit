@@ -147,4 +147,8 @@ commands:
    save:
       description: Permite al jugador guardar el servidor
       permission: bewom.mod
+      
+   xray:
+      description: Permite al jugador ver los stats de xray
+      permission: bewom.mod
 

@@ -32,6 +32,8 @@
 
 - Integracion foro
 
+http://wiki.sk89q.com/wiki/WorldEdit/API
+
 
 > UUID
 si pones nick en minus, te da = UUID

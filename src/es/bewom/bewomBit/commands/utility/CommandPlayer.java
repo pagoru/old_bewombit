@@ -108,6 +108,9 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandSave.commandsave(sender, cmd, label, args)){
 					return true;
 				}
+				if(CommandXray.commandxray(sender, cmd, label, args)){
+					return true;
+				}
 			} 
 			
 			// ---> Comandos cualquiera <--- //

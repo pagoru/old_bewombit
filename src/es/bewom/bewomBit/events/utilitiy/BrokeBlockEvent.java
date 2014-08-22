@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import es.bewom.bewomBit.events.EventsP;
+import es.bewom.bewomBit.events.EventsRxray;
 import es.bewom.bewomBit.events.EventsSpawner;
 
 public class BrokeBlockEvent implements Listener {
@@ -21,6 +22,7 @@ public class BrokeBlockEvent implements Listener {
 		
 		EventsP.brokeBlockPlayerEventsP (eventBroke);
 		EventsSpawner.brokeBlockPlayerEventsP(eventBroke);
+		EventsRxray.OnBreak(eventBroke);
 		
 	}
 
