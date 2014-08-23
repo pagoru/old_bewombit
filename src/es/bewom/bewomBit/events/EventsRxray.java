@@ -55,7 +55,6 @@ public class EventsRxray {
 		if(eventBroke.getBlock().getType().equals(Material.EMERALD_ORE)){
 			actualizarOres (xrayData, f, playerName, ".Emerald_Ore", true);		
 		}
-
 	}
 
 	public static void OnPlace(BlockPlaceEvent eventPlace) throws FileNotFoundException, IOException, InvalidConfigurationException {
