@@ -193,6 +193,35 @@ public class CommandXray {
 					
 				}
 			
+			} else if (args.length == 2){
+				
+				if(args[1].equals("limpiar")){
+					
+					Player craftPlayer = (Player) sender;
+					String playerName = args[0];
+					
+					File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+					File f = new File(rayData, File.separator + "rxray.yml");
+					FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
+					
+					xrayData.load(f);
+					
+					String iPlayer = xrayData.getString(playerName);
+							
+					if(iPlayer != null){
+						
+						xrayData.set(playerName, null);
+						craftPlayer.sendMessage(ChatColor.RED + "Reiniciado deteccion xray de " + playerName);
+						
+					} else {
+
+						craftPlayer.sendMessage(ChatColor.RED + "El jugador " + playerName + " aun no ha roto ningun mineral.");
+						
+					}
+					
+					xrayData.save(f);
+				}
+				
 			}
 			return true;
 		}

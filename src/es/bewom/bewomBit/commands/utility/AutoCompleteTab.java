@@ -22,6 +22,7 @@ import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpAll;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpaHere;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoV;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoXray;
 
 public class AutoCompleteTab implements TabCompleter {
 
@@ -67,6 +68,9 @@ public class AutoCompleteTab implements TabCompleter {
 			}
 			if (CommandAutoSave.commandautosave(sender, cmd, alias, args) != null){
 				return CommandAutoSave.commandautosave(sender, cmd, alias, args);
+			}
+			if (CommandAutoXray.commandautoxray(sender, cmd, alias, args) != null){
+				return CommandAutoXray.commandautoxray(sender, cmd, alias, args);
 			}
 
 		
