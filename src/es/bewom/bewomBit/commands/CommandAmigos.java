@@ -38,7 +38,8 @@ public class CommandAmigos {
 				
 				if(args[0].equals("añadir")){
 					
-					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+					String namePlayer = args[1];
+					UUID craftPlayerUUIDArgs = Bukkit.getServer().getOfflinePlayer(namePlayer).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
 					if(craftPlayerArgs.getLastPlayed() != 0){
@@ -112,13 +113,14 @@ public class CommandAmigos {
 						
 					} else {
 						
-						craftPlayer.sendMessage(ChatColor.RED + "El jugador " + args[1] + " no existe.");
+						craftPlayer.sendMessage(ChatColor.RED + "El jugador " + craftPlayerArgs.getName() + " no existe.");
 						
 					}
 					
 				} else if(args[0].equals("eliminar")){
 					
-					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+					String namePlayer = args[1];
+					UUID craftPlayerUUIDArgs = Bukkit.getServer().getOfflinePlayer(namePlayer).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
 					List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
@@ -141,7 +143,8 @@ public class CommandAmigos {
 					
 				} else if(args[0].equals("aceptar")){
 					
-					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+					String namePlayer = args[1];
+					UUID craftPlayerUUIDArgs = Bukkit.getServer().getOfflinePlayer(namePlayer).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
 					List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
@@ -190,7 +193,8 @@ public class CommandAmigos {
 					
 				} else if(args[0].equals("rechazar")){
 					
-					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+					String namePlayer = args[1];
+					UUID craftPlayerUUIDArgs = Bukkit.getServer().getOfflinePlayer(namePlayer).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
 					List<String> pListaP = amigosData.getStringList(playerName + ".amigos");

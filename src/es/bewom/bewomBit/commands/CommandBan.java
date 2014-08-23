@@ -52,6 +52,7 @@ public class CommandBan {
 					
 					String bannedPlayer = args[0];
 					UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+					bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 					
 					String bannedPlayerIP = null;
 					
@@ -76,13 +77,13 @@ public class CommandBan {
 						
 						if(ban_tiempoC == null){
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma permanente.");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
 						} else {
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
 							craftPlayer.sendMessage(ChatColor.DARK_RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
@@ -123,6 +124,7 @@ public class CommandBan {
 				
 					String bannedPlayer = args[0];
 					UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+					bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 					
 					String bannedPlayerIP = null;
 					
@@ -156,13 +158,13 @@ public class CommandBan {
 						
 						if(ban_tiempoC == null){
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma permanente.");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
 						} else {
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
 							craftPlayer.sendMessage(ChatColor.DARK_RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
@@ -212,6 +214,7 @@ public class CommandBan {
 					
 					String bannedPlayer = args[0];
 					UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+					bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 					
 					String bannedPlayerIP = null;
 					
@@ -257,13 +260,13 @@ public class CommandBan {
 						
 						if(ban_tiempoC == null){
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma permanente.");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
 						} else {
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
 							craftPlayer.sendMessage(ChatColor.DARK_RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
@@ -320,6 +323,7 @@ public class CommandBan {
 					
 					String bannedPlayer = args[0];
 					UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+					bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 					
 					String bannedPlayerIP = null;
 					
@@ -365,13 +369,13 @@ public class CommandBan {
 						
 						if(ban_tiempoC == null){
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma permanente.");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
 						} else {
 							
-							craftPlayer.sendMessage(ChatColor.RED + "> " + args[0] + " ya estaba baneado por " + motivoC + ".");
+							craftPlayer.sendMessage(ChatColor.RED + "> " + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
 							craftPlayer.sendMessage(ChatColor.RED + "> " + baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
 							craftPlayer.sendMessage(ChatColor.DARK_RED + "> " + "El baneo ha sido reemplazado por el tuyo.");
 							
