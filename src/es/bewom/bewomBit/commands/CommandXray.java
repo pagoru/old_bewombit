@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -33,6 +35,47 @@ public class CommandXray {
 				
 				if(args[0].equals("top")){
 					
+					ArrayList<String> myList = new ArrayList<String>();
+					boolean color = true;
+					
+					for (OfflinePlayer p : Bukkit.getOfflinePlayers()){
+						
+						String playerNameArgs = p.getName();
+						
+						xrayData.load(f);
+						
+						double iStone = xrayData.getDouble(playerNameArgs + ".Stone");
+						double iCoal = xrayData.getDouble(playerNameArgs + ".Coal_Ore");
+						double iIron = xrayData.getDouble(playerNameArgs + ".Iron_Ore");
+						double iGold = xrayData.getDouble(playerNameArgs + ".Gold_Ore");
+						double iRedstone = xrayData.getDouble(playerNameArgs + ".Redstone_Ore");
+						double iLapis = xrayData.getDouble(playerNameArgs + ".Lapis_Ore");
+						double iDiamond = xrayData.getDouble(playerNameArgs + ".Diamond_Ore");
+						
+						double StatsCoal = (iCoal/(iStone*0.03))*100;
+						double StatsIron = (iIron/(iStone*0.015))*100;
+						double StatsGold = (iGold/(iStone*0.0013))*100;
+						double StatsRedstone = (iRedstone/(iStone*0.002))*100;
+						double StatsLapis = (iLapis/(iStone*0.001))*100;
+						double StatsDiamond = (iDiamond/(iStone*0.0015))*100;	
+						
+						if(StatsCoal > 90 || StatsIron > 90 || StatsGold > 90 || StatsRedstone > 90 || StatsLapis > 90 || StatsDiamond > 90){
+							
+							if(color == true){
+								myList.add(ChatColor.BLUE + playerNameArgs + ChatColor.WHITE);	
+								color = false;
+							} else {
+								myList.add(ChatColor.LIGHT_PURPLE + playerNameArgs + ChatColor.WHITE);	
+								color = true;
+							}
+											
+						}
+						
+						xrayData.save(f);
+						
+					}
+					
+					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Sospechosos: " + ChatColor.WHITE + myList.toString());
 					
 					
 				} else {
