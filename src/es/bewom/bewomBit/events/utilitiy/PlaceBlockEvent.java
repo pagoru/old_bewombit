@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import es.bewom.bewomBit.events.EventsP;
+import es.bewom.bewomBit.events.EventsRxray;
 import es.bewom.bewomBit.events.EventsSpawner;
 
 public class PlaceBlockEvent implements Listener {
@@ -21,6 +22,7 @@ public class PlaceBlockEvent implements Listener {
 		
 		EventsP.blockPlacePlayerEventsP(eventPlace);
 		EventsSpawner.OnPlace(eventPlace);
+		EventsRxray.OnPlace(eventPlace);
 		
 	}
 

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -41,31 +42,109 @@ public class CommandXray {
 					xrayData.load(f);
 					
 					double iStone = xrayData.getDouble(playerName + ".Stone");
-					double  iCoal = xrayData.getDouble(playerName + ".Coal_Ore");
-					double  iIron = xrayData.getDouble(playerName + ".Iron_Ore");
-					double  iGold = xrayData.getDouble(playerName + ".Gold_Ore");
-					double  iRedstone = xrayData.getDouble(playerName + ".Redstone_Ore");
-					double  iLapis = xrayData.getDouble(playerName + ".Lapis_Ore");
-					double  iDiamond = xrayData.getDouble(playerName + ".Diamond_Ore");
-					double  iEmerald = xrayData.getDouble(playerName + ".Emerald_Ore");
+					double iCoal = xrayData.getDouble(playerName + ".Coal_Ore");
+					double iIron = xrayData.getDouble(playerName + ".Iron_Ore");
+					double iGold = xrayData.getDouble(playerName + ".Gold_Ore");
+					double iRedstone = xrayData.getDouble(playerName + ".Redstone_Ore");
+					double iLapis = xrayData.getDouble(playerName + ".Lapis_Ore");
+					double iDiamond = xrayData.getDouble(playerName + ".Diamond_Ore");
+					double iEmerald = xrayData.getDouble(playerName + ".Emerald_Ore");
 					
-					double StatsCoal = ((iCoal/iStone)%3333)*10000;
-					double StatsIron = ((iIron/iStone)%10000)*10000;
-					double StatsGold = ((iGold/iStone)%76923)*10000;
-					double StatsRedstone = ((iRedstone/iStone)%50000)*10000;
-					double StatsLapis = ((iLapis/iStone)%100000)*10000;
-					double StatsDiamond = ((iDiamond/iStone)%66666)*10000;				
+					double StatsCoal = (iCoal/(iStone*0.03))*100;
+					double StatsIron = (iIron/(iStone*0.015))*100;
+					double StatsGold = (iGold/(iStone*0.0013))*100;
+					double StatsRedstone = (iRedstone/(iStone*0.002))*100;
+					double StatsLapis = (iLapis/(iStone*0.001))*100;
+					double StatsDiamond = (iDiamond/(iStone*0.0015))*100;				
+								
+					String coalColor = "";
+					String ironColor = "";
+					String goldColor = "";
+					String redstoneColor = "";
+					String lapisColor = "";
+					String diamondColor = "";
 					
-					craftPlayer.sendMessage("Estos son los stats del jugador " + args[0]);				
+					if(StatsCoal >= 50 && StatsCoal < 75){
+						coalColor = ChatColor.YELLOW + "";
+					} else if(StatsCoal >= 75 && StatsCoal < 90){
+						coalColor = ChatColor.RED + "";
+					} else if(StatsCoal >= 90 && StatsCoal < 110){
+						coalColor = ChatColor.DARK_RED + "";
+					} else if(StatsCoal >= 110){
+						coalColor = ChatColor.DARK_GRAY + "";
+					} else {
+						coalColor = ChatColor.GREEN + "";
+					}
 					
-					craftPlayer.sendMessage("Piedra: " + dfsin.format(iStone) + " ");
-					craftPlayer.sendMessage("Carbon: " + dfsin.format(iCoal) + " " + df.format(StatsCoal) + "%");
-					craftPlayer.sendMessage("Hierro: " + dfsin.format(iIron) + " " + df.format(StatsIron) + "%");
-					craftPlayer.sendMessage("Oro: " + dfsin.format(iGold) + " " + df.format(StatsGold) + "%");
-					craftPlayer.sendMessage("Redstone: " + dfsin.format(iRedstone) + " " + df.format(StatsRedstone) + "%");
-					craftPlayer.sendMessage("Lapis: " + dfsin.format(iLapis) + " " + df.format(StatsLapis) + "%");
-					craftPlayer.sendMessage("Diamante: " + dfsin.format(iDiamond) + " " + df.format(StatsDiamond) + "%");
-					craftPlayer.sendMessage("Esmeralda: " + dfsin.format(iEmerald));
+					if(StatsIron >= 50 && StatsIron < 75){
+						ironColor = ChatColor.YELLOW + "";
+					} else if(StatsIron >= 75 && StatsIron < 90){
+						ironColor = ChatColor.RED + "";
+					} else if(StatsIron >= 90 && StatsIron < 110){
+						ironColor = ChatColor.DARK_RED + "";
+					} else if(StatsIron >= 110){
+						ironColor = ChatColor.DARK_GRAY + "";
+					} else {
+						ironColor = ChatColor.GREEN + "";
+					}
+					
+					if(StatsGold >= 50 && StatsGold < 75){
+						goldColor = ChatColor.YELLOW + "";
+					} else if(StatsGold >= 75 && StatsGold < 90){
+						goldColor = ChatColor.RED + "";
+					} else if(StatsGold >= 90 && StatsGold < 110){
+						goldColor = ChatColor.DARK_RED + "";
+					} else if(StatsGold >= 110){
+						goldColor = ChatColor.DARK_GRAY + "";
+					} else {
+						goldColor = ChatColor.GREEN + "";
+					}
+					
+					if(StatsRedstone >= 50 && StatsRedstone < 75){
+						redstoneColor = ChatColor.YELLOW + "";
+					} else if(StatsRedstone >= 75 && StatsRedstone < 90){
+						redstoneColor = ChatColor.RED + "";
+					} else if(StatsRedstone >= 90 && StatsRedstone < 110){
+						redstoneColor = ChatColor.DARK_RED + "";
+					} else if(StatsRedstone >= 110){
+						redstoneColor = ChatColor.DARK_GRAY + "";
+					} else {
+						redstoneColor = ChatColor.GREEN + "";
+					}
+					
+					if(StatsLapis >= 50 && StatsLapis < 75){
+						lapisColor = ChatColor.YELLOW + "";
+					} else if(StatsLapis >= 75 && StatsLapis < 90){
+						lapisColor = ChatColor.RED + "";
+					} else if(StatsLapis >= 90 && StatsLapis < 110){
+						lapisColor = ChatColor.DARK_RED + "";
+					} else if(StatsLapis >= 110){
+						lapisColor = ChatColor.DARK_GRAY + "";
+					} else {
+						lapisColor = ChatColor.GREEN + "";
+					}
+					
+					if(StatsDiamond >= 50 && StatsDiamond < 75){
+						diamondColor = ChatColor.YELLOW + "";
+					} else if(StatsDiamond >= 75 && StatsDiamond < 90){
+						diamondColor = ChatColor.RED + "";
+					} else if(StatsDiamond >= 90 && StatsDiamond < 110){
+						diamondColor = ChatColor.DARK_RED + "";
+					} else if(StatsDiamond >= 110){
+						diamondColor = ChatColor.DARK_GRAY + "";
+					} else {
+						diamondColor = ChatColor.GREEN + "";
+					}
+					
+					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Minerales picados de " + args[0] + ":");	
+					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iStone) + " de piedra.");
+					craftPlayer.sendMessage(coalColor + dfsin.format(iCoal) + " de carbon - " + ChatColor.BOLD + df.format(StatsCoal) + "%");
+					craftPlayer.sendMessage(ironColor + dfsin.format(iIron) + " de hierro - " + ChatColor.BOLD + df.format(StatsIron) + "%");
+					craftPlayer.sendMessage(goldColor + dfsin.format(iGold) + " de oro - " + ChatColor.BOLD + df.format(StatsGold) + "%");
+					craftPlayer.sendMessage(redstoneColor + dfsin.format(iRedstone) + " de redstone - " + ChatColor.BOLD + df.format(StatsRedstone) + "%");
+					craftPlayer.sendMessage(lapisColor + dfsin.format(iLapis) + " de lapis - " + ChatColor.BOLD + df.format(StatsLapis) + "%");
+					craftPlayer.sendMessage(diamondColor + dfsin.format(iDiamond) + " de diamante - " + ChatColor.BOLD + df.format(StatsDiamond) + "%");
+					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iEmerald) + " de esmeralda");
 					
 					xrayData.save(f);
 					
