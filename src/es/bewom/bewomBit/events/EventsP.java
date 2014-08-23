@@ -114,7 +114,7 @@ public class EventsP {
 			String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
 			String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
 			String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
-
+			
 			if (getlocationBlockPlayerNamepos1 == null && getlocationBlockPlayerNamepos2 == null && getlocationBlockPlayerNamepos3 == null && getlocationBlockPlayerNamepos4 == null){
 
 				proteccionData.set(material + "." + hash + ".playerName", playerName);
@@ -124,8 +124,7 @@ public class EventsP {
 				proteccionData.set(material + "." + hash + ".estado", "privado");
 				proteccionData.set(material + "." + hash + ".doble", false);
 
-			}
-			else {
+			} else {
 
 				if (getlocationBlockPlayerNamepos1 != null){
 
@@ -382,7 +381,10 @@ public class EventsP {
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
-
+		
+		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File f1 = new File(amigosdata, File.separator + "amigos.yml");
+		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f);
 
 		eventInteract.getAction();
 		eventInteract.getAction();
@@ -412,6 +414,7 @@ public class EventsP {
 			String nombreMaterial = null;
 
 			proteccionData.load(protecciondata);
+			amigosData.load(f1);
 
 			//proteccion
 			if(eventInteract.getClickedBlock().getType() == Material.CHEST || eventInteract.getClickedBlock().getType() == Material.HOPPER || eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST || eventInteract.getClickedBlock().getType() == Material.FURNACE || eventInteract.getClickedBlock().getType() == Material.ANVIL || eventInteract.getClickedBlock().getType() == Material.DROPPER || eventInteract.getClickedBlock().getType() == Material.JUKEBOX || eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE || eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
@@ -460,12 +463,14 @@ public class EventsP {
 				getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
 				getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
 				getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
+				
+				List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
 
 				String gethash = Integer.toString(getlocationBlockX) + Integer.toString(getlocationBlockY) + Integer.toString(getlocationBlockZ);
 
 				if (gethash.equals(hash)){
 
-					if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockEstado.equals("publico") || pLista.toString().contains(playerName)){
+					if (getlocationBlockPlayerName.equals(playerName) || getlocationBlockEstado.equals("publico") || pLista.toString().contains(playerName) || pListaP.contains(getlocationBlockPlayerName)){
 
 					}
 					else if (getlocationBlockPlayerName.equals(null)) {
@@ -497,7 +502,8 @@ public class EventsP {
 					}
 				}
 			}
-
+			
+			amigosData.save(f);
 			proteccionData.save(protecciondata);
 
 		}
