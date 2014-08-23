@@ -108,12 +108,12 @@ public class CommandXray {
 					String lapisColor = "";
 					String diamondColor = "";
 					
-					comprobarColor (StatsCoal, coalColor);
-					comprobarColor (StatsIron, ironColor);
-					comprobarColor (StatsGold, goldColor);
-					comprobarColor (StatsRedstone, redstoneColor);
-					comprobarColor (StatsLapis, lapisColor);
-					comprobarColor (StatsDiamond, diamondColor);			
+					coalColor = comprobarColor (StatsCoal, coalColor);
+					ironColor = comprobarColor (StatsIron, ironColor);
+					goldColor = comprobarColor (StatsGold, goldColor);
+					redstoneColor = comprobarColor (StatsRedstone, redstoneColor);
+					lapisColor = comprobarColor (StatsLapis, lapisColor);
+					diamondColor = comprobarColor (StatsDiamond, diamondColor);		
 					
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Minerales picados de " + args[0] + ":");	
 					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iStone) + " de piedra.");
@@ -163,7 +163,7 @@ public class CommandXray {
 		return false;
 	}
 	
-	public static void comprobarColor (double stats, String color){
+	public static String comprobarColor (double stats, String color){
 		
 		if(stats >= 50 && stats < 75){
 			color = ChatColor.YELLOW + "";
@@ -180,5 +180,6 @@ public class CommandXray {
 		else {
 			color = ChatColor.GREEN + "";
 		}
+		return color;
 	}
 }
