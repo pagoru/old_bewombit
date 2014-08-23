@@ -151,4 +151,7 @@ commands:
    xray:
       description: Permite al jugador ver los stats de xray
       permission: bewom.mod
-
+      
+   amigos:
+      description: Permite al jugador anadir y eliminar amigos
+      permission: bewom.default

@@ -127,6 +127,9 @@ public class CommandPlayer implements CommandExecutor {
 			if(CommandLag.commandlag(sender, cmd, label, args)){
 				return true;
 			}
+			if(CommandAmigos.commandban(sender, cmd, label, args)){
+				return true;
+			}
 			
 			
 			
