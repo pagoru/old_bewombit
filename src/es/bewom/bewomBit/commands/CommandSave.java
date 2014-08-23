@@ -10,65 +10,49 @@ import org.bukkit.entity.Player;
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
 
 public class CommandSave {
-	
+
 	public static boolean commandsave(CommandSender sender, Command cmd, String label, String[] args) {
-		
+
 		if (label.equalsIgnoreCase("save")){
-			
-			if (args.length == 0){
-				
-				CommandUtilities.formaCorrecta(sender, "/save [jugadores/mundos/all]");
-				
-			} else if (args.length == 1){
-				
+
+			if (args.length == 1){
+
 				if(args[0].equals("jugadores")){
-					
-					for (Player p : Bukkit.getServer().getOnlinePlayers()){
-						
-						p.saveData();
-						sender.sendMessage(ChatColor.YELLOW + "Usuario " + p.getName() + " guardado.");
-						
-					}
-					
-				} else if(args[0].equals("mundos")){
-					
-					java.util.List<World> listWorlds = Bukkit.getServer().getWorlds();
-					
-					for (World w : listWorlds){
-						
-						w.save();
-						sender.sendMessage(ChatColor.YELLOW + w.getName() + " guardado.");
-						
-					}
-					
-				} else if(args[0].equals("all")){
-					
-					for (Player p : Bukkit.getOnlinePlayers()){
-						
-						p.saveData();
-						sender.sendMessage(ChatColor.YELLOW + "Usuario " + p.getName() + " guardado.");
-						
-					}
-					
-					java.util.List<World> listWorlds = Bukkit.getServer().getWorlds();
-					
-					for (World w : listWorlds){
-						
-						w.save();
-						sender.sendMessage(ChatColor.YELLOW + w.getName() + " guardado.");
-						
-					}
-					
+					savePlayers (sender);
 				}
-				
+				else if(args[0].equals("mundos")){
+					saveWorlds (sender);
+				}
+				else if(args[0].equals("all")){
+					savePlayers (sender);
+					saveWorlds (sender);
+				}
+				else {
+					CommandUtilities.formaCorrecta(sender, "/save [jugadores/mundos/all]");
+				}
 			}
-			
-			return true;	
-			
+			else {
+				CommandUtilities.formaCorrecta(sender, "/save [jugadores/mundos/all]");
+			}
+			return true;			
+		}		
+		return false;		
+	}
+
+	public static void savePlayers (CommandSender sender){
+		
+		for (Player p : Bukkit.getServer().getOnlinePlayers()){
+			p.saveData();
+			sender.sendMessage(ChatColor.YELLOW + "Usuario " + p.getName() + " guardado.");
 		}
-		
-		return false;	
-		
 	}
 	
+	public static void saveWorlds (CommandSender sender){
+		
+		java.util.List<World> listWorlds = Bukkit.getServer().getWorlds();
+		for (World w : listWorlds){
+			w.save();
+			sender.sendMessage(ChatColor.YELLOW + w.getName() + " guardado.");
+		}
+	}
 }

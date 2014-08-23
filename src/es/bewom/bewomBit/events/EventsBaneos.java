@@ -48,16 +48,12 @@ public class EventsBaneos {
 					eventPreConnect.disallow(Result.KICK_BANNED , DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal hasta " + ban_tiempoC + ". [Reclamaciones en bewom.es]");
 				} else {
 					eventPreConnect.disallow(Result.KICK_BANNED , DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal por " + motivoC + " hasta " + ban_tiempoC + ". [Reclamaciones en bewom.es]");
-				}
-				
-			}
-			
-			
+				}				
+			}			
 		}
 		
 		statementC.close();
 		connectionC.closeConnection();
 		
-	}
-	
+	}	
 }

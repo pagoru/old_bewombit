@@ -39,8 +39,5 @@ public class CommandAutoBan {
 			return pList;
 		}
 		return null;
-
-	}
-	
-}
-	
+	}	
+}	

@@ -47,8 +47,7 @@ public class CommandUnban {
 			statementC.close();
 			connectionC.closeConnection();
 			
-			return true;
-			
+			return true;			
 		}
 		return false;
 	}

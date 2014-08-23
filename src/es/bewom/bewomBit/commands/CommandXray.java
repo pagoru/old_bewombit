@@ -78,7 +78,8 @@ public class CommandXray {
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Sospechosos: " + ChatColor.WHITE + myList.toString());
 					
 					
-				} else {
+				}
+				else {
 					
 					String playerName = args[0];
 					
@@ -107,77 +108,12 @@ public class CommandXray {
 					String lapisColor = "";
 					String diamondColor = "";
 					
-					if(StatsCoal >= 50 && StatsCoal < 75){
-						coalColor = ChatColor.YELLOW + "";
-					} else if(StatsCoal >= 75 && StatsCoal < 90){
-						coalColor = ChatColor.RED + "";
-					} else if(StatsCoal >= 90 && StatsCoal < 110){
-						coalColor = ChatColor.DARK_RED + "";
-					} else if(StatsCoal >= 110){
-						coalColor = ChatColor.DARK_GRAY + "";
-					} else {
-						coalColor = ChatColor.GREEN + "";
-					}
-					
-					if(StatsIron >= 50 && StatsIron < 75){
-						ironColor = ChatColor.YELLOW + "";
-					} else if(StatsIron >= 75 && StatsIron < 90){
-						ironColor = ChatColor.RED + "";
-					} else if(StatsIron >= 90 && StatsIron < 110){
-						ironColor = ChatColor.DARK_RED + "";
-					} else if(StatsIron >= 110){
-						ironColor = ChatColor.DARK_GRAY + "";
-					} else {
-						ironColor = ChatColor.GREEN + "";
-					}
-					
-					if(StatsGold >= 50 && StatsGold < 75){
-						goldColor = ChatColor.YELLOW + "";
-					} else if(StatsGold >= 75 && StatsGold < 90){
-						goldColor = ChatColor.RED + "";
-					} else if(StatsGold >= 90 && StatsGold < 110){
-						goldColor = ChatColor.DARK_RED + "";
-					} else if(StatsGold >= 110){
-						goldColor = ChatColor.DARK_GRAY + "";
-					} else {
-						goldColor = ChatColor.GREEN + "";
-					}
-					
-					if(StatsRedstone >= 50 && StatsRedstone < 75){
-						redstoneColor = ChatColor.YELLOW + "";
-					} else if(StatsRedstone >= 75 && StatsRedstone < 90){
-						redstoneColor = ChatColor.RED + "";
-					} else if(StatsRedstone >= 90 && StatsRedstone < 110){
-						redstoneColor = ChatColor.DARK_RED + "";
-					} else if(StatsRedstone >= 110){
-						redstoneColor = ChatColor.DARK_GRAY + "";
-					} else {
-						redstoneColor = ChatColor.GREEN + "";
-					}
-					
-					if(StatsLapis >= 50 && StatsLapis < 75){
-						lapisColor = ChatColor.YELLOW + "";
-					} else if(StatsLapis >= 75 && StatsLapis < 90){
-						lapisColor = ChatColor.RED + "";
-					} else if(StatsLapis >= 90 && StatsLapis < 110){
-						lapisColor = ChatColor.DARK_RED + "";
-					} else if(StatsLapis >= 110){
-						lapisColor = ChatColor.DARK_GRAY + "";
-					} else {
-						lapisColor = ChatColor.GREEN + "";
-					}
-					
-					if(StatsDiamond >= 50 && StatsDiamond < 75){
-						diamondColor = ChatColor.YELLOW + "";
-					} else if(StatsDiamond >= 75 && StatsDiamond < 90){
-						diamondColor = ChatColor.RED + "";
-					} else if(StatsDiamond >= 90 && StatsDiamond < 110){
-						diamondColor = ChatColor.DARK_RED + "";
-					} else if(StatsDiamond >= 110){
-						diamondColor = ChatColor.DARK_GRAY + "";
-					} else {
-						diamondColor = ChatColor.GREEN + "";
-					}
+					comprobarColor (StatsCoal, coalColor);
+					comprobarColor (StatsIron, ironColor);
+					comprobarColor (StatsGold, goldColor);
+					comprobarColor (StatsRedstone, redstoneColor);
+					comprobarColor (StatsLapis, lapisColor);
+					comprobarColor (StatsDiamond, diamondColor);			
 					
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Minerales picados de " + args[0] + ":");	
 					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iStone) + " de piedra.");
@@ -220,12 +156,29 @@ public class CommandXray {
 					}
 					
 					xrayData.save(f);
-				}
-				
+				}				
 			}
 			return true;
-		}
-		
+		}		
 		return false;
+	}
+	
+	public static void comprobarColor (double stats, String color){
+		
+		if(stats >= 50 && stats < 75){
+			color = ChatColor.YELLOW + "";
+		}
+		else if(stats >= 75 && stats < 90){
+			color = ChatColor.RED + "";
+		}
+		else if(stats >= 90 && stats < 110){
+			color = ChatColor.DARK_RED + "";
+		}
+		else if(stats >= 110){
+			color = ChatColor.DARK_GRAY + "";
+		}
+		else {
+			color = ChatColor.GREEN + "";
+		}
 	}
 }
