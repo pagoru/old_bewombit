@@ -20,6 +20,7 @@ import es.bewom.bewomBit.commands.utility.CommandPlayer;
 import es.bewom.bewomBit.events.utilitiy.BrokeBlockEvent;
 import es.bewom.bewomBit.events.utilitiy.ChatEvent;
 import es.bewom.bewomBit.events.utilitiy.DamageEntityEvent;
+import es.bewom.bewomBit.events.utilitiy.ExplodeEvent;
 import es.bewom.bewomBit.events.utilitiy.JoinEvent;
 import es.bewom.bewomBit.events.utilitiy.DeathEvent;
 import es.bewom.bewomBit.events.utilitiy.InteractEvent;
@@ -61,6 +62,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getServer().getPluginManager().registerEvents(new DamageEntityEvent(), this);
 		getServer().getPluginManager().registerEvents(new QuitEvent(), this);
 		getServer().getPluginManager().registerEvents(new PreLoginEvent(), this);
+		getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
 		
 		// ---> Comandos <--- //
 		

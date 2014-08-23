@@ -15,8 +15,6 @@
 
 - LogBlock.
  > (mucho trabajo)
- 
-- Sistema deteccion x-ray.
 
 - Broadcast twitter (?)
   (Cuando se publiquen tweets que tambien salgan en los servers en forma de broadcast?)
@@ -58,3 +56,5 @@ entonces llamas al nombre de esa UUID y te lo da corecto con sus mayus! ;D <3 <3
   > VIPS.
   > Perfiles MySQL.
   > El freeze!
+  
+  - Sistema deteccion x-ray.
