@@ -452,7 +452,7 @@ public class EventsP {
 					nombreMaterial = "Este mesa de encantamientos";
 				}
 				else if (eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
-					material = "EnderChest";
+					material = "EnderChest"; 
 					nombreMaterial = "Este enderchest";
 				} 
 
