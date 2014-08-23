@@ -121,6 +121,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("ban").setTabCompleter(new AutoCompleteTab());
 		getCommand("save").setTabCompleter(new AutoCompleteTab());
 		getCommand("xray").setTabCompleter(new AutoCompleteTab());
+		getCommand("amigos").setTabCompleter(new AutoCompleteTab());
 		
 		// ---> Temporizadores
 		

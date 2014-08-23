@@ -75,7 +75,7 @@ public class CommandAmigos {
 							
 							if(!pListaP.contains(craftPlayerArgs.getName()) && !pLista1.contains(playerName)){
 								
-								if(!pLista.contains(playerName)){
+								if(!pLista2.contains(playerName)){
 									
 									if(!craftPlayerArgs.getName().equals(playerName)){
 										

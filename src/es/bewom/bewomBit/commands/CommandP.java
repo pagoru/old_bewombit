@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -136,25 +138,31 @@ public class CommandP {
 					}
 				}
 				else if (args.length == 2){
+					
+					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 
 					if (args[0].equals("añadir")){
 
-						if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+						if (craftPlayerArgs.getName() != null){
 							
-							añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
+							añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
 							
 						}
 					}
 					else if (args[0].equals("eliminar")) {
 
-						if (craftPlayer.getServer().getOfflinePlayer(args[1]) != null){
+						if (craftPlayerArgs.getName() != null){
 
-							eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, args[1]);
+							eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
 							
 						}
 					}
 				}
 				else if (args.length == 3){
+					
+					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[2]).getUniqueId();
+					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 
 					if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
 
@@ -162,9 +170,8 @@ public class CommandP {
 
 							if (args[1].equals("propietario")){
 
-								cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, args[2]);
-								proteccionData.set(material + "." + hash + ".playerName", args[2]);
-								craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + args[2] + ".");
+								cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, craftPlayerArgs.getName());
+								proteccionData.set(material + "." + hash + ".playerName", craftPlayerArgs.getName());
 
 							}
 							else if (args[1].equals("estado")){
