@@ -50,7 +50,7 @@ public class CommandTeleport {
 						
 						Data.set("Names." + args[0], hash);
 						
-						Data.set(hash + ".Name", args[0]);
+						Data.set(hash + ".Name", args[0]); 
 						Data.set(hash + ".Destino", args[1]);
 						
 						Data.set(hash + ".X", locationBlockX);
