@@ -7,12 +7,18 @@ import java.io.IOException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+
+import es.bewom.bewomBit.utility.PlayerUtility;
 
 public class EventsTeleport {
 	
@@ -88,6 +94,128 @@ public class EventsTeleport {
 				Data.save(data);
 				
 			}
+			
+		}
+		
+	}
+	
+	@EventHandler
+	public static void onPlayerMove (PlayerMoveEvent eventMove) throws FileNotFoundException, IOException, InvalidConfigurationException{
+		
+		Player craftPlayer = (Player) eventMove.getPlayer();
+		Block block = craftPlayer.getLocation().add(0, 1, 0).getBlock().getRelative(BlockFace.DOWN);
+		
+		if(block.getType() == Material.TRIPWIRE){
+			
+			int locationBlockX = craftPlayer.getLocation().getBlockX();
+			int locationBlockY = craftPlayer.getLocation().getBlockY();
+			int locationBlockZ = craftPlayer.getLocation().getBlockZ();
+			
+			float YawFloat = craftPlayer.getLocation().getYaw();
+			float PitchFloat = craftPlayer.getLocation().getPitch();
+
+			String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+			
+			String hash1 = Integer.toString(locationBlockX+1) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+			String hash2 = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ+1);
+			String hash3 = Integer.toString(locationBlockX-1) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+			String hash4 = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ-1);
+			
+			File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File data = new File(data1, File.separator + "teleport.yml");
+			FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+			
+			String seeCardinal = PlayerUtility.getCardinalDirection(craftPlayer);
+			
+			int sumaX = 0;
+			int sumaZ = 0;
+			
+			if(seeCardinal.equals("N")){
+				sumaX = -1;
+			} else if(seeCardinal.equals("S")){
+				sumaX = 1;
+			} else if(seeCardinal.equals("E")){
+				sumaZ = -1;
+			} else if(seeCardinal.equals("W")){
+				sumaZ = 1;
+			}
+			
+			Data.load(data);	
+			
+			if(Data.contains(hash)){
+				
+				String nameDest = Data.getString(hash + ".Destino");
+				
+				String getHashDest = Data.getString("Names." + nameDest);
+				
+				double X = Data.getInt(getHashDest + ".X");
+				double Y = Data.getInt(getHashDest + ".Y");
+				double Z = Data.getInt(getHashDest + ".Z");
+				String World = Data.getString(getHashDest + ".World");
+								
+				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+				craftPlayer.teleport(teleport);
+				
+			} else if(Data.contains(hash1)){
+				
+				String nameDest = Data.getString(hash1 + ".Destino");
+				
+				String getHashDest = Data.getString("Names." + nameDest);
+				
+				double X = Data.getInt(getHashDest + ".X");
+				double Y = Data.getInt(getHashDest + ".Y");
+				double Z = Data.getInt(getHashDest + ".Z");
+				String World = Data.getString(getHashDest + ".World");
+				
+				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+				craftPlayer.teleport(teleport);
+				
+			} else if(Data.contains(hash2)){
+				
+				String nameDest = Data.getString(hash2 + ".Destino");
+				
+				String getHashDest = Data.getString("Names." + nameDest);
+				
+				double X = Data.getInt(getHashDest + ".X");
+				double Y = Data.getInt(getHashDest + ".Y");
+				double Z = Data.getInt(getHashDest + ".Z");
+				String World = Data.getString(getHashDest + ".World");
+				
+				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+				craftPlayer.teleport(teleport);
+				
+			} else if(Data.contains(hash3)){
+				
+				String nameDest = Data.getString(hash3 + ".Destino");
+				
+				String getHashDest = Data.getString("Names." + nameDest);
+				
+				double X = Data.getInt(getHashDest + ".X");
+				double Y = Data.getInt(getHashDest + ".Y");
+				double Z = Data.getInt(getHashDest + ".Z");
+				String World = Data.getString(getHashDest + ".World");
+				
+				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+				craftPlayer.teleport(teleport);
+				
+			} else if(Data.contains(hash4)){
+				
+				String nameDest = Data.getString(hash4 + ".Destino");
+				
+				String getHashDest = Data.getString("Names." + nameDest);
+				
+				double X = Data.getInt(getHashDest + ".X");
+				double Y = Data.getInt(getHashDest + ".Y");
+				double Z = Data.getInt(getHashDest + ".Z");
+				String World = Data.getString(getHashDest + ".World");
+				
+				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+				craftPlayer.teleport(teleport);
+				
+			}
+			
+			
+			Data.save(data);	
 			
 		}
 		
