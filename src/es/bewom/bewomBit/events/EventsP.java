@@ -362,7 +362,20 @@ public class EventsP {
 
 			proteccionData.set(material + "." + hash, null);
 			proteccionData.save(protecciondata);
+			
 		}
+		
+		//---> Protección Puertas
+		
+		Location locationBlock = eventPlace.getBlock().getLocation().add(0, 1, 0);
+		Location locationBlock1 = eventPlace.getBlock().getLocation().add(0, 2, 0);
+		
+		if(locationBlock.getBlock().getType().toString().equals("WOODEN_DOOR") && locationBlock1.getBlock().getType().toString().equals("WOODEN_DOOR")){
+			
+			eventPlace.setCancelled(true);
+			
+		}
+		
 	}
 	
 	public static void playerInteractEventsP(PlayerInteractEvent eventInteract) throws FileNotFoundException, IOException, InvalidConfigurationException{

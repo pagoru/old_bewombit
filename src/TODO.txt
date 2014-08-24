@@ -19,9 +19,6 @@
 - Broadcast twitter (?)
   (Cuando se publiquen tweets que tambien salgan en los servers en forma de broadcast?)
   
-- Sistema de amigos
- > Para que dentro del servidor puedan poner en invisible a la gente que no les interesa y el chat igual.
-  
 - Sistema de torneos e inscripciones para pixelmon
 
 - Sistema de logs por usuario + mp
@@ -58,3 +55,5 @@ entonces llamas al nombre de esa UUID y te lo da corecto con sus mayus! ;D <3 <3
   > El freeze!
   
   - Sistema deteccion x-ray.
+    
+  - Sistema de amigos
