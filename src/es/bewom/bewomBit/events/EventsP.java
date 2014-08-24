@@ -59,13 +59,16 @@ public class EventsP {
 
 		// Proteccion
 
-		if(placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL){
+		if(placeBlock.getType() == Material.FURNACE || placeBlock.getType() == Material.ANVIL || placeBlock.getType() == Material.WOODEN_DOOR){
 
 			if (placeBlock.getType() == Material.FURNACE){
 				material = "Furnace";
 			}
 			else if (placeBlock.getType() == Material.ANVIL){
 				material = "Anvil";
+			}
+			else if (placeBlock.getType() == Material.WOODEN_DOOR){
+				material = "WoodenDoor";
 			}
 
 			proteccionData.set(material + "." + hash + ".playerName", playerName);
@@ -315,7 +318,8 @@ public class EventsP {
 				|| brokeBlock.getType() == Material.DROPPER 
 				|| brokeBlock.getType() == Material.JUKEBOX 
 				|| brokeBlock.getType() == Material.ENCHANTMENT_TABLE 
-				|| brokeBlock.getType() == Material.ENDER_CHEST){
+				|| brokeBlock.getType() == Material.ENDER_CHEST
+				|| brokeBlock.getType() == Material.WOODEN_DOOR){
 
 			if(brokeBlock.getType() == Material.CHEST){
 				material = "Chest";
