@@ -3,6 +3,8 @@
 
 >>> TODO:
 
+- Sistema AFK
+
 - Economia.
   > Dinero por minutos.
   > Tiendas.

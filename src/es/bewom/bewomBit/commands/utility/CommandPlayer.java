@@ -72,6 +72,9 @@ public class CommandPlayer implements CommandExecutor {
 				/*if(CommandSpeed.commandspeed(sender, cmd, label, args)){
 					return true;
 				}*/
+				if(CommandTeleport.commandteleport(sender, cmd, label, args)){
+					return true;
+				}
 			}
 			
 			// ---> Comandos de vips <--- //

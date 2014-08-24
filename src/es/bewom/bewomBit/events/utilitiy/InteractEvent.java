@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import es.bewom.bewomBit.events.EventsCongelar;
 import es.bewom.bewomBit.events.EventsP;
+import es.bewom.bewomBit.events.EventsTeleport;
 
 public class InteractEvent implements Listener {
 	
@@ -21,6 +22,7 @@ public class InteractEvent implements Listener {
 	
 		EventsP.playerInteractEventsP(eventInteract);
 		EventsCongelar.onPlayerInteract(eventInteract);
+		EventsTeleport.playerInteractEventsP(eventInteract);
 	
 	}
 

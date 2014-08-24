@@ -155,3 +155,7 @@ commands:
    amigos:
       description: Permite al jugador anadir y eliminar amigos
       permission: bewom.default
+      
+   teleport:
+      description: Permite al jugador marcar posiciones de tepeo
+      permission: bewom.admin
