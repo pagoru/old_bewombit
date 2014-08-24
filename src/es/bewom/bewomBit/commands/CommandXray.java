@@ -17,33 +17,33 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class CommandXray {
-	
+
 	public static boolean commandxray (CommandSender sender, Command cmd, String label, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
 		if (label.equalsIgnoreCase("xray")){
-			
+
 			if (args.length == 1){
-			
+
 				Player craftPlayer = (Player) sender;
-				
+
 				DecimalFormat df = new DecimalFormat("#.##");
 				DecimalFormat dfsin = new DecimalFormat("#");
-				
+
 				File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 				File f = new File(rayData, File.separator + "rxray.yml");
 				FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
-				
+
 				if(args[0].equals("top")){
-					
+
 					ArrayList<String> myList = new ArrayList<String>();
 					boolean color = true;
-					
+
 					for (OfflinePlayer p : Bukkit.getOfflinePlayers()){
-						
+
 						String playerNameArgs = p.getName();
-						
+
 						xrayData.load(f);
-						
+
 						double iStone = xrayData.getDouble(playerNameArgs + ".Stone");
 						double iCoal = xrayData.getDouble(playerNameArgs + ".Coal_Ore");
 						double iIron = xrayData.getDouble(playerNameArgs + ".Iron_Ore");
@@ -51,40 +51,35 @@ public class CommandXray {
 						double iRedstone = xrayData.getDouble(playerNameArgs + ".Redstone_Ore");
 						double iLapis = xrayData.getDouble(playerNameArgs + ".Lapis_Ore");
 						double iDiamond = xrayData.getDouble(playerNameArgs + ".Diamond_Ore");
-						
+
 						double StatsCoal = (iCoal/(iStone*0.03))*100;
 						double StatsIron = (iIron/(iStone*0.015))*100;
 						double StatsGold = (iGold/(iStone*0.0013))*100;
 						double StatsRedstone = (iRedstone/(iStone*0.002))*100;
 						double StatsLapis = (iLapis/(iStone*0.001))*100;
 						double StatsDiamond = (iDiamond/(iStone*0.0015))*100;	
-						
+
 						if(StatsCoal > 90 || StatsIron > 90 || StatsGold > 90 || StatsRedstone > 90 || StatsLapis > 90 || StatsDiamond > 90){
-							
+
 							if(color == true){
 								myList.add(ChatColor.BLUE + playerNameArgs + ChatColor.WHITE);	
 								color = false;
-							} else {
+							}
+							else {
 								myList.add(ChatColor.LIGHT_PURPLE + playerNameArgs + ChatColor.WHITE);	
 								color = true;
 							}
-											
 						}
-						
 						xrayData.save(f);
-						
 					}
-					
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Sospechosos: " + ChatColor.WHITE + myList.toString());
-					
-					
 				}
 				else {
-					
+
 					String playerName = args[0];
-					
+
 					xrayData.load(f);
-					
+
 					double iStone = xrayData.getDouble(playerName + ".Stone");
 					double iCoal = xrayData.getDouble(playerName + ".Coal_Ore");
 					double iIron = xrayData.getDouble(playerName + ".Iron_Ore");
@@ -93,28 +88,21 @@ public class CommandXray {
 					double iLapis = xrayData.getDouble(playerName + ".Lapis_Ore");
 					double iDiamond = xrayData.getDouble(playerName + ".Diamond_Ore");
 					double iEmerald = xrayData.getDouble(playerName + ".Emerald_Ore");
-					
+
 					double StatsCoal = (iCoal/(iStone*0.03))*100;
 					double StatsIron = (iIron/(iStone*0.015))*100;
 					double StatsGold = (iGold/(iStone*0.0013))*100;
 					double StatsRedstone = (iRedstone/(iStone*0.002))*100;
 					double StatsLapis = (iLapis/(iStone*0.001))*100;
 					double StatsDiamond = (iDiamond/(iStone*0.0015))*100;				
-								
-					String coalColor = "";
-					String ironColor = "";
-					String goldColor = "";
-					String redstoneColor = "";
-					String lapisColor = "";
-					String diamondColor = "";
-					
-					coalColor = comprobarColor (StatsCoal, coalColor);
-					ironColor = comprobarColor (StatsIron, ironColor);
-					goldColor = comprobarColor (StatsGold, goldColor);
-					redstoneColor = comprobarColor (StatsRedstone, redstoneColor);
-					lapisColor = comprobarColor (StatsLapis, lapisColor);
-					diamondColor = comprobarColor (StatsDiamond, diamondColor);		
-					
+
+					String coalColor = comprobarColor (StatsCoal);
+					String ironColor = comprobarColor (StatsIron);
+					String goldColor = comprobarColor (StatsGold);
+					String redstoneColor = comprobarColor (StatsRedstone);
+					String lapisColor = comprobarColor (StatsLapis);
+					String diamondColor = comprobarColor (StatsDiamond);		
+
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Minerales picados de " + args[0] + ":");	
 					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iStone) + " de piedra.");
 					craftPlayer.sendMessage(coalColor + dfsin.format(iCoal) + " de carbon - " + ChatColor.BOLD + df.format(StatsCoal) + "%");
@@ -124,37 +112,37 @@ public class CommandXray {
 					craftPlayer.sendMessage(lapisColor + dfsin.format(iLapis) + " de lapis - " + ChatColor.BOLD + df.format(StatsLapis) + "%");
 					craftPlayer.sendMessage(diamondColor + dfsin.format(iDiamond) + " de diamante - " + ChatColor.BOLD + df.format(StatsDiamond) + "%");
 					craftPlayer.sendMessage(ChatColor.GREEN + dfsin.format(iEmerald) + " de esmeralda");
-					
+
 					xrayData.save(f);
-					
+
 				}
-			
+
 			} else if (args.length == 2){
-				
+
 				if(args[1].equals("limpiar")){
-					
+
 					Player craftPlayer = (Player) sender;
 					String playerName = args[0];
-					
+
 					File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 					File f = new File(rayData, File.separator + "rxray.yml");
 					FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
-					
+
 					xrayData.load(f);
-					
+
 					String iPlayer = xrayData.getString(playerName);
-							
+
 					if(iPlayer != null){
-						
+
 						xrayData.set(playerName, null);
 						craftPlayer.sendMessage(ChatColor.RED + "Reiniciado deteccion xray de " + playerName);
-						
+
 					} else {
 
 						craftPlayer.sendMessage(ChatColor.RED + "El jugador " + playerName + " aun no ha roto ningun mineral.");
-						
+
 					}
-					
+
 					xrayData.save(f);
 				}				
 			}
@@ -162,9 +150,9 @@ public class CommandXray {
 		}		
 		return false;
 	}
-	
-	public static String comprobarColor (double stats, String color){
-		
+
+	public static String comprobarColor (double stats){
+		String color;
 		if(stats >= 50 && stats < 75){
 			color = ChatColor.YELLOW + "";
 		}
