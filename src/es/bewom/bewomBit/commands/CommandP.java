@@ -40,7 +40,8 @@ public class CommandP {
 					craftPlayer.getTargetBlock(null, 5).getType() == Material.FURNACE ||
 					craftPlayer.getTargetBlock(null, 5).getType() == Material.ANVIL ||
 					craftPlayer.getTargetBlock(null, 5).getType() == Material.ENCHANTMENT_TABLE ||
-					craftPlayer.getTargetBlock(null, 5).getType() == Material.ENDER_CHEST){
+					craftPlayer.getTargetBlock(null, 5).getType() == Material.ENDER_CHEST ||
+					craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
 
 				if(craftPlayer.getTargetBlock(null, 5).getType() == Material.CHEST){
 					material = "Chest";
@@ -78,6 +79,10 @@ public class CommandP {
 					material = "EnderChest";
 					nombreMaterial = "Este enderchest";
 					nombreMaterialSimple = "este enderchest";
+				} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+					material = "WoodenDoor";
+					nombreMaterial = "Esta puerta";
+					nombreMaterialSimple = "esta puerta";
 				}
 
 				int locationBlockX = craftPlayer.getTargetBlock(null, 5).getLocation().getBlockX();
@@ -98,7 +103,7 @@ public class CommandP {
 
 				}
 				else if (args.length == 1){
-
+					
 					int getlocationBlockHash = 0;
 					String getlocationBlockPlayerName = null;
 					int getlocationBlockX = 0;
@@ -114,48 +119,139 @@ public class CommandP {
 					getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 
 					String gethash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+					
+					if(craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+						
+						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+							
+							if(gethash.equals(hash)){
+								
+								if (args[0].equals("privado")){
 
-					if (gethash.equals(hash)){
+									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									
+								} else if (args[0].equals("publico")) {
 
-						if (getlocationBlockPlayerName.equals(playerName)){
+									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									
+								}
+								
+							} 
+														
+						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+							
+							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+							String gethashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+							
+							if(gethashW.equals(hashW)){
+								
+								if (args[0].equals("privado")){
 
-							if (args[0].equals("privado")){
+									privatizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+									
+								} else if (args[0].equals("publico")) {
 
-								privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									estatalizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+									
+								}
 								
 							}
-							else if (args[0].equals("publico")) {
+							
+						}
+						
+					} else {
 
-								estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-								
+						if (gethash.equals(hash)){
+
+							if (getlocationBlockPlayerName.equals(playerName)){
+
+								if (args[0].equals("privado")){
+
+									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									
+								}
+								else if (args[0].equals("publico")) {
+
+									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									
+								}
+							}
+							else {
+
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+
 							}
 						}
-						else {
-
-							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-
-						}
+						
 					}
+					
 				}
 				else if (args.length == 2){
 					
 					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
-
-					if (args[0].equals("añadir")){
-
-						if (craftPlayerArgs.getName() != null){
+					
+					if(craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+					
+						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
-							añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+							if (args[0].equals("añadir")){
+								
+								if (craftPlayerArgs.getName() != null){
+									
+									añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+									
+								}
+							}
+							else if (args[0].equals("eliminar")) {
+								
+								if (craftPlayerArgs.getName() != null){
+			
+									eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+									
+								}
+							}
+														
+						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+							
+							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+							
+							if (args[0].equals("añadir")){
+								
+								if (craftPlayerArgs.getName() != null){
+									
+									añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+									
+								}
+							}
+							else if (args[0].equals("eliminar")) {
+								
+								if (craftPlayerArgs.getName() != null){
+			
+									eliminar(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+									
+								}
+							}
 							
 						}
-					}
-					else if (args[0].equals("eliminar")) {
-
-						if (craftPlayerArgs.getName() != null){
-
-							eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-							
+						
+					} else {
+						
+						if (args[0].equals("añadir")){
+		
+							if (craftPlayerArgs.getName() != null){
+								
+								añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+								
+							}
+						}
+						else if (args[0].equals("eliminar")) {
+		
+							if (craftPlayerArgs.getName() != null){
+		
+								eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+								
+							}
 						}
 					}
 				}
@@ -165,28 +261,83 @@ public class CommandP {
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 
 					if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
-
-						if (args[0].equals("cambiar")){
-
-							if (args[1].equals("propietario")){
-
-								cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, craftPlayerArgs.getName());
-								proteccionData.set(material + "." + hash + ".playerName", craftPlayerArgs.getName());
-
-							}
-							else if (args[1].equals("estado")){
-
-								if (args[2].equals("privado")){
-
-									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+						
+						if(craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+							
+							if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+								
+								if (args[0].equals("cambiar")){
+									
+									if (args[1].equals("propietario")){
+		
+										cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, craftPlayerArgs.getName());
+										proteccionData.set(material + "." + hash + ".playerName", craftPlayerArgs.getName());
+		
+									}
+									else if (args[1].equals("estado")){
+		
+										if (args[2].equals("privado")){
+		
+											privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+										}
+										else if (args[2].equals("publico")){
+		
+											estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);												
+										}											
+									}									
 								}
-								else if (args[2].equals("publico")){
-
-									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);												
-								}											
-							}									
-						}
-					}	
+															
+							} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+								
+								String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+								
+								if (args[0].equals("cambiar")){
+									
+									if (args[1].equals("propietario")){
+		
+										cambiar (proteccionData, material, hashW, craftPlayer, nombreMaterial, nombreMaterialSimple, craftPlayerArgs.getName());
+										proteccionData.set(material + "." + hashW + ".playerName", craftPlayerArgs.getName());
+		
+									}
+									else if (args[1].equals("estado")){
+		
+										if (args[2].equals("privado")){
+		
+											privatizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+										}
+										else if (args[2].equals("publico")){
+		
+											estatalizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);												
+										}											
+									}									
+								}
+								
+							}
+							
+						} else {
+						
+							if (args[0].equals("cambiar")){
+	
+								if (args[1].equals("propietario")){
+	
+									cambiar (proteccionData, material, hash, craftPlayer, nombreMaterial, nombreMaterialSimple, craftPlayerArgs.getName());
+									proteccionData.set(material + "." + hash + ".playerName", craftPlayerArgs.getName());
+	
+								}
+								else if (args[1].equals("estado")){
+	
+									if (args[2].equals("privado")){
+	
+										privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+									}
+									else if (args[2].equals("publico")){
+	
+										estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);												
+									}											
+								}									
+							}
+						}	
+					}
 				}
 				else {
 
