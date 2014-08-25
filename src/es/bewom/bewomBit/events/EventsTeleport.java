@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -57,33 +58,50 @@ public class EventsTeleport {
 						
 						String nameDest = Data.getString(hash + ".Destino");
 						
-						String getHashDest = Data.getString("Names." + nameDest);
+						if(nameDest != null){
 						
-						double X = Data.getInt(getHashDest + ".X");
-						double Y = Data.getInt(getHashDest + ".Y");
-						double Z = Data.getInt(getHashDest + ".Z");
-						String World = Data.getString(getHashDest + ".World");
-						
-						Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
-						craftPlayer.teleport(teleport);
+							String getHashDest = Data.getString("Names." + nameDest);
 							
-						eventInteract.setCancelled(true);
+							double X = Data.getInt(getHashDest + ".X");
+							double Y = Data.getInt(getHashDest + ".Y");
+							double Z = Data.getInt(getHashDest + ".Z");
+							String World = Data.getString(getHashDest + ".World");
+							
+							Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
+							craftPlayer.teleport(teleport);
+								
+							eventInteract.setCancelled(true);
+						} else {
+							
+							craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+							eventInteract.setCancelled(true);
+							
+						}
 						
 					} else if (eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 						
 						String nameDest = Data.getString(hashMinus + ".Destino");
 						
-						String getHashDest = Data.getString("Names." + nameDest);
+						if(nameDest != null){
 						
-						double X = Data.getInt(getHashDest + ".X");
-						double Y = Data.getInt(getHashDest + ".Y");
-						double Z = Data.getInt(getHashDest + ".Z");
-						String World = Data.getString(getHashDest + ".World");
-						
-						Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
-						craftPlayer.teleport(teleport);
+							String getHashDest = Data.getString("Names." + nameDest);
 							
-						eventInteract.setCancelled(true);
+							double X = Data.getInt(getHashDest + ".X");
+							double Y = Data.getInt(getHashDest + ".Y");
+							double Z = Data.getInt(getHashDest + ".Z");
+							String World = Data.getString(getHashDest + ".World");
+							
+							Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
+							craftPlayer.teleport(teleport);
+								
+							eventInteract.setCancelled(true);
+						
+						} else {
+							
+							craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+							eventInteract.setCancelled(true);
+							
+						}
 						
 					}
 					
@@ -132,127 +150,143 @@ public class EventsTeleport {
 				
 				String nameDest = Data.getString(hash + ".Destino");
 				
-				String getHashDest = Data.getString("Names." + nameDest);
-				
-				double X = Data.getInt(getHashDest + ".X");
-				double Y = Data.getInt(getHashDest + ".Y");
-				double Z = Data.getInt(getHashDest + ".Z");
-				String World = Data.getString(getHashDest + ".World");
-				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
-				
-				if(seeCardinal.equals("N")){
-					sumaX = 1;
-				} else if(seeCardinal.equals("S")){
-					sumaX = -1;
-				} else if(seeCardinal.equals("E")){
-					sumaZ = 1;
-				} else if(seeCardinal.equals("W")){
-					sumaZ = -1;
+				if(nameDest != null){
+					
+					String getHashDest = Data.getString("Names." + nameDest);
+					
+					double X = Data.getInt(getHashDest + ".X");
+					double Y = Data.getInt(getHashDest + ".Y");
+					double Z = Data.getInt(getHashDest + ".Z");
+					String World = Data.getString(getHashDest + ".World");
+					String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+					
+					if(seeCardinal.equals("N")){
+						sumaX = 1;
+					} else if(seeCardinal.equals("S")){
+						sumaX = -1;
+					} else if(seeCardinal.equals("E")){
+						sumaZ = 1;
+					} else if(seeCardinal.equals("W")){
+						sumaZ = -1;
+					}
+									
+					Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
 				}
-								
-				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
-				craftPlayer.teleport(teleport);
 				
 			} else if(Data.contains(hash1)){
 				
 				String nameDest = Data.getString(hash1 + ".Destino");
 				
-				String getHashDest = Data.getString("Names." + nameDest);
-				
-				double X = Data.getInt(getHashDest + ".X");
-				double Y = Data.getInt(getHashDest + ".Y");
-				double Z = Data.getInt(getHashDest + ".Z");
-				String World = Data.getString(getHashDest + ".World");
-				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
-				
-				if(seeCardinal.equals("N")){
-					sumaX = 1;
-				} else if(seeCardinal.equals("S")){
-					sumaX = -1;
-				} else if(seeCardinal.equals("E")){
-					sumaZ = 1;
-				} else if(seeCardinal.equals("W")){
-					sumaZ = -1;
+				if(nameDest != null){
+					String getHashDest = Data.getString("Names." + nameDest);
+					
+					double X = Data.getInt(getHashDest + ".X");
+					double Y = Data.getInt(getHashDest + ".Y");
+					double Z = Data.getInt(getHashDest + ".Z");
+					String World = Data.getString(getHashDest + ".World");
+					String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+					
+					if(seeCardinal.equals("N")){
+						sumaX = 1;
+					} else if(seeCardinal.equals("S")){
+						sumaX = -1;
+					} else if(seeCardinal.equals("E")){
+						sumaZ = 1;
+					} else if(seeCardinal.equals("W")){
+						sumaZ = -1;
+					}
+					
+					Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
 				}
-				
-				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
-				craftPlayer.teleport(teleport);
 				
 			} else if(Data.contains(hash2)){
 				
 				String nameDest = Data.getString(hash2 + ".Destino");
 				
-				String getHashDest = Data.getString("Names." + nameDest);
-				
-				double X = Data.getInt(getHashDest + ".X");
-				double Y = Data.getInt(getHashDest + ".Y");
-				double Z = Data.getInt(getHashDest + ".Z");
-				String World = Data.getString(getHashDest + ".World");
-				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
-				
-				if(seeCardinal.equals("N")){
-					sumaX = 1;
-				} else if(seeCardinal.equals("S")){
-					sumaX = -1;
-				} else if(seeCardinal.equals("E")){
-					sumaZ = 1;
-				} else if(seeCardinal.equals("W")){
-					sumaZ = -1;
+				if(nameDest != null){
+					
+					String getHashDest = Data.getString("Names." + nameDest);
+					
+					double X = Data.getInt(getHashDest + ".X");
+					double Y = Data.getInt(getHashDest + ".Y");
+					double Z = Data.getInt(getHashDest + ".Z");
+					String World = Data.getString(getHashDest + ".World");
+					String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+					
+					if(seeCardinal.equals("N")){
+						sumaX = 1;
+					} else if(seeCardinal.equals("S")){
+						sumaX = -1;
+					} else if(seeCardinal.equals("E")){
+						sumaZ = 1;
+					} else if(seeCardinal.equals("W")){
+						sumaZ = -1;
+					}
+					
+					Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
+					
 				}
-				
-				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
-				craftPlayer.teleport(teleport);
 				
 			} else if(Data.contains(hash3)){
 				
 				String nameDest = Data.getString(hash3 + ".Destino");
 				
-				String getHashDest = Data.getString("Names." + nameDest);
+				if(nameDest != null){
+					
+					String getHashDest = Data.getString("Names." + nameDest);
+					
+					double X = Data.getInt(getHashDest + ".X");
+					double Y = Data.getInt(getHashDest + ".Y");
+					double Z = Data.getInt(getHashDest + ".Z");
+					String World = Data.getString(getHashDest + ".World");
+					String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+					
+					if(seeCardinal.equals("N")){
+						sumaX = 1;
+					} else if(seeCardinal.equals("S")){
+						sumaX = -1;
+					} else if(seeCardinal.equals("E")){
+						sumaZ = 1;
+					} else if(seeCardinal.equals("W")){
+						sumaZ = -1;
+					}
+					
+					Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
 				
-				double X = Data.getInt(getHashDest + ".X");
-				double Y = Data.getInt(getHashDest + ".Y");
-				double Z = Data.getInt(getHashDest + ".Z");
-				String World = Data.getString(getHashDest + ".World");
-				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
-				
-				if(seeCardinal.equals("N")){
-					sumaX = 1;
-				} else if(seeCardinal.equals("S")){
-					sumaX = -1;
-				} else if(seeCardinal.equals("E")){
-					sumaZ = 1;
-				} else if(seeCardinal.equals("W")){
-					sumaZ = -1;
 				}
-				
-				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
-				craftPlayer.teleport(teleport);
-				
+					
 			} else if(Data.contains(hash4)){
 				
 				String nameDest = Data.getString(hash4 + ".Destino");
 				
-				String getHashDest = Data.getString("Names." + nameDest);
+				if(nameDest != null){
 				
-				double X = Data.getInt(getHashDest + ".X");
-				double Y = Data.getInt(getHashDest + ".Y");
-				double Z = Data.getInt(getHashDest + ".Z");
-				String World = Data.getString(getHashDest + ".World");
-				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
-				
-				if(seeCardinal.equals("N")){
-					sumaX = 1;
-				} else if(seeCardinal.equals("S")){
-					sumaX = -1;
-				} else if(seeCardinal.equals("E")){
-					sumaZ = 1;
-				} else if(seeCardinal.equals("W")){
-					sumaZ = -1;
+					String getHashDest = Data.getString("Names." + nameDest);
+					
+					double X = Data.getInt(getHashDest + ".X");
+					double Y = Data.getInt(getHashDest + ".Y");
+					double Z = Data.getInt(getHashDest + ".Z");
+					String World = Data.getString(getHashDest + ".World");
+					String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+					
+					if(seeCardinal.equals("N")){
+						sumaX = 1;
+					} else if(seeCardinal.equals("S")){
+						sumaX = -1;
+					} else if(seeCardinal.equals("E")){
+						sumaZ = 1;
+					} else if(seeCardinal.equals("W")){
+						sumaZ = -1;
+					}
+					
+					Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
+					craftPlayer.teleport(teleport);
+					
 				}
-				
-				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
-				craftPlayer.teleport(teleport);
-				
 			}
 			
 			

@@ -38,10 +38,10 @@ public class CommandTeleport {
 			
 			Data.load(data);
 			
-			if(args.length == 2){
-
-				if (craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+			if(args.length == 1){
 				
+				if (craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+					
 					if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 						
 						String exNames = Data.getString("Names." + args[0]);
@@ -50,20 +50,23 @@ public class CommandTeleport {
 							
 							Data.set(exNames, null);
 							
+							craftPlayer.sendMessage("Reescrita la puerta de teletransporte [" + args[0] + "].");
+							
+						} else {
+							
+							craftPlayer.sendMessage("Creada la puerta de teletransporte [" + args[0] + "].");
 						}
 						
+
 						Data.set("Names." + args[0], hash);
 						
 						Data.set(hash + ".Name", args[0]); 
-						Data.set(hash + ".Destino", args[1]);
 						
 						Data.set(hash + ".X", locationBlockX);
 						Data.set(hash + ".Y", locationBlockY);
 						Data.set(hash + ".Z", locationBlockZ);
 						Data.set(hash + ".World", craftPlayer.getWorld().getName());
 						Data.set(hash + ".Cardinal", seeCardinal);
-						
-						craftPlayer.sendMessage(" > "+ args[0] + "-" + args[1]);
 						
 					} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 						
@@ -73,23 +76,26 @@ public class CommandTeleport {
 							
 							Data.set(exNames, null);
 							
+							craftPlayer.sendMessage("Reescrita la puerta de teletransporte [" + args[0] + "].");
+							
+						} else {
+							
+							craftPlayer.sendMessage("Creada la puerta de teletransporte [" + args[0] + "].");
 						}
 						
+
 						Data.set("Names." + args[0], hashMinus);
 						
-						Data.set(hashMinus + ".Name", args[0]);
-						Data.set(hashMinus + ".Destino", args[1]);
+						Data.set(hashMinus + ".Name", args[0]); 
 						
 						Data.set(hashMinus + ".X", locationBlockX);
 						Data.set(hashMinus + ".Y", locationBlockY-1);
 						Data.set(hashMinus + ".Z", locationBlockZ);
 						Data.set(hashMinus + ".World", craftPlayer.getWorld().getName());
-						Data.set(hash + ".Cardinal", seeCardinal);
-						
-						craftPlayer.sendMessage(" > "+ args[0] + "-" + args[1]);
+						Data.set(hashMinus + ".Cardinal", seeCardinal);
 						
 					}
-				
+					
 				}
 				
 				if(craftPlayer.getTargetBlock(null, 5).getType() == Material.TRIPWIRE){
@@ -100,12 +106,16 @@ public class CommandTeleport {
 						
 						Data.set(exNames, null);
 						
+						craftPlayer.sendMessage("Reescrito el tripwire de teletransporte [" + args[0] + "].");
+						
+					} else {
+						
+						craftPlayer.sendMessage("Creado el tripwire de teletransporte [" + args[0] + "].");
 					}
 					
 					Data.set("Names." + args[0], hash);
 					
 					Data.set(hash + ".Name", args[0]); 
-					Data.set(hash + ".Destino", args[1]);
 					
 					Data.set(hash + ".X", locationBlockX);
 					Data.set(hash + ".Y", locationBlockY);
@@ -113,7 +123,24 @@ public class CommandTeleport {
 					Data.set(hash + ".World", craftPlayer.getWorld().getName());
 					Data.set(hash + ".Cardinal", seeCardinal);
 					
-					craftPlayer.sendMessage(" > trip "+ args[0] + "-" + args[1]);
+				}
+				
+			} else if(args.length == 3){
+				
+				if(args[1].equals("destino")){
+					
+					String exNames = Data.getString("Names." + args[0]);
+					
+					if(exNames != null){
+						
+						craftPlayer.sendMessage("Reescrito el destino de [" + args[0] + "] hacia [" + args[2] + "].");
+						
+					} else {
+						
+						craftPlayer.sendMessage("Creado el destino de [" + args[0] + "] hacia [" + args[2] + "].");
+					}
+
+					Data.set(exNames + ".Destino", args[2]);
 					
 				}
 			}
