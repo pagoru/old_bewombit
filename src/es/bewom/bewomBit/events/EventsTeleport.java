@@ -18,8 +18,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import es.bewom.bewomBit.utility.PlayerUtility;
-
 public class EventsTeleport {
 	
 	@SuppressWarnings("unused")
@@ -125,20 +123,8 @@ public class EventsTeleport {
 			File data = new File(data1, File.separator + "teleport.yml");
 			FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 			
-			String seeCardinal = PlayerUtility.getCardinalDirection(craftPlayer);
-			
 			int sumaX = 0;
 			int sumaZ = 0;
-			
-			if(seeCardinal.equals("N")){
-				sumaX = -1;
-			} else if(seeCardinal.equals("S")){
-				sumaX = 1;
-			} else if(seeCardinal.equals("E")){
-				sumaZ = -1;
-			} else if(seeCardinal.equals("W")){
-				sumaZ = 1;
-			}
 			
 			Data.load(data);	
 			
@@ -152,6 +138,17 @@ public class EventsTeleport {
 				double Y = Data.getInt(getHashDest + ".Y");
 				double Z = Data.getInt(getHashDest + ".Z");
 				String World = Data.getString(getHashDest + ".World");
+				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+				
+				if(seeCardinal.equals("N")){
+					sumaX = 1;
+				} else if(seeCardinal.equals("S")){
+					sumaX = -1;
+				} else if(seeCardinal.equals("E")){
+					sumaZ = 1;
+				} else if(seeCardinal.equals("W")){
+					sumaZ = -1;
+				}
 								
 				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
 				craftPlayer.teleport(teleport);
@@ -166,6 +163,17 @@ public class EventsTeleport {
 				double Y = Data.getInt(getHashDest + ".Y");
 				double Z = Data.getInt(getHashDest + ".Z");
 				String World = Data.getString(getHashDest + ".World");
+				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+				
+				if(seeCardinal.equals("N")){
+					sumaX = 1;
+				} else if(seeCardinal.equals("S")){
+					sumaX = -1;
+				} else if(seeCardinal.equals("E")){
+					sumaZ = 1;
+				} else if(seeCardinal.equals("W")){
+					sumaZ = -1;
+				}
 				
 				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
 				craftPlayer.teleport(teleport);
@@ -180,6 +188,17 @@ public class EventsTeleport {
 				double Y = Data.getInt(getHashDest + ".Y");
 				double Z = Data.getInt(getHashDest + ".Z");
 				String World = Data.getString(getHashDest + ".World");
+				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+				
+				if(seeCardinal.equals("N")){
+					sumaX = 1;
+				} else if(seeCardinal.equals("S")){
+					sumaX = -1;
+				} else if(seeCardinal.equals("E")){
+					sumaZ = 1;
+				} else if(seeCardinal.equals("W")){
+					sumaZ = -1;
+				}
 				
 				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
 				craftPlayer.teleport(teleport);
@@ -194,6 +213,17 @@ public class EventsTeleport {
 				double Y = Data.getInt(getHashDest + ".Y");
 				double Z = Data.getInt(getHashDest + ".Z");
 				String World = Data.getString(getHashDest + ".World");
+				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+				
+				if(seeCardinal.equals("N")){
+					sumaX = 1;
+				} else if(seeCardinal.equals("S")){
+					sumaX = -1;
+				} else if(seeCardinal.equals("E")){
+					sumaZ = 1;
+				} else if(seeCardinal.equals("W")){
+					sumaZ = -1;
+				}
 				
 				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
 				craftPlayer.teleport(teleport);
@@ -208,6 +238,17 @@ public class EventsTeleport {
 				double Y = Data.getInt(getHashDest + ".Y");
 				double Z = Data.getInt(getHashDest + ".Z");
 				String World = Data.getString(getHashDest + ".World");
+				String seeCardinal = Data.getString(getHashDest + ".Cardinal");
+				
+				if(seeCardinal.equals("N")){
+					sumaX = 1;
+				} else if(seeCardinal.equals("S")){
+					sumaX = -1;
+				} else if(seeCardinal.equals("E")){
+					sumaZ = 1;
+				} else if(seeCardinal.equals("W")){
+					sumaZ = -1;
+				}
 				
 				Location teleport = new Location(Bukkit.getWorld(World), X+0.5+(sumaX), Y, Z+0.5+(sumaZ), YawFloat, PitchFloat);
 				craftPlayer.teleport(teleport);

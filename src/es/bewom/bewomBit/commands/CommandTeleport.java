@@ -12,6 +12,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import es.bewom.bewomBit.utility.PlayerUtility;
+
 public class CommandTeleport {
 	
 	@SuppressWarnings("deprecation")
@@ -27,6 +29,8 @@ public class CommandTeleport {
 
 			String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 			String hashMinus = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+			
+			String seeCardinal = PlayerUtility.getCardinalDirection(craftPlayer);
 				
 			File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 			File data = new File(data1, File.separator + "teleport.yml");
@@ -57,6 +61,7 @@ public class CommandTeleport {
 						Data.set(hash + ".Y", locationBlockY);
 						Data.set(hash + ".Z", locationBlockZ);
 						Data.set(hash + ".World", craftPlayer.getWorld().getName());
+						Data.set(hash + ".Cardinal", seeCardinal);
 						
 						craftPlayer.sendMessage(" > "+ args[0] + "-" + args[1]);
 						
@@ -79,6 +84,7 @@ public class CommandTeleport {
 						Data.set(hashMinus + ".Y", locationBlockY-1);
 						Data.set(hashMinus + ".Z", locationBlockZ);
 						Data.set(hashMinus + ".World", craftPlayer.getWorld().getName());
+						Data.set(hash + ".Cardinal", seeCardinal);
 						
 						craftPlayer.sendMessage(" > "+ args[0] + "-" + args[1]);
 						
@@ -105,6 +111,7 @@ public class CommandTeleport {
 					Data.set(hash + ".Y", locationBlockY);
 					Data.set(hash + ".Z", locationBlockZ);
 					Data.set(hash + ".World", craftPlayer.getWorld().getName());
+					Data.set(hash + ".Cardinal", seeCardinal);
 					
 					craftPlayer.sendMessage(" > trip "+ args[0] + "-" + args[1]);
 					
