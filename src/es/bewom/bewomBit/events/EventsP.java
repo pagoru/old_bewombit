@@ -409,16 +409,8 @@ public class EventsP {
 		String playerName = eventInteract.getPlayer().getName();
 		Player craftPlayer = (Player) eventInteract.getPlayer();
 
-		boolean playerIsCongelado = false;
-		boolean isCongelado = false;
-
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-		File data = new File(data1, File.separator + "config.yml");
-		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
-
 		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
-		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 		
 		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File f1 = new File(amigosdata, File.separator + "amigos.yml");
@@ -522,9 +514,9 @@ public class EventsP {
 				if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
 					
 					if(eventInteract.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-						
+												
 						if (gethash.equals(hash)){
-
+							
 							if (getlocationBlockPlayerName.equals(playerName) 
 									|| getlocationBlockEstado.equals("publico") 
 									|| pLista.toString().contains(playerName) 
@@ -662,40 +654,7 @@ public class EventsP {
 			proteccionData.save(protecciondata);
 
 		}
-
-
-		eventInteract.getAction();
-		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK){
-
-			if(craftPlayer.getItemInHand().getType().equals(Material.HOPPER_MINECART) || craftPlayer.getItemInHand().getType().equals(Material.DISPENSER)){
-
-				eventInteract.setCancelled(true);
-
-			}
-		}
-
-		playerData.load(f);
-
-		playerIsCongelado = playerData.getBoolean("Congelado");
-
-		playerData.save(f);
-
-
-		Data.load(data);
-
-		isCongelado = Data.getBoolean("Congelado");
-
-		Data.save(data);
-
-		//congelado
-
-		if (!craftPlayer.hasPermission("bewom.admin") || !craftPlayer.hasPermission("bewom.mod")){
-			if (playerIsCongelado || isCongelado){
-
-				eventInteract.setCancelled(true);
-				craftPlayer.sendMessage(ChatColor.RED + "Has sido congelado temporalmente.");
-			}
-		}		        
+        
 	}
 
 	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, String locationBlockX, String locationBlockY, String locationBlockZ){
