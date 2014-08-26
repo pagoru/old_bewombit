@@ -2,6 +2,8 @@ package es.bewom.bewomBit.events.utilitiy;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.event.EventHandler;
@@ -23,7 +25,7 @@ public class MoveEvent implements Listener{
 	}
 
 	@EventHandler
-	public void onPlayerMove (PlayerMoveEvent eventMove) throws FileNotFoundException, IOException, InvalidConfigurationException{
+	public void onPlayerMove (PlayerMoveEvent eventMove) throws FileNotFoundException, IOException, InvalidConfigurationException, ClassNotFoundException, SQLException, ParseException{
 		
 		EventsCongelar.movePlayerEventsCongelar (eventMove);
 		EventsSaltarImpulso.movePlayerEventsSaltarImpulso(eventMove);
