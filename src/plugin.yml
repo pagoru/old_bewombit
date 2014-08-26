@@ -159,3 +159,7 @@ commands:
    teleport:
       description: Permite al jugador marcar posiciones de tepeo
       permission: bewom.admin
+
+   whitelist:
+      description: Permite al jugador whitlistear
+      permission: bewom.admin

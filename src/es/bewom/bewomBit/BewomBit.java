@@ -105,6 +105,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("xray").setExecutor(new CommandPlayer());
 		getCommand("amigos").setExecutor(new CommandPlayer());
 		getCommand("teleport").setExecutor(new CommandPlayer());
+		getCommand("whitelist").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		
@@ -123,6 +124,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("save").setTabCompleter(new AutoCompleteTab());
 		getCommand("xray").setTabCompleter(new AutoCompleteTab());
 		getCommand("amigos").setTabCompleter(new AutoCompleteTab());
+		getCommand("whitelist").setTabCompleter(new AutoCompleteTab());
 		
 		// ---> Temporizadores
 		
@@ -156,6 +158,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		File dataRxray = new File(data1, File.separator + "rxray.yml");
 		File dataAmigos = new File(data1, File.separator + "amigos.yml");
 		File dataTeleport = new File(data1, File.separator + "teleport.yml");
+		File dataWhitelist = new File(data1, File.separator + "whitelist.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
 		try {
@@ -166,6 +169,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 			dataRxray.createNewFile();
 			dataAmigos.createNewFile();
 			dataTeleport.createNewFile();
+			dataWhitelist.createNewFile();
 			
 		} catch (IOException e) {
 		  

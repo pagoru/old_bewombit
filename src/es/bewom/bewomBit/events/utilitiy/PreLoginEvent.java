@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import es.bewom.bewomBit.events.EventsBaneos;
+import es.bewom.bewomBit.events.EventsWhitelist;
 
 public class PreLoginEvent implements Listener {
 	
@@ -17,6 +18,7 @@ public class PreLoginEvent implements Listener {
 	public void onPreJoin(AsyncPlayerPreLoginEvent eventPreConnect) throws SQLException, IOException, InvalidConfigurationException, ClassNotFoundException, ParseException {
 		
 		EventsBaneos.onPreJoin(eventPreConnect);
+		EventsWhitelist.onPreJoin(eventPreConnect);
 		
 	}
 	

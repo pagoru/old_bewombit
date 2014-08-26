@@ -23,6 +23,7 @@ import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpAll;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpa;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoTpaHere;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoV;
+import es.bewom.bewomBit.commands.autocomplete.CommandAutoWhitelist;
 import es.bewom.bewomBit.commands.autocomplete.CommandAutoXray;
 
 public class AutoCompleteTab implements TabCompleter {
@@ -75,6 +76,9 @@ public class AutoCompleteTab implements TabCompleter {
 			}
 			if (CommandAutoAmigos.commandautogm(sender, cmd, alias, args) != null){
 				return CommandAutoAmigos.commandautogm(sender, cmd, alias, args);
+			}
+			if(CommandAutoWhitelist.commandautowhitelist(sender, cmd, alias, args) != null){
+				return CommandAutoWhitelist.commandautowhitelist(sender, cmd, alias, args);
 			}
 
 		

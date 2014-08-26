@@ -8,6 +8,7 @@ public class DefaultMessages {
 	+ ChatColor.BOLD + "WOM" + ChatColor.DARK_RED  + " < " + ChatColor.RED;
 	
 	public static String kickBanPlayer = ChatColor.BLUE + "";
+	public static String whitelistPlayer = ChatColor.YELLOW + "";
 	
 	
 }
