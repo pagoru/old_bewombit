@@ -3,6 +3,7 @@ package es.bewom.bewomBit.events;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,6 +33,18 @@ public class EventsTeleport {
 		int locationBlockY = 0;
 		int locationBlockZ = 0;
 		
+		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File f1 = new File(amigosdata, File.separator + "amigos.yml");
+		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
+		
+		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		
+		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data = new File(data1, File.separator + "teleport.yml");
+		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+		
 		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK || eventInteract.getAction() == Action.LEFT_CLICK_BLOCK){
 						
 			if(eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
@@ -45,12 +58,25 @@ public class EventsTeleport {
 				
 				String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 				String hashMinus = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+								
+				proteccionData.load(protecciondata);
+				amigosData.load(f1);
+				Data.load(data);
 				
-				File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-				File data = new File(data1, File.separator + "teleport.yml");
-				FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
+				String material = "WoodenDoor";
 				
-				Data.load(data);				
+				String getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+				String getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
+				
+				List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
+				List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+				
+				
+				String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashMinus + ".playerName");
+				String getlocationBlockEstadoW = proteccionData.getString(material + "." + hashMinus + ".estado");
+				
+				List<String> pListaW = proteccionData.getStringList(material + "." + hashMinus + ".miembros");
+				
 				
 				if(Data.contains(hash) || Data.contains(hashMinus)){
 					
@@ -58,49 +84,72 @@ public class EventsTeleport {
 						
 						String nameDest = Data.getString(hash + ".Destino");
 						
-						if(nameDest != null){
-						
-							String getHashDest = Data.getString("Names." + nameDest);
+						if (getlocationBlockPlayerName.equals(playerName) 
+								|| getlocationBlockEstado.equals("publico") 
+								|| pLista.toString().contains(playerName) 
+								|| pListaP.contains(getlocationBlockPlayerName)){
 							
-							double X = Data.getInt(getHashDest + ".X");
-							double Y = Data.getInt(getHashDest + ".Y");
-							double Z = Data.getInt(getHashDest + ".Z");
-							String World = Data.getString(getHashDest + ".World");
 							
-							Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
-							craftPlayer.teleport(teleport);
+							if(nameDest != null){
 								
-							eventInteract.setCancelled(true);
+								String getHashDest = Data.getString("Names." + nameDest);
+								
+								double X = Data.getInt(getHashDest + ".X");
+								double Y = Data.getInt(getHashDest + ".Y");
+								double Z = Data.getInt(getHashDest + ".Z");
+								String World = Data.getString(getHashDest + ".World");
+								
+								Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
+								craftPlayer.teleport(teleport);
+									
+								eventInteract.setCancelled(true);
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+								eventInteract.setCancelled(true);
+								
+							}
+
 						} else {
-							
-							craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+
 							eventInteract.setCancelled(true);
-							
+
 						}
 						
 					} else if (eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 						
 						String nameDest = Data.getString(hashMinus + ".Destino");
 						
-						if(nameDest != null){
+						if (getlocationBlockPlayerNameW.equals(playerName) 
+								|| getlocationBlockEstadoW.equals("publico") 
+								|| pListaW.toString().contains(playerName) 
+								|| pListaP.contains(getlocationBlockPlayerName)){
 						
-							String getHashDest = Data.getString("Names." + nameDest);
+							if(nameDest != null){
 							
-							double X = Data.getInt(getHashDest + ".X");
-							double Y = Data.getInt(getHashDest + ".Y");
-							double Z = Data.getInt(getHashDest + ".Z");
-							String World = Data.getString(getHashDest + ".World");
-							
-							Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
-							craftPlayer.teleport(teleport);
+								String getHashDest = Data.getString("Names." + nameDest);
 								
-							eventInteract.setCancelled(true);
+								double X = Data.getInt(getHashDest + ".X");
+								double Y = Data.getInt(getHashDest + ".Y");
+								double Z = Data.getInt(getHashDest + ".Z");
+								String World = Data.getString(getHashDest + ".World");
+								
+								Location teleport = new Location(Bukkit.getWorld(World), X+0.5, Y, Z+0.5, YawFloat, PitchFloat);
+								craftPlayer.teleport(teleport);
+									
+								eventInteract.setCancelled(true);
+							
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+								eventInteract.setCancelled(true);
+								
+							}
 						
 						} else {
-							
-							craftPlayer.sendMessage(ChatColor.RED + "La puerta no tiene destino.");
+
 							eventInteract.setCancelled(true);
-							
+
 						}
 						
 					}

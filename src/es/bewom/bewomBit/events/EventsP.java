@@ -405,19 +405,13 @@ public class EventsP {
 	
 	public static void playerInteractEventsP(PlayerInteractEvent eventInteract) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
-		String playerUUID = eventInteract.getPlayer().getUniqueId().toString();
 		String playerName = eventInteract.getPlayer().getName();
 		Player craftPlayer = (Player) eventInteract.getPlayer();
-
-		File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
-		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		
 		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File f1 = new File(amigosdata, File.separator + "amigos.yml");
-		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f);
+		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
 
-		eventInteract.getAction();
-		eventInteract.getAction();
 		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK || eventInteract.getAction() == Action.LEFT_CLICK_BLOCK){
 
 			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
@@ -650,7 +644,7 @@ public class EventsP {
 				
 			}
 			
-			amigosData.save(f);
+			amigosData.save(f1);
 			proteccionData.save(protecciondata);
 
 		}
