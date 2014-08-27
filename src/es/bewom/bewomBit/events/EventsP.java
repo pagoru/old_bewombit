@@ -71,20 +71,13 @@ public class EventsP {
 			}
 			else if (placeBlock.getType() == Material.WOODEN_DOOR){
 				material = "WoodenDoor";
-			}
-
-			proteccionData.set(material + "." + hash + ".playerName", playerName);
-			proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
-			proteccionData.set(material + "." + hash + ".X", locationBlockX);
-			proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-			proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-			proteccionData.set(material + "." + hash + ".estado", "privado");
-			proteccionData.set(material + "." + hash + ".miembrosbool", false);
-
-		} else if(placeBlock.getType() == Material.DROPPER 
-				|| placeBlock.getType() == Material.JUKEBOX 
-				|| placeBlock.getType() == Material.ENCHANTMENT_TABLE 
-				|| placeBlock.getType() == Material.ENDER_CHEST) {
+			}			
+			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
+		}
+		else if(placeBlock.getType() == Material.DROPPER ||
+				placeBlock.getType() == Material.JUKEBOX ||
+				placeBlock.getType() == Material.ENCHANTMENT_TABLE ||
+				placeBlock.getType() == Material.ENDER_CHEST) {
 
 			if(placeBlock.getType() == Material.DROPPER){
 				material = "Dropper";
@@ -97,16 +90,8 @@ public class EventsP {
 			}
 			else if (placeBlock.getType() == Material.ENDER_CHEST){
 				material = "EnderChest";
-			} 
-
-			proteccionData.set(material + "." + hash + ".playerName", playerName);
-			proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
-			proteccionData.set(material + "." + hash + ".X", locationBlockX);
-			proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-			proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-			proteccionData.set(material + "." + hash + ".estado", "publico");
-			proteccionData.set(material + "." + hash + ".miembrosbool", false);
-
+			} 			
+			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "publico", false);
 		}
 
 		if(placeBlock.getType().equals(Material.CHEST) || placeBlock.getType().equals(Material.TRAPPED_CHEST)){
@@ -122,145 +107,46 @@ public class EventsP {
 			String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
 			String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
 			String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
-			
+
 			if (getlocationBlockPlayerNamepos1 == null && getlocationBlockPlayerNamepos2 == null && getlocationBlockPlayerNamepos3 == null && getlocationBlockPlayerNamepos4 == null){
-
-				proteccionData.set(material + "." + hash + ".playerName", playerName);
-				proteccionData.set(material + "." + hash + ".X", locationBlockX);
-				proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-				proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-				proteccionData.set(material + "." + hash + ".estado", "privado");
-				proteccionData.set(material + "." + hash + ".doble", false);
-
-			} else {
+				actualizarEstado (proteccionData, material, hash, playerName, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
+			}
+			else {
 
 				if (getlocationBlockPlayerNamepos1 != null){
-
+					
 					if (getlocationBlockPlayerNamepos1.equals(playerName)){
-
-						String estadohaspos1 = proteccionData.getString(material + "." + hashpos1 + ".estado");
-						Boolean membool = proteccionData.getBoolean(material + "." + hashpos1 + ".miembrosbool");
-
-						proteccionData.set(material + "." + hash + ".playerName", playerName);
-						proteccionData.set(material + "." + hash + ".X", locationBlockX);
-						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".estado", estadohaspos1);
-						proteccionData.set(material + "." + hash + ".doble", true);
-						proteccionData.set(material + "." + hash + ".dobleHash", hashpos1);
-						proteccionData.set(material + "." + hash + ".miembrosbool", membool);
-
-						proteccionData.set(material + "." + hashpos1 + ".doble", true);
-						proteccionData.set(material + "." + hashpos1 + ".dobleHash", hash);
-
-						List<String> pList1 = new ArrayList<String>(); 
-						List<String> pLista = proteccionData.getStringList(material + "." + hashpos1 + ".miembros");
-
-						pList1.addAll(pLista);
-
-						proteccionData.set(material + "." + hash + ".miembros", pList1);
-
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos1, locationBlockX, locationBlockY, locationBlockZ, true);						
 					}
 					else {
-
 						eventPlace.setCancelled(true);
-
 					}
 				} 
 
 				if (getlocationBlockPlayerNamepos2 != null){
-
 					if (getlocationBlockPlayerNamepos2.equals(playerName)){
-
-						String estadohaspos2 = proteccionData.getString(material + "." + hashpos2 + ".estado");
-
-						proteccionData.set(material + "." + hash + ".playerName", playerName);
-						proteccionData.set(material + "." + hash + ".X", locationBlockX);
-						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".estado", estadohaspos2);
-						proteccionData.set(material + "." + hash + ".doble", true);
-						proteccionData.set(material + "." + hash + ".dobleHash", hashpos2);
-
-						proteccionData.set(material + "." + hashpos2 + ".doble", true);
-						proteccionData.set(material + "." + hashpos2 + ".dobleHash", hash);
-
-						List<String> pList1 = new ArrayList<String>(); 
-						List<String> pLista = proteccionData.getStringList(material + "." + hashpos2 + ".miembros");
-
-						pList1.addAll(pLista);
-
-						proteccionData.set(material + "." + hash + ".miembros", pList1);
-
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos2, locationBlockX, locationBlockY, locationBlockZ, false);
 					}
 					else {
-
 						eventPlace.setCancelled(true);
-
 					}
 				}
 
 				if (getlocationBlockPlayerNamepos3 != null){
-
 					if (getlocationBlockPlayerNamepos3.equals(playerName)){
-
-						String estadohaspos3 = proteccionData.getString(material + "." + hashpos3 + ".estado");
-
-						proteccionData.set(material + "." + hash + ".playerName", playerName);
-						proteccionData.set(material + "." + hash + ".X", locationBlockX);
-						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".estado", estadohaspos3);
-						proteccionData.set(material + "." + hash + ".doble", true);
-						proteccionData.set(material + "." + hash + ".dobleHash", hashpos3);
-
-						proteccionData.set(material + "." + hashpos3 + ".doble", true);
-						proteccionData.set(material + "." + hashpos3 + ".dobleHash", hash);
-
-						List<String> pList1 = new ArrayList<String>(); 
-						List<String> pLista = proteccionData.getStringList(material + "." + hashpos3 + ".miembros");
-
-						pList1.addAll(pLista);
-
-						proteccionData.set(material + "." + hash + ".miembros", pList1);
-
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos3, locationBlockX, locationBlockY, locationBlockZ, false);
 					}
 					else {
-
 						eventPlace.setCancelled(true);
-
 					}
 				} 
 
 				if (getlocationBlockPlayerNamepos4 != null){
-
 					if (getlocationBlockPlayerNamepos4.equals(playerName)){
-
-						String estadohaspos4 = proteccionData.getString(material + "." + hashpos4 + ".estado");
-
-						proteccionData.set(material + "." + hash + ".playerName", playerName);
-						proteccionData.set(material + "." + hash + ".X", locationBlockX);
-						proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-						proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-						proteccionData.set(material + "." + hash + ".estado", estadohaspos4);
-						proteccionData.set(material + "." + hash + ".doble", true);
-						proteccionData.set(material + "." + hash + ".dobleHash", hashpos4);
-
-						proteccionData.set(material + "." + hashpos4 + ".doble", true);
-						proteccionData.set(material + "." + hashpos4 + ".dobleHash", hash);
-
-						List<String> pList1 = new ArrayList<String>(); 
-						List<String> pLista = proteccionData.getStringList(material + "." + hashpos4 + ".miembros");
-
-						pList1.addAll(pLista);
-
-						proteccionData.set(material + "." + hash + ".miembros", pList1);
-
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos4, locationBlockX, locationBlockY, locationBlockZ, false);
 					}
 					else {
-
 						eventPlace.setCancelled(true);
-
 					}
 				} 
 			}
@@ -274,32 +160,22 @@ public class EventsP {
 
 			locationBlock = placeBlock.getLocation().add(0, 1, 0);
 
-			if(locationBlock.getBlock().getType() == Material.CHEST || locationBlock.getBlock().getType() == Material.TRAPPED_CHEST || locationBlock.getBlock().getType() == Material.DROPPER || locationBlock.getBlock().getType() == Material.FURNACE){
-
+			if(locationBlock.getBlock().getType() == Material.CHEST ||
+					locationBlock.getBlock().getType() == Material.TRAPPED_CHEST ||
+					locationBlock.getBlock().getType() == Material.DROPPER ||
+					locationBlock.getBlock().getType() == Material.FURNACE){
 				eventPlace.setCancelled(true);
-
 			}
 			else {
-
-				proteccionData.set(material + "." + hash + ".playerName", playerName);
-				proteccionData.set(material + "." + hash + ".X", locationBlockX);
-				proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-				proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-				proteccionData.set(material + "." + hash + ".estado", "privado");
-
+				actualizarEstado (proteccionData, material, hash, playerName, locationBlockX, locationBlockY, locationBlockZ, "privado");
 			}
-
 		}
-
 		proteccionData.save(protecciondata);
-
 	}
 
-	@SuppressWarnings({ "unused", "deprecation" })
+	@SuppressWarnings({"unused", "deprecation" })
 	public static void brokeBlockPlayerEventsP(BlockBreakEvent eventPlace) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
-		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
-		String playerName = eventPlace.getPlayer().getName();
 		Player craftPlayer = (Player) eventPlace.getPlayer();
 
 		Block brokeBlock = eventPlace.getBlock();
@@ -371,43 +247,35 @@ public class EventsP {
 				proteccionData.set(material + "." + getdobleChestHash + ".dobleHash", null);
 
 			}
-			
+
 			if (brokeBlock.getType() == Material.WOODEN_DOOR){
-				
+
 				if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-					
 					proteccionData.set(material + "." + hash, null);
-					
-				} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-					
-					String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
-					
-					proteccionData.set(material + "." + hashW, null);
-					
 				}
-				
-			} else {
+				else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 
-				proteccionData.set(material + "." + hash, null);
-				
+					String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+					proteccionData.set(material + "." + hashW, null);
+				}
 			}
-
+			else {
+				proteccionData.set(material + "." + hash, null);
+			}
 			proteccionData.save(protecciondata);
-			
 		}
-		
+
 		//---> Protección Puertas
-		
+
 		Location locationBlock = eventPlace.getBlock().getLocation().add(0, 1, 0);
 		Location locationBlock1 = eventPlace.getBlock().getLocation().add(0, 2, 0);
-				
 	}
 	
 	public static void playerInteractEventsP(PlayerInteractEvent eventInteract) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
 		String playerName = eventInteract.getPlayer().getName();
 		Player craftPlayer = (Player) eventInteract.getPlayer();
-		
+
 		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
 		File f1 = new File(amigosdata, File.separator + "amigos.yml");
 		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
@@ -500,17 +368,17 @@ public class EventsP {
 				getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
 				getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
 				getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
-				
+
 				List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
 
 				String gethash = Integer.toString(getlocationBlockX) + Integer.toString(getlocationBlockY) + Integer.toString(getlocationBlockZ);
-				
+
 				if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
-					
+
 					if(eventInteract.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-												
+
 						if (gethash.equals(hash)){
-							
+
 							if (getlocationBlockPlayerName.equals(playerName) 
 									|| getlocationBlockEstado.equals("publico") 
 									|| pLista.toString().contains(playerName) 
@@ -528,28 +396,19 @@ public class EventsP {
 						}
 						else {
 
-							if (getlocationBlockPlayerName == null) {
-
-								proteccionData.set(material + "." + hash + ".playerName", "Steve");
-								proteccionData.set(material + "." + hash + ".X", locationBlockX);
-								proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-								proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-								proteccionData.set(material + "." + hash + ".estado", "publico");
-
-
+							if (getlocationBlockPlayerName == null) {								
+								actualizarEstado (proteccionData, material, hash, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
 							}
 							else {
-
 								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 								eventInteract.setCancelled(true);
-
 							}
 						}
-						
-					} else if(eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-						
+					}
+					else if(eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+
 						String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
-						
+
 						List<String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
 
 						String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
@@ -557,9 +416,9 @@ public class EventsP {
 						int getlocationBlockYW = proteccionData.getInt(material + "." + hashW + ".Y");
 						int getlocationBlockZW = proteccionData.getInt(material + "." + hashW + ".Z");
 						String getlocationBlockEstadoW = proteccionData.getString(material + "." + hashW + ".estado");
-						
+
 						String gethashW = Integer.toString(getlocationBlockXW) + Integer.toString(getlocationBlockYW) + Integer.toString(getlocationBlockZW);
-						
+
 						List<String> pListaPW = amigosData.getStringList(playerName + ".amigos");
 
 						if (gethashW.equals(hashW)){
@@ -581,15 +440,8 @@ public class EventsP {
 						}
 						else {
 
-							if (getlocationBlockPlayerNameW == null) {
-
-								proteccionData.set(material + "." + hashW + ".playerName", "Steve");
-								proteccionData.set(material + "." + hashW + ".X", locationBlockX);
-								proteccionData.set(material + "." + hashW + ".Y", locationBlockY);
-								proteccionData.set(material + "." + hashW + ".Z", locationBlockZ);
-								proteccionData.set(material + "." + hashW + ".estado", "publico");
-
-
+							if (getlocationBlockPlayerNameW == null) {								
+								actualizarEstado (proteccionData, material, hashW, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
 							}
 							else {
 
@@ -598,11 +450,11 @@ public class EventsP {
 
 							}
 						}
-						
+
 					}
-					
+
 				} else {
-					
+
 					if (gethash.equals(hash)){
 
 						if (getlocationBlockPlayerName.equals(playerName) 
@@ -622,42 +474,75 @@ public class EventsP {
 					}
 					else {
 
-						if (getlocationBlockPlayerName == null) {
-
-							proteccionData.set(material + "." + hash + ".playerName", "Steve");
-							proteccionData.set(material + "." + hash + ".X", locationBlockX);
-							proteccionData.set(material + "." + hash + ".Y", locationBlockY);
-							proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-							proteccionData.set(material + "." + hash + ".estado", "publico");
-
-
+						if (getlocationBlockPlayerName == null) {					
+							actualizarEstado (proteccionData, material, hash, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
 						}
 						else {
 
 							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 							eventInteract.setCancelled(true);
-
 						}
 					}
-					
 				}
-				
 			}
-			
 			amigosData.save(f1);
 			proteccionData.save(protecciondata);
-
 		}
-        
 	}
 
-	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, String locationBlockX, String locationBlockY, String locationBlockZ){
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, int locationBlockX, int locationBlockY, int locationBlockZ, String estado, boolean miembrosbool){
+
 		proteccionData.set(material + "." + hash + ".playerName", playerName);
 		proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
 		proteccionData.set(material + "." + hash + ".X", locationBlockX);
 		proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 		proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
-		proteccionData.set(material + "." + hash + ".estado", "privado");
-		proteccionData.set(material + "." + hash + ".miembrosbool", false);
+		proteccionData.set(material + "." + hash + ".estado", estado);
+		proteccionData.set(material + "." + hash + ".miembrosbool", miembrosbool);
+	}
+
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, int locationBlockX, int locationBlockY, int locationBlockZ, String estado, boolean doble){
+
+		proteccionData.set(material + "." + hash + ".playerName", playerName);
+		proteccionData.set(material + "." + hash + ".X", locationBlockX);
+		proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+		proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+		proteccionData.set(material + "." + hash + ".estado", estado);
+		proteccionData.set(material + "." + hash + ".doble", doble);
+	}
+
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String hashpos, int locationBlockX, int locationBlockY, int locationBlockZ, boolean mem){
+
+		String estadohaspos = proteccionData.getString(material + "." + hashpos + ".estado");
+
+		proteccionData.set(material + "." + hash + ".playerName", playerName);
+		proteccionData.set(material + "." + hash + ".X", locationBlockX);
+		proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+		proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+		proteccionData.set(material + "." + hash + ".estado", estadohaspos);
+		proteccionData.set(material + "." + hash + ".doble", true);
+		proteccionData.set(material + "." + hash + ".dobleHash", hashpos);
+		if (mem){
+			Boolean membool = proteccionData.getBoolean(material + "." + hashpos + ".miembrosbool");
+			proteccionData.set(material + "." + hash + ".miembrosbool", membool);
+		}
+		proteccionData.set(material + "." + hashpos + ".doble", true);
+		proteccionData.set(material + "." + hashpos + ".dobleHash", hash);
+
+		List<String> pList = new ArrayList<String>(); 
+		List<String> pLista = proteccionData.getStringList(material + "." + hashpos + ".miembros");
+
+		pList.addAll(pLista);
+
+		proteccionData.set(material + "." + hash + ".miembros", pList);
+	}
+	
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, int locationBlockX, int locationBlockY, int locationBlockZ, String estado){		
+		
+		proteccionData.set(material + "." + hash + ".playerName", playerName);
+		proteccionData.set(material + "." + hash + ".X", locationBlockX);
+		proteccionData.set(material + "." + hash + ".Y", locationBlockY);
+		proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
+		proteccionData.set(material + "." + hash + ".estado", estado);
 	}
 }
