@@ -34,17 +34,37 @@ public class CommandWhitelist {
 
 
 			if (args.length == 1){		
-
+				
+				Boolean white = proteccionData1.getBoolean("Whitelist");
+					
 				if (args[0].equals("on")){		
-
-					proteccionData1.set("Whitelist", true);
-					sender.sendMessage(ChatColor.GRAY + "Whitelist activada.");					
+					
+					if(!white){
+						
+						proteccionData1.set("Whitelist", true);
+						sender.sendMessage(ChatColor.GRAY + "Whitelist activada.");		
+						
+					} else {
+						
+						sender.sendMessage(ChatColor.RED + "La whitelist ya estaba activada.");	
+						
+					}
+			
+				} else if (args[0].equals("off")){
+					
+					if(white){
+						
+						proteccionData1.set("Whitelist", false);
+						sender.sendMessage(ChatColor.GRAY + "Whitelist desactivada.");			
+						
+					} else {
+						
+						sender.sendMessage(ChatColor.RED + "La whitelist ya estaba desactivada.");		
+						
+					}
+									
 				}
-				else if (args[0].equals("off")){
-
-					proteccionData1.set("Whitelist", false);
-					sender.sendMessage(ChatColor.GRAY + "Whitelist desactivada.");					
-				}
+				
 			}
 			else if (args.length == 2){
 

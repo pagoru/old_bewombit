@@ -19,20 +19,25 @@ public class CommandHeal {
 			if (args.length == 0){
 
 				curarJugador (craftPlayer);
-			}
-
-			else if (args.length == 1){
+				
+			} else if (args.length == 1){
 				if (sender.getServer().getPlayer(args [0]) != null){
+					
 					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
 					curarJugador (craftPlayerArgs);
 					craftPlayer.sendMessage(ChatColor.GRAY + craftPlayerArgs.getName() + " ha sido curado.");
+					
 				} else {
+					
 					CommandUtilities.jugadorDesconectado(sender);
+					
 				}
-			}
-			else{
+			} else{
+				
 				CommandUtilities.formaCorrecta(sender, "/heal [player]");
+				
 			}
+			
 			return true;
 		}
 		return false;
