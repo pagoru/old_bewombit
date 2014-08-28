@@ -33,9 +33,9 @@ public static List<String> commandautogm(CommandSender sender, Command cmd, Stri
 			amigosData.load(f);
 			
 			if (args.length == 1){
-				
-				pList =  Arrays.asList("añadir","eliminar","aceptar","rechazar");  
-				
+					
+				pList =  Arrays.asList("añadir","eliminar","aceptar","rechazar","solicitudes");  
+
 			} else if (args.length == 2){
 				
 				if(args[0].equals("eliminar")){
