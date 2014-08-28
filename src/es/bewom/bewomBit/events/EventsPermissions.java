@@ -43,6 +43,7 @@ public class EventsPermissions {
 		String playerUUID = craftPlayer.getUniqueId().toString();
 		String playerName = craftPlayer.getName();
 		String playerIP = craftPlayer.getAddress().getAddress().toString().substring(1);
+		int serverPort = Bukkit.getServer().getPort();
 		
 		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date firstDate = new Date();
@@ -59,6 +60,7 @@ public class EventsPermissions {
 			
 			String groupExp = query.getString("group_expiration");
 			String lastLogin = query.getString("last_login");
+			String id = query.getString("id");
 			
 			Date lastLoginParse = dateFormat.parse(lastLogin);
 			
@@ -70,7 +72,7 @@ public class EventsPermissions {
 			
 			//última hora de connexion//
 			
-			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido de nuevo " + playerName + "! " + ChatColor.DARK_RED  + "❤");
+			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido de nuevo usuario #" + id + " " + playerName + "! " + ChatColor.DARK_RED  + "❤");
 			
 			String segundos = "";
 			String minutos = "";
@@ -419,11 +421,14 @@ public class EventsPermissions {
 				
 			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido " + playerName + "! ¿Eres nuevo, no? " + ChatColor.DARK_RED  + "❤");
 			
-			statement.executeUpdate("INSERT INTO permissions (`UUID`, `playerName`, `group`, `first_login`, `last_login`, `IP`) VALUES ('" + playerUUID + "', '" + playerName + "', '" + "0" + "', '" + dateFormat.format(firstDate).toString() + "', '" + dateFormat.format(firstDate).toString() + "', '" + playerIP + "');");
+			statement.executeUpdate("INSERT INTO permissions (`UUID`, `playerName`, `group`, `first_login`, `last_login`, `IP`,`first_server`,`last_server`) "
+					+ "VALUES ('" + playerUUID + "', '" + playerName + "', '" + "0" + "', '" + dateFormat.format(firstDate).toString() + "',"
+					+ " '" + dateFormat.format(firstDate).toString() + "', '" + playerIP + "', '" + serverPort + "', '" + serverPort + "');");
 			
 		}
 		
-		statement.executeUpdate("UPDATE `permissions` SET `UUID`= '" + playerUUID + "', `last_login`= '" + dateFormat.format(firstDate).toString() + "', `IP`= '" + playerIP + "' WHERE `playerName` = '" + playerName + "'");
+		statement.executeUpdate("UPDATE `permissions` SET `UUID`= '" + playerUUID + "', `last_login`= '" + dateFormat.format(firstDate).toString() + "',"
+				+ " `IP`= '" + playerIP + "',`last_server`='" + serverPort + "' WHERE `playerName` = '" + playerName + "'");
 		
 		statement.close();
 		connection.closeConnection();

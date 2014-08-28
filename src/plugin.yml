@@ -163,3 +163,7 @@ commands:
    whitelist:
       description: Permite al jugador whitlistear
       permission: bewom.admin
+
+   reiniciar:
+      description: Permite al jugador stopear
+      permission: bewom.admin

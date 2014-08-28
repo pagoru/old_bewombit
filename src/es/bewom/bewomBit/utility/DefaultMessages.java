@@ -10,5 +10,8 @@ public class DefaultMessages {
 	public static String kickBanPlayer = ChatColor.BLUE + "";
 	public static String whitelistPlayer = ChatColor.YELLOW + "";
 	
+	public static String restartServer = ChatColor.GOLD + "/"+ ChatColor.MAGIC + "b" + ChatColor.GOLD  + "/" + ChatColor.GOLD  + "" 
+			+ ChatColor.BOLD + "WOM" + ChatColor.GOLD  + " < " + ChatColor.YELLOW;
+	
 	
 }

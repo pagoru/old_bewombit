@@ -3,6 +3,7 @@ package es.bewom.bewomBit.events;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,7 +20,7 @@ public class EventsPerfiles {
 
 	static Scoreboard board;
 	
-	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect) throws FileNotFoundException, IOException, InvalidConfigurationException{
+	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect) throws FileNotFoundException, IOException, InvalidConfigurationException, ClassNotFoundException, SQLException{
 		
 		Player craftPlayer = eventConnect.getPlayer(); //craftPlayer Player
 		String playerName = eventConnect.getPlayer().getName(); //limpio String 
@@ -44,7 +45,7 @@ public class EventsPerfiles {
 		playerData.set("PlayerName", playerName);
 		playerData.set("Chat", "global");
 		playerData.set("Tpa", null);
-		playerData.set("Dios", false);
+		playerData.set("Dios", false);	
 		
 		if (playerData.getBoolean("Congelado") != true) {
 			playerData.set("Congelado", false);
@@ -74,7 +75,7 @@ public class EventsPerfiles {
 			registrarScoreboardsPorPermisos (craftPlayer, teamUser, playerName);
 		}					
 
-		playerData.save(f);
+		playerData.save(f);		
 	
 	}
 	

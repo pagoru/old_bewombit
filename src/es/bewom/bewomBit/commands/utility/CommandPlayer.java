@@ -11,17 +11,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 
 public class CommandPlayer implements CommandExecutor {
-
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
 		// ---> Comandos de administracion <--- //
 		try {
-			if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
+			if (sender.hasPermission("bewom.admin")){
 	
 				if(CommandSay.commandsay(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandTpHere.commandtphere(sender, cmd, label, args)){
 					return true;
 				}
 				if(CommandFly.commandfly(sender, cmd, label, args)){
@@ -39,34 +36,10 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandKill.commandkill(sender, cmd, label, args)){
 					return true;
 				}
-				if(CommandHeal.commandheal(sender,cmd,label,args)){
-					return true;
-				}
-				if(CommandKick.commandkick(sender, cmd, label, args)){
-					return true;
-				}
 				if(CommandCongelar.commandcongelar(sender, cmd, label, args)){
 					return true;
-				}
-				if(CommandGm.commandgm(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandV.commandv(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandSpawner.commandspawner(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandGod.commandgod(sender, cmd, label, args)){
-					return true;
-				}
+				}				
 				if(CommandTpAll.commandtpall(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandBan.commandban(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandUnban.commandunban(sender, cmd, label, args)){
 					return true;
 				}
 				/*if(CommandSpeed.commandspeed(sender, cmd, label, args)){
@@ -76,6 +49,45 @@ public class CommandPlayer implements CommandExecutor {
 					return true;
 				}
 				if(CommandWhitelist.commandwhitelist(sender, cmd, label, args)){
+					return true;
+				}
+			}
+			
+			// ---> Comandos de mods <--- //
+			
+			if(sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod")){
+				
+				if(CommandSave.commandsave(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandXray.commandxray(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandBan.commandban(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandUnban.commandunban(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandSpawner.commandspawner(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandGod.commandgod(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandGm.commandgm(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandV.commandv(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandKick.commandkick(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandHeal.commandheal(sender,cmd,label,args)){
+					return true;
+				}
+				if(CommandTpHere.commandtphere(sender, cmd, label, args)){
 					return true;
 				}
 			}
@@ -111,12 +123,6 @@ public class CommandPlayer implements CommandExecutor {
 				if(CommandDelHome.commanddelhome(sender, cmd, label, args)){
 					return true;
 				}
-				if(CommandSave.commandsave(sender, cmd, label, args)){
-					return true;
-				}
-				if(CommandXray.commandxray(sender, cmd, label, args)){
-					return true;
-				}
 			} 
 			
 			// ---> Comandos cualquiera <--- //
@@ -133,7 +139,7 @@ public class CommandPlayer implements CommandExecutor {
 			if(CommandLag.commandlag(sender, cmd, label, args)){
 				return true;
 			}
-			if(CommandAmigos.commandban(sender, cmd, label, args)){
+			if(CommandAmigos.commandamigos(sender, cmd, label, args)){
 				return true;
 			}
 			

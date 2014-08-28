@@ -21,7 +21,7 @@ import org.bukkit.entity.Player;
 public class CommandAmigos {
 	
 	@SuppressWarnings({ "deprecation" })
-	public static boolean commandban (CommandSender sender, Command cmd, String label, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException, SQLException, ClassNotFoundException, ParseException{
+	public static boolean commandamigos (CommandSender sender, Command cmd, String label, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException, SQLException, ClassNotFoundException, ParseException{
 
 		if (label.equalsIgnoreCase("amigos")){
 			
