@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +35,30 @@ public class CommandAmigos {
 			
 			amigosData.load(f);
 			
-			if (args.length == 2){
+			if (args.length == 0){
+				
+				List<String> pList = amigosData.getStringList(playerName + ".amigos");
+				
+				ArrayList<String> myList = new ArrayList<String>();
+				
+				boolean color = true;
+				
+				for(String craftPlayerList : pList){
+					
+					if(color == true){
+						myList.add(ChatColor.GREEN + craftPlayerList + ChatColor.WHITE);	
+						color = false;
+					}
+					else {
+						myList.add(ChatColor.DARK_GREEN + craftPlayerList + ChatColor.WHITE);	
+						color = true;
+					}
+					
+				}
+				
+				craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Estos son tus amigos: " + ChatColor.WHITE + myList);
+				
+			} else if (args.length == 2){
 				
 				if(args[0].equals("añadir")){
 					
@@ -88,6 +112,8 @@ public class CommandAmigos {
 										if(Bukkit.getServer().getPlayer(craftPlayerUUIDArgs) != null){
 											
 											craftPlayerArgs.getPlayer().sendMessage(ChatColor.GREEN + "El usuario " + playerName + " quiere ser tu amigo.");
+											craftPlayerArgs.getPlayer().sendMessage(ChatColor.GRAY + "Para aceptar la solicitud " + ChatColor.GREEN + "" + ChatColor.ITALIC + "/amigos aceptar " + playerName + "");
+											craftPlayerArgs.getPlayer().sendMessage(ChatColor.GRAY + "Para rechazar la solicitud " + ChatColor.RED + "" + ChatColor.ITALIC + "/amigos rechazar " + playerName + "");
 											
 										}
 										

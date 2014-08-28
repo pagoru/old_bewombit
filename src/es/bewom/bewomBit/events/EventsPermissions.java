@@ -40,7 +40,7 @@ public class EventsPermissions {
 	public static void onJoin(PlayerJoinEvent eventConnect) throws SQLException, IOException, ClassNotFoundException, ParseException {
 		
 		final Player craftPlayer = eventConnect.getPlayer();
-		String playerUUID = craftPlayer.getUniqueId().toString();
+		final String playerUUID = craftPlayer.getUniqueId().toString();
 		String playerName = craftPlayer.getName();
 		String playerIP = craftPlayer.getAddress().getAddress().toString().substring(1);
 		int serverPort = Bukkit.getServer().getPort();
@@ -54,7 +54,7 @@ public class EventsPermissions {
 		MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 		connection.openConnection();
 		Statement statement = connection.getConnection().createStatement();
-		ResultSet query = statement.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
+		ResultSet query = statement.executeQuery("SELECT * FROM `permissions` WHERE `UUID` = '" + playerUUID + "';");
 		
 		if(query.next()){
 			
@@ -129,7 +129,7 @@ public class EventsPermissions {
 				
 				if(group_expiration.compareTo(firstDate) < 0){
 					
-					statement.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `playerName` = '" + playerName + "'");
+					statement.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `UUID` = '" + playerUUID + "'");
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Se te ha terminado el VIP, puedes volver a donar en http://bewom.es/vip ! :)" );
 					
 				} else {
@@ -269,7 +269,7 @@ public class EventsPermissions {
 									connection1.openConnection();
 									
 									Statement statement1 = connection1.getConnection().createStatement();
-									ResultSet query1 = statement1.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
+									ResultSet query1 = statement1.executeQuery("SELECT * FROM `permissions` WHERE `UUID` = '" + playerUUID + "';");
 									
 									if(query1.next()){
 										
@@ -284,7 +284,7 @@ public class EventsPermissions {
 											
 											if(group_expiration1.compareTo(firstDate1) < 0){
 												
-												statement1.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `playerName` = '" + craftPlayer.getName() + "'");
+												statement1.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `UUID` = '" + playerUUID + "'");
 												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Se te ha terminado el VIP! :(");
 												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Pero puedes volver a donar! :)");
 												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "http://bewom.es/vip");
@@ -354,7 +354,7 @@ public class EventsPermissions {
 								connection2.openConnection();
 								
 								Statement statement2 = connection2.getConnection().createStatement();
-								ResultSet query2 = statement2.executeQuery("SELECT * FROM `permissions` WHERE `playerName` = '" + craftPlayer.getName() + "';");
+								ResultSet query2 = statement2.executeQuery("SELECT * FROM `permissions` WHERE `UUID` = '" + playerUUID + "';");
 								
 								if(query2.next()){
 									
@@ -427,8 +427,8 @@ public class EventsPermissions {
 			
 		}
 		
-		statement.executeUpdate("UPDATE `permissions` SET `UUID`= '" + playerUUID + "', `last_login`= '" + dateFormat.format(firstDate).toString() + "',"
-				+ " `IP`= '" + playerIP + "',`last_server`='" + serverPort + "' WHERE `playerName` = '" + playerName + "'");
+		statement.executeUpdate("UPDATE `permissions` SET `playerName`= '" + playerName + "', `last_login`= '" + dateFormat.format(firstDate).toString() + "',"
+				+ " `IP`= '" + playerIP + "',`last_server`='" + serverPort + "' WHERE `UUID` = '" + playerUUID + "'");
 		
 		statement.close();
 		connection.closeConnection();
