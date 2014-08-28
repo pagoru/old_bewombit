@@ -1,9 +1,11 @@
 package es.bewom.bewomBit.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class CommandHat {
 
@@ -12,15 +14,24 @@ public class CommandHat {
 		if (label.equalsIgnoreCase("hat")){
 
 			Player craftPlayer = (Player) sender;
-			ponerItemEnManoDeSombrero (craftPlayer);
+			
+			ItemStack itemInHat = craftPlayer.getInventory().getHelmet();
+			ItemStack itemInHand = craftPlayer.getItemInHand();
+			
+			if(craftPlayer.getItemInHand().getType() != Material.AIR){
+				
+				craftPlayer.getInventory().setHelmet(itemInHand);
+				craftPlayer.setItemInHand(itemInHat);
+				craftPlayer.sendMessage(ChatColor.GRAY + "Bonito sombrero!");
+				
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "No puedes colocarte aire como sombrero!");
+			}
+			
 			return true;
 		}
 		return false;
 	}
 
-	public static void ponerItemEnManoDeSombrero (Player player){
-		player.setItemInHand(player.getInventory().getHelmet());
-		player.getInventory().setHelmet(player.getItemInHand());
-		player.sendMessage(ChatColor.GRAY + "Bonito sombrero!");
-	}
 }
