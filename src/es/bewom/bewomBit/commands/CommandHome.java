@@ -3,6 +3,8 @@ package es.bewom.bewomBit.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -24,8 +26,53 @@ public class CommandHome implements Listener {
 			
 			Player craftPlayer = (Player) sender;
 			UUID playerUUID = craftPlayer.getUniqueId();
-						
-			if (args.length == 1){
+				
+			if (args.length == 0){
+				
+				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
+				File f = new File(userdata, File.separator + playerUUID + ".yml");
+				FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+				playerData.load(f);
+				
+				List<String> hList = playerData.getStringList("Homes.List");
+				
+				ArrayList<String> myList = new ArrayList<String>();
+				
+				boolean color = true;
+				int numHomes = 0;
+				
+				for(String craftPlayerList : hList){
+					
+					if(color == true){
+						myList.add(ChatColor.WHITE + craftPlayerList + ChatColor.WHITE);	
+						color = false;
+					}
+					else {
+						myList.add(ChatColor.GRAY+ craftPlayerList + ChatColor.WHITE);	
+						color = true;
+					}
+					numHomes = numHomes + 1;
+					
+				}
+				
+				if(numHomes == 0){
+					
+					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "No tienes homes.");
+					
+				} else if(numHomes == 1){
+					
+					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Tienes 1 home: " + ChatColor.WHITE + myList);
+					
+				} else {
+					
+					craftPlayer.sendMessage(ChatColor.DARK_AQUA + "Tienes " + numHomes + " homes: " + ChatColor.WHITE +  myList);
+					
+				}
+				
+				playerData.save(f);
+				
+			} else if (args.length == 1){
 				
 				File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 				File f = new File(userdata, File.separator + playerUUID + ".yml");
@@ -57,6 +104,10 @@ public class CommandHome implements Listener {
 				
 				playerData.save(f);
 	
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "La forma correcta es /home [nombre casa].");
+				
 			}
 			
 			return true;

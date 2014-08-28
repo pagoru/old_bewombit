@@ -72,7 +72,7 @@ public class EventsPermissions {
 			
 			//última hora de connexion//
 			
-			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido de nuevo usuario #" + id + " " + playerName + "! " + ChatColor.DARK_RED  + "❤");
+			craftPlayer.sendMessage(ChatColor.BOLD + "Bienvenido de nuevo sujeto #" + id + " " + playerName + "! " + ChatColor.DARK_RED  + "❤");
 			
 			String segundos = "";
 			String minutos = "";

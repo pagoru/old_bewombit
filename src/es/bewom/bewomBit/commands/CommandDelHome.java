@@ -54,6 +54,10 @@ public class CommandDelHome {
 											
 				playerData.save(f);
 	
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "La forma correcta es /delhome [nombre casa].");
+				
 			}
 			
 			return true;

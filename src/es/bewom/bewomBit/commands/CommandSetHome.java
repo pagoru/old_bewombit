@@ -58,6 +58,10 @@ public class CommandSetHome implements Listener {
 				
 				playerData.save(f);
 
+			} else {
+				
+				craftPlayer.sendMessage(ChatColor.RED + "La forma correcta es /sethome [nombre casa].");
+				
 			}
 			
 			return true;
