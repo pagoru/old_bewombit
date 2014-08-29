@@ -11,7 +11,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandKill {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandkill (CommandSender sender, Command cmd, String label, String [] args){
+	public static boolean commandkill (CommandSender sender, Command cmd, String label, String [] args) throws Exception{
 
 		if (label.equalsIgnoreCase("kill")){
 
@@ -19,7 +19,7 @@ public class CommandKill {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					int nivel = craftPlayerArgs.getLevel();
 					craftPlayerArgs.setHealth(0);
 					mostrarExperiencia (sender, craftPlayerArgs, nivel);

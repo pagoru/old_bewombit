@@ -2,14 +2,12 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -21,7 +19,7 @@ public class CommandMp {
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
 
-	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
+	public static boolean commandmp(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		
 		if (label.equalsIgnoreCase("mp") || label.equalsIgnoreCase("msg") || label.equalsIgnoreCase("tell") || label.equalsIgnoreCase("me")){
 		

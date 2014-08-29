@@ -11,7 +11,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandFly {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandfly (CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandfly (CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("fly")){
 			Player craftPlayer = (Player) sender;
@@ -23,7 +23,7 @@ public class CommandFly {
 			else if (args.length == 1){
 
 				if (CommandUtilities.comprobarJugador (sender, (args[0]))){
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					cambiarModoDeVuelo (craftPlayer, craftPlayerArgs);
 				}
 				else {

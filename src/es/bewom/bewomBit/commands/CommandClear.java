@@ -13,7 +13,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandClear {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("clear")){
 
@@ -23,9 +23,9 @@ public class CommandClear {
 			}
 
 			else if (args.length == 1){
-
-				if (sender.getServer().getPlayer(args [0]) != null){
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+				
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					eliminarInventario (craftPlayerArgs);
 					sender.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
 				}

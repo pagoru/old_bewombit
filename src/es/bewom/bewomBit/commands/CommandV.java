@@ -14,8 +14,8 @@ public class CommandV {
 
 	static Logger log = Logger.getLogger("Minecraft");
 
-	@SuppressWarnings({ "deprecation" })
-	public static boolean commandv(CommandSender sender, Command cmd, String label, String[] args){
+	@SuppressWarnings("deprecation")
+	public static boolean commandv(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("v")){
 
@@ -25,7 +25,7 @@ public class CommandV {
 			if(args.length == 2) {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[1]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[1]).getUniqueId());
 
 					if (args[0].equals("ocultar")){
 						

@@ -3,7 +3,6 @@ package es.bewom.bewomBit.commands.utility;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-
 public class CommandUtilities {
 
 	public static void jugadorDesconectado (CommandSender sender){
@@ -15,7 +14,7 @@ public class CommandUtilities {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static boolean comprobarJugador (CommandSender sender, String playerName){
+	public static boolean comprobarJugador (CommandSender sender, String playerName) throws Exception{
 		if (sender.getServer().getPlayer(playerName) != null) {
 			return true;
 		}

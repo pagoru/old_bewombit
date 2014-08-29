@@ -10,16 +10,16 @@ import org.bukkit.entity.Player;
 public class CommandTpHere {
 	
 	@SuppressWarnings("deprecation")
-	public static boolean commandtphere(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandtphere(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		if (label.equalsIgnoreCase("tphere")){
 			Player craftPlayer = (Player) sender;
 			Player craftPlayerArgs;
 
 			if (args.length == 1){
-				if (craftPlayer.getServer().getPlayer(args[0]) != null){
+				if (craftPlayer.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 
 					Location locationPlayer = craftPlayer.getLocation();
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					craftPlayerArgs.teleport(locationPlayer);
 					String playerArgsName = craftPlayerArgs.getName();
 

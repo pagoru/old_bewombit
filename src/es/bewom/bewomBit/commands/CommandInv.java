@@ -12,16 +12,16 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandInv {
 
 	@SuppressWarnings("deprecation")
-	public static boolean commandinv(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandinv(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("inv")){
 			Player craftPlayer = (Player) sender;
 
 			if (args.length == 1) {
 
-				if (sender.getServer().getPlayer(args [0]) != null){
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					PlayerInventory craftPlayerArgsInventory = craftPlayerArgs.getInventory();
 					craftPlayer.openInventory(craftPlayerArgsInventory);
 

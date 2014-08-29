@@ -12,7 +12,7 @@ import es.bewom.bewomBit.commands.utility.CommandUtilities;
 public class CommandEnderChest {
 	
 	@SuppressWarnings("deprecation")
-	public static boolean commandenderchest(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandenderchest(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		
 		if (label.equalsIgnoreCase("enderchest") || label.equalsIgnoreCase("ender") || label.equalsIgnoreCase("end")){
 			Player craftPlayer = (Player) sender;
@@ -28,9 +28,9 @@ public class CommandEnderChest {
 			
 			else if (args.length == 1) {
 				
-				if (sender.getServer().getPlayer(args [0]) != null){
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 					
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					
 					Inventory craftPlayerArgsInventory = craftPlayerArgs.getEnderChest();
 					craftPlayer.openInventory(craftPlayerArgsInventory);
