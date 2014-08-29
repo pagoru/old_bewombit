@@ -37,9 +37,6 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 	
 	public static BewomBit main;
 	
-	@SuppressWarnings("unused")
-	private static int task1;
-	
 	public static String SQLUrl = "localhost";
 	public static String SQLPort = "3306";
 	public static String SQLbd = "bewomBit";
@@ -132,7 +129,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 						
 		// ---> Guardado de mundos
 		
-		task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
 	        
 			@Override
 	        public void run() {

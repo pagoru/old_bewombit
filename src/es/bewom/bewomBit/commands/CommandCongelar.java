@@ -1,24 +1,21 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
+import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandCongelar {
 
-	@SuppressWarnings({ "deprecation" })
-	public static boolean commandcongelar (CommandSender sender, Command cmd, String commandLabel, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException{
+	public static boolean commandcongelar (CommandSender sender, Command cmd, String commandLabel, String [] args) throws Exception{
 
 		if (commandLabel.equalsIgnoreCase("congelar")){
 
@@ -45,10 +42,10 @@ public class CommandCongelar {
 			}
 			
 			else if (args.length == 1){
+				
+				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
 
-				if (sender.getServer().getPlayer(args[0]) != null){
-
-					UUID argUUID = sender.getServer().getOfflinePlayer(args[0]).getUniqueId();
+					UUID argUUID = sender.getServer().getOfflinePlayer(UUIDFetcher.getUUIDOf(args[0])).getUniqueId();
 					
 					File argsdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 					File arg = new File(argsdata, File.separator + argUUID + ".yml");

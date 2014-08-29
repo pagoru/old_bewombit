@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
+import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandEnderChest {
 	
-	@SuppressWarnings("deprecation")
-	public static boolean commandenderchest(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandenderchest(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		
 		if (label.equalsIgnoreCase("enderchest") || label.equalsIgnoreCase("ender") || label.equalsIgnoreCase("end")){
 			Player craftPlayer = (Player) sender;
@@ -28,9 +28,9 @@ public class CommandEnderChest {
 			
 			else if (args.length == 1) {
 				
-				if (sender.getServer().getPlayer(args [0]) != null){
+				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
 					
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
 					
 					Inventory craftPlayerArgsInventory = craftPlayerArgs.getEnderChest();
 					craftPlayer.openInventory(craftPlayerArgsInventory);

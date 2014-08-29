@@ -12,11 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
+import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandSeen {
 
-	@SuppressWarnings("deprecation")
-	public static boolean commandseen(CommandSender sender, Command cmd, String label, String[] args){
+	public static boolean commandseen(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("seen")){
 
@@ -24,7 +24,7 @@ public class CommandSeen {
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 					
 					Player craftPlayer = (Player) sender;
-					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(args[0]);
+					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(UUIDFetcher.getUUIDOf(args[0]));
 
 					long craftPlayerArgsLast = (int) craftPlayerArgs.getLastPlayed();
 

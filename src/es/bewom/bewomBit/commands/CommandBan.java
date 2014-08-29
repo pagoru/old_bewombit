@@ -1,12 +1,8 @@
 package es.bewom.bewomBit.commands;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -16,17 +12,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.utility.DefaultMessages;
+import es.bewom.bewomBit.utility.UUIDFetcher;
 import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class CommandBan {
 	
-	@SuppressWarnings({ "deprecation" })
-	public static boolean commandban (CommandSender sender, Command cmd, String commandLabel, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException, SQLException, ClassNotFoundException, ParseException{
+	public static boolean commandban (CommandSender sender, Command cmd, String commandLabel, String [] args) throws Exception{
 
 		if (commandLabel.equalsIgnoreCase("ban")){
 			
@@ -53,14 +48,14 @@ public class CommandBan {
 					if (args.length == 2){
 						
 						String bannedPlayer = args[0];
-						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						UUID bannedPlayerUUID = UUIDFetcher.getUUIDOf(bannedPlayer);
 						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
 						String bannedPlayerIP = null;
 						
-						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+						if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
 							
-							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
 							
 						}
 						
@@ -117,7 +112,7 @@ public class CommandBan {
 						
 						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
 						
-						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
 						if(bannedCraftPlayer != null){
 							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma permanente por incumplir las normas.");
 						}
@@ -125,14 +120,14 @@ public class CommandBan {
 					} else if (args.length >= 3){
 					
 						String bannedPlayer = args[0];
-						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						UUID bannedPlayerUUID = UUIDFetcher.getUUIDOf(bannedPlayer);
 						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
 						String bannedPlayerIP = null;
 						
-						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+						if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
 							
-							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
 							
 						}
 						
@@ -198,7 +193,7 @@ public class CommandBan {
 						
 						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
 						
-						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
 						if(bannedCraftPlayer != null){
 							
 							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma permanente.");
@@ -219,7 +214,7 @@ public class CommandBan {
 						long segundosArgs2 = 0;
 						
 						String bannedPlayer = args[0];
-						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						UUID bannedPlayerUUID = UUIDFetcher.getUUIDOf(bannedPlayer);
 						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
 						String bannedPlayerIP = null;
@@ -227,9 +222,9 @@ public class CommandBan {
 						long firsDateTime = firstDate.getTime();
 						
 						
-						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+						if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
 							
-							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
 							
 						}		
 						
@@ -307,7 +302,7 @@ public class CommandBan {
 						
 						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
 						
-						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
 						if(bannedCraftPlayer != null){
 							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal por incumplir las normas.");
 						}
@@ -328,7 +323,7 @@ public class CommandBan {
 						long segundosArgs2 = 0;
 						
 						String bannedPlayer = args[0];
-						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						UUID bannedPlayerUUID = UUIDFetcher.getUUIDOf(bannedPlayer);
 						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
 						String bannedPlayerIP = null;
@@ -336,9 +331,9 @@ public class CommandBan {
 						long firsDateTime = firstDate.getTime();
 						
 						
-						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+						if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
 							
-							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
 							
 						}		
 						
@@ -416,7 +411,7 @@ public class CommandBan {
 						
 						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
 						
-						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
 						if(bannedCraftPlayer != null){
 							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma temporal.");
 						}

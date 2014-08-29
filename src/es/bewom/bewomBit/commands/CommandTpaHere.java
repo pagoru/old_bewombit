@@ -1,24 +1,22 @@
 package es.bewom.bewomBit.commands;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
+import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandTpaHere implements Listener {
 
-	@SuppressWarnings({ "deprecation" })
-	public static boolean commandtpahere(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
+	public static boolean commandtpahere(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("tpahere")){
 
@@ -33,7 +31,7 @@ public class CommandTpaHere implements Listener {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 
-					craftPlayerArgs = Bukkit.getServer().getPlayer(args[0]);
+					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
 					playerUUIDArgs = craftPlayerArgs.getUniqueId().toString();
 
 					File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
@@ -64,7 +62,7 @@ public class CommandTpaHere implements Listener {
 					if(playerNameTpa != null){
 						if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
 
-							Player playerCraftTpa = craftPlayer.getServer().getPlayer(playerNameTpa);
+							Player playerCraftTpa = craftPlayer.getServer().getPlayer(UUIDFetcher.getUUIDOf(playerNameTpa));
 
 							playerCraftTpa.teleport(craftPlayer);
 

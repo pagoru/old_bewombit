@@ -19,15 +19,19 @@ public class EventsGuardar {
 		
 		task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
 	        
-			@SuppressWarnings("deprecation")
 			@Override
 	        public void run() {
 				
 				craftPlayer.saveData();
 				log.info("Perfil de " + craftPlayer.getName() + " guardado.");
 				
-				if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
-					Bukkit.getServer().getScheduler().cancelTask(task1);
+				for(Player craftPlayer: Bukkit.getServer().getOnlinePlayers()){
+					
+					if(!craftPlayer.getName().equals(craftPlayer.getName())){
+					
+						Bukkit.getServer().getScheduler().cancelTask(task1);
+						
+					}
 				}
 
 			}

@@ -263,7 +263,6 @@ public class EventsPermissions {
 												
 						task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
 				            
-							@SuppressWarnings("deprecation")
 							@Override
 				            public void run() {
 								try {
@@ -315,9 +314,13 @@ public class EventsPermissions {
 									statement1.close();
 									connection1.closeConnection();
 									
-									if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
+									for(Player craftPlayer: Bukkit.getServer().getOnlinePlayers()){
 										
-										Bukkit.getServer().getScheduler().cancelTask(task1);
+										if(!craftPlayer.getName().equals(craftPlayer.getName())){
+										
+											Bukkit.getServer().getScheduler().cancelTask(task1);
+										
+										}
 										
 									}
 									
@@ -348,7 +351,6 @@ public class EventsPermissions {
 					
 					task2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
 			            
-						@SuppressWarnings("deprecation")
 						@Override
 			            public void run() {
 							try {
@@ -393,9 +395,13 @@ public class EventsPermissions {
 								statement2.close();
 								connection2.closeConnection();
 								
-								if(Bukkit.getServer().getPlayer(craftPlayer.getName()) == null){
+								for(Player craftPlayer: Bukkit.getServer().getOnlinePlayers()){
 									
-									Bukkit.getServer().getScheduler().cancelTask(task2);
+									if(!craftPlayer.getName().equals(craftPlayer.getName())){
+									
+										Bukkit.getServer().getScheduler().cancelTask(task2);
+									
+									}
 									
 								}
 								
