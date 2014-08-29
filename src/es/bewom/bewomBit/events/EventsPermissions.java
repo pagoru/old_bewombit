@@ -146,14 +146,20 @@ public class EventsPermissions {
 					} else if(group == 1){
 						
 						attachment.setPermission("bewom.admin", true);
+						attachment.setPermission("bewom.mod", true);
+						attachment.setPermission("bewom.vip", true);
+						attachment.setPermission("bewom.default", true);
 						
 					} else if(group == 2){
 						
 						attachment.setPermission("bewom.mod", true);
+						attachment.setPermission("bewom.vip", true);
+						attachment.setPermission("bewom.default", true);
 						
 					} else if(group == 3){
 						
 						attachment.setPermission("bewom.vip", true);
+						attachment.setPermission("bewom.default", true);
 						
 						//horas restantes VIP
 						

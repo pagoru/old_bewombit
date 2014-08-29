@@ -99,10 +99,16 @@ public class CommandP {
 
 				if (args.length == 0) {
 
-					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
+					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado/añadir/eliminar].");
 
 				}
 				else if (args.length == 1){
+					
+					if(args[0].equals("añadir")){
+						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p añadir [jugador].");
+					} else if(args[0].equals("eliminar")){
+						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p eliminar [jugador].");
+					}
 					
 					int getlocationBlockHash = 0;
 					String getlocationBlockPlayerName = null;
@@ -191,67 +197,144 @@ public class CommandP {
 					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
+					String getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+					
+					List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+					
 					if(craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
 					
 						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
-							if (args[0].equals("añadir")){
+							if (getlocationBlockPlayerName.equals(playerName)){
+							
+								if (args[0].equals("añadir")){
+									
+									if (craftPlayerArgs.getName() != null){
+										
+										if(!pLista.contains(args[1])){
+											
+											if(!args[1].equals(playerName)){
+										
+												añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+										
+											} else {
+												
+												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+					
+											}
+											
+										} else {
+											
+											craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
+				
+										}
+										
+									}
+								} else if (args[0].equals("eliminar")) {
 								
-								if (craftPlayerArgs.getName() != null){
-									
-									añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-									
+									if (craftPlayerArgs.getName() != null){
+				
+										eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(),nombreMaterialSimple);
+										
+									}
 								}
-							}
-							else if (args[0].equals("eliminar")) {
-								
-								if (craftPlayerArgs.getName() != null){
-			
-									eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-									
-								}
+							
+							} else {
+	
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+	
 							}
 														
 						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
 							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
 							
-							if (args[0].equals("añadir")){
+							List <String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
+							String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
+						
+							if (getlocationBlockPlayerNameW.equals(playerName)){
 								
-								if (craftPlayerArgs.getName() != null){
+								if (args[0].equals("añadir")){
 									
-									añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
+									if (craftPlayerArgs.getName() != null){
+										
+										if(!pListaW.contains(args[1])){
+											
+											if(!args[1].equals(playerName)){
+										
+													añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+										
+											} else {
+												
+												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+					
+											}
+											
+										} else {
+											
+											craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
+				
+										}
+										
+									}
+								} else if (args[0].equals("eliminar")) {
 									
+									if (craftPlayerArgs.getName() != null){
+				
+										eliminar(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+										
+									}
 								}
-							}
-							else if (args[0].equals("eliminar")) {
 								
-								if (craftPlayerArgs.getName() != null){
-			
-									eliminar(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-									
-								}
-							}
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+	
+							}	
 							
 						}
 						
 					} else {
 						
-						if (args[0].equals("añadir")){
+						if (getlocationBlockPlayerName.equals(playerName)){
+						
+							if (args[0].equals("añadir")){
+								
+								if(!pLista.contains(args[1])){
+									
+									if(!args[1].equals(playerName)){
+			
+										if (craftPlayerArgs.getName() != null){
+											
+											añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+											
+										}
+								
+									} else {
+										
+										craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+			
+									}
+									
+								} else {
+									
+									craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
 		
-							if (craftPlayerArgs.getName() != null){
-								
-								añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-								
+								}
 							}
-						}
-						else if (args[0].equals("eliminar")) {
-		
-							if (craftPlayerArgs.getName() != null){
-		
-								eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName());
-								
+							else if (args[0].equals("eliminar")) {
+			
+								if (craftPlayerArgs.getName() != null){
+			
+									eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+									
+								}
 							}
+					
+						} else {
+							
+							craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+
 						}
 					}
 				}
@@ -378,10 +461,11 @@ public class CommandP {
 		}
 	}
 
-	public static void añadir(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg){
+	public static void añadir(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg, String nombreMaterialSimple){
 
 		List <String> pList = new ArrayList<String>(); 
 		List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+		craftPlayer.sendMessage(ChatColor.GRAY + "Ahora " + arg + " puede interactuar en " + nombreMaterialSimple + ".");
 
 		pList.addAll(pLista);
 		pList.add(arg);
@@ -395,10 +479,11 @@ public class CommandP {
 		}
 	}
 
-	public static void eliminar(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg){
+	public static void eliminar(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg, String nombreMaterialSimple){
 
 		List <String> pList = new ArrayList<String>(); 
 		List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+		craftPlayer.sendMessage(ChatColor.GRAY + "Ahora " + arg + " ya no puede interactuar en " + nombreMaterialSimple + ".");
 
 		pList.addAll(pLista);
 		pList.remove(arg);

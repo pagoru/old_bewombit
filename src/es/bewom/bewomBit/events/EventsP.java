@@ -72,7 +72,7 @@ public class EventsP {
 			else if (placeBlock.getType() == Material.WOODEN_DOOR){
 				material = "WoodenDoor";
 			}			
-			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
+			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "privado");
 		}
 		else if(placeBlock.getType() == Material.DROPPER ||
 				placeBlock.getType() == Material.JUKEBOX ||
@@ -91,7 +91,7 @@ public class EventsP {
 			else if (placeBlock.getType() == Material.ENDER_CHEST){
 				material = "EnderChest";
 			} 			
-			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "publico", false);
+			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "publico");
 		}
 
 		if(placeBlock.getType().equals(Material.CHEST) || placeBlock.getType().equals(Material.TRAPPED_CHEST)){
@@ -116,7 +116,7 @@ public class EventsP {
 				if (getlocationBlockPlayerNamepos1 != null){
 					
 					if (getlocationBlockPlayerNamepos1.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos1, locationBlockX, locationBlockY, locationBlockZ, true);						
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos1, locationBlockX, locationBlockY, locationBlockZ);						
 					}
 					else {
 						eventPlace.setCancelled(true);
@@ -125,7 +125,7 @@ public class EventsP {
 
 				if (getlocationBlockPlayerNamepos2 != null){
 					if (getlocationBlockPlayerNamepos2.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos2, locationBlockX, locationBlockY, locationBlockZ, false);
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos2, locationBlockX, locationBlockY, locationBlockZ);
 					}
 					else {
 						eventPlace.setCancelled(true);
@@ -134,7 +134,7 @@ public class EventsP {
 
 				if (getlocationBlockPlayerNamepos3 != null){
 					if (getlocationBlockPlayerNamepos3.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos3, locationBlockX, locationBlockY, locationBlockZ, false);
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos3, locationBlockX, locationBlockY, locationBlockZ);
 					}
 					else {
 						eventPlace.setCancelled(true);
@@ -143,7 +143,7 @@ public class EventsP {
 
 				if (getlocationBlockPlayerNamepos4 != null){
 					if (getlocationBlockPlayerNamepos4.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos4, locationBlockX, locationBlockY, locationBlockZ, false);
+						actualizarEstado (proteccionData, material, hash, playerName, hashpos4, locationBlockX, locationBlockY, locationBlockZ);
 					}
 					else {
 						eventPlace.setCancelled(true);
@@ -490,7 +490,7 @@ public class EventsP {
 		}
 	}
 
-	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, int locationBlockX, int locationBlockY, int locationBlockZ, String estado, boolean miembrosbool){
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, int locationBlockX, int locationBlockY, int locationBlockZ, String estado){
 
 		proteccionData.set(material + "." + hash + ".playerName", playerName);
 		proteccionData.set(material + "." + hash + ".playerUUID", playerUUID);
@@ -498,7 +498,6 @@ public class EventsP {
 		proteccionData.set(material + "." + hash + ".Y", locationBlockY);
 		proteccionData.set(material + "." + hash + ".Z", locationBlockZ);
 		proteccionData.set(material + "." + hash + ".estado", estado);
-		proteccionData.set(material + "." + hash + ".miembrosbool", miembrosbool);
 	}
 
 	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, int locationBlockX, int locationBlockY, int locationBlockZ, String estado, boolean doble){
@@ -511,7 +510,7 @@ public class EventsP {
 		proteccionData.set(material + "." + hash + ".doble", doble);
 	}
 
-	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String hashpos, int locationBlockX, int locationBlockY, int locationBlockZ, boolean mem){
+	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String hashpos, int locationBlockX, int locationBlockY, int locationBlockZ){
 
 		String estadohaspos = proteccionData.getString(material + "." + hashpos + ".estado");
 
@@ -522,10 +521,7 @@ public class EventsP {
 		proteccionData.set(material + "." + hash + ".estado", estadohaspos);
 		proteccionData.set(material + "." + hash + ".doble", true);
 		proteccionData.set(material + "." + hash + ".dobleHash", hashpos);
-		if (mem){
-			Boolean membool = proteccionData.getBoolean(material + "." + hashpos + ".miembrosbool");
-			proteccionData.set(material + "." + hash + ".miembrosbool", membool);
-		}
+		
 		proteccionData.set(material + "." + hashpos + ".doble", true);
 		proteccionData.set(material + "." + hashpos + ".dobleHash", hash);
 
