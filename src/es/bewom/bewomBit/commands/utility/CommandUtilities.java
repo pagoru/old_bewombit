@@ -3,6 +3,8 @@ package es.bewom.bewomBit.commands.utility;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import es.bewom.bewomBit.utility.UUIDFetcher;
+
 
 public class CommandUtilities {
 
@@ -14,9 +16,8 @@ public class CommandUtilities {
 		sender.sendMessage(ChatColor.RED + "La forma correcta es " + formaCorrecta);
 	}
 
-	@SuppressWarnings("deprecation")
-	public static boolean comprobarJugador (CommandSender sender, String playerName){
-		if (sender.getServer().getPlayer(playerName) != null) {
+	public static boolean comprobarJugador (CommandSender sender, String playerName) throws Exception{
+		if (sender.getServer().getOfflinePlayer(UUIDFetcher.getUUIDOf(playerName)) != null) {
 			return true;
 		}
 		return false;

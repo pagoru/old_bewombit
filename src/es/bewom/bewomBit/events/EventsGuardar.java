@@ -25,9 +25,9 @@ public class EventsGuardar {
 				craftPlayer.saveData();
 				log.info("Perfil de " + craftPlayer.getName() + " guardado.");
 				
-				for(Player craftPlayer: Bukkit.getServer().getOnlinePlayers()){
+				for(Player craftPlayerFor: Bukkit.getServer().getOnlinePlayers()){
 					
-					if(!craftPlayer.getName().equals(craftPlayer.getName())){
+					if(!craftPlayerFor.getName().equals(craftPlayer.getName())){
 					
 						Bukkit.getServer().getScheduler().cancelTask(task1);
 						

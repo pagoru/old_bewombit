@@ -49,6 +49,9 @@ public class CommandBan {
 						
 						String bannedPlayer = args[0];
 						UUID bannedPlayerUUID = UUIDFetcher.getUUIDOf(bannedPlayer);
+						
+						craftPlayer.sendMessage(bannedPlayerUUID.toString());
+						
 						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
 						String bannedPlayerIP = null;
