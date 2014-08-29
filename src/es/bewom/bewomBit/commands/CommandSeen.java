@@ -63,7 +63,7 @@ public class CommandSeen {
 					
 				} else {
 					
-					craftPlayer.sendMessage(ChatColor.RED + "El jugador no exsiste.");
+					craftPlayer.sendMessage(ChatColor.RED + "El jugador no existe.");
 					
 				}
 				
