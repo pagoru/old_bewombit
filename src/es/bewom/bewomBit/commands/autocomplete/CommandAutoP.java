@@ -126,7 +126,7 @@ public class CommandAutoP {
 						
 						String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
 						
-						List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+						List<String> pLista = proteccionData.getStringList(material + "." + hashW + ".miembros");
 						return pLista;
 					}
 					

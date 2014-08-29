@@ -1,0 +1,14 @@
+* 29/09/14 22:03
+
+[comando] 
+	-	/p añadir <usuario> 
+		Devuelve errores adecuados
+  
+[auto completar comando]
+	-	/p eliminar <usuario>
+		Devuelve correctamente los usuarios de el bloque con protección
+			* Las puertas no las detecta correctamente
+			
+[interaccion]
+	-	p
+		Si el cofre ya esta puesto y se pone un cofre al lado, este se vuelve loco con los permisos.

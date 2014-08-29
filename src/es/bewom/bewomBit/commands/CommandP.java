@@ -133,9 +133,9 @@ public class CommandP {
 						
 						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
-							if(getlocationBlockPlayerName2 != null){
+							if(getlocationBlockPlayerName != null){
 								
-								if(!getlocationBlockPlayerName2.equals("Steve")){
+								if(!getlocationBlockPlayerName.equals("Steve")){
 								
 									if(gethash.equals(hash)){
 										
@@ -170,9 +170,9 @@ public class CommandP {
 							
 							getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
 							
-							if(getlocationBlockPlayerName != null){
+							if(getlocationBlockPlayerNameW != null){
 								
-								if(!getlocationBlockPlayerName.equals("Steve")){
+								if(!getlocationBlockPlayerNameW.equals("Steve")){
 							
 									if(gethashW.equals(hashW)){
 										
