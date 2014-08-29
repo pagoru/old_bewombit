@@ -44,82 +44,98 @@ public class CommandMp {
 			
 			getPlayerChat = playerData.getString("Chat");
 			
-			if (args.length == 0){
-
-				if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
-				
-					if(getPlayerChat.equals("global")){
-						
-						craftPlayer.sendMessage(ChatColor.RED + "No puedes salir del chat general, usa /mp [nick] y/o (mensaje).");
-					}
-					else {
-						
-						playerData.set("Chat", "global");
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del chat privado de " + getPlayerChat + ".");
-					}
-				
-				}
-				else {
-					
-					craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-				}
-				
-			}
-			else if (args.length == 1) {
-				
-				if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
-				
-					if (CommandUtilities.comprobarJugador(sender, args [0])){
-						
-						craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + args[0] + ".");
-						playerData.set("Chat", args[0]);
-						
-					}
-					else {
-						CommandUtilities.jugadorDesconectado(sender);
-						return true;
-					}
-				}
-				else {
-					
-					craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
-				}
-			}
-			else {
-				
-				if (CommandUtilities.comprobarJugador(sender, args [0])){
-					
-					String texto = "";
-					for (int i = 1; i < args.length; i++) {
-						texto += args[i] + " ";
-					}
-					
-					if (craftPlayer.hasPermission("bewom.admin")) {	
-						
-						formatearChatMp (craftPlayer, playerName, admin, mpText, args, texto);
-						
-					}
-					else if (craftPlayer.hasPermission("bewom.mod")) {
-						
-						formatearChatMp (craftPlayer, playerName, mod, mpText, args, texto);
-						
-					}
-					else if (craftPlayer.hasPermission("bewom.vip")) {
-						
-						formatearChatMp (craftPlayer, playerName, vip, mpText, args, texto);
-						
-					}
-					else {
+				if (args.length == 0){
 	
-						formatearChatMp (craftPlayer, playerName, steve, mpText, args, texto);
+					if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
+					
+						if(getPlayerChat.equals("global")){
+							
+							craftPlayer.sendMessage(ChatColor.RED + "No puedes salir del chat general, usa /mp [nick] y/o (mensaje).");
+						}
+						else {
+							
+							playerData.set("Chat", "global");
+							craftPlayer.sendMessage(ChatColor.GRAY + "Has salido del chat privado de " + getPlayerChat + ".");
+						}
+					
+					}
+					else {
+						
+						craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
+					}
+					
+				}
+				else if (args.length == 1) {
+					
+					if(!args[0].equals(playerName)){
+					
+						if (sender.hasPermission("bewom.admin") || sender.hasPermission("bewom.mod") || sender.hasPermission("bewom.vip")) {
+						
+							if (CommandUtilities.comprobarJugador(sender, args [0])){
+								
+								craftPlayer.sendMessage(ChatColor.GRAY + "Has entrado en el chat privado de " + args[0] + ".");
+								playerData.set("Chat", args[0]);
+								
+							}
+							else {
+								CommandUtilities.jugadorDesconectado(sender);
+								return true;
+							}
+						}
+						else {
+							
+							craftPlayer.sendMessage(ChatColor.RED + "Solo los Vips pueden entrar en salas privadas, usa /mp [nick] [mensaje].");
+						}
+					
+					} else {
+						
+						craftPlayer.sendMessage(ChatColor.RED + "No puedes enviarte a ti mismo mp's.");
+						
 					}
 				}
-			}
+				else {
+					
+					if(!args[0].equals(playerName)){
+					
+						if (CommandUtilities.comprobarJugador(sender, args [0])){
+							
+							String texto = "";
+							for (int i = 1; i < args.length; i++) {
+								texto += args[i] + " ";
+							}
+							
+							if (craftPlayer.hasPermission("bewom.admin")) {	
+								
+								formatearChatMp (craftPlayer, playerName, admin, mpText, args, texto);
+								
+							}
+							else if (craftPlayer.hasPermission("bewom.mod")) {
+								
+								formatearChatMp (craftPlayer, playerName, mod, mpText, args, texto);
+								
+							}
+							else if (craftPlayer.hasPermission("bewom.vip")) {
+								
+								formatearChatMp (craftPlayer, playerName, vip, mpText, args, texto);
+								
+							}
+							else {
+			
+								formatearChatMp (craftPlayer, playerName, steve, mpText, args, texto);
+							}
+						}
+						
+					} else {
+						
+						craftPlayer.sendMessage(ChatColor.RED + "No puedes enviarte a ti mismo mp's.");
+						
+					}
+				}			
+			
+			
 			
 			playerData.save(f);
 			return true;
-			
-
 		}
 		return false;
 	}

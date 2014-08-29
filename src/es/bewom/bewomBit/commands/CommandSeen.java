@@ -33,8 +33,6 @@ public class CommandSeen {
 					
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(args[0]);
 					
-					craftPlayer.sendMessage(craftPlayerArgs.getUniqueId().toString());
-					
 					MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 					connection.openConnection();
 					Statement statement = connection.getConnection().createStatement();
