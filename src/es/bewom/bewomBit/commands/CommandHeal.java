@@ -8,10 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandHeal {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandheal (CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("heal")){
@@ -21,9 +21,9 @@ public class CommandHeal {
 				curarJugador (craftPlayer);
 				
 			} else if (args.length == 1){
-				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 					
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					curarJugador (craftPlayerArgs);
 					craftPlayer.sendMessage(ChatColor.GRAY + craftPlayerArgs.getName() + " ha sido curado.");
 					

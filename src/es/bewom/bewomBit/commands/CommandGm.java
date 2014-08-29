@@ -8,10 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandGm {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandgm(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("gm")){
@@ -24,9 +24,9 @@ public class CommandGm {
 			}
 			
 			else if (args.length == 2) {
-				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					cambiarModoDeJuego (sender, craftPlayerArgs, args);
 				} else {
 					CommandUtilities.jugadorDesconectado(sender);

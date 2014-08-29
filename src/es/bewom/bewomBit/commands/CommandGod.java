@@ -11,10 +11,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import es.bewom.bewomBit.utility.UUIDFetcher;
-
 public class CommandGod {
 	
+	@SuppressWarnings("deprecation")
 	public static boolean commandgod(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("god")){
@@ -48,9 +47,9 @@ public class CommandGod {
 				
 			} else if (args.length == 1){
 				
-				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 					
-					UUID argUUID = sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])).getUniqueId();
+					UUID argUUID = sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()).getUniqueId();
 					
 					File argsdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
 					File arg = new File(argsdata, File.separator + argUUID + ".yml");

@@ -15,11 +15,11 @@ import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class CommandSeen {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandseen(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("seen")){
@@ -28,9 +28,9 @@ public class CommandSeen {
 					
 				Player craftPlayer = (Player) sender;
 				
-				if(UUIDFetcher.getUUIDOf(args[0]) != null){
+				if(Bukkit.getServer().getOfflinePlayer(args[0]) != null){
 					
-					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(UUIDFetcher.getUUIDOf(args[0]));
+					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(args[0]);
 					
 					MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
 					connection.openConnection();

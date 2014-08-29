@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandFly {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandfly (CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("fly")){
@@ -23,7 +23,7 @@ public class CommandFly {
 			else if (args.length == 1){
 
 				if (CommandUtilities.comprobarJugador (sender, (args[0]))){
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					cambiarModoDeVuelo (craftPlayer, craftPlayerArgs);
 				}
 				else {

@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandTpa implements Listener {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandtpa(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		
 		if (label.equalsIgnoreCase("tpa")){
@@ -32,7 +32,7 @@ public class CommandTpa implements Listener {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					playerUUIDArgs = craftPlayerArgs.getUniqueId().toString();
 					
 					File userdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "UserData");
@@ -63,7 +63,7 @@ public class CommandTpa implements Listener {
 					if(playerNameTpa != null){
 						if (CommandUtilities.comprobarJugador(sender, playerNameTpa)){
 
-							Player playerCraftTpa = craftPlayer.getServer().getPlayer(UUIDFetcher.getUUIDOf(playerNameTpa));
+							Player playerCraftTpa = craftPlayer.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(playerNameTpa).getUniqueId());
 							
 							craftPlayer.teleport(playerCraftTpa);
 							

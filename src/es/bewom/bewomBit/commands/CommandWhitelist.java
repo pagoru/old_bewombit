@@ -11,10 +11,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import es.bewom.bewomBit.utility.UUIDFetcher;
-
 public class CommandWhitelist {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandwhitelist (CommandSender sender, Command cmd, String label, String [] args) throws Exception{
 
 		if (label.equalsIgnoreCase("whitelist")){
@@ -65,7 +64,7 @@ public class CommandWhitelist {
 			else if (args.length == 2){
 
 				String wPlayer = args[1];
-				UUID wPlayerUUID = UUIDFetcher.getUUIDOf(wPlayer);
+				UUID wPlayerUUID = Bukkit.getServer().getOfflinePlayer(wPlayer).getUniqueId();
 				wPlayer = Bukkit.getServer().getOfflinePlayer(wPlayerUUID).getName();	
 				
 				actualizarWhitelist (proteccionData, args [0], wPlayer, sender);		

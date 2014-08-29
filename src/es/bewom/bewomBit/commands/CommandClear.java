@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandClear {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandclear(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("clear")){
@@ -24,8 +24,8 @@ public class CommandClear {
 
 			else if (args.length == 1){
 				
-				if (sender.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
-					Player craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+				if (sender.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
+					Player craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					eliminarInventario (craftPlayerArgs);
 					sender.sendMessage(ChatColor.GRAY + "Se ha eliminado el inventario de " + args[0] + "!");
 				}

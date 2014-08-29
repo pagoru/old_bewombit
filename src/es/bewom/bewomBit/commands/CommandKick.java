@@ -15,11 +15,11 @@ import org.bukkit.entity.Player;
 import es.bewom.bewomBit.BewomBit;
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
 import es.bewom.bewomBit.utility.DefaultMessages;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class CommandKick {
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandkick(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("kick")){
@@ -38,14 +38,14 @@ public class CommandKick {
 			String world = craftPlayer.getWorld().getName();
 			
 			String bannedPlayer = args[0];
-			UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(UUIDFetcher.getUUIDOf(bannedPlayer)).getUniqueId();
+			UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId()).getUniqueId();
 			bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 			
 			String bannedPlayerIP = null;
 			
-			if(Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(bannedPlayer)) != null){
+			if(Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId()) != null){
 				
-				bannedPlayerIP = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(bannedPlayer)).getAddress().getAddress().toString().substring(1);
+				bannedPlayerIP = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId()).getAddress().getAddress().toString().substring(1);
 				
 			}
 			
@@ -59,7 +59,7 @@ public class CommandKick {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 
 					craftPlayerArgs.kickPlayer (DefaultMessages.kickBanPlayer + "Has sido kickeado.");
 					Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + craftPlayerArgs.getName() + " ha sido kickeado.");
@@ -89,7 +89,7 @@ public class CommandKick {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
 
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])); 
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()); 
 					String texto = "";
 
 					for (int i = 1; i < args.length; i++) {

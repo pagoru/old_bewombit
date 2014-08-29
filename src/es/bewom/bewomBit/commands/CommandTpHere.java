@@ -7,20 +7,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import es.bewom.bewomBit.utility.UUIDFetcher;
-
 public class CommandTpHere {
 	
+	@SuppressWarnings("deprecation")
 	public static boolean commandtphere(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 		if (label.equalsIgnoreCase("tphere")){
 			Player craftPlayer = (Player) sender;
 			Player craftPlayerArgs;
 
 			if (args.length == 1){
-				if (craftPlayer.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0])) != null){
+				if (craftPlayer.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId()) != null){
 
 					Location locationPlayer = craftPlayer.getLocation();
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[0]));
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[0]).getUniqueId());
 					craftPlayerArgs.teleport(locationPlayer);
 					String playerArgsName = craftPlayerArgs.getName();
 

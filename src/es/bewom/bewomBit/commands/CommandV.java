@@ -9,12 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.commands.utility.CommandUtilities;
-import es.bewom.bewomBit.utility.UUIDFetcher;
 
 public class CommandV {
 
 	static Logger log = Logger.getLogger("Minecraft");
 
+	@SuppressWarnings("deprecation")
 	public static boolean commandv(CommandSender sender, Command cmd, String label, String[] args) throws Exception{
 
 		if (label.equalsIgnoreCase("v")){
@@ -25,7 +25,7 @@ public class CommandV {
 			if(args.length == 2) {
 
 				if (CommandUtilities.comprobarJugador(sender, args [0])){
-					craftPlayerArgs = Bukkit.getServer().getPlayer(UUIDFetcher.getUUIDOf(args[1]));
+					craftPlayerArgs = Bukkit.getServer().getPlayer(Bukkit.getServer().getOfflinePlayer(args[1]).getUniqueId());
 
 					if (args[0].equals("ocultar")){
 						
