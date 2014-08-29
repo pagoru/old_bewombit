@@ -45,7 +45,7 @@ public class EventsTeleport {
 		File data = new File(data1, File.separator + "teleport.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
-		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK || eventInteract.getAction() == Action.LEFT_CLICK_BLOCK){
+		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK){
 						
 			if(eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
 				
