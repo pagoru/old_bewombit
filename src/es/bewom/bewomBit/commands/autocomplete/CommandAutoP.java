@@ -71,7 +71,11 @@ public class CommandAutoP {
 				material = "EnderChest";
 				nombreMaterial = "Este enderchest";
 				nombreMaterialSimple = "este enderchest";
-			} 
+			} else if (craftPlayer.getTargetBlock(null, 5).getType() == Material.ENDER_CHEST){
+				material = "WoodenDoor";
+				nombreMaterial = "Esta puerta";
+				nombreMaterialSimple = "este puerta";
+			}
 			
 			int getlocationBlockHash = 0;
 			String getlocationBlockPlayerName = null;
@@ -111,10 +115,28 @@ public class CommandAutoP {
 				
 				return pList;
 			} else if(args.length == 2 && args[0].equals("eliminar")){
+
+				if (craftPlayer.getTargetBlock(null, 5).getType() == Material.WOODEN_DOOR){
+
+					if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+					
+						List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+						return pLista;
+					} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+						
+						String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+						
+						List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+						return pLista;
+					}
+					
+				} else {
+					
+					List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+					return pLista;
+				}
 				
-				List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
 				
-				return pLista;
 				
 			} else if(args.length == 2 && args[0].equals("cambiar")){
 				

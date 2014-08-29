@@ -379,8 +379,6 @@ public class CommandP {
 						}
 					} else {
 						
-						craftPlayer.sendMessage(getlocationBlockPlayerName);
-						
 						if(getlocationBlockPlayerName != null){
 							
 							if(!getlocationBlockPlayerName.equals("Steve")){
@@ -422,7 +420,7 @@ public class CommandP {
 							
 								} else {
 									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 		
 								}
 								
@@ -584,18 +582,28 @@ public class CommandP {
 
 		List <String> pList = new ArrayList<String>(); 
 		List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
-		craftPlayer.sendMessage(ChatColor.GRAY + "Ahora " + arg + " ya no puede interactuar en " + nombreMaterialSimple + ".");
+		
+		if(pLista.contains(arg)){
+			
+			craftPlayer.sendMessage(ChatColor.GRAY + "Ahora " + arg + " ya no puede interactuar en " + nombreMaterialSimple + ".");
+			
+			pList.addAll(pLista);
+			pList.remove(arg);
 
-		pList.addAll(pLista);
-		pList.remove(arg);
+			proteccionData.set(material + "." + hash + ".miembros", pList);
 
-		proteccionData.set(material + "." + hash + ".miembros", pList);
+			if (material.equals("Chest") || material.equals("TrappedChest")){
 
-		if (material.equals("Chest") || material.equals("TrappedChest")){
-
-			actualizarPropietarios (proteccionData, material, hash, pList);
+				actualizarPropietarios (proteccionData, material, hash, pList);
+				
+			}
+			
+		} else {
+			
+			craftPlayer.sendMessage(ChatColor.RED + arg + " no es miembro de " + nombreMaterialSimple + ".");
 			
 		}
+		
 	}
 
 	public static void cambiar (FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String nombreMaterialSimple, String arg){
