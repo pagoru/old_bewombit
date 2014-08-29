@@ -19,6 +19,9 @@ import org.bukkit.entity.Player;
 
 public class CommandP {
 
+	private static String getlocationBlockPlayerName;
+	private static String getlocationBlockPlayerNameW;
+	private static String getlocationBlockPlayerName2;
 	@SuppressWarnings({"unused", "deprecation" })
 	public static boolean commandp(CommandSender sender, Command cmd, String label, String[] args) throws IOException, InvalidConfigurationException{
 
@@ -111,14 +114,14 @@ public class CommandP {
 					}
 					
 					int getlocationBlockHash = 0;
-					String getlocationBlockPlayerName = null;
+					getlocationBlockPlayerName2 = null;
 					int getlocationBlockX = 0;
 					int getlocationBlockY = 0;
 					int getlocationBlockZ = 0;
 					String getlocationBlockEstado = null;
 
 					getlocationBlockHash = proteccionData.getInt(material + "." + hash);
-					getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+					getlocationBlockPlayerName2 = proteccionData.getString(material + "." + hash + ".playerName");
 					getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
 					getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
 					getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
@@ -130,63 +133,113 @@ public class CommandP {
 						
 						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
-							if(gethash.equals(hash)){
+							if(getlocationBlockPlayerName2 != null){
 								
-								if (args[0].equals("privado")){
-
-									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+								if(!getlocationBlockPlayerName2.equals("Steve")){
+								
+									if(gethash.equals(hash)){
+										
+										if (args[0].equals("privado")){
+	
+											privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+											
+										} else if (args[0].equals("publico")) {
+	
+											estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+											
+										}
+										
+									} 
 									
-								} else if (args[0].equals("publico")) {
-
-									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+								} else {
+									
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
 									
 								}
 								
-							} 
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+								
+							}
 														
 						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
 							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
 							String gethashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
 							
-							if(gethashW.equals(hashW)){
+							getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
+							
+							if(getlocationBlockPlayerName != null){
 								
-								if (args[0].equals("privado")){
-
-									privatizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+								if(!getlocationBlockPlayerName.equals("Steve")){
+							
+									if(gethashW.equals(hashW)){
+										
+										if (args[0].equals("privado")){
+		
+											privatizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+											
+										} else if (args[0].equals("publico")) {
+		
+											estatalizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+											
+										}
+										
+									}
 									
-								} else if (args[0].equals("publico")) {
-
-									estatalizar (proteccionData, material, hashW, craftPlayer, nombreMaterial);
+								} else {
+									
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
 									
 								}
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
 								
 							}
 							
 						}
 						
 					} else {
+						
+						if(getlocationBlockPlayerName != null){
+							
+							if(!getlocationBlockPlayerName.equals("Steve")){
 
-						if (gethash.equals(hash)){
-
-							if (getlocationBlockPlayerName.equals(playerName)){
-
-								if (args[0].equals("privado")){
-
-									privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-									
+								if (gethash.equals(hash)){
+		
+									if (getlocationBlockPlayerName2.equals(playerName)){
+		
+										if (args[0].equals("privado")){
+		
+											privatizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+											
+										}
+										else if (args[0].equals("publico")) {
+		
+											estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
+											
+										}
+									}
+									else {
+		
+										craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName2 + ".");
+		
+									}
 								}
-								else if (args[0].equals("publico")) {
-
-									estatalizar (proteccionData, material, hash, craftPlayer, nombreMaterial);
-									
-								}
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+								
 							}
-							else {
-
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-
-							}
+						
+						} else {
+							
+							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+							
 						}
 						
 					}
@@ -197,7 +250,7 @@ public class CommandP {
 					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
 					
-					String getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+					getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
 					
 					List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
 					
@@ -205,140 +258,188 @@ public class CommandP {
 					
 						if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 							
-							if (getlocationBlockPlayerName.equals(playerName)){
-							
-								if (args[0].equals("añadir")){
-									
-									if (craftPlayerArgs.getName() != null){
-										
-										if(!pLista.contains(args[1])){
-											
-											if(!args[1].equals(playerName)){
-										
-												añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
-										
-											} else {
-												
-												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
-					
-											}
-											
-										} else {
-											
-											craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
-				
-										}
-										
-									}
-								} else if (args[0].equals("eliminar")) {
+							if(getlocationBlockPlayerName != null){
 								
-									if (craftPlayerArgs.getName() != null){
-				
-										eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(),nombreMaterialSimple);
-										
-									}
-								}
+								if(!getlocationBlockPlayerName.equals("Steve")){
 							
-							} else {
-	
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-	
-							}
+									if (getlocationBlockPlayerName.equals(playerName)){
+									
+										if (args[0].equals("añadir")){
+											
+											if (craftPlayerArgs.getName() != null){
+												
+												if(!pLista.contains(args[1])){
+													
+													if(!args[1].equals(playerName)){
+												
+														añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+												
+													} else {
 														
-						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
 							
-							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
-							
-							List <String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
-							String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
+													}
+													
+												} else {
+													
+													craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
 						
-							if (getlocationBlockPlayerNameW.equals(playerName)){
-								
-								if (args[0].equals("añadir")){
-									
-									if (craftPlayerArgs.getName() != null){
-										
-										if(!pListaW.contains(args[1])){
-											
-											if(!args[1].equals(playerName)){
-										
-													añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
-										
-											} else {
+												}
 												
-												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
-					
 											}
-											
-										} else {
-											
-											craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
-				
-										}
+										} else if (args[0].equals("eliminar")) {
 										
-									}
-								} else if (args[0].equals("eliminar")) {
-									
-									if (craftPlayerArgs.getName() != null){
-				
-										eliminar(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
-										
-									}
-								}
-								
-							} else {
-								
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-	
-							}	
-							
-						}
+											if (craftPlayerArgs.getName() != null){
 						
-					} else {
-						
-						if (getlocationBlockPlayerName.equals(playerName)){
-						
-							if (args[0].equals("añadir")){
-								
-								if(!pLista.contains(args[1])){
-									
-									if(!args[1].equals(playerName)){
-			
-										if (craftPlayerArgs.getName() != null){
-											
-											añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
-											
+												eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(),nombreMaterialSimple);
+												
+											}
 										}
-								
+									
 									} else {
-										
-										craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+			
+										craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 			
 									}
 									
 								} else {
 									
-									craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
-		
-								}
-							}
-							else if (args[0].equals("eliminar")) {
-			
-								if (craftPlayerArgs.getName() != null){
-			
-									eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
 									
 								}
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+								
+							}							
+						} else if(craftPlayer.getTargetBlock(null, 5).getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+							
+							String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+							
+							List <String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
+							getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
+							
+							if(getlocationBlockPlayerNameW != null){
+								
+								if(!getlocationBlockPlayerNameW.equals("Steve")){
+							
+									if (getlocationBlockPlayerNameW.equals(playerName)){
+										
+										if (args[0].equals("añadir")){
+											
+											if (craftPlayerArgs.getName() != null){
+												
+												if(!pListaW.contains(args[1])){
+													
+													if(!args[1].equals(playerName)){
+												
+															añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+												
+													} else {
+														
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+							
+													}
+													
+												} else {
+													
+													craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
+						
+												}
+												
+											}
+										} else if (args[0].equals("eliminar")) {
+											
+											if (craftPlayerArgs.getName() != null){
+						
+												eliminar(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+												
+											}
+										}
+										
+									} else {
+										
+										craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+			
+									}	
+									
+								} else {
+									
+									craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+									
+								}
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+								
 							}
+							
+						}
+					} else {
+						
+						craftPlayer.sendMessage(getlocationBlockPlayerName);
+						
+						if(getlocationBlockPlayerName != null){
+							
+							if(!getlocationBlockPlayerName.equals("Steve")){
+						
+								if (getlocationBlockPlayerName.equals(playerName)){
+								
+									if (args[0].equals("añadir")){
+										
+										if(!pLista.contains(args[1])){
+											
+											if(!args[1].equals(playerName)){
 					
+												if (craftPlayerArgs.getName() != null){
+													
+													añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+													
+												}
+										
+											} else {
+												
+												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+					
+											}
+											
+										} else {
+											
+											craftPlayer.sendMessage(ChatColor.RED + "Este usuario ya tiene permisos sobre " + nombreMaterialSimple + ".");
+				
+										}
+									}
+									else if (args[0].equals("eliminar")) {
+					
+										if (craftPlayerArgs.getName() != null){
+					
+											eliminar(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+											
+										}
+									}
+							
+								} else {
+									
+									craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+		
+								}
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+								
+							}
+							
 						} else {
 							
-							craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
-
-						}
+							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " es de la naturaleza.");
+						}	
+						
 					}
-				}
-				else if (args.length == 3){
+					
+				} else if (args.length == 3){
 					
 					UUID craftPlayerUUIDArgs = Bukkit.getOfflinePlayer(args[2]).getUniqueId();
 					OfflinePlayer craftPlayerArgs = Bukkit.getServer().getOfflinePlayer(craftPlayerUUIDArgs);
@@ -421,21 +522,21 @@ public class CommandP {
 							}
 						}	
 					}
-				}
-				else {
+				} else {
 
 					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado].");
 
 				}
 				proteccionData.save(protecciondata);
 
-			}
-			else {
+			} else {
 
-				craftPlayer.sendMessage(ChatColor.RED + "Este bloque no se puede proteger.");
+				craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " no se puede proteger.");
 			}	
-			return true;
+		return true;
+		
 		}
+		
 		return false;
 	}
 
