@@ -39,7 +39,7 @@ public class EventsWhitelist {
 			
 			if(!pLista.contains(prePlayerName)){
 				
-				eventPreConnect.disallow(Result.KICK_WHITELIST , DefaultMessages.whitelistPlayer + "No estas en la whitelist del servidor!");
+				eventPreConnect.disallow(Result.KICK_BANNED , DefaultMessages.whitelistPlayer + "No estas en la whitelist del servidor!");
 				
 			}
 			
