@@ -1,8 +1,12 @@
 package es.bewom.bewomBit.commands;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -12,6 +16,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 
 import es.bewom.bewomBit.BewomBit;
@@ -20,8 +25,8 @@ import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class CommandBan {
 	
-	@SuppressWarnings("deprecation")
-	public static boolean commandban (CommandSender sender, Command cmd, String commandLabel, String [] args) throws Exception{
+	@SuppressWarnings({ "deprecation" })
+	public static boolean commandban (CommandSender sender, Command cmd, String commandLabel, String [] args) throws FileNotFoundException, IOException, InvalidConfigurationException, SQLException, ClassNotFoundException, ParseException{
 
 		if (commandLabel.equalsIgnoreCase("ban")){
 			
@@ -41,386 +46,379 @@ public class CommandBan {
 			final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date firstDate = new Date();
 			
-			if(Bukkit.getServer().getOfflinePlayer(args[0]) != null){
+			if (args.length != 1 && args.length != 0){
 			
-				if (args.length != 1 && args.length != 0){
-				
-					if(args[1].contains("permanente")){
+				if(args[1].contains("permanente")){
+					
+					if (args.length == 2){
 						
-						if (args.length == 2){
-							
-							UUID bannedPlayerUUID = Bukkit.getOfflinePlayer(args[0]).getUniqueId();
-							OfflinePlayer bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID);
-							
-							String bannedPlayerIP = null;
-							
-							if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
-								
-								bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
-								
-							}
-							
-							//consulta bans
-							
-							MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connectionC.openConnection();
-							Statement statementC = connectionC.getConnection().createStatement();
-							ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer.getName() + "' AND `activo` = true;");
-							
-							if(queryC.next()){
-								
-								String motivoC = queryC.getString("motivo");
-								String ban_tiempoC = queryC.getString("ban_tiempo");
-								String baneador_playerName = queryC.getString("baneador_playerName");
-								
-								if(ban_tiempoC == null){
-									
-									craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer.getName() + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								} else {
-									
-									craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer.getName() + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								}
-								
-								statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
-								
-							}
-							
-							statementC.close();
-							connectionC.closeConnection();
-							
-							// ban actual
-							
-							MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connection.openConnection();
-							
-							Statement statement = connection.getConnection().createStatement();
-								
-							statement.executeUpdate("INSERT INTO ban_list "
-									+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
-									+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`) VALUES "
-									+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
-									+ "'incumplir las normas', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
-									+ "'" + world + "', '" + server + "' );");
-		
-							statement.close();
-							connection.closeConnection();
-							
-							Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
-							
-							Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
-							if(bannedCraftPlayer != null){
-								bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma permanente por incumplir las normas.");
-							}
-							
-						} else if (args.length >= 3){
+						String bannedPlayer = args[0];
+						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
 						
-							String bannedPlayer = args[0];
-							UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
-							bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
+						String bannedPlayerIP = null;
+						
+						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
 							
-							String bannedPlayerIP = null;
-							
-							if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
-								
-								bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
-								
-							}
-							
-							String motivo = "";
-							for (int i = 2; i < args.length; i++) {
-								if(args.length-1 > i){
-									motivo += args[i] + " ";
-								} else {
-									motivo += args[i] + "";
-								}
-							}
-							
-							//consulta bans
-							
-							MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connectionC.openConnection();
-							Statement statementC = connectionC.getConnection().createStatement();
-							ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
-							
-							if(queryC.next()){
-								
-								String motivoC = queryC.getString("motivo");
-								String ban_tiempoC = queryC.getString("ban_tiempo");
-								String baneador_playerName = queryC.getString("baneador_playerName");
-								
-								if(ban_tiempoC == null){
-									
-									craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								} else {
-									
-									craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								}
-								
-								statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
-								
-							}
-							
-							statementC.close();
-							connectionC.closeConnection();
-							
-							// ban actual
-							
-							MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connection.openConnection();
-							
-							Statement statement = connection.getConnection().createStatement();
-								
-							statement.executeUpdate("INSERT INTO ban_list "
-									+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
-									+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`) VALUES "
-									+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
-									+ "'" + motivo + "', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
-									+ "'" + world + "', '" + server + "' );");
-		
-							statement.close();
-							connection.closeConnection();
-							
-							Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
-							
-							Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
-							if(bannedCraftPlayer != null){
-								
-								bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma permanente.");
-								
-							}
-							
-						} else {
-							
-							craftPlayer.sendMessage(ChatColor.RED  + "Usa el comando bien /ban [nick] [permanente/temporal} [motivo/numero} {tiempo} {motivo}.");
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
 							
 						}
 						
-					} else if(args[1].contains("temporal")){
+						//consulta bans
 						
-						if (args.length == 4){
+						MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connectionC.openConnection();
+						Statement statementC = connectionC.getConnection().createStatement();
+						ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
 						
-							long args2 = Long.parseLong(args[2]);
-							long segundosArgs2 = 0;
+						if(queryC.next()){
 							
-							String bannedPlayer = args[0];
-							UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
-							bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
+							String motivoC = queryC.getString("motivo");
+							String ban_tiempoC = queryC.getString("ban_tiempo");
+							String baneador_playerName = queryC.getString("baneador_playerName");
 							
-							String bannedPlayerIP = null;
-							
-							long firsDateTime = firstDate.getTime();
-							
-							
-							if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
+							if(ban_tiempoC == null){
 								
-								bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
+								craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
 								
-							}		
-							
-							if(args[3].contains("s")){
+							} else {
 								
-								segundosArgs2 = args2*1000;
-								
-							} else if(args[3].contains("m")){
-								
-								segundosArgs2 = args2*60*1000;
-								
-							} else if(args[3].contains("h")){
-								
-								segundosArgs2 = args2*60*60*1000;
-								
-							} else if(args[3].contains("d")){
-								
-								segundosArgs2 = args2*24*60*60*1000;
+								craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
 								
 							}
 							
-							//consulta bans
+							statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
 							
-							MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connectionC.openConnection();
-							Statement statementC = connectionC.getConnection().createStatement();
-							ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+						}
+						
+						statementC.close();
+						connectionC.closeConnection();
+						
+						// ban actual
+						
+						MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connection.openConnection();
+						
+						Statement statement = connection.getConnection().createStatement();
 							
-							if(queryC.next()){
+						statement.executeUpdate("INSERT INTO ban_list "
+								+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
+								+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`) VALUES "
+								+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
+								+ "'incumplir las normas', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
+								+ "'" + world + "', '" + server + "' );");
+	
+						statement.close();
+						connection.closeConnection();
+						
+						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
+						
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						if(bannedCraftPlayer != null){
+							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma permanente por incumplir las normas.");
+						}
+						
+					} else if (args.length >= 3){
+					
+						String bannedPlayer = args[0];
+						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
+						
+						String bannedPlayerIP = null;
+						
+						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+							
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							
+						}
+						
+						String motivo = "";
+						for (int i = 2; i < args.length; i++) {
+							if(args.length-1 > i){
+								motivo += args[i] + " ";
+							} else {
+								motivo += args[i] + "";
+							}
+						}
+						
+						//consulta bans
+						
+						MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connectionC.openConnection();
+						Statement statementC = connectionC.getConnection().createStatement();
+						ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+						
+						if(queryC.next()){
+							
+							String motivoC = queryC.getString("motivo");
+							String ban_tiempoC = queryC.getString("ban_tiempo");
+							String baneador_playerName = queryC.getString("baneador_playerName");
+							
+							if(ban_tiempoC == null){
 								
-								String motivoC = queryC.getString("motivo");
-								String ban_tiempoC = queryC.getString("ban_tiempo");
-								String baneador_playerName = queryC.getString("baneador_playerName");
+								craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
 								
-								if(ban_tiempoC == null){
-									
-									craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								} else {
-									
-									craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								}
+							} else {
 								
-								statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+								craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
 								
 							}
 							
-							statementC.close();
-							connectionC.closeConnection();
+							statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
 							
-							// ban actual
+						}
+						
+						statementC.close();
+						connectionC.closeConnection();
+						
+						// ban actual
+						
+						MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connection.openConnection();
+						
+						Statement statement = connection.getConnection().createStatement();
 							
-							long dateTimeSec = firsDateTime + segundosArgs2;					
-							Date dateTime = new Date(dateTimeSec);
+						statement.executeUpdate("INSERT INTO ban_list "
+								+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
+								+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`) VALUES "
+								+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
+								+ "'" + motivo + "', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
+								+ "'" + world + "', '" + server + "' );");
+	
+						statement.close();
+						connection.closeConnection();
+						
+						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
+						
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						if(bannedCraftPlayer != null){
 							
-							MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connection.openConnection();
+							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma permanente.");
 							
-							Statement statement = connection.getConnection().createStatement();
+						}
+						
+					} else {
+						
+						craftPlayer.sendMessage(ChatColor.RED  + "Usa el comando bien /ban [nick] [permanente/temporal} [motivo/numero} {tiempo} {motivo}.");
+						
+					}
+					
+				} else if(args[1].contains("temporal")){
+					
+					if (args.length == 4){
+					
+						long args2 = Long.parseLong(args[2]);
+						long segundosArgs2 = 0;
+						
+						String bannedPlayer = args[0];
+						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
+						
+						String bannedPlayerIP = null;
+						
+						long firsDateTime = firstDate.getTime();
+						
+						
+						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+							
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							
+						}		
+						
+						if(args[3].contains("s")){
+							
+							segundosArgs2 = args2*1000;
+							
+						} else if(args[3].contains("m")){
+							
+							segundosArgs2 = args2*60*1000;
+							
+						} else if(args[3].contains("h")){
+							
+							segundosArgs2 = args2*60*60*1000;
+							
+						} else if(args[3].contains("d")){
+							
+							segundosArgs2 = args2*24*60*60*1000;
+							
+						}
+						
+						//consulta bans
+						
+						MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connectionC.openConnection();
+						Statement statementC = connectionC.getConnection().createStatement();
+						ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+						
+						if(queryC.next()){
+							
+							String motivoC = queryC.getString("motivo");
+							String ban_tiempoC = queryC.getString("ban_tiempo");
+							String baneador_playerName = queryC.getString("baneador_playerName");
+							
+							if(ban_tiempoC == null){
 								
-							statement.executeUpdate("INSERT INTO ban_list "
-									+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
-									+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
-									+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
-									+ "'incumplir las normas', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
-									+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
-		
-							statement.close();
-							connection.closeConnection();
-							
-							Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
-							
-							Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
-							if(bannedCraftPlayer != null){
-								bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal por incumplir las normas.");
+								craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
+								
 							}
 							
-						} else if (args.length >= 5){
-											
-							String motivo = "";
-							for (int i = 4; i < args.length; i++) {
-								if(args.length-1 > i){
-									motivo += args[i] + " ";
-								} else {
-									motivo += args[i] + "";
-								}
+							statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+							
+						}
+						
+						statementC.close();
+						connectionC.closeConnection();
+						
+						// ban actual
+						
+						long dateTimeSec = firsDateTime + segundosArgs2;					
+						Date dateTime = new Date(dateTimeSec);
+						
+						MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connection.openConnection();
+						
+						Statement statement = connection.getConnection().createStatement();
+							
+						statement.executeUpdate("INSERT INTO ban_list "
+								+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
+								+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
+								+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
+								+ "'incumplir las normas', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
+								+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
+	
+						statement.close();
+						connection.closeConnection();
+						
+						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por incumplir las normas.");
+						
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						if(bannedCraftPlayer != null){
+							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal por incumplir las normas.");
+						}
+						
+					} else if (args.length >= 5){
+										
+						String motivo = "";
+						for (int i = 4; i < args.length; i++) {
+							if(args.length-1 > i){
+								motivo += args[i] + " ";
+							} else {
+								motivo += args[i] + "";
+							}
+						}
+						
+						
+						long args2 = Long.parseLong(args[2]);
+						long segundosArgs2 = 0;
+						
+						String bannedPlayer = args[0];
+						UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
+						bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
+						
+						String bannedPlayerIP = null;
+						
+						long firsDateTime = firstDate.getTime();
+						
+						
+						if(Bukkit.getServer().getPlayer(bannedPlayer) != null){
+							
+							bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayer).getAddress().getAddress().toString().substring(1);
+							
+						}		
+						
+						if(args[3].contains("s")){
+							
+							segundosArgs2 = args2*1000;
+							
+						} else if(args[3].contains("m")){
+							
+							segundosArgs2 = args2*60*1000;
+							
+						} else if(args[3].contains("h")){
+							
+							segundosArgs2 = args2*60*60*1000;
+							
+						} else if(args[3].contains("d")){
+							
+							segundosArgs2 = args2*24*60*60*1000;
+							
+						}
+						
+						//consulta bans
+						
+						MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connectionC.openConnection();
+						Statement statementC = connectionC.getConnection().createStatement();
+						ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+						
+						if(queryC.next()){
+							
+							String motivoC = queryC.getString("motivo");
+							String ban_tiempoC = queryC.getString("ban_tiempo");
+							String baneador_playerName = queryC.getString("baneador_playerName");
+							
+							if(ban_tiempoC == null){
+								
+								craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
+								
+							} else {
+								
+								craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
+								craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
+								
 							}
 							
+							statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
+							craftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal.");
+						}
+						
+						statementC.close();
+						connectionC.closeConnection();
+						
+						// ban actual
+						
+						long dateTimeSec = firsDateTime + segundosArgs2;					
+						Date dateTime = new Date(dateTimeSec);
+						
+						MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
+						connection.openConnection();
+						
+						Statement statement = connection.getConnection().createStatement();
 							
-							long args2 = Long.parseLong(args[2]);
-							long segundosArgs2 = 0;
-							
-							String bannedPlayer = args[0];
-							UUID bannedPlayerUUID = Bukkit.getServer().getOfflinePlayer(bannedPlayer).getUniqueId();
-							bannedPlayer = Bukkit.getServer().getOfflinePlayer(bannedPlayerUUID).getName();
-							
-							String bannedPlayerIP = null;
-							
-							long firsDateTime = firstDate.getTime();
-							
-							
-							if(Bukkit.getServer().getPlayer(bannedPlayerUUID) != null){
-								
-								bannedPlayerIP = Bukkit.getServer().getPlayer(bannedPlayerUUID).getAddress().getAddress().toString().substring(1);
-								
-							}		
-							
-							if(args[3].contains("s")){
-								
-								segundosArgs2 = args2*1000;
-								
-							} else if(args[3].contains("m")){
-								
-								segundosArgs2 = args2*60*1000;
-								
-							} else if(args[3].contains("h")){
-								
-								segundosArgs2 = args2*60*60*1000;
-								
-							} else if(args[3].contains("d")){
-								
-								segundosArgs2 = args2*24*60*60*1000;
-								
-							}
-							
-							//consulta bans
-							
-							MySQL connectionC = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connectionC.openConnection();
-							Statement statementC = connectionC.getConnection().createStatement();
-							ResultSet queryC = statementC.executeQuery("SELECT * FROM `ban_list` WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
-							
-							if(queryC.next()){
-								
-								String motivoC = queryC.getString("motivo");
-								String ban_tiempoC = queryC.getString("ban_tiempo");
-								String baneador_playerName = queryC.getString("baneador_playerName");
-								
-								if(ban_tiempoC == null){
-									
-									craftPlayer.sendMessage(ChatColor.GRAY + bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY + baneador_playerName + " lo baneo de forma permanente.");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								} else {
-									
-									craftPlayer.sendMessage(ChatColor.GRAY +bannedPlayer + " ya estaba baneado por " + motivoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +baneador_playerName + " lo baneo de forma temporal hasta " + ban_tiempoC + ".");
-									craftPlayer.sendMessage(ChatColor.GRAY +"El baneo ha sido reemplazado por el tuyo.");
-									
-								}
-								
-								statementC.executeUpdate("UPDATE `ban_list` SET `activo` = false WHERE `banned_playerName` = '" + bannedPlayer + "' AND `activo` = true;");
-								craftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado de forma temporal.");
-							}
-							
-							statementC.close();
-							connectionC.closeConnection();
-							
-							// ban actual
-							
-							long dateTimeSec = firsDateTime + segundosArgs2;					
-							Date dateTime = new Date(dateTimeSec);
-							
-							MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-							connection.openConnection();
-							
-							Statement statement = connection.getConnection().createStatement();
-								
-							statement.executeUpdate("INSERT INTO ban_list "
-									+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
-									+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
-									+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
-									+ "'" + motivo + "', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
-									+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
-		
-							statement.close();
-							connection.closeConnection();
-							
-							Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
-							
-							Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayerUUID);
-							if(bannedCraftPlayer != null){
-								bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma temporal.");
-							}
-							
-						} else {
-							
-							craftPlayer.sendMessage(ChatColor.RED  + "Usa el comando bien /ban [nick] [permanente/temporal} [motivo/numero} {tiempo} {motivo}.");
-							
+						statement.executeUpdate("INSERT INTO ban_list "
+								+ "(`activo`, `tiempo`, `banned_UUID`, `banned_playerName`, `banned_IP`, `motivo`, `baneador_UUID`, " // `ban_tiempo`, 
+								+ " `baneador_playerName`, `baneador_IP`, `X`, `Y`, `Z`, `world`, `server`, `ban_tiempo`) VALUES "
+								+ "(true, '" + dateFormat.format(firstDate) + "', '" + bannedPlayerUUID + "', '" + bannedPlayer + "', '" + bannedPlayerIP + "', "
+								+ "'" + motivo + "', '" + playerUUID + "', '" + playerName + "', '" + playerIP + "', '" + X + "', '" + Y + "', '" + Z + "', "
+								+ "'" + world + "', '" + server + "', '" + dateFormat.format(dateTime) + "' );");
+	
+						statement.close();
+						connection.closeConnection();
+						
+						Bukkit.getServer().broadcastMessage(DefaultMessages.kickBan + "El jugador " + bannedPlayer + " ha sido baneado por " + motivo + ".");
+						
+						Player bannedCraftPlayer = Bukkit.getServer().getPlayer(bannedPlayer);
+						if(bannedCraftPlayer != null){
+							bannedCraftPlayer.kickPlayer(DefaultMessages.kickBanPlayer + "Has sido baneado por " + motivo + " de forma temporal.");
 						}
 						
 					} else {
@@ -434,9 +432,10 @@ public class CommandBan {
 					craftPlayer.sendMessage(ChatColor.RED  + "Usa el comando bien /ban [nick] [permanente/temporal} [motivo/numero} {tiempo} {motivo}.");
 					
 				}
+				
 			} else {
 				
-				craftPlayer.sendMessage(ChatColor.RED + "El jugador no existe.");
+				craftPlayer.sendMessage(ChatColor.RED  + "Usa el comando bien /ban [nick] [permanente/temporal} [motivo/numero} {tiempo} {motivo}.");
 				
 			}
 			
