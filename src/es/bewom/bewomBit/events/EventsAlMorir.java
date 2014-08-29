@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventsCofreMuerto {
+public class EventsAlMorir {
 		
 	public static void deathCofreMuerto (PlayerDeathEvent eventDeath) throws InterruptedException{
 		
