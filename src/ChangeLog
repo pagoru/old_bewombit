@@ -2,7 +2,7 @@
 
 [evento]
 	-	Guardar Jugador
-		Arreglado error que guardaba eternamente al jugador aunque no estubiese conectado.
+		Arreglado error que guardaba eternamente al jugador aunque no estuviese conectado.
 
 * 29/09/14 22:03
 
@@ -13,7 +13,7 @@
 [auto completar comando]
 	-	/p eliminar <usuario>
 		Devuelve correctamente los usuarios de el bloque con protección
-			* Las puertas no las detecta correctamente
+			**ERROR Las puertas no las detecta correctamente
 			
 [interaccion]
 	-	p
