@@ -108,7 +108,10 @@ public class EventsP {
 			String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
 			String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
 
-			if (getlocationBlockPlayerNamepos1 == null && getlocationBlockPlayerNamepos2 == null && getlocationBlockPlayerNamepos3 == null && getlocationBlockPlayerNamepos4 == null){
+			if (getlocationBlockPlayerNamepos1 == null 
+					&& getlocationBlockPlayerNamepos2 == null 
+					&& getlocationBlockPlayerNamepos3 == null 
+					&& getlocationBlockPlayerNamepos4 == null){
 				actualizarEstado (proteccionData, material, hash, playerName, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
 			}
 			else {

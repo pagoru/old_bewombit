@@ -1,3 +1,9 @@
+* 30/09/14 04:33
+
+[evento]
+	-	Guardar Jugador
+		Arreglado error que guardaba eternamente al jugador aunque no estubiese conectado.
+
 * 29/09/14 22:03
 
 [comando] 

@@ -24,18 +24,14 @@ public class EventsGuardar {
 				
 				craftPlayer.saveData();
 				log.info("Perfil de " + craftPlayer.getName() + " guardado.");
-				
-				for(Player craftPlayerFor: Bukkit.getServer().getOnlinePlayers()){
+									
+				if(!craftPlayer.isOnline()){
 					
-					if(!craftPlayerFor.getName().equals(craftPlayer.getName())){
-					
-						Bukkit.getServer().getScheduler().cancelTask(task1);
-						
-					}
+					Bukkit.getScheduler().cancelTask(task1);
 				}
 
 			}
 			
-		}, 0, 6000);
+		}, 0, 60000);
 	}
 }
