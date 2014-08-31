@@ -105,11 +105,11 @@ public class CommandAutoP {
 				
 				if (craftPlayer.hasPermission("bewom.admin") || craftPlayer.hasPermission("bewom.mod")){
 					
-					pList = Arrays.asList("privado","publico","añadir","eliminar","cambiar");  
+					pList = Arrays.asList("privado","publico","aÃ±adir","eliminar","cambiar");  
 				
 				} else {
 					
-					pList = Arrays.asList("privado","publico","añadir","eliminar");  
+					pList = Arrays.asList("privado","publico","aÃ±adir","eliminar");  
 					
 				}
 				
