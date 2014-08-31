@@ -106,7 +106,7 @@ public class CommandAmigos {
 			
 			} else if (args.length == 2){
 				
-				if(args[0].equals("añadir")){
+				if(args[0].equals("aÃ±adir")){
 					
 					String namePlayer = args[1];
 					
@@ -172,7 +172,7 @@ public class CommandAmigos {
 									
 								} else {
 									
-									craftPlayer.sendMessage(ChatColor.RED + "No puedes añadir a alguien que ya es amigo tuyo.");
+									craftPlayer.sendMessage(ChatColor.RED + "No puedes aï¿½adir a alguien que ya es amigo tuyo.");
 									
 								}
 								

@@ -27,7 +27,7 @@ public static List<String> commandautowhitelist(CommandSender sender, Command cm
 			
 			if (args.length == 1){
 				
-				List<String> pList =  Arrays.asList("on","off","añadir","eliminar");  
+				List<String> pList =  Arrays.asList("on","off","aÃ±adir","eliminar");  
 				
 				return pList;
 			} else if(args.length == 2){

@@ -34,7 +34,7 @@ public static List<String> commandautogm(CommandSender sender, Command cmd, Stri
 			
 			if (args.length == 1){
 					
-				pList =  Arrays.asList("añadir","eliminar","aceptar","rechazar","solicitudes");  
+				pList =  Arrays.asList("aÃ±adir","eliminar","aceptar","rechazar","solicitudes");  
 
 			} else if (args.length == 2){
 				
