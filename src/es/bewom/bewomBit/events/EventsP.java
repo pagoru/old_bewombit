@@ -24,7 +24,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class EventsP {
 
 	public static void blockPlacePlayerEventsP(BlockPlaceEvent eventPlace) throws SQLException, IOException, InvalidConfigurationException {
-
+		
 		String playerUUID = eventPlace.getPlayer().getUniqueId().toString();
 		String playerName = eventPlace.getPlayer().getName();
 

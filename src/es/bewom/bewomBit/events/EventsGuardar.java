@@ -32,6 +32,6 @@ public class EventsGuardar {
 
 			}
 			
-		}, 0, 60000);
+		}, 0, 6000);
 	}
 }

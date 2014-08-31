@@ -102,13 +102,13 @@ public class CommandP {
 
 				if (args.length == 0) {
 
-					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado/a�adir/eliminar].");
+					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado/añadir/eliminar].");
 
 				}
 				else if (args.length == 1){
 					
-					if(args[0].equals("a�adir")){
-						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p a�adir [jugador].");
+					if(args[0].equals("añadir")){
+						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p añadir [jugador].");
 					} else if(args[0].equals("eliminar")){
 						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p eliminar [jugador].");
 					}
@@ -264,7 +264,7 @@ public class CommandP {
 							
 									if (getlocationBlockPlayerName.equals(playerName)){
 									
-										if (args[0].equals("a�adir")){
+										if (args[0].equals("añadir")){
 											
 											if (craftPlayerArgs.getName() != null){
 												
@@ -276,7 +276,7 @@ public class CommandP {
 												
 													} else {
 														
-														craftPlayer.sendMessage(ChatColor.RED + "No puedes a�adirte a ti mismo en " + nombreMaterialSimple + ".");
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
 							
 													}
 													
@@ -326,7 +326,7 @@ public class CommandP {
 							
 									if (getlocationBlockPlayerNameW.equals(playerName)){
 										
-										if (args[0].equals("a�adir")){
+										if (args[0].equals("añadir")){
 											
 											if (craftPlayerArgs.getName() != null){
 												
@@ -338,7 +338,7 @@ public class CommandP {
 												
 													} else {
 														
-														craftPlayer.sendMessage(ChatColor.RED + "No puedes a�adirte a ti mismo en " + nombreMaterialSimple + ".");
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
 							
 													}
 													
@@ -385,7 +385,7 @@ public class CommandP {
 						
 								if (getlocationBlockPlayerName.equals(playerName)){
 								
-									if (args[0].equals("a�adir")){
+									if (args[0].equals("añadir")){
 										
 										if(!pLista.contains(args[1])){
 											
@@ -399,7 +399,7 @@ public class CommandP {
 										
 											} else {
 												
-												craftPlayer.sendMessage(ChatColor.RED + "No puedes a�adirte a ti mismo en " + nombreMaterialSimple + ".");
+												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
 					
 											}
 											
@@ -609,7 +609,7 @@ public class CommandP {
 	public static void cambiar (FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String nombreMaterialSimple, String arg){
 		
 		proteccionData.set(material + "." + hash + ".playerName", arg);
-		craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo due�o de " + nombreMaterialSimple + " es " + arg + ".");
+		craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + arg + ".");
 
 		if (material.equals("Chest") || material.equals("TrappedChest")){
 

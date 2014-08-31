@@ -5,6 +5,8 @@
 
 - Sistema AFK
 
+- Al caer en lava perder cosas.
+
 - Economia.
   > Dinero por minutos.
   > Tiendas.
