@@ -102,13 +102,13 @@ public class CommandP {
 
 				if (args.length == 0) {
 
-					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado/añadir/eliminar].");
+					craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p [publico/privado/aï¿½adir/eliminar].");
 
 				}
 				else if (args.length == 1){
 					
-					if(args[0].equals("añadir")){
-						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p añadir [jugador].");
+					if(args[0].equals("aï¿½adir")){
+						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p aï¿½adir [jugador].");
 					} else if(args[0].equals("eliminar")){
 						craftPlayer.sendMessage(ChatColor.RED + "Usa bien el comando, /p eliminar [jugador].");
 					}
@@ -264,7 +264,7 @@ public class CommandP {
 							
 									if (getlocationBlockPlayerName.equals(playerName)){
 									
-										if (args[0].equals("añadir")){
+										if (args[0].equals("aï¿½adir")){
 											
 											if (craftPlayerArgs.getName() != null){
 												
@@ -272,11 +272,11 @@ public class CommandP {
 													
 													if(!args[1].equals(playerName)){
 												
-														añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+														aÃ±adir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
 												
 													} else {
 														
-														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes aï¿½adirte a ti mismo en " + nombreMaterialSimple + ".");
 							
 													}
 													
@@ -326,7 +326,7 @@ public class CommandP {
 							
 									if (getlocationBlockPlayerNameW.equals(playerName)){
 										
-										if (args[0].equals("añadir")){
+										if (args[0].equals("aï¿½adir")){
 											
 											if (craftPlayerArgs.getName() != null){
 												
@@ -334,11 +334,11 @@ public class CommandP {
 													
 													if(!args[1].equals(playerName)){
 												
-															añadir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+															aÃ±adir(proteccionData, material, hashW, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
 												
 													} else {
 														
-														craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+														craftPlayer.sendMessage(ChatColor.RED + "No puedes aï¿½adirte a ti mismo en " + nombreMaterialSimple + ".");
 							
 													}
 													
@@ -385,7 +385,7 @@ public class CommandP {
 						
 								if (getlocationBlockPlayerName.equals(playerName)){
 								
-									if (args[0].equals("añadir")){
+									if (args[0].equals("aï¿½adir")){
 										
 										if(!pLista.contains(args[1])){
 											
@@ -393,13 +393,13 @@ public class CommandP {
 					
 												if (craftPlayerArgs.getName() != null){
 													
-													añadir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
+													aÃ±adir(proteccionData, material, hash, craftPlayer, nombreMaterial, craftPlayerArgs.getName(), nombreMaterialSimple);
 													
 												}
 										
 											} else {
 												
-												craftPlayer.sendMessage(ChatColor.RED + "No puedes añadirte a ti mismo en " + nombreMaterialSimple + ".");
+												craftPlayer.sendMessage(ChatColor.RED + "No puedes aï¿½adirte a ti mismo en " + nombreMaterialSimple + ".");
 					
 											}
 											
@@ -560,7 +560,7 @@ public class CommandP {
 		}
 	}
 
-	public static void añadir(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg, String nombreMaterialSimple){
+	public static void aÃ±adir(FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String arg, String nombreMaterialSimple){
 
 		List <String> pList = new ArrayList<String>(); 
 		List <String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
@@ -609,7 +609,7 @@ public class CommandP {
 	public static void cambiar (FileConfiguration proteccionData, String material, String hash, Player craftPlayer, String nombreMaterial, String nombreMaterialSimple, String arg){
 		
 		proteccionData.set(material + "." + hash + ".playerName", arg);
-		craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueño de " + nombreMaterialSimple + " es " + arg + ".");
+		craftPlayer.sendMessage(ChatColor.GRAY + "El nuevo dueï¿½o de " + nombreMaterialSimple + " es " + arg + ".");
 
 		if (material.equals("Chest") || material.equals("TrappedChest")){
 

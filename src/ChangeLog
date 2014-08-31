@@ -1,3 +1,9 @@
+* 31/08/14 06:05
+
+[eventos]
+	-	logblock
+		Solo al romper bloques
+
 * 30/09/14 04:33
 
 [evento]
@@ -7,12 +13,12 @@
 * 29/09/14 22:03
 
 [comando] 
-	-	/p añadir <usuario> 
+	-	/p aï¿½adir <usuario> 
 		Devuelve errores adecuados
   
 [auto completar comando]
 	-	/p eliminar <usuario>
-		Devuelve correctamente los usuarios de el bloque con protección
+		Devuelve correctamente los usuarios de el bloque con protecciï¿½n
 			**ERROR Las puertas no las detecta correctamente
 			
 [interaccion]
