@@ -16,7 +16,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,9 +29,9 @@ public class EventsP {
 
 		Block placeBlock = eventPlace.getBlock();
 
-		int locationBlockX = placeBlock.getLocation().getBlockX();
-		int locationBlockY = placeBlock.getLocation().getBlockY();
-		int locationBlockZ = placeBlock.getLocation().getBlockZ();
+		final int locationBlockX = placeBlock.getLocation().getBlockX();
+		final int locationBlockY = placeBlock.getLocation().getBlockY();
+		final int locationBlockZ = placeBlock.getLocation().getBlockZ();
 		Location locationBlock = placeBlock.getLocation();
 
 		int locationBlockXmas1 = locationBlockX + 1;
@@ -49,9 +48,9 @@ public class EventsP {
 
 		//---> Proteccion
 
-		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
-		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		final File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		final File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		final FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 
 		String material = null;
 
@@ -63,99 +62,85 @@ public class EventsP {
 				|| placeBlock.getType() == Material.ANVIL 
 				|| placeBlock.getType() == Material.WOODEN_DOOR){
 
-			if (placeBlock.getType() == Material.FURNACE){
-				material = "Furnace";
-			}
-			else if (placeBlock.getType() == Material.ANVIL){
-				material = "Anvil";
-			}
-			else if (placeBlock.getType() == Material.WOODEN_DOOR){
-				material = "WoodenDoor";
-			}			
-			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "privado");
-		}
-		else if(placeBlock.getType() == Material.DROPPER ||
-				placeBlock.getType() == Material.JUKEBOX ||
-				placeBlock.getType() == Material.ENCHANTMENT_TABLE ||
-				placeBlock.getType() == Material.ENDER_CHEST) {
+			material = extracted(playerUUID, playerName, placeBlock,
+					locationBlockX, locationBlockY, locationBlockZ, hash,
+					proteccionData, material);
+		} else {
 
 			if(placeBlock.getType() == Material.DROPPER){
-				material = "Dropper";
+					material = "Dropper";
 			}
 			else if (placeBlock.getType() == Material.JUKEBOX){
-				material = "Jukebox";
+					material = "Jukebox";
 			}
 			else if (placeBlock.getType() == Material.ENCHANTMENT_TABLE){
-				material = "EnchantmentTable";
+					material = "EnchantmentTable";
 			}
 			else if (placeBlock.getType() == Material.ENDER_CHEST){
-				material = "EnderChest";
+					material = "EnderChest";
 			} 			
 			actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "publico");
+			}
+
+		if(placeBlock.getType() == Material.CHEST){
+			material = "Chest";
+		}
+		else if (placeBlock.getType() == Material.TRAPPED_CHEST){
+			material = "TrappedChest";
 		}
 
-		if(placeBlock.getType().equals(Material.CHEST) || placeBlock.getType().equals(Material.TRAPPED_CHEST)){
+		String getlocationBlockPlayerNamepos1 = proteccionData.getString(material + "." + hashpos1 + ".playerName");
+		String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
+		String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
+		String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
 
-			if(placeBlock.getType() == Material.CHEST){
-				material = "Chest";
-			}
-			else if (placeBlock.getType() == Material.TRAPPED_CHEST){
-				material = "TrappedChest";
-			}
+		if (getlocationBlockPlayerNamepos1 == null 
+				&& getlocationBlockPlayerNamepos2 == null 
+				&& getlocationBlockPlayerNamepos3 == null 
+				&& getlocationBlockPlayerNamepos4 == null){
+			actualizarEstado (proteccionData, material, hash, playerName, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
+		}
+		else {
 
-			String getlocationBlockPlayerNamepos1 = proteccionData.getString(material + "." + hashpos1 + ".playerName");
-			String getlocationBlockPlayerNamepos2 = proteccionData.getString(material + "." + hashpos2 + ".playerName");
-			String getlocationBlockPlayerNamepos3 = proteccionData.getString(material + "." + hashpos3 + ".playerName");
-			String getlocationBlockPlayerNamepos4 = proteccionData.getString(material + "." + hashpos4 + ".playerName");
-
-			if (getlocationBlockPlayerNamepos1 == null 
-					&& getlocationBlockPlayerNamepos2 == null 
-					&& getlocationBlockPlayerNamepos3 == null 
-					&& getlocationBlockPlayerNamepos4 == null){
-				actualizarEstado (proteccionData, material, hash, playerName, locationBlockX, locationBlockY, locationBlockZ, "privado", false);
-			}
-			else {
-
-				if (getlocationBlockPlayerNamepos1 != null){
-					
-					if (getlocationBlockPlayerNamepos1.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos1, locationBlockX, locationBlockY, locationBlockZ);						
-					}
-					else {
-						eventPlace.setCancelled(true);
-					}
-				} 
-
-				if (getlocationBlockPlayerNamepos2 != null){
-					if (getlocationBlockPlayerNamepos2.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos2, locationBlockX, locationBlockY, locationBlockZ);
-					}
-					else {
-						eventPlace.setCancelled(true);
-					}
+			if (getlocationBlockPlayerNamepos1 != null){
+				
+				if (getlocationBlockPlayerNamepos1.equals(playerName)){
+					actualizarEstado (proteccionData, material, hash, playerName, hashpos1, locationBlockX, locationBlockY, locationBlockZ);						
 				}
+				else {
+					eventPlace.setCancelled(true);
+				}
+			} 
 
-				if (getlocationBlockPlayerNamepos3 != null){
-					if (getlocationBlockPlayerNamepos3.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos3, locationBlockX, locationBlockY, locationBlockZ);
-					}
-					else {
-						eventPlace.setCancelled(true);
-					}
-				} 
-
-				if (getlocationBlockPlayerNamepos4 != null){
-					if (getlocationBlockPlayerNamepos4.equals(playerName)){
-						actualizarEstado (proteccionData, material, hash, playerName, hashpos4, locationBlockX, locationBlockY, locationBlockZ);
-					}
-					else {
-						eventPlace.setCancelled(true);
-					}
-				} 
+			if (getlocationBlockPlayerNamepos2 != null){
+				if (getlocationBlockPlayerNamepos2.equals(playerName)){
+					actualizarEstado (proteccionData, material, hash, playerName, hashpos2, locationBlockX, locationBlockY, locationBlockZ);
+				}
+				else {
+					eventPlace.setCancelled(true);
+				}
 			}
+
+			if (getlocationBlockPlayerNamepos3 != null){
+				if (getlocationBlockPlayerNamepos3.equals(playerName)){
+					actualizarEstado (proteccionData, material, hash, playerName, hashpos3, locationBlockX, locationBlockY, locationBlockZ);
+				}
+				else {
+					eventPlace.setCancelled(true);
+				}
+			} 
+
+			if (getlocationBlockPlayerNamepos4 != null){
+				if (getlocationBlockPlayerNamepos4.equals(playerName)){
+					actualizarEstado (proteccionData, material, hash, playerName, hashpos4, locationBlockX, locationBlockY, locationBlockZ);
+				}
+				else {
+					eventPlace.setCancelled(true);
+				}
+			} 
 		}
 
-		//---> Protección Hopper contra cofre y cofre trampa
+		//---> Protecciï¿½n Hopper contra cofre y cofre trampa
 
 		if(placeBlock.getType().equals(Material.HOPPER)){
 
@@ -176,6 +161,23 @@ public class EventsP {
 		proteccionData.save(protecciondata);
 	}
 
+	private static String extracted(String playerUUID, String playerName,
+			Block placeBlock, final int locationBlockX,
+			final int locationBlockY, final int locationBlockZ, String hash,
+			final FileConfiguration proteccionData, String material) {
+		if (placeBlock.getType() == Material.FURNACE){
+			material = "Furnace";
+		}
+		else if (placeBlock.getType() == Material.ANVIL){
+			material = "Anvil";
+		}
+		else if (placeBlock.getType() == Material.WOODEN_DOOR){
+			material = "WoodenDoor";
+		}			
+		actualizarEstado (proteccionData, material, hash, playerName, playerUUID, locationBlockX, locationBlockY, locationBlockZ, "privado");
+		return material;
+	}
+
 	@SuppressWarnings({"unused", "deprecation" })
 	public static void brokeBlockPlayerEventsP(BlockBreakEvent eventPlace) throws FileNotFoundException, IOException, InvalidConfigurationException{
 
@@ -183,14 +185,14 @@ public class EventsP {
 
 		Block brokeBlock = eventPlace.getBlock();
 
-		int locationBlockX = brokeBlock.getLocation().getBlockX();
-		int locationBlockY = brokeBlock.getLocation().getBlockY();
-		int locationBlockZ = brokeBlock.getLocation().getBlockZ();
+		final int locationBlockX = brokeBlock.getLocation().getBlockX();
+		final int locationBlockY = brokeBlock.getLocation().getBlockY();
+		final int locationBlockZ = brokeBlock.getLocation().getBlockZ();
 
 
-		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
-		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		final File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		final File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		final FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 
 		String material = null;
 
@@ -268,7 +270,7 @@ public class EventsP {
 			proteccionData.save(protecciondata);
 		}
 
-		//---> Protección Puertas
+		//---> Protecciï¿½n Puertas
 
 		Location locationBlock = eventPlace.getBlock().getLocation().add(0, 1, 0);
 		Location locationBlock1 = eventPlace.getBlock().getLocation().add(0, 2, 0);
@@ -279,184 +281,104 @@ public class EventsP {
 		String playerName = eventInteract.getPlayer().getName();
 		Player craftPlayer = (Player) eventInteract.getPlayer();
 
-		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-		File f1 = new File(amigosdata, File.separator + "amigos.yml");
-		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
+		final File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		final File f1 = new File(amigosdata, File.separator + "amigos.yml");
+		final FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
 
-		if (eventInteract.getAction() == Action.RIGHT_CLICK_BLOCK || eventInteract.getAction() == Action.LEFT_CLICK_BLOCK){
+		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
+		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 
-			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
-			File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
-			FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
+		int locationBlockX = 0;
+		int locationBlockY = 0;
+		int locationBlockZ = 0;
 
-			int locationBlockX = 0;
-			int locationBlockY = 0;
-			int locationBlockZ = 0;
+		String getlocationBlockPlayerName = null;
+		int getlocationBlockX = 0;
+		int getlocationBlockY = 0;
+		int getlocationBlockZ = 0;
+		String getlocationBlockEstado = null;
 
-			String getlocationBlockPlayerName = null;
-			int getlocationBlockX = 0;
-			int getlocationBlockY = 0;
-			int getlocationBlockZ = 0;
-			String getlocationBlockEstado = null;
+		locationBlockX = eventInteract.getClickedBlock().getLocation().getBlockX();
+		locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
+		locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
 
-			locationBlockX = eventInteract.getClickedBlock().getLocation().getBlockX();
-			locationBlockY = eventInteract.getClickedBlock().getLocation().getBlockY();
-			locationBlockZ = eventInteract.getClickedBlock().getLocation().getBlockZ();
+		String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 
-			String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
+		String material = null;
+		String nombreMaterial = null;
 
-			String material = null;
-			String nombreMaterial = null;
+		proteccionData.load(protecciondata);
+		amigosData.load(f1);
 
-			proteccionData.load(protecciondata);
-			amigosData.load(f1);
+		//proteccion
+		if(eventInteract.getClickedBlock().getType() == Material.CHEST 
+				|| eventInteract.getClickedBlock().getType() == Material.HOPPER 
+				|| eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST 
+				|| eventInteract.getClickedBlock().getType() == Material.FURNACE 
+				|| eventInteract.getClickedBlock().getType() == Material.ANVIL 
+				|| eventInteract.getClickedBlock().getType() == Material.DROPPER 
+				|| eventInteract.getClickedBlock().getType() == Material.JUKEBOX 
+				|| eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE 
+				|| eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST
+				|| eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
 
-			//proteccion
-			if(eventInteract.getClickedBlock().getType() == Material.CHEST 
-					|| eventInteract.getClickedBlock().getType() == Material.HOPPER 
-					|| eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST 
-					|| eventInteract.getClickedBlock().getType() == Material.FURNACE 
-					|| eventInteract.getClickedBlock().getType() == Material.ANVIL 
-					|| eventInteract.getClickedBlock().getType() == Material.DROPPER 
-					|| eventInteract.getClickedBlock().getType() == Material.JUKEBOX 
-					|| eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE 
-					|| eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST
-					|| eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
+			if(eventInteract.getClickedBlock().getType() == Material.CHEST){
+				material = "Chest";
+				nombreMaterial = "Este cofre";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.HOPPER){
+				material = "Hopper";
+				nombreMaterial = "Este hopper";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST){
+				material = "TrappedChest";
+				nombreMaterial = "Este cofre trampa";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.FURNACE){
+				material = "Furnace";
+				nombreMaterial = "Este horno";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.ANVIL){
+				material = "Anvil";
+				nombreMaterial = "Este yunque";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.DROPPER){
+				material = "Dropper";
+				nombreMaterial = "Este dropper";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.JUKEBOX){
+				material = "Jukebox";
+				nombreMaterial = "Esta jukebox";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE){
+				material = "EnchantmentTable";
+				nombreMaterial = "Este mesa de encantamientos";
+			}
+			else if (eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
+				material = "EnderChest"; 
+				nombreMaterial = "Este enderchest";
+			} 
+			else if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
+				material = "WoodenDoor"; 
+				nombreMaterial = "Esta puerta";
+			}
 
-				if(eventInteract.getClickedBlock().getType() == Material.CHEST){
-					material = "Chest";
-					nombreMaterial = "Este cofre";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.HOPPER){
-					material = "Hopper";
-					nombreMaterial = "Este hopper";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.TRAPPED_CHEST){
-					material = "TrappedChest";
-					nombreMaterial = "Este cofre trampa";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.FURNACE){
-					material = "Furnace";
-					nombreMaterial = "Este horno";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.ANVIL){
-					material = "Anvil";
-					nombreMaterial = "Este yunque";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.DROPPER){
-					material = "Dropper";
-					nombreMaterial = "Este dropper";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.JUKEBOX){
-					material = "Jukebox";
-					nombreMaterial = "Esta jukebox";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE){
-					material = "EnchantmentTable";
-					nombreMaterial = "Este mesa de encantamientos";
-				}
-				else if (eventInteract.getClickedBlock().getType() == Material.ENDER_CHEST){
-					material = "EnderChest"; 
-					nombreMaterial = "Este enderchest";
-				} 
-				else if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
-					material = "WoodenDoor"; 
-					nombreMaterial = "Esta puerta";
-				}
+			List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
 
-				List<String> pLista = proteccionData.getStringList(material + "." + hash + ".miembros");
+			getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
+			getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
+			getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
+			getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
+			getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
 
-				getlocationBlockPlayerName = proteccionData.getString(material + "." + hash + ".playerName");
-				getlocationBlockX = proteccionData.getInt(material + "." + hash + ".X");
-				getlocationBlockY = proteccionData.getInt(material + "." + hash + ".Y");
-				getlocationBlockZ = proteccionData.getInt(material + "." + hash + ".Z");
-				getlocationBlockEstado = proteccionData.getString(material + "." + hash + ".estado");
+			List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
 
-				List<String> pListaP = amigosData.getStringList(playerName + ".amigos");
+			String gethash = Integer.toString(getlocationBlockX) + Integer.toString(getlocationBlockY) + Integer.toString(getlocationBlockZ);
 
-				String gethash = Integer.toString(getlocationBlockX) + Integer.toString(getlocationBlockY) + Integer.toString(getlocationBlockZ);
+			if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
 
-				if (eventInteract.getClickedBlock().getType() == Material.WOODEN_DOOR){
-
-					if(eventInteract.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-
-						if (gethash.equals(hash)){
-
-							if (getlocationBlockPlayerName.equals(playerName) 
-									|| getlocationBlockEstado.equals("publico") 
-									|| pLista.toString().contains(playerName) 
-									|| pListaP.contains(getlocationBlockPlayerName)){
-
-							}
-							else if (getlocationBlockPlayerName.equals(null)) {
-
-							} else {
-
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-								eventInteract.setCancelled(true);
-
-							}
-						}
-						else {
-
-							if (getlocationBlockPlayerName == null) {								
-								actualizarEstado (proteccionData, material, hash, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
-							}
-							else {
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
-								eventInteract.setCancelled(true);
-							}
-						}
-					}
-					else if(eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
-
-						String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
-
-						List<String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
-
-						String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
-						int getlocationBlockXW = proteccionData.getInt(material + "." + hashW + ".X");
-						int getlocationBlockYW = proteccionData.getInt(material + "." + hashW + ".Y");
-						int getlocationBlockZW = proteccionData.getInt(material + "." + hashW + ".Z");
-						String getlocationBlockEstadoW = proteccionData.getString(material + "." + hashW + ".estado");
-
-						String gethashW = Integer.toString(getlocationBlockXW) + Integer.toString(getlocationBlockYW) + Integer.toString(getlocationBlockZW);
-
-						List<String> pListaPW = amigosData.getStringList(playerName + ".amigos");
-
-						if (gethashW.equals(hashW)){
-
-							if (getlocationBlockPlayerNameW.equals(playerName) 
-									|| getlocationBlockEstadoW.equals("publico") 
-									|| pListaW.toString().contains(playerName) 
-									|| pListaPW.contains(getlocationBlockPlayerNameW)){
-
-							}
-							else if (getlocationBlockPlayerNameW.equals(null)) {
-
-							} else {
-
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerNameW + ".");
-								eventInteract.setCancelled(true);
-
-							}
-						}
-						else {
-
-							if (getlocationBlockPlayerNameW == null) {								
-								actualizarEstado (proteccionData, material, hashW, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
-							}
-							else {
-
-								craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerNameW + " / " + playerName + ".");
-								eventInteract.setCancelled(true);
-
-							}
-						}
-
-					}
-
-				} else {
+				if(eventInteract.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType() == Material.WOODEN_DOOR){
 
 					if (gethash.equals(hash)){
 
@@ -477,20 +399,97 @@ public class EventsP {
 					}
 					else {
 
-						if (getlocationBlockPlayerName == null) {					
+						if (getlocationBlockPlayerName == null) {								
 							actualizarEstado (proteccionData, material, hash, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
 						}
 						else {
-
 							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
 							eventInteract.setCancelled(true);
 						}
 					}
 				}
+				else if(eventInteract.getClickedBlock().getLocation().add(0, -1, 0).getBlock().getType() == Material.WOODEN_DOOR){
+
+					String hashW = Integer.toString(locationBlockX) + Integer.toString(locationBlockY-1) + Integer.toString(locationBlockZ);
+
+					List<String> pListaW = proteccionData.getStringList(material + "." + hashW + ".miembros");
+
+					String getlocationBlockPlayerNameW = proteccionData.getString(material + "." + hashW + ".playerName");
+					int getlocationBlockXW = proteccionData.getInt(material + "." + hashW + ".X");
+					int getlocationBlockYW = proteccionData.getInt(material + "." + hashW + ".Y");
+					int getlocationBlockZW = proteccionData.getInt(material + "." + hashW + ".Z");
+					String getlocationBlockEstadoW = proteccionData.getString(material + "." + hashW + ".estado");
+
+					String gethashW = Integer.toString(getlocationBlockXW) + Integer.toString(getlocationBlockYW) + Integer.toString(getlocationBlockZW);
+
+					List<String> pListaPW = amigosData.getStringList(playerName + ".amigos");
+
+					if (gethashW.equals(hashW)){
+
+						if (getlocationBlockPlayerNameW.equals(playerName) 
+								|| getlocationBlockEstadoW.equals("publico") 
+								|| pListaW.toString().contains(playerName) 
+								|| pListaPW.contains(getlocationBlockPlayerNameW)){
+
+						}
+						else if (getlocationBlockPlayerNameW.equals(null)) {
+
+						} else {
+
+							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerNameW + ".");
+							eventInteract.setCancelled(true);
+
+						}
+					}
+					else {
+
+						if (getlocationBlockPlayerNameW == null) {								
+							actualizarEstado (proteccionData, material, hashW, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
+						}
+						else {
+
+							craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerNameW + " / " + playerName + ".");
+							eventInteract.setCancelled(true);
+
+						}
+					}
+
+				}
+
+			} else {
+
+				if (gethash.equals(hash)){
+
+					if (getlocationBlockPlayerName.equals(playerName) 
+							|| getlocationBlockEstado.equals("publico") 
+							|| pLista.toString().contains(playerName) 
+							|| pListaP.contains(getlocationBlockPlayerName)){
+
+					}
+					else if (getlocationBlockPlayerName.equals(null)) {
+
+					} else {
+
+						craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+						eventInteract.setCancelled(true);
+
+					}
+				}
+				else {
+
+					if (getlocationBlockPlayerName == null) {					
+						actualizarEstado (proteccionData, material, hash, "Steve", locationBlockX, locationBlockY, locationBlockZ, "publico");
+					}
+					else {
+
+						craftPlayer.sendMessage(ChatColor.RED + nombreMaterial + " pertenece a " + getlocationBlockPlayerName + ".");
+						eventInteract.setCancelled(true);
+					}
+				}
 			}
-			amigosData.save(f1);
-			proteccionData.save(protecciondata);
 		}
+		amigosData.save(f1);
+		proteccionData.save(protecciondata);
 	}
 
 	public static void actualizarEstado (FileConfiguration proteccionData, String material, String hash, String playerName, String playerUUID, int locationBlockX, int locationBlockY, int locationBlockZ, String estado){

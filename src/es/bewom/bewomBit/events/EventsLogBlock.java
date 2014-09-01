@@ -21,7 +21,7 @@ import es.bewom.bewomBit.utility.MySQL.MySQL;
 
 public class EventsLogBlock {
 	
-	@SuppressWarnings({ "deprecation", "unused"})
+	@SuppressWarnings({ "deprecation"})
 	public static void OnBreak(BlockBreakEvent eventBroke) throws Exception {
 		
 		MySQL connection = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
@@ -76,118 +76,7 @@ public class EventsLogBlock {
 					
 					int i = 0;
 					boolean bool = true;
-					for(String date : listBlockDate){
-						
-						String bloqueES = "bloque no encontrado.";
-						
-						if (listBlockBP.get(i).equals(Material.STONE.name())){
-							bloqueES = "piedra";
-						} else if (listBlockBP.get(i).equals(Material.GRASS.name())){
-							bloqueES = "cesped";
-						} else if (listBlockBP.get(i).equals(Material.DIRT.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "tierra";
-						} else if (listBlockBP.get(i).equals(Material.DIRT.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "tierra coarse";
-						} else if (listBlockBP.get(i).equals(Material.DIRT.name()) && listBlockDP.get(i).equals("2")){
-							bloqueES = "podzol";
-						} else if (listBlockBP.get(i).equals(Material.COBBLESTONE.name())){
-							bloqueES = "cobblestone";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("2")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("3")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("4")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WOOD.name()) && listBlockDP.get(i).equals("5")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("2")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("3")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("4")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAPLING.name()) && listBlockDP.get(i).equals("5")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.BEDROCK.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WATER.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LAVA.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAND.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SAND.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.GRAVEL.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.GOLD_ORE.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.IRON_ORE.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.COAL_ORE.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LOG.name()) && (listBlockDP.get(i).equals("0") || listBlockDP.get(i).equals("4") || listBlockDP.get(i).equals("8"))){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LOG.name()) && (listBlockDP.get(i).equals("1") || listBlockDP.get(i).equals("5") || listBlockDP.get(i).equals("9"))){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LOG.name()) && (listBlockDP.get(i).equals("2") || listBlockDP.get(i).equals("6") || listBlockDP.get(i).equals("10"))){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LOG.name()) && (listBlockDP.get(i).equals("3") || listBlockDP.get(i).equals("7") || listBlockDP.get(i).equals("11"))){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LOG_2.name()) && (listBlockDP.get(i).equals("0") || listBlockDP.get(i).equals("4") || listBlockDP.get(i).equals("8"))){
-							bloqueES = "";	
-						} else if (listBlockBP.get(i).equals(Material.LOG_2.name()) && (listBlockDP.get(i).equals("1") || listBlockDP.get(i).equals("5") || listBlockDP.get(i).equals("9"))){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LEAVES.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LEAVES.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LEAVES.name()) && listBlockDP.get(i).equals("2")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LEAVES.name()) && listBlockDP.get(i).equals("3")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SPONGE.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.GLASS.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LAPIS_ORE.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LAPIS_BLOCK.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.DISPENSER.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SANDSTONE.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SANDSTONE.name()) && listBlockDP.get(i).equals("1")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.SANDSTONE.name()) && listBlockDP.get(i).equals("2")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.NOTE_BLOCK.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.BED_BLOCK.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.POWERED_RAIL.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.DETECTOR_RAIL.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.PISTON_STICKY_BASE.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.WEB.name())){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.DEAD_BUSH.name()) && listBlockDP.get(i).equals("0")){
-							bloqueES = "";
-						} else if (listBlockBP.get(i).equals(Material.LONG_GRASS.name())){
-							bloqueES = "";
-						}
-						
+					for(String date : listBlockDate){			
 						
 						String color = "";
 						
@@ -221,8 +110,6 @@ public class EventsLogBlock {
 					craftPlayer.sendMessage(ChatColor.DARK_AQUA + dateFormatSimple.format(firstDate) + " > No hay informes disponibles!");
 					
 				}
-				
-				
 				
 			} 
 			
@@ -297,6 +184,10 @@ public class EventsLogBlock {
 					boolean bool = true;
 					for(String date : listBlockDate){
 						
+						int idBloque = Integer.parseInt(listBlockDP.get(i));
+						
+						String bloqueES = comprobarBloque (listBlockBP.get(i), idBloque);
+						
 						String color = "";
 						
 						if(bool){
@@ -310,12 +201,12 @@ public class EventsLogBlock {
 						if(listBlockBA.get(i).equals(Material.AIR.name())){
 							
 							craftPlayer.sendMessage(color + dateFormatSimple.format(dateFormat.parse(date)) + " > " + listBlockplayerName.get(i).toLowerCase() 
-									+ " » ha creado " + listBlockBP.get(i).toLowerCase() + "^" + listBlockDP.get(i));
+									+ " » ha creado " + bloqueES);
 							
 						} else if(listBlockBP.get(i).equals(Material.AIR.name())){
 							
 							craftPlayer.sendMessage(color + dateFormatSimple.format(dateFormat.parse(date)) + " > " + listBlockplayerName.get(i).toLowerCase() 
-									+ " » ha destruido " + listBlockBA.get(i).toLowerCase() + "^" + listBlockDA.get(i));
+									+ " » ha destruido " + bloqueES);
 							
 						}
 						
@@ -415,5 +306,282 @@ public class EventsLogBlock {
 		connection.closeConnection();
 		
 	}
+	
+	public static String comprobarBloque (String material, int id){
+		
+		String bloqueES = "bloque no encontrado.";		
 
+		if (material.equals(Material.STONE.name())){
+			bloqueES = "piedra";
+		} else if (material.equals(Material.GRASS.name())){
+			bloqueES = "cesped";
+		} else if (material.equals(Material.DIRT.name())){
+			if(id == 0){
+				bloqueES = "tierra";
+			} else if(id == 1){
+				bloqueES = "tierra coarse";
+			} else if(id == 2){
+				bloqueES = "podzol";
+			}
+		} else if (material.equals(Material.COBBLESTONE.name())){
+			bloqueES = "cobblestone";
+		} else if (material.equals(Material.WOOD.name())){
+			if( id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.SAPLING.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.BEDROCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WATER.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.LAVA.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.SAND.name()) && id == 0){
+			bloqueES = "";
+		} else if (material.equals(Material.SAND.name()) && id == 1){
+			bloqueES = "";
+		} else if (material.equals(Material.GRAVEL.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.GOLD_ORE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.IRON_ORE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.COAL_ORE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.LOG.name())){
+			if(id == 0 || id == 4 || id == 8){
+				bloqueES = "";
+			} else if (id == 1 || id == 5 || id == 9){
+			bloqueES = "";
+			}
+		} else if (id == 2 || id == 6 || id == 10){
+			bloqueES = "";
+		} else if (id == 3 || id == 7 || id == 11){
+			bloqueES = "";
+		} else if (material.equals(Material.LOG_2.name())){
+			if(id == 0 || id == 4 || id == 8){
+				bloqueES = "";	
+			} else if (id == 1 || id == 5 || id == 9){
+			bloqueES = "";
+			}
+		} else if (material.equals(Material.LEAVES.name()) && id == 0){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			}
+		}  else if (material.equals(Material.SPONGE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.GLASS.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.LAPIS_ORE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.LAPIS_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DISPENSER.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.SANDSTONE.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} 
+		}  else if (material.equals(Material.NOTE_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.BED_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.POWERED_RAIL.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DETECTOR_RAIL.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.PISTON_STICKY_BASE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WEB.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DEAD_BUSH.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.LONG_GRASS.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.PISTON_BASE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WOOL.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			} else if (id == 6){
+				bloqueES = "";
+			} else if (id == 7){
+				bloqueES = "";
+			} else if (id == 8){
+				bloqueES = "";
+			} else if (id == 9){
+				bloqueES = "";
+			} else if (id == 10){
+				bloqueES = "";
+			} else if (id == 11){
+				bloqueES = "";
+			} else if (id == 12){
+				bloqueES = "";
+			} else if (id == 13){
+				bloqueES = "";
+			} else if (id == 14){
+				bloqueES = "";
+			} else if (id == 15){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.YELLOW_FLOWER.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.RED_ROSE.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			} else if (id == 6){
+				bloqueES = "";
+			} else if (id == 7){
+				bloqueES = "";
+			} else if (id == 8){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.BROWN_MUSHROOM.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.RED_MUSHROOM.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.GOLD_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.IRON_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DOUBLE_STEP.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			} else if (id == 6){
+				bloqueES = "";
+			} else if (id == 7){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.STEP.name())){
+			if(id == 0){
+				bloqueES = "";
+			} else if (id == 1){
+				bloqueES = "";
+			} else if (id == 2){
+				bloqueES = "";
+			} else if (id == 3){
+				bloqueES = "";
+			} else if (id == 4){
+				bloqueES = "";
+			} else if (id == 5){
+				bloqueES = "";
+			} else if (id == 6){
+				bloqueES = "";
+			} else if (id == 7){
+				bloqueES = "";
+			}
+		} else if (material.equals(Material.BRICK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.TNT.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.BOOKSHELF.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.MOSSY_COBBLESTONE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.OBSIDIAN.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.TORCH.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.FIRE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.MOB_SPAWNER.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WOOD_STAIRS.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.CHEST.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.REDSTONE_WIRE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DIAMOND_ORE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.DIAMOND_BLOCK.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WORKBENCH.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.CROPS.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.SOIL.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.FURNACE.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.SIGN_POST.name())){
+			bloqueES = "";
+		} else if (material.equals(Material.WALL_SIGN.name())){
+			bloqueES = "";
+		}
+	
+		
+		return bloqueES;
+	}
 }
