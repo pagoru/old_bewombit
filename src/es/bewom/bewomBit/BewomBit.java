@@ -1,7 +1,6 @@
 package es.bewom.bewomBit;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,9 +15,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.PermissionAttachment;
@@ -252,17 +248,15 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		
 		// ---> config inicial <--- //
 		
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "config.yml");
 		File dataProteccion = new File(data1, File.separator + "proteccion.yml");
 		File dataRxray = new File(data1, File.separator + "rxray.yml");
 		File dataAmigos = new File(data1, File.separator + "amigos.yml");
 		File dataTeleport = new File(data1, File.separator + "teleport.yml");
 		File dataWhitelist = new File(data1, File.separator + "whitelist.yml");
-		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
 		try {
-			
 			data1.mkdir();
 			data.createNewFile();
 			dataProteccion.createNewFile();
@@ -270,32 +264,8 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 			dataAmigos.createNewFile();
 			dataTeleport.createNewFile();
 			dataWhitelist.createNewFile();
-			
-		} catch (IOException e) {
-		  
+		} catch (IOException e) { 
 			e.printStackTrace();
-		}
-		
-		try {
-			try {
-				try {
-					
-					Data.load(data);
-					
-					Data.set("Congelado", false);
-					
-					Data.save(data);
-					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-			
-		} catch (InvalidConfigurationException e) {
-				e.printStackTrace();
 		}
 	}
 

@@ -22,7 +22,7 @@ public class EventsWhitelist {
 //		String prePlayerIP = eventPreConnect.getAddress().getAddress().toString().substring(1);
 		String prePlayerName = eventPreConnect.getName();
 		
-		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File protecciondata = new File(protecciondata1, File.separator + "whitelist.yml");
 		File protecciondataConfig = new File(protecciondata1, File.separator + "config.yml");
 		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);

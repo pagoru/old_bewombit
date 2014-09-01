@@ -29,7 +29,7 @@ public class CommandXray {
 				DecimalFormat df = new DecimalFormat("#.##");
 				DecimalFormat dfsin = new DecimalFormat("#");
 
-				File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+				File rayData = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 				File f = new File(rayData, File.separator + "rxray.yml");
 				FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
 

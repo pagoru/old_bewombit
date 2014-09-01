@@ -24,7 +24,7 @@ public class CommandAmigos {
 			final Player craftPlayer = ((OfflinePlayer) sender).getPlayer();
 			String playerName = craftPlayer.getName();
 			
-			File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File amigosdata = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 			File f = new File(amigosdata, File.separator + "amigos.yml");
 			FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f);
 			

@@ -94,7 +94,7 @@ public class CommandP {
 
 				String hash = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 
-				File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+				File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 				File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
 				FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 

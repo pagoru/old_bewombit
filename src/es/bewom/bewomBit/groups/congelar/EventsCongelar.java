@@ -25,7 +25,7 @@ public class EventsCongelar {
 		boolean playerIsCongelado = false;
 		boolean isCongelado = false;
 		
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 
@@ -69,7 +69,7 @@ public class EventsCongelar {
 		
 		boolean isCongelado = false;
 		
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
@@ -115,7 +115,7 @@ public class EventsCongelar {
 		File f = new File(userdata, File.separator + playerUUID + ".yml");
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 		
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 
@@ -147,7 +147,7 @@ public class EventsCongelar {
 
 		boolean isCongelado = false;
 
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "config.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 

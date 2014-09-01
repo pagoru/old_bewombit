@@ -32,7 +32,7 @@ public class CommandTeleport {
 			
 			String seeCardinal = PlayerUtility.getCardinalDirection(craftPlayer);
 				
-			File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 			File data = new File(data1, File.separator + "teleport.yml");
 			FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 			

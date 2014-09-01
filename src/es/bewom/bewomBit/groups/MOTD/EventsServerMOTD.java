@@ -29,7 +29,7 @@ public class EventsServerMOTD {
 	            e1.printStackTrace();
 	    }
 		
-		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File protecciondataConfig = new File(protecciondata1, File.separator + "config.yml");
 		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondataConfig);
 		

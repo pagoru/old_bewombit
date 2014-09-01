@@ -18,7 +18,7 @@ public class CommandWhitelist {
 
 		if (label.equalsIgnoreCase("whitelist")){
 
-			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 			File protecciondata = new File(protecciondata1, File.separator + "whitelist.yml");
 			File protecciondataConfig = new File(protecciondata1, File.separator + "config.yml");
 			FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
@@ -80,7 +80,7 @@ public class CommandWhitelist {
 	public static void actualizarWhitelist (FileConfiguration proteccionData, String arg, String wPlayer, CommandSender sender){
 		
 		List<String> pLista = proteccionData.getStringList("miembros");
-		if (arg.equals("a�adir")){
+		if (arg.equals("añadir")){
 
 			if(!pLista.contains(wPlayer)){
 				pLista.add(wPlayer);
@@ -88,7 +88,7 @@ public class CommandWhitelist {
 				proteccionData.set("miembros", null);
 				proteccionData.set("miembros", pLista);
 
-				sender.sendMessage(ChatColor.GRAY + wPlayer + " a�adido a la whitelist.");
+				sender.sendMessage(ChatColor.GRAY + wPlayer + " añadido a la whitelist.");
 			}
 			else {
 				sender.sendMessage(ChatColor.GRAY + "No puedes a�adir a " + wPlayer + " a la whitelist.");

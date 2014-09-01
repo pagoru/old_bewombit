@@ -20,7 +20,7 @@ public class EventsRxray {
 		Player craftPlayer = eventBroke.getPlayer();
 		String playerName = craftPlayer.getName();
 
-		File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File rayData = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File f = new File(rayData, File.separator + "rxray.yml");
 		FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
 
@@ -62,7 +62,7 @@ public class EventsRxray {
 		Player craftPlayer = eventPlace.getPlayer();
 		String playerName = craftPlayer.getName();
 
-		File rayData = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File rayData = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File f = new File(rayData, File.separator + "rxray.yml");
 		FileConfiguration xrayData = YamlConfiguration.loadConfiguration(f);
 

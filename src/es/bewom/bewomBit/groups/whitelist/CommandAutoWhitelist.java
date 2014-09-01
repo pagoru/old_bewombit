@@ -19,7 +19,7 @@ public static List<String> commandautowhitelist(CommandSender sender, Command cm
 		
 		if(cmd.getName().equalsIgnoreCase("whitelist")){
 			
-			File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 			File protecciondata = new File(protecciondata1, File.separator + "whitelist.yml");
 			FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 			

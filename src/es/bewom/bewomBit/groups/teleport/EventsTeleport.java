@@ -33,15 +33,15 @@ public class EventsTeleport {
 		int locationBlockY = 0;
 		int locationBlockZ = 0;
 		
-		File amigosdata = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File amigosdata = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File f1 = new File(amigosdata, File.separator + "amigos.yml");
 		FileConfiguration amigosData = YamlConfiguration.loadConfiguration(f1);
 		
-		File protecciondata1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File protecciondata1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File protecciondata = new File(protecciondata1, File.separator + "proteccion.yml");
 		FileConfiguration proteccionData = YamlConfiguration.loadConfiguration(protecciondata);
 		
-		File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+		File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 		File data = new File(data1, File.separator + "teleport.yml");
 		FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 		
@@ -186,7 +186,7 @@ public class EventsTeleport {
 			String hash3 = Integer.toString(locationBlockX-1) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ);
 			String hash4 = Integer.toString(locationBlockX) + Integer.toString(locationBlockY) + Integer.toString(locationBlockZ-1);
 			
-			File data1 = new File(Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder(), File.separator + "Config");
+			File data1 = Bukkit.getServer().getPluginManager().getPlugin("bewomBit").getDataFolder();
 			File data = new File(data1, File.separator + "teleport.yml");
 			FileConfiguration Data = YamlConfiguration.loadConfiguration(data);
 			
