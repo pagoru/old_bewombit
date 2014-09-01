@@ -1,3 +1,19 @@
+* 31/08/14
+
+[eventos]
+	-	Guardar jugadores
+		Pasado al arrancar el plugin
+			Incapacidad de hacerlo de forma individual por culpa de las tareas programadas.
+			
+	-	LogBlock
+		Añadidos los eventos de interacción
+			**ERROR Rotos, mas complejo de lo que parece
+		Añadidos los eventos de romper bloques
+		Añadidos los eventos de poner bloques
+		Herramienta con bloque clasico de bedrock
+		
+		
+
 * 31/08/14 06:05
 
 [eventos]
@@ -18,7 +34,7 @@
   
 [auto completar comando]
 	-	/p eliminar <usuario>
-		Devuelve correctamente los usuarios de el bloque con protecci�n
+		Devuelve correctamente los usuarios de el bloque con protección
 			**ERROR Las puertas no las detecta correctamente
 			
 [interaccion]

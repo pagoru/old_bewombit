@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -146,6 +147,23 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 			}
 			
 		}, 0, 18000);
+		
+		// ---> Guardar jugadores
+		
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
+	        
+			@Override
+	        public void run() {
+				
+				for(Player craftPlayer : Bukkit.getServer().getOnlinePlayers()){
+				
+					craftPlayer.saveData();
+					log.info("Perfil de " + craftPlayer.getName() + " guardado.");
+					
+				}
+			}
+			
+		}, 0, 6000);
 		
 		// ---> config inicial <--- //
 		
