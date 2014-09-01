@@ -27,7 +27,6 @@ public class EventsPermissions {
 	
 	static Logger log = Logger.getLogger("Minecraft");
 	
-	private static int task1;
 	private static int task2;
 	
 	private static final EventsPermissions instance = new EventsPermissions();
@@ -258,83 +257,6 @@ public class EventsPermissions {
 							}
 							
 						}
-						
-						//Scheduler
-												
-						task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(BewomBit.main, new Runnable() {
-				            
-							@Override
-				            public void run() {
-								try {
-									
-									log.info("Refrescando permisos de " + craftPlayer.getName());
-									
-									MySQL connection1 = new MySQL(BewomBit.main, BewomBit.SQLUrl, BewomBit.SQLPort, BewomBit.SQLbd, BewomBit.SQLUser, BewomBit.SQLPass);
-									
-									connection1.openConnection();
-									
-									Statement statement1 = connection1.getConnection().createStatement();
-									ResultSet query1 = statement1.executeQuery("SELECT * FROM `permissions` WHERE `UUID` = '" + playerUUID + "';");
-									
-									if(query1.next()){
-										
-										String groupExp1 = query1.getString("group_expiration");
-										Date firstDate1 = new Date();
-										Date group_expiration1;
-										
-										
-										if(groupExp1 != null) {
-											
-											group_expiration1 = dateFormat.parse(groupExp1);
-											
-											if(group_expiration1.compareTo(firstDate1) < 0){
-												
-												statement1.executeUpdate("UPDATE `permissions` SET `group`= 0, `group_expiration`= null WHERE `UUID` = '" + playerUUID + "'");
-												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Se te ha terminado el VIP! :(");
-												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "¡Pero puedes volver a donar! :)");
-												craftPlayer.sendMessage(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "http://bewom.es/vip");
-												
-												attachment.unsetPermission("bewom.vip");
-												attachment.setPermission("bewom.default", true);
-												
-												// elimina scoreboard del jugador
-												
-												ScoreboardManager manager = Bukkit.getScoreboardManager();
-												EventsPerfiles.board = manager.getMainScoreboard();
-												
-												Team teamUser = EventsPerfiles.board.getTeam(craftPlayer.getName());
-												teamUser.unregister();
-												
-												Bukkit.getServer().getScheduler().cancelTask(task1);
-												
-											}
-										}
-									}
-									
-									statement1.close();
-									connection1.closeConnection();
-									
-									for(Player craftPlayer: Bukkit.getServer().getOnlinePlayers()){
-										
-										if(!craftPlayer.getName().equals(craftPlayer.getName())){
-										
-											Bukkit.getServer().getScheduler().cancelTask(task1);
-										
-										}
-										
-									}
-									
-								} catch (ClassNotFoundException e) {
-									e.printStackTrace();
-								} catch (SQLException e) {
-									e.printStackTrace();
-								} catch (ParseException e) {
-									e.printStackTrace();
-								}	
-							}
-							
-						}, 0, 6000);
-	
 						
 					} 
 				}

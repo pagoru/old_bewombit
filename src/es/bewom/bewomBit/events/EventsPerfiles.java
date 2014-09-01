@@ -18,7 +18,7 @@ import org.bukkit.scoreboard.Team;
 
 public class EventsPerfiles {
 
-	static Scoreboard board;
+	public static Scoreboard board;
 	
 	public static void connectPlayerEventsPerfiles (PlayerJoinEvent eventConnect) throws FileNotFoundException, IOException, InvalidConfigurationException, ClassNotFoundException, SQLException{
 		
@@ -40,7 +40,7 @@ public class EventsPerfiles {
 
 		playerData.load(f);
 					
-		// Información que cargar/guardar para el jugador
+		// Informaciï¿½n que cargar/guardar para el jugador
 		
 		playerData.set("PlayerName", playerName);
 		playerData.set("Chat", "global");
