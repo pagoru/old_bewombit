@@ -13,7 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class EventsChatAntiSpam {
+public class EventsChat {
 
 	static Logger log = Logger.getLogger("Minecraft");
 	private static String getPlayerChat;
@@ -118,7 +118,7 @@ public class EventsChatAntiSpam {
 
 	private static String corregir (String message) {
 
-		//Activar el c�digo de abajo para que los dem�s usuarios puedan formatear sus mensajes.
+		//Activar el codigo de abajo para que los demas usuarios puedan formatear sus mensajes.
 		//message = cambiarColores(message);
 
 		if (message.length() >= 5){

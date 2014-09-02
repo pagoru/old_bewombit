@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import es.bewom.bewomBit.groups.chat.EventsChatAntiSpam;
+import es.bewom.bewomBit.groups.chat.EventsChat;
 import es.bewom.bewomBit.groups.congelar.EventsCongelar;
 
 public class ChatEvent implements Listener {
@@ -19,7 +19,7 @@ public class ChatEvent implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent eventChat) throws FileNotFoundException, IOException, InvalidConfigurationException {
 
-		EventsChatAntiSpam.onPlayerChatEventsAntiSpam(eventChat);
+		EventsChat.onPlayerChatEventsAntiSpam(eventChat);
 		EventsCongelar.onPlayerChatEventsCongelar(eventChat);
 		
 	}
