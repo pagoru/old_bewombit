@@ -78,8 +78,6 @@ public class EventsCongelar {
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
 					
 		playerData.load(f);
-
-		playerData.set("LastMessage", message);
 		
 		playerIsCongelado = playerData.getBoolean("Congelado");
 		

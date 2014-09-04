@@ -135,27 +135,27 @@ commands:
    speed:
       description: Permite al jugador cambiar velocidades.
       permission: bewom.admin
-      
+
    ban:
       description: Permite al jugador banear a otro jugador
       permission: bewom.mod
-      
+
    unban:
       description: Permite al jugador desbanear a otro jugador
       permission: bewom.mod
-      
+
    save:
       description: Permite al jugador guardar el servidor
       permission: bewom.mod
-      
+
    xray:
       description: Permite al jugador ver los stats de xray
       permission: bewom.mod
-      
+
    amigos:
       description: Permite al jugador anadir y eliminar amigos
       permission: bewom.default
-      
+
    teleport:
       description: Permite al jugador marcar posiciones de tepeo
       permission: bewom.admin
@@ -166,4 +166,8 @@ commands:
 
    reiniciar:
       description: Permite al jugador stopear
+      permission: bewom.admin
+
+   rollback:
+      description: Permite al jugador hacer rollbacks
       permission: bewom.admin

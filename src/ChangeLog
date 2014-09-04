@@ -1,3 +1,13 @@
+* 04/09/14 19:00
+
+[eventos]
+	-	LogBlock 
+		Primeros pasos para el rollback
+
+	-	Chat
+		los 3 últimos mensajes no pueden repetirse
+		** ERROR Varios fallos con esto...
+
 * 02/09/14 04:12
 
 [eventos]

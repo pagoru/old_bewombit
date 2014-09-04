@@ -112,6 +112,7 @@ public class BewomBit extends JavaPlugin implements Listener, CommandExecutor {
 		getCommand("amigos").setExecutor(new CommandPlayer());
 		getCommand("teleport").setExecutor(new CommandPlayer());
 		getCommand("whitelist").setExecutor(new CommandPlayer());
+		getCommand("rollback").setExecutor(new CommandPlayer());
 		
 		// ---> Comandos auto-completar <--- //
 		

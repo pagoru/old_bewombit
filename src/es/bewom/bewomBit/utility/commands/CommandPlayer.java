@@ -20,6 +20,7 @@ import es.bewom.bewomBit.groups.home.CommandHome;
 import es.bewom.bewomBit.groups.home.CommandSetHome;
 import es.bewom.bewomBit.groups.kill.CommandKill;
 import es.bewom.bewomBit.groups.lag.CommandLag;
+import es.bewom.bewomBit.groups.loglbock.CommandRollback;
 import es.bewom.bewomBit.groups.morir.CommandSuicide;
 import es.bewom.bewomBit.groups.p.CommandP;
 import es.bewom.bewomBit.groups.save.CommandSave;
@@ -82,6 +83,9 @@ public class CommandPlayer implements CommandExecutor {
 					return true;
 				}
 				if(CommandWhitelist.commandwhitelist(sender, cmd, label, args)){
+					return true;
+				}
+				if(CommandRollback.commandrollback(sender, cmd, label, args)){
 					return true;
 				}
 			}

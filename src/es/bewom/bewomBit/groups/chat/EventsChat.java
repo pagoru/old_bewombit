@@ -95,13 +95,23 @@ public class EventsChat {
 			}
 		}
 
-		String lastMessage = playerData.getString("LastMessage");
-
-		if(lastMessage.equals(message)){
-			eventChat.setCancelled(true);
+		String lastMessage1 = playerData.getString("LastMessage1");
+		String lastMessage2 = playerData.getString("LastMessage2");
+		String lastMessage3 = playerData.getString("LastMessage3");
+		
+		if(lastMessage1 != null && lastMessage2 != null && lastMessage3 != null){
+			if(lastMessage1.equals(message) || lastMessage2.equals(message) || lastMessage3.equals(message)){
+				eventChat.setCancelled(true);
+			}
 		}
-
-		playerData.set("LastMessage", message);
+		
+		String message2 = playerData.getString("LastMessage2");
+		playerData.set("LastMessage3", message2);
+		
+		String message1 = playerData.getString("LastMessage1");
+		playerData.set("LastMessage2", message1);
+		
+		playerData.set("LastMessage1", message);
 
 		playerData.save(f);
 
